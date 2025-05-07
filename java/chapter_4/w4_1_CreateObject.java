@@ -1,4 +1,4 @@
-package Lab_Ch4;
+//package java.chapter_4;
 
 class Man1
 {

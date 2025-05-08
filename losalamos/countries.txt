@@ -1,0 +1,15 @@
+Argentina       45696159        2736690
+Bahrain          1607049            790
+Brunei            462722           5270
+Cambodia        17638801         176520
+Canada          39742430        8788700
+China         1419321278        9388210
+France          66548531         547557
+India         1450935791        2973190
+Indonesia      283487931        1892555
+Japan          123753041         364500
+Luxembourg        673036           2575
+Monaco             38631              2
+Russia         144820423       16376870
+Singapore        5832387            718
+Thailand        71668011         510890

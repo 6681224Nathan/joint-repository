@@ -1,7 +1,5 @@
 {
     "java.project.sourcePaths": [
-        "src",
-        "java/chapter_4",
         "java"
     ]
 }

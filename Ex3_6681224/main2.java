@@ -1,3 +1,10 @@
+/* 
+ * AUTHORS
+ * Nathan Tanaboriboon 6681224
+ * Veerapat Leepiboonsawat 6580969
+*/
+
+
 package Ex3_6681224;
 
 import java.util.*;

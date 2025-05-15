@@ -1,0 +1,2 @@
+Abstract class:
+    Child class of abstract class has to overwrite all abstract method

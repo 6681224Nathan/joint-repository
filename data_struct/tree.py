@@ -27,3 +27,11 @@ n2.right = n3
 root = n2
 
 root.right.get_value()
+
+def search(node, k):
+    if node is None or node.key == k:
+        return node
+    elif k < node.key:
+        return search(node.left, k)
+    else
+        return search(node.right, k)

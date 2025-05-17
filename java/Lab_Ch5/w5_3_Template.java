@@ -7,9 +7,9 @@ package Lab_Ch5;
 // ----- (1) class template
 //           which class headers work for (2) and (3) ?
 
-class Cell<T>
+//class Cell<T>
 //class Cell<T extends AnimalAbstract>
-//class Cell<T extends Flyer>
+class Cell<T extends Flyer>
 {
     protected T member;
     public Cell(T m)					{ member = m; } 

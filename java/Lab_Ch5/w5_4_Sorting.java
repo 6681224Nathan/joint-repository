@@ -47,7 +47,7 @@ class w5_4_Sorting
         // (1) Arrays
         MyPoint [] P = new MyPoint[4];
         P[0] = new MyPoint(40, 100);
-        P[1] = new MyPoint(10, 400);
+        P[1] = new MyPoint(10, 50);
         P[2] = new MyPoint(30, 200);
         P[3] = new MyPoint(20, 300);
         

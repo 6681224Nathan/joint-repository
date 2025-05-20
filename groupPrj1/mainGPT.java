@@ -32,12 +32,12 @@ class Items{
 
     public void printItems()
     {
-        System.out.printf("%s %s %i\n", code, name, unit_price);    
+        System.out.printf("%s %s %d\n", code, name, unit_price);  
     }
 
 }
 
-class main2{
+class mainGPT{
     public static void main(String[] args){
 
         //basic essential variables 
@@ -48,7 +48,7 @@ class main2{
         Items[] itemsList = new Items[6];
         
         
-        //check the existence of the file
+        //extract information from items.txt
 
         File itemsFile = new File(path + "items.txt");
         Scanner itemsScanner = null;
@@ -70,18 +70,30 @@ class main2{
 
         ////////////////////
 
-        itemsScanner.nextLine(); //skip the header line
-        for(i=0; itemsScanner.hasNext(); i++)
+
+        
+        for(i=0; i<4; i++) //4, because unit"space"price
         {
+            itemsScanner.next(); //skip the first line
+        }
 
-            String line   = itemsScanner.nextLine();        
-            String []cols = line.split(",");        
+        // Skip the header lines
+    
+        for(i=0; i<6 && itemsScanner.hasNextLine(); i++) {
+            String line = itemsScanner.nextLine().trim();
+            if (line.isEmpty()) continue;
             
-            String Code = cols[0].trim();
-            String Name = cols[1].trim();
-            int Unit_price = Integer
-
+            // Split on commas followed by optional whitespace
+            String[] parts = line.split(",\\s*", 3);
             
+            if (parts.length < 3) continue; // skip malformed lines
+            
+            String Code = parts[0].trim();
+            String Name = parts[1].trim();
+            int Unit_price = Integer.parseInt(parts[2].trim());
+            
+            itemsList[i] = new Items(Code, Name, Unit_price);
+            itemsList[i].printItems();
         }
 
         

@@ -1,34 +1,37 @@
 package losalamos;
 
+import java.util.*;
 
-class Parentclass 
-{
-    private int x=10;
-
-    public Parentclass(){};
-
-    public int getX()   {return x;}
-    public void setX(int d) { x=d;}
-}
-
-class Childclass extends Parentclass 
-{
-
-    public Childclass()
-    { 
-        super();
-        super.setX(5);
-        System.out.println(super.getX());
-
-    }
-
-
-}
-
-class main2
-{
+class main2{
     public static void main(String[] args){
-        Parentclass parentclass = new Parentclass();
-        Childclass childclass = new Childclass();
+
+        Parentclass parent = new Parentclass();
+        Childclass child = new Childclass();
+
+        System.out.printf("Parent : %d Child : %d\n", parent.staticnumber, child.staticnumber);
+
+        Parentclass.staticnumber = 500;
+
+        System.out.printf("Parent : %d Child : %d\n", parent.staticnumber, child.staticnumber);
+
+
     }
+}
+
+class Parentclass{
+    public int number;
+    public static int staticnumber;
+
+    public Parentclass(){
+        number=0;
+        staticnumber=10;
+    }
+}
+
+class Childclass extends Parentclass{
+    public Childclass(){
+        super();
+    }
+
+
 }

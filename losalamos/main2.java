@@ -2,6 +2,13 @@ package losalamos;
 
 import java.util.*;
 
+class InvalidInputException extends Exception {
+    // Constructor that accepts a custom message
+    public InvalidInputException(String message) {
+        super(message);
+    }
+}
+
 class main2{
     public static void main(String[] args){
 

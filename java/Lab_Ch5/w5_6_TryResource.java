@@ -120,11 +120,12 @@ public class w5_6_TryResource
     public static void main(String[] args) 
     {
         String path     = "src/main/Java/Lab_Ch5/";
+        path = "";
         String [] files = {"correctone.txt", "correctzero.txt", "wrong.txt"};
         
         MyInputReader calc = new MyInputReader( path, files[2] );
-        calc.oldTry_openFileOnce();
+        //calc.oldTry_openFileOnce();
         //calc.newTry_openFileOnce();
-        //calc.newTry_openFileLoop();
+        calc.newTry_openFileLoop();
     }    
 }

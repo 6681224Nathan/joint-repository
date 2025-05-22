@@ -3,6 +3,14 @@ package groupPrj1;
 import java.util.*;
 import java.io.*;
 
+class InvalidInputException extends Exception {
+    // Constructor that accepts a custom message
+    public InvalidInputException(String message) {
+        super(message);
+    }
+}
+
+
 class Items{
     private String code;
     private String name;
@@ -102,7 +110,8 @@ class main2{
         String path = ""; //I'll change it to src/main/Java/Ex2_6580969/countries.txt
         
         
-        //////////////////check the existence of the file, and read from it
+        //////////////////opening the items file, and read from it
+        
         Items[] itemsList = new Items[6];
 
         Scanner itemsScanner = createFileScanner(path, "items.txt");
@@ -115,16 +124,18 @@ class main2{
         {
             String line   = itemsScanner.nextLine();        
             String []cols = line.split(",");        
-            
-            String Code = cols[0].trim();
-            String Name = cols[1].trim();
-            int Unit_price = Integer.parseInt(cols[2].trim());
+            trimArray(cols);
+
+            String Code = cols[0];
+            String Name = cols[1];
+            int Unit_price = Integer.parseInt(cols[2]);
 
             System.out.printf("%s %s %d\n", Code, Name, Unit_price);
             itemsList[i] = new Items(Code, Name, Unit_price);
         }
 
         /////////////////////////opening discount flies
+        
         Scanner discountsScanner = createFileScanner(path, "discounts.txt");
         Discount discounts = new Discount();
 
@@ -133,49 +144,52 @@ class main2{
         {
             String line = discountsScanner.nextLine();
             String []cols = line.split(",");
+            trimArray(cols);
             
             if(cols.length < 2) continue;
             
-            double discountPrice = Double.parseDouble(cols[0].trim());
-            double discountPercent = Double.parseDouble(cols[1].trim());
+            double discountPrice = Double.parseDouble(cols[0]);
+            double discountPercent = Double.parseDouble(cols[1]);
             System.out.printf("Price : %10.2f Criteria : %-7.2f\n", discountPrice, discountPercent);
             discounts.addDiscount(discountPrice, discountPercent);
             
         }
         
-
-        /////////////////////////opening the bookings file
+        /////////////////////////opening the bookings file, and read from it
         
-        Scanner bookingsScanner = createFileScanner(path, "bookings.txt");
+        Scanner bookingsScanner = createFileScanner(path, "bookings_errors.txt");
 
         ArrayList<Booking> bookings = new ArrayList<Booking>();
 
         bookingsScanner.nextLine(); //skip header line
-        for(i=0; bookingsScanner.hasNextLine(); i++)
+        for(i=0; bookingsScanner.hasNext(); i++)
         {
+            String line = bookingsScanner.nextLine();
             try
             {
-                String line = bookingsScanner.nextLine();
                 String []cols = line.split(",");
+                trimArray(cols);
                 
+                String bookingName = cols[0];
+                String customers = cols[1];
+                int days =  Integer.parseInt(cols[2]);
+                negativeCheck(days, "days");
                 
-                String bookingName = cols[1].trim();
-                String customers = cols[2].trim();
-                int days =  Integer.parseInt(cols[3].trim());
-                int[] rooms = cols[4].split(":");
-                int persons = 4;
-                int[] meals = M.clone();
+                int [] rooms = stringArrayToInt(cols[3]);
+
+                int persons = Integer.parseInt(cols[4]);
+                negativeCheck(persons, "persons");
                 
-                if(cols.length < 6) continue;
+                int [] meals = stringArrayToInt(cols[5]);
+
+                System.out.printf("%-3s %s %-2d %d:%d:%d %-3d %d:%d:%d\n",bookingName,customers,days,rooms[0]
+                ,rooms[1],rooms[2],persons,meals[0],meals[1],meals[2]);
                 
-                double discountPrice = Double.parseDouble(cols[0].trim());
-                double discountPercent = Double.parseDouble(cols[1].trim());
-                System.out.printf("Price : %10.2f Criteria : %-7.2f\n", discountPrice, discountPercent);
-                discounts.addDiscount(discountPrice, discountPercent);
             }
             catch(Exception e)
             {
-                
+                System.err.println(e);
+                System.out.printf("%s%5s%s", line, " ", "skip\n\n");
             }
             
         }
@@ -189,7 +203,7 @@ class main2{
         keyboardScanner.close();
     }
 
-    ////////////////end of main, following these will be functions for main, for repeated use
+    ////////////////end of main, following these will be functions for main, for repeated use/////////////////////////////
 
     public static Scanner createFileScanner(String path, String fileName) 
     {
@@ -217,16 +231,36 @@ class main2{
         return fileScanner;
     }
 
-    public static int arrayParseInt(String[] stringNumber)
+    public static void trimArray(String[] cols)
     {
-        int[] intNumber = new int[stringNumber.length];
-        for(int i=0; i<stringNumber.length; i++)
+        for(int i=0; i<cols.length; i++)
         {
-            intNumber[i] = Integer.parseInt(stringNumber[i].trim());
+            cols[i] = cols[i].trim();
+        }
+    }
+
+    public static void negativeCheck(int number, String type) throws InvalidInputException
+    {
+        String errorMsg = "For " + type + " : \"" + number + "\"";
+        if(number < 0) throw new InvalidInputException(errorMsg);
+    }
+
+    public static int[] stringArrayToInt(String cols) throws InvalidInputException, NumberFormatException
+    {
+        int [] rooms = new int[3]; 
+        String[] roomString = cols.split(":"); 
+        if(roomString.length != 3) throw new InvalidInputException("For rooms : \"" + cols + "\"");
+
+        for(int j=0; j<roomString.length; j++)
+        {   
+            rooms[j] = Integer.parseInt(roomString[j]);
+            negativeCheck(rooms[j], "rooms");
         }
 
-        return intNumber;
+        return rooms;
     }
+
+
 
 
     

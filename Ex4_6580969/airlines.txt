@@ -1,0 +1,35 @@
+name,                        ICAO,  aircraft, destinations
+China Southern Airlines,      CSN,       629,     216 
+Egyptair,                     MSR,        78,     102 
+VietJet Air,                  VJC,        77,     115 
+Air Asia,                     AXM,       255,     165 
+Japan Airlines,               JAL,       152,      88 
+Ryanair,                      RYR,       611,     235 
+Malaysia Airlines,            MAS,        77,      75 
+Qantas,                       QFA,       125,     104 
+United Airlines,              UAL,      1026,     365 
+Asiana Airlines,              AAR,        83,      90 
+Etihad Airways,               ETD,       103,      81 
+Bangkok Airways,              BKP,        35,      30 
+Emirates Airlines,            UAE,       252,     157 
+British Airways,              BAW,       244,     206 
+Air China,                    CCA,       456,     201 
+Qatar Airways,                QTR,       252,     198 
+EasyJet,                      EZY,       347,     157 
+China Eastern Airlines,       CES,       588,     248 
+Garuda Indonesia,             GIA,       134,      90 
+All Nippon Airways,           ANA,       255,      97 
+Cebu Pacific,                 CEB,        52,      62 
+Thai Airways International,   THA,        79,      65 
+Finnair,                      FIN,        80,     104 
+Delta Air Lines,              DAL,       982,     311 
+Cathay Pacific,               CPA,       152,      88 
+Flydubai,                     FDB,        87,     127 
+EVA Air,                      EVA,        87,      62 
+Lufthansa,                    DLH,       274,     229 
+Ethiopian Airlines,           ETH,       146,     155 
+American Airlines,            AAL,       985,     353 
+Korean Air,                   KAL,       159,     121 
+Air France,                   AFR,       226,     184 
+Singapore Airlines,           SIA,       159,     137 
+Philippine Airlines,          PAL,        77,      75 

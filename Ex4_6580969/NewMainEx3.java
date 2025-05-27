@@ -20,10 +20,10 @@ public class NewMainEx3 {
     public static void main(String[] args) {
            Scanner scan = new Scanner(System.in);
         ArrayList<Airline> airlines = new ArrayList<>();
-
+        String path = "src/main/Java/Ex4_6580969/airlines.txt";
      
         try {
-            Scanner fileScan = new Scanner(new File("src/main/Java/Ex4_6580969/airlines.txt"));
+            Scanner fileScan = new Scanner(new File(path));
             if (fileScan.hasNextLine()) fileScan.nextLine(); // skip header
 
             while (fileScan.hasNextLine()) {
@@ -126,14 +126,16 @@ class Airline implements Comparable<Airline> {
         if (this.destinations != other.destinations)
             return other.destinations - this.destinations;
 
-        return this.name.compareToIgnoreCase(other.name);
+        return this.name.compareToIgnoreCase(other.name); //this will compare the alphabetical order of two strings, first letter, if first letter is equal, then second
+                                                        // letter and so on, found on the internet
   }
   @Override
   public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof Airline)) return false;
         Airline other = (Airline) obj;
-        return this.code.equalsIgnoreCase(other.code);
+        return this.code.equalsIgnoreCase(other.code); //this will check whether two strings are equal, by ignoring some cases like uppercase letter
+                                                        //found on the internet as well
   }
   @Override
     public String toString() {

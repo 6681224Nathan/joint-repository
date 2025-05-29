@@ -412,6 +412,7 @@ class main2{
                 System.out.println("Enter correct file name (with.txt) = ");
                 String ia = keyboardScanner.next();
                 file = new File(path + ia);
+                filePath = path + ia;
 
             }
         }

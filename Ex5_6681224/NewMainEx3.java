@@ -4,7 +4,7 @@
  */
 // Veerapat Leepiboonsawat 6580969
 // Nathan Tanaboriboon 6681224
-package Ex4_6580969;
+package Ex5_6681224;
 
 import java.io.*;
 import java.util.*;

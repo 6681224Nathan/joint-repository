@@ -44,9 +44,9 @@ public class main3 {
         ArrayList<Airline> airlines = new ArrayList<>();
         String path = "src/main/Java/Ex4_6580969/";
         path = ""; //DONT FORGET TO DISABLE
-        Scanner fileScan = createFileScanner(path, "airlines.txt"); //use file scanner creator from Project 1, has Exception proof
+        Scanner fileScan = createFileScanner(path, "airlines_errors.txt"); //use file scanner creator from Project 1, has Exception proof
      
-        try {
+        /*try {
             if (fileScan.hasNextLine()) fileScan.nextLine(); // skip header
 
             while (fileScan.hasNextLine()) {
@@ -65,11 +65,32 @@ public class main3 {
         } catch (Exception e) {
             System.err.println(e);
             
-        }
+        }*/
+        ////////////////pin's part
+        fileScan.nextLine();
+        while (fileScan.hasNextLine()) {
+            String line = null;
+            try{
+                line = fileScan.nextLine();
+                String[] cols = line.split(",");
+
+                String name = cols[0].trim();
+                String code = cols[1].trim().toUpperCase();
+                int aircraft = Integer.parseInt(cols[2].trim());
+                int destinations = Integer.parseInt(cols[3].trim());
+
+                airlines.add(new Airline(name, code, aircraft, destinations));
+            }
+            catch(Exception e)
+            {
+                System.err.println(e);
+                System.out.println(line + "\n");
+            }
+            }
 
         
         Collections.sort(airlines);
-        System.out.println("Sorted Airlines:");
+        headerPrint();
         for (Airline a : airlines) {
             System.out.println(a);
         }
@@ -98,6 +119,7 @@ public class main3 {
                 int threshold = Integer.parseInt(scan.nextLine().trim());
 
                 System.out.println("Airlines with aircraft >= " + threshold + ":");
+                headerPrint();
                 for (Airline a : airlines) {
                     if (a.getAircraft() >= threshold) {
                         System.out.println(a);
@@ -143,6 +165,18 @@ public class main3 {
         System.out.println("Read from " + filePath);
 
         return fileScanner;
+    }
+
+    public static void negativeCheck(int number, String type) throws InvalidInputException
+    {
+        String errorMsg = "For " + type + " : \"" + number + "\"";
+        if(number < 0) throw new InvalidInputException(errorMsg);
+    }
+
+    public static void headerPrint()
+    {
+        System.out.println("Airline                                     Aircraft         Destinations");
+        System.out.println("=========================================================================");
     }
     
 }
@@ -196,7 +230,8 @@ class Airline implements Comparable<Airline> {
   }
   @Override
     public String toString() {
-        return String.format("%-30s %-5s %6d %6d", name, code, aircraft, destinations);
+        String localCode = code + ")";
+        return String.format("%-30s (%-5s %14d %20d", name, localCode, aircraft, destinations);
     }
   
  

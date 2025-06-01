@@ -21,8 +21,7 @@ public class NewMainEx4 {
            Scanner scan = new Scanner(System.in);
         ArrayList<Airline> airlines = new ArrayList<>();
         String path = "src/main/Java/Ex4_6580969/airlines.txt";
-        path = "airlines.txt"; //DISABLE THIS AS WELL
-        //path = "airlines.txt";
+        //path = "airlines.txt"; //DISABLE THIS AS WELL
      
         try {
             Scanner fileScan = new Scanner(new File(path));

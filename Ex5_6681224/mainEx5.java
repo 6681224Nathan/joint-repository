@@ -28,7 +28,7 @@ public class mainEx5 {
         Scanner scan = new Scanner(System.in);
         ArrayList<Airline> airlines = new ArrayList<>();
         String path = "src/main/Java/Ex4_6580969/";
-        path = ""; //DONT FORGET TO DISABLE, FOR LOCAL WORKING, WONT WORK WITH NETBEANS
+        //path = ""; //DONT FORGET TO DISABLE, FOR LOCAL WORKING, WONT WORK WITH NETBEANS
         Scanner fileScan = createFileScanner(path, "airlines_errors.txt"); //use file scanner creator from Project 1, has Exception proof
      
         fileScan.nextLine();

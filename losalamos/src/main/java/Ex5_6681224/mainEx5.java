@@ -20,22 +20,7 @@ class InvalidInputException extends Exception {
     }
 }
 
-public class main3 {
-
-    /* 
-        Error detection list
-        missing file, get from Project 1                                    ,COMPLETE
-        Invalid input type, 0 instead of o, 1 instead of i                  ,NOT COMPLETE   RUNTIME
-        wrong splitter, l instead of comma                                  ,NOT COMPLETE   NOT SURE
-        wrong 3-letters airport code NO EXCEPTION                           ,NOT COMPLETE   NO EXCEPTION
-        double instead of int NO EXCEPTION                                  ,NOT COMPLETE   NO EXCEPTION
-        missing column                                                      ,NOT COMPLETE   RUNTIME
-        exceeding column NO EXCEPTION                                       ,NOT COMPLETE   NO EXCEPTION
-
-        
-
-    */
-
+public class mainEx5 {
     /**
      * @param args the command line arguments
      */
@@ -43,30 +28,9 @@ public class main3 {
         Scanner scan = new Scanner(System.in);
         ArrayList<Airline> airlines = new ArrayList<>();
         String path = "src/main/Java/Ex4_6580969/";
-        path = ""; //DONT FORGET TO DISABLE
+        path = ""; //DONT FORGET TO DISABLE, FOR LOCAL WORKING, WONT WORK WITH NETBEANS
         Scanner fileScan = createFileScanner(path, "airlines_errors.txt"); //use file scanner creator from Project 1, has Exception proof
      
-        /*try {
-            if (fileScan.hasNextLine()) fileScan.nextLine(); // skip header
-
-            while (fileScan.hasNextLine()) {
-                String line = fileScan.nextLine();
-                String[] cols = line.split(",");
-
-                String name = cols[0].trim();
-                String code = cols[1].trim();
-                int aircraft = Integer.parseInt(cols[2].trim());
-                int destinations = Integer.parseInt(cols[3].trim());
-
-                airlines.add(new Airline(name, code, aircraft, destinations));
-            }
-
-            fileScan.close();
-        } catch (Exception e) {
-            System.err.println(e);
-            
-        }*/
-        ////////////////pin's part
         fileScan.nextLine();
         while (fileScan.hasNextLine()) {
             String line = null;
@@ -76,8 +40,11 @@ public class main3 {
 
                 String name = cols[0].trim();
                 String code = cols[1].trim().toUpperCase();
-                int aircraft = Integer.parseInt(cols[2].trim());
-                int destinations = Integer.parseInt(cols[3].trim());
+                int aircraft = (int) Double.parseDouble( cols[2].trim() );
+                int destinations = (int) Double.parseDouble( cols[3].trim() );
+                
+                negativeCheck(aircraft, "aircraft");
+                negativeCheck(destinations, "destinations");
 
                 airlines.add(new Airline(name, code, aircraft, destinations));
             }
@@ -115,9 +82,23 @@ public class main3 {
                 }
 
             } else if (choice.equals("2")) {
-                System.out.print("Enter minimum aircraft threshold: ");
-                int threshold = Integer.parseInt(scan.nextLine().trim());
-
+                
+                int threshold;
+                while(true){
+                    try{
+                        System.out.println("Enter minimum aircraft threshold (int) : ");
+                        threshold = Integer.parseInt(scan.nextLine().trim());
+                        if(threshold < 0) 
+                        {   
+                            String thresholdStr = threshold + "";
+                            throw new InvalidInputException(thresholdStr);
+                        }
+                        break;
+                    }
+                    catch(Exception e){
+                        
+                    }
+                }
                 System.out.println("Airlines with aircraft >= " + threshold + ":");
                 headerPrint();
                 for (Airline a : airlines) {
@@ -137,6 +118,8 @@ public class main3 {
 
         scan.close();
     }
+
+    /////////////////////end of main////////////////////////////////////////////////////
 
     public static Scanner createFileScanner(String path, String fileName) 
     {
@@ -162,7 +145,7 @@ public class main3 {
             }
         }
 
-        System.out.println("Read from " + filePath);
+        System.out.println("Read from " + filePath + "\n");
 
         return fileScanner;
     }
@@ -182,7 +165,7 @@ public class main3 {
 }
 
 
-/////////////////end of main///////////////////////////////////////////////////////////////////
+/////////////////end of main CLASS///////////////////////////////////////////////////////////////////
 
 
 

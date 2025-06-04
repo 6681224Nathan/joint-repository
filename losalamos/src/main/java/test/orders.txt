@@ -1,0 +1,3 @@
+food type, food name,          name, amount
+drink,     capuccino,        Robert,      3
+meal,        sausage,          Carl,      5

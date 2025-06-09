@@ -18,4 +18,14 @@ def f(n):
     
     return dp[n]
 
-print(f(6))
+print(f(10))
+
+def f_recursive(n):
+    if n == 0 or n == 1:
+        return 0
+    elif n==2:
+        return A[2]
+    else:
+        return max( f_recursive(n-1), f_recursive(n-3)+A[n] )
+
+print(f_recursive(10))

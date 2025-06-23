@@ -8,12 +8,12 @@ class MyThread extends Thread
     public void run()
     {
 	// ----- (4) when doing (4.1) and (4.2), notice the difference between these loops
-	/*	
+		
 	for (int i=1; i<=200; i++)	
 	{ 
             System.out.print(this.getName() + " "); 
 	}
-	*/	
+		
 		
 	/*
         for (int i=1; i<=200; i++)	

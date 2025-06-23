@@ -25,43 +25,43 @@ public class FactorThread extends Thread {
   }
  @Override
  public void run() {
- // Create PrintWriter object to write result to a separate file
- // Execute steps 1-3 in loop until #primes = target:
- // 1. Random a value v in range [100, 500] and find all its positive factors (i.e.
- // integers that divide it with 0 remainder.
- //
- // 2. If v is a prime: print round number, v, current #primes to file as in demo.
- // 3. If v is not a prime: print round number, v, its factors to file as in demo.
- // After the loop, print thread name, #rounds, all primes (sorted in increasing order)
- // to the screen.
- String Filename = this.getName()+ ".txt";
- int round = 1;
- try{
-     out = new PrintWriter(new FileWriter("src/main/java/Ex6_6681224" + Filename));
-     
- }catch (IOException e) {
-            e.printStackTrace();
-            return;
-  }
-     
-     while(allPrimes.size() < target){
-       round++;
-       int v = rand.nextInt(401)+ 100;
-       List<Integer> factors = getFactors(v);        
-        if (isPrime(v)) {
-                allPrimes.add(v);
-                out.printf("Round %3d >> %d = prime   #primes = %d\n", round, v, allPrimes.size());
-            } else {
-                out.printf("Round %3d >> %d           factors = %s\n", round, v, factors.toString());
-            }
-     }
-     
-     out.close();
-     
-     Collections.sort(allPrimes);
-     System.out.printf("%s finished after %d round, Primes = "+ allPrimes + "%n", getName(),round);
-     
-     
+    // Create PrintWriter object to write result to a separate file
+    // Execute steps 1-3 in loop until #primes = target:
+    // 1. Random a value v in range [100, 500] and find all its positive factors (i.e.
+    // integers that divide it with 0 remainder.
+    //
+    // 2. If v is a prime: print round number, v, current #primes to file as in demo.
+    // 3. If v is not a prime: print round number, v, its factors to file as in demo.
+    // After the loop, print thread name, #rounds, all primes (sorted in increasing order)
+    // to the screen.
+    String Filename = this.getName()+ ".txt";
+    int round = 1;
+    try{
+        out = new PrintWriter(new FileWriter("src/main/java/Ex6_6681224/" + Filename));
+        
+    }catch (IOException e) {
+                e.printStackTrace();
+                return;
+    }
+        
+        while(allPrimes.size() < target){
+        round++;
+        int v = rand.nextInt(401)+ 100;
+        List<Integer> factors = getFactors(v);        
+            if (isPrime(v)) {
+                    allPrimes.add(v);
+                    out.printf("Round %3d >> %d = prime   #primes = %d\n", round, v, allPrimes.size());
+                } else {
+                    out.printf("Round %3d >> %d           factors = %s\n", round, v, factors.toString());
+                }
+        }
+        
+        out.close();
+        
+        Collections.sort(allPrimes);
+        System.out.printf("%s finished after %d round, Primes = "+ allPrimes + "%n", getName(),round);
+        
+        
  }
   private List<Integer> getFactors(int n) {
         List<Integer> factors = new ArrayList<>();

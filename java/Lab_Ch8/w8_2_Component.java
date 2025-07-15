@@ -17,7 +17,7 @@ class w8_2_Component extends JFrame
 
 	// ----- (1) setup layout
 	JPanel contentpane = (JPanel)getContentPane();
-	contentpane.setLayout( new BorderLayout(25, 25) );
+	contentpane.setLayout( new BorderLayout(25, 25) ); //this seems to widen the size of "label in the north"
 
 
 	// ----- (2) setup components              
@@ -38,8 +38,8 @@ class w8_2_Component extends JFrame
 	//           notice 2 buttons in the south
 	contentpane.add(label, BorderLayout.NORTH);
 	contentpane.add(cregion, BorderLayout.CENTER);
-	contentpane.add(button1, BorderLayout.SOUTH);
-	contentpane.add(button2, BorderLayout.SOUTH);
+	//contentpane.add(button1, BorderLayout.SOUTH);
+	//contentpane.add(button2, BorderLayout.SOUTH);
 	
 
 	
@@ -106,10 +106,12 @@ class w8_2_Component extends JFrame
         JScrollPane lsc = new JScrollPane(lb);
         lsc.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	cregion.add(lsc);
+	
 
 	//lb.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-	lb.setSelectionMode( ListSelectionModel.SINGLE_INTERVAL_SELECTION );
+	//lb.setSelectionMode( ListSelectionModel.SINGLE_INTERVAL_SELECTION );
         lb.setSelectionMode( ListSelectionModel.MULTIPLE_INTERVAL_SELECTION );
+	//default is multiple interval selection
         
 
 	// ----- (4) validate container once all components are added

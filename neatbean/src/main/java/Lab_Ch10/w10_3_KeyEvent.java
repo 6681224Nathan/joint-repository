@@ -105,7 +105,7 @@ class DoubleText implements CaretListener
     @Override
     public void caretUpdate( CaretEvent e )
     {
-	//out.setText( in.getText() );
-        out.setText( new String(in.getPassword()) );
+	out.setText( in.getText() );
+        //out.setText( new String(in.getPassword()) );
     }
 };

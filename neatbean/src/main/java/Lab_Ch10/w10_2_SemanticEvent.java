@@ -132,8 +132,8 @@ class w10_2_SemanticEvent extends JFrame
 		
 	contentpane.add(add_button);
 	contentpane.add(rem_button);
-	//contentpane.add(combo);				// using combo (3)
-	contentpane.add(rpanel);			// using radio buttons (4)
+	contentpane.add(combo);				// using combo (3)
+	//contentpane.add(rpanel);			// using radio buttons (4)
 	contentpane.add(drawpane);
 
 	validate();

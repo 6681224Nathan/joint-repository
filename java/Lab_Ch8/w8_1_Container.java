@@ -33,26 +33,26 @@ class w8_1_Container
         
         // ----- (1.1) If the frame is visible before components are added,
         //             must call validate or pack to trigger layout manager & update screen
-        frame.validate();
+        //frame.validate();
         //frame.pack();
         
         // ----- (1.2) Or add components first and make frame (with components) visible
         //             Don't need to call validate or pack 
-        //frame.setVisible(true);
+        frame.setVisible(true);
 	
 
 
 	// ----- (3) Dialog
 	//           - notice the difference between dialog with and without owner
 	//           - notice the difference between modal and non-modal dialogs
-	/*
+	
 	JDialog dialog = new JDialog();
 	dialog.setTitle("This is a Dialog");
-	dialog.setModal(false);
+	dialog.setModal(true);
 	dialog.setBounds(400, 400, 300, 150 );
 	dialog.setVisible(true);
 	dialog.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
-	*/
+	
 	
 
 

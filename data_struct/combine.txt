@@ -1,0 +1,23 @@
+procedure Combine(YL, YR, δ)
+    Y ← merge YL and YR sorted by y-coordinate
+    Y′ ← empty list
+
+    for each point p in Y do
+        if |p.x − dividing_line_x| < δ then
+            add p to Y′
+
+    δ′ ← δ
+    for i ← 0 to |Y′| − 1 do
+        for j ← i+1 to min(i+7, |Y′|−1) do
+            d ← distance(Y′[i], Y′[j])
+            if d < δ′ then
+                δ′ ← d
+
+    return δ′
+end procedure
+dividing_line_x is the x-coordinate of the vertical line splitting the plane.
+distance(p1, p2) = Euclidean distance:
+√((p1.x − p2.x)² + (p1.y − p2.y)²)
+Only up to 7 points after each point in Y′ need to be checked due to geometry proof.
+Y′ contains points within a 2δ-wide vertical strip centered at dividing_line_x
+

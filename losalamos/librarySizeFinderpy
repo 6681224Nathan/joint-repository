@@ -1,0 +1,19 @@
+import os
+import pkg_resources
+
+# Get the installed packages from the environment
+installed_packages = pkg_resources.working_set
+
+# Define a function to get the size of each package
+def get_package_size(package):
+    package_path = package.location
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(package_path):
+        for f in filenames:
+            total_size += os.path.getsize(os.path.join(dirpath, f))
+    return total_size
+
+# Print the size of each package
+for package in installed_packages:
+    size = get_package_size(package)
+    print(f"{package.project_name}: {size / (1024 * 1024):.2f} MB")

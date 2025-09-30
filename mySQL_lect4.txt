@@ -1,0 +1,106 @@
+USE pins_schema_lec4;
+
+CREATE TABLE Store(
+	Store nchar(10) NULL,
+	Aisle nchar(10) NULL,
+	Shelf nchar(10) NULL
+);
+INSERT Store (Store, Aisle, Shelf) VALUES (23, 'W', 5);
+INSERT Store (Store, Aisle, Shelf) VALUES (24, 'K', 9);
+INSERT Store (Store, Aisle, Shelf) VALUES (25, 'Z', 6);
+
+
+CREATE TABLE P2(
+	P_Code nvarchar(255) NULL,
+	P_Descript nvarchar(255) NULL,
+	Price float NULL
+);
+INSERT P2 (P_Code, P_Descript, Price) VALUES (345678, 'Microwave', 160);
+INSERT P2 (P_Code, P_Descript, Price) VALUES (345679, 'Dishwasher', 500);
+
+CREATE TABLE P(
+	P_Code nvarchar(255) NULL,
+	P_Descript nvarchar(255) NULL,
+	Price decimal(10,8) NULL
+);
+INSERT P (P_Code, P_Descript, Price) VALUES (123456, 'Flashlight', 5.2600);
+INSERT P (P_Code, P_Descript, Price) VALUES (123457, 'Lamp', 25.1500);
+INSERT P (P_Code, P_Descript, Price) VALUES (123458, 'Box Fa', 10.9900);
+INSERT P (P_Code, P_Descript, Price) VALUES (213345, '9v Battery', 1.9200);
+INSERT P (P_Code, P_Descript, Price) VALUES (254467, '100W Bulb', 1.4700);
+INSERT P (P_Code, P_Descript, Price) VALUES (311452, 'Powerdrill', 34.9900);
+
+CREATE TABLE Fname2(
+	F_Name nvarchar(255) NULL
+);
+INSERT Fname2 (F_Name) VALUES ('Jane');
+INSERT Fname2 (F_Name) VALUES ('William');
+INSERT Fname2 (F_Name) VALUES ('Jorge');
+INSERT Fname2 (F_Name) VALUES ('Dennis');
+
+CREATE TABLE Fname(
+	F_Name nvarchar(255) NULL
+);
+INSERT Fname (F_Name) VALUES ('George');
+INSERT Fname (F_Name) VALUES ('Jane');
+INSERT Fname (F_Name) VALUES ('Elaine');
+INSERT Fname (F_Name) VALUES ('Wilfred');
+INSERT Fname (F_Name) VALUES ('Jorge');
+
+
+
+CREATE TABLE S(
+	sid nvarchar(255) NULL,
+	name nvarchar(255) NULL,
+	login nvarchar(255) NULL,
+	age smallint NULL,
+	gpa float NULL
+);
+
+INSERT S (sid, name, login, age, gpa) VALUES ('53666', 'Jones', 'jones@cs', 18, 3.4);
+INSERT S (sid, name, login, age, gpa) VALUES ('53688', 'Smith', 'smith@ee', 18, 3.2);
+INSERT S (sid, name, login, age, gpa) VALUES ('53650', 'Smith', 'smith@math', 19, 3.8);
+
+CREATE TABLE E(
+	sid varchar(10) NOT NULL,
+	cid varchar(20) NOT NULL,
+	grade varchar(2) NULL,
+    CONSTRAINT PK_E PRIMARY KEY (sid,cid)
+);
+INSERT E (sid, cid, grade) VALUES ('53831', 'Carnatic10', 'C');
+INSERT E (sid, cid, grade) VALUES ('53831', 'Raggae203', 'B');
+INSERT E (sid, cid, grade) VALUES ('53650', 'Topology112', 'A');
+INSERT E (sid, cid, grade) VALUES ('53666', 'History', 'B');
+
+#USE THUNDER I TO GRADUALLY RUN ONLY PARTS OF CODE
+
+Select * From p where Price < 2.0;
+
+#Select COLUMN_TO_SHOW From TABLE (ALL INFO) where CONDITION;
+
+Select * From p where P_Code = 311452;
+
+Select * From p where P_Code like '1%'; # "%" represents any character, 1% means any string/int that is 1 and followed by ....
+
+Select Price From p; # only price column
+
+Select P_Descript, Price From P; #only two columns
+
+Select * From s where age = 18;
+
+Select * From S;
+
+Select * From s where age = 18 AND gpa < 3.4;
+Select sid, name, age, gpa From s where age = 18 AND gpa < 3.4; #prof work
+
+Select * From S, e; #same thing as cross join (product)
+
+Select * From s, e where s.sid = e.sid;
+#to match between two tables using primary/candidate keys
+
+Select * From s, e where s.sid = e.sid and grade = 'a';
+
+Select s.sid, s.name, s.gpa, e.cid, e.grade 
+From s, e 
+where s.sid = e.sid and grade = 'a';
+

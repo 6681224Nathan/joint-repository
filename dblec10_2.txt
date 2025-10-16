@@ -1,0 +1,94 @@
+USE movieinfo;
+
+select name
+from movies join moviestar on movies.movies.movieid = moviestar.movieid
+where title = 'Star Wars';
+
+select title
+from movies join moviestar on movies.movies.movieid = moviestar.movieid
+where names = 'Willy Wonka';
+
+select name from moviestar where name like 'W%';
+
+select gender, count(*) as no_gender
+from moviestar
+group by gender;
+
+select title from movies as m join moviestar as ms on m.movieid = ms.movieid where name='Dorothy' and year < 2000;
+
+select ms.name from movies as m join moviestar as ms on m.movieid = ms.movieid where rating>3.5;
+
+select title, abs(length-(select length from movies where title = 'Wizard of Oz') ) as diffDuration
+from movies
+where title  <> 'Wizard of Oz';
+
+select distinct title from movies as m join moviestar as ms on m.movieid = ms.movieid where gender = 'f';
+
+select ms.movieid, title, gender, count(*) as no_gender
+from movies as m join moviestar as ms on m.movieid = ms.movieid
+group by ms.movieid, gender;
+
+----------------------------------- TEACHER VERSION
+  use movieinfo;
+
+select name
+from movies, moviestar
+where movies.movieid = moviestar.movieid and title='Star Wars';
+
+select name 
+from movies join moviestar on movies.movieid = moviestar.movieid
+where title='Star Wars';
+
+select Title
+from movies join moviestar on movies.movieid = moviestar.movieid
+where name='Willy Wongka';
+
+select name
+from moviestar
+where name Like 'W%W%k_';
+
+select gender, count(*) as no_gender
+from moviestar
+group by gender;
+
+select Title
+from movies join moviestar on movies.movieid = moviestar.movieid
+where name='Dorothy' and year <2000;
+
+select name
+from movies join moviestar on movies.movieid = moviestar.movieid
+where rating >3.5;
+
+
+select title, abs(length-(select length from movies where title = 'Wizard of Oz')) as diffDuration
+from movies
+where title <> 'Wizard of Oz';
+
+select distinct title
+from movies join moviestar on movies.movieid = moviestar.movieid
+where gender = 'f';
+
+
+select moviestar.movieid, title, gender, count(*)
+from movies join moviestar on movies.movieid = moviestar.movieid
+group by moviestar.movieid, gender;
+
+
+
+ 
+
+
+
+
+
+
+Find who played in Star Wars
+ ▪ Find which movie that Willy Wongka played
+ ▪ Find the moviestar’s name beginning with “W”
+ ▪ Count the number of actors and the number of actresses from “moviestar” table
+ ▪ Find the movie that is older than year 2000 and played by Dorothy
+ ▪ Show the length difference of “Chocolate Factory-Wizard of Oz” and “Star Wars – 
+Wizard of Oz”
+ ▪ Find who played in the movies that the rating ≧ 3.5
+ ▪ Find the movie that played by an actress
+ ▪ Count the number of actors and actresses for each movie

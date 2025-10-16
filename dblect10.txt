@@ -1,0 +1,115 @@
+
+CREATE DATABASE lecture08_branch; 
+
+USE lecture08_branch;
+
+CREATE TABLE region(
+	region_nbr varchar(5) NULL,
+	region_name varchar(20) NULL
+);
+
+INSERT region (region_nbr, region_name) VALUES ('100', 'East Regio');
+INSERT region (region_nbr, region_name) VALUES ('200', 'Central Regio');
+INSERT region (region_nbr, region_name) VALUES ('300', 'Virtual Regio');
+INSERT region (region_nbr, region_name) VALUES ('400', 'West Regio');
+
+CREATE TABLE branch(
+	branch_nbr varchar(5) NULL,
+	branch_name varchar(20) NULL,
+	region_nbr varchar(5) NULL,
+	employee_count smallint NULL
+);
+INSERT branch (branch_nbr, branch_name, region_nbr, employee_count) VALUES ('108', 'New York', '100', 10);
+INSERT branch (branch_nbr, branch_name, region_nbr, employee_count) VALUES ('110', 'Bosto', '100', 6);
+INSERT branch (branch_nbr, branch_name, region_nbr, employee_count) VALUES ('212', 'Chicago', '200', 5);
+INSERT branch (branch_nbr, branch_name, region_nbr, employee_count) VALUES ('404', 'San Diego', '400', 6);
+INSERT branch (branch_nbr, branch_name, region_nbr, employee_count) VALUES ('415', 'San Jose', '400', 3);
+
+
+SELECT region.region_nbr, region.region_name, branch.branch_nbr, branch.branch_name
+FROM region LEFT OUTER JOIN branch ON branch.region_nbr = region.region_nbr
+ORDER BY region.region_nbr;
+
+SELECT region.region_nbr, region.region_name, branch.branch_nbr, branch.branch_name
+FROM region RIGHT OUTER JOIN branch ON branch.region_nbr = region.region_nbr
+ORDER BY region.region_nbr;
+
+SELECT region.region_nbr, region.region_name, branch.branch_nbr, branch.branch_name
+FROM region INNER JOIN branch ON branch.region_nbr = region.region_nbr
+ORDER BY region.region_nbr;
+
+USE lecture08;
+select distinct e.empno, hiredate, firstname, lastname 
+from           employee e
+order by    hiredate asc;
+
+select         deptno, deptname, sum(salary) as totalsalary, count(*) as employees
+from           department d, employee e
+where        e.workdept = d.deptno
+group by   deptno, deptname;
+
+select        deptno, deptname, avg(salary) as MeanSalary
+from          department d, employee e
+where       e.workdept = d.deptno
+group by  deptno, deptname
+having      count(*) >= 4;
+
+
+SELECT MAX(salary) AS highest_salary
+FROM employee; #find highest salary from empployee table
+
+SELECT empno, firstname, lastname, salary
+FROM employee
+WHERE salary = (SELECT MAX(salary) FROM employee); #find PERSONAL DATA of highest salary person
+
+select empno, firstname, lastname, salary
+from employee
+order by salary desc
+limit 1; #alternative way, limit 1 means only the top 1
+
+select         deptno, deptname, max(salary) as maxsalary
+from           department d, employee e
+where        e.workdept = d.deptno
+group by   deptno, deptname; #max salary from each department
+
+select empno, firstname, lastname, salary
+from employee, (select         deptno, deptname, max(salary) as maxsalary
+from           department d, employee e
+where        e.workdept = d.deptno
+group by   deptno, deptname) as mx
+where salary = maxsalary and workdept=deptno;
+
+create table  Emp (
+		EmpNo		char (6),
+		FirstName	varchar (12),
+		MidInit		char (1),
+		WorkDept	char (3),
+		HireDate	date
+);
+
+Alter table Emp
+	add Salary decimal (9,2);
+    
+drop table emp; #delete the entire thing
+
+create table    Employee3  (
+	EmpNo	char (6)  not null primary key,
+	FirstName	varchar (12) not null,
+	MidInt	char (1),
+	LastName	varchar (15) not null,
+	WorkDept	char(3)  not null,
+	HireDate 	date,
+	Salary		decimal (9,2)  check (Salary >= 10000),
+			constraint unique_name_dept
+			unique (FirstName, LastName, WorkDept)
+);
+
+create   view  ManufacturingProjects as
+	(  select   projno, projname, firstname, lastname
+	   from     project, employee
+	   where  respemp = empno  and  deptno = 'D21'  );
+
+select * from manufacturingProjects;
+
+
+

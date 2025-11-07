@@ -1,0 +1,78 @@
+#1
+
+
+#2.1 is in paper
+#2.2
+Aircraft
+(
+	aid int PK,
+	aname string,
+	cruisingrange int
+)
+
+Employees
+(
+	eid int PK,
+	ename string,
+	salary int
+)
+
+Flights
+(
+	flno int PK,
+	from string,
+	to string,
+	distance int,
+	departs datetime,
+	arrives datetime,
+	price float
+	
+	aid int,
+	foreign key aid references Aircraft(aid)
+)
+
+Certified
+(
+	aid int PK,
+	eid int PK,
+	foreign key aid references Aircraft(aid)
+	foreign key eid references Employees(eid)
+)
+
+Question : assuming that the SQL statement to create the database is incomplete, can we add more attributes?
+	For 2.2, do you want us to convert the ER diagram to a schema, or an SQL statement to a schema
+	The table optimization does not seem to work, there is a separate table for that relationship meaning that it must be M:M.
+	From relational algebra, can there be inequality/exclusion notation? like if we want to get the aircraft that is not boeing, can we σ aname <> "Boeing %" (Aircraft)
+
+
+#2.3.a
+#(a) Find the eids and name of pilots certified for Boeing aircraft
+
+Select Employees.eid, Employees.ename 
+From
+(Select * From Certified JOIN Aircraft on Certified.aid = Aircraft.aid where Aircraft.aname like "Boeing %") as w
+JOIN Employees on w.eid = Employees.eid;
+
+#2.3.b
+#For all aircraft with cruising miles over 1000 miles, find the name of the aircraft and the average
+salary of all pilots certified for this aircraft
+
+Select w.aname, AVG(Employees.salary) From (Select * From Certified JOIN Aircraft on Certified.aid=Aircraft.aid where cruisingrange > 1000) as w
+LEFT JOIN Employees on w.eid = Employees.eid group by W.aname;
+
+Write the following queries in relational algebra
+
+#2.4.a Find the names of pilots certified for Boeing aircraft
+πename ((Certified ⟕ Aircraft) ⨝ Employee)
+
+#2.4.b Find the names of pilots who can operate planes with a range greater than 3,000 miles but are not
+certified on any Boeing aircraft.
+A = π_{eid}( Certified ⋈ σ_{cruisingrange > 3000}(Aircraft) )
+
+B = π_{eid}( Certified ⋈ σ_{aname LIKE 'Boeing%'}(Aircraft) )
+
+Result = π_{ename}( Employees ⋈ ( A − B ) )
+
+
+
+

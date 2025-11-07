@@ -1,0 +1,27 @@
+CREATE DATABASE airline;
+
+USE airline;
+
+CREATE TABLE Aircraft(
+	aid int,
+	aname varchar(255),
+	cruisingrange int
+);
+CREATE TABLE Certified(
+	eid int,
+	aid int
+);
+CREATE TABLE Employees(
+	eid int,
+	ename varchar(255),
+	salary int
+);
+CREATE TABLE Flights(
+	flno int,
+	`from` varchar(255),
+	`to` varchar(255),
+	distance int,
+	departs datetime,
+	arrives datetime,
+	price float
+);

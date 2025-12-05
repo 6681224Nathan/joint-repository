@@ -232,6 +232,20 @@ GRANT SELECT ON concurrency.Balance TO egci321;
 -- or
 GRANT SELECT, UPDATE ON concurrency.Balance TO egci321;
 
+-- Privilege,Description
+-- SELECT,Allows reading data from the table.
+-- INSERT,Allows adding new rows to the table.
+-- UPDATE,Allows modifying existing rows in the table.
+-- DELETE,Allows removing rows from the table.
+
+-- REFERENCES	Required to create a foreign key constraint that refers to this table.
+-- INDEX	Allows the creation of indexes on the table (common in MySQL).
+-- ALTER	Allows changing the table structure (e.g., adding/renaming columns).
+-- TRUNCATE	Allows emptying the table completely (often faster than DELETE).
+
+--Example: Allow egci321 to update the amount but not the account_id:
+-- GRANT UPDATE (amount) ON concurrency.Balance TO egci321;
+
 -- Show Grant Priviliges of user
 SHOW GRANTS FOR egci321;
 
@@ -244,6 +258,43 @@ REVOKE SELECT ON concurrency.Balance FROM egci321;
 -- Revoke All Privileges
 REVOKE ALL PRIVILEGES, GRANT OPTION FROM egci321;
 
+/*
+-------------------------------------------------------------------------
+  MYSQL PRIVILEGES CHEATSHEET: MANAGING THE "GRANT OPTION"
+  Target User: egci321
+  Target Table: concurrency.Balance
+-------------------------------------------------------------------------
+*/
+
+-- 1. MAKE A USER A MANAGER (Give Data Access + Ability to share it)
+-- usage: Grants SELECT and UPDATE, plus the power to grant these to others.
+GRANT SELECT, UPDATE ON concurrency.Balance TO egci321 WITH GRANT OPTION;
+
+
+-- 2. DEMOTE A MANAGER (Remove Ability to share, KEEP Data Access)
+-- usage: User can still SELECT/UPDATE, but cannot GRANT rights to others.
+REVOKE GRANT OPTION FOR SELECT, UPDATE ON concurrency.Balance FROM egci321;
+
+
+-- 3. FIRE THE USER (Remove Data Access + Ability to share)
+-- usage: User loses all rights to this table completely.
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM egci321;
+
+
+/*
+-------------------------------------------------------------------------
+  CRITICAL MYSQL WARNING:
+  MySQL does NOT support "Cascade" for Revoke.
+  
+  If 'egci321' gave permissions to 'User_B' while they were a manager,
+  and you later revoke 'egci321's rights, 'User_B' KEEPS their access.
+  You must manually investigate and revoke 'User_B's rights if needed.
+-------------------------------------------------------------------------
+*/
+
+--specific column
+-- REVOKE ALL PRIVILEGES ON concurrency.Balance FROM egci321;
+
 -- Show Privileges
 SHOW PRIVILEGES;
 
@@ -255,6 +306,24 @@ ALTER DATABASE concurrency READ ONLY = 0;
 
 -- Delete user
 DROP USER 'egci321';
+
+-- impose constraint
+CREATE TABLE Students (
+    ID int,
+    Name varchar(255),
+    -- The Constraint Rule:
+    CONSTRAINT chk_start_h CHECK (Name LIKE 'h%') -- HERE
+);
+
+ALTER TABLE Students
+ADD CONSTRAINT chk_start_h CHECK (Name LIKE 'h%');
+
+-- create view table
+CREATE VIEW Public_Employee_List AS
+SELECT Name, Email
+FROM Employees;
+
+GRANT SELECT ON concurrency.view_safe_balance TO egci321;
 
 
 

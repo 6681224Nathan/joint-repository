@@ -1,0 +1,24 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Sewak et~al.(2018)Sewak, Sahay, and Rathore]{paper_1}
+Mohit Sewak, Sanjay~K. Sahay, and Hemant Rathore.
+\newblock Comparison of deep learning and the classical machine learning
+  algorithm for the malware detection.
+\newblock \emph{2018 19th IEEE/ACIS International Conference on Software
+  Engineering, Artificial Intelligence, Networking and Parallel/Distributed
+  Computing (SNPD)}, pages 293--296, 2018.
+\newblock \doi{10.1109/SNPD.2018.8441123}.
+
+\bibitem[Zaabi and Mouheb(2020)]{paper_2}
+Ali~Al Zaabi and Djedjiga Mouheb.
+\newblock Android malware detection using static features and machine learning.
+\newblock \emph{2020 International Conference on Communications, Computing,
+  Cybersecurity, and Informatics (CCCI)}, page 1–5, 2020.
+\newblock \doi{10.1109/CCCI49893.2020.9256450}.
+
+\end{thebibliography}

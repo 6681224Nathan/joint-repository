@@ -1,0 +1,44 @@
+\documentclass[a4paper]{article} %Always requireed
+%========================================================================
+% preamble to declare kackges used in the document
+%========================================================================
+%Packages that will be used
+
+%To use a block comment in a document
+\usepackage{comment} 
+\begin{comment}
+	Test a block comment 
+\end{comment}
+%------------------------------------------------------------------------
+\usepackage{fontspec}
+%Either Xelatex or Lualatex is required as a default complier
+%To learn more about "fontspec" package: https://ctan.org/pkg/fontspec?lang=en 
+%========================================================================
+%To declare a document title and an author(s) 
+\title{This is a title of my first document}
+
+
+\begin{comment}
+	\author{
+		LastName1, FirstName1\\
+		\texttt{first1.last1@xxxxx.com} 
+		\and
+		LastName2, FirstName2\\
+		\texttt{first2.last2@xxxxx.com}
+		\and
+		LastName3, FirstName3\\
+		\texttt{first3.last3@xxxxx.com}
+		\and
+		LastName4, FirstName4\\
+		\texttt{first4.last4@xxxxx.com}
+	}
+\end{comment}
+
+%document
+\begin{document}
+	\maketitle
+	%Put your text in a body of your document here... 
+	Hello World
+	
+\end{document}
+%========================================================================

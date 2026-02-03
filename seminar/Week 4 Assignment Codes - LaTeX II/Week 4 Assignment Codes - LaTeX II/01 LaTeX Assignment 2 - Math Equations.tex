@@ -1,0 +1,50 @@
+\documentclass[a4paper]{article} %Always requireed\part{title}
+%========================================================================
+% preamble to declare kackges used in the document
+%========================================================================
+%Packages that will be used
+
+%To use a block comment in a document
+\usepackage{comment} 
+\usepackage{ragged2e}
+\usepackage{amsmath}
+\begin{comment}
+	Test a block comment 
+\end{comment}
+%------------------------------------------------------------------------
+\usepackage{fontspec}
+%Either Xelatex or Lualatex is required as a default complier
+%To learn more about "fontspec" package: https://ctan.org/pkg/fontspec?lang=en 
+%========================================================================
+%To declare a document title and an author(s) 
+\title{EGCI491 Computer Engineering Seminar\\ \LaTeX \space Assignment II}
+\author{Firstname Lastname}
+
+%document
+\begin{document}
+	\maketitle
+	%Put your text in a body of your document here... 
+	\noindent A quadratic equation is a second degree polynomial written as $ax^2+bx+c = 0$. The generic function of the quadratic equation can be determined as:
+	
+	
+	\begin{align}f(x) = ax^2+bx+c\end{align}
+	
+	\noindent whose discriminant $b^2-4ac$ is positive, with x representing an unknown, with a, b and c representing constants, and with a $\neq$ 0, the quadratic formula is:
+	
+	\begin{align}
+		x &= \frac{-b \pm \sqrt{b^2-4ac} }{2a}
+	\end{align}
+	
+	%\begin{comment} \hspace{ size } can leave a space \end{comment}
+	
+	\noindent where the plus–minus symbol $\pm$ indicates that the quadratic equation has two solutions. When written separately, they become: 
+	
+	\begin{align}
+	\begin{split}
+		x &= \frac{-b + \sqrt{b^2-4ac} }{2a} \hspace{10pt} and \\
+		x &= \frac{-b - \sqrt{b^2-4ac} }{2a}
+	\end{split}
+	\end{align}
+	
+\end{document}
+%========================================================================

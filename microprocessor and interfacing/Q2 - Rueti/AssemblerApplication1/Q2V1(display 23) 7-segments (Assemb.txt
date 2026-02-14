@@ -1,0 +1,1 @@
+Q2V1(display 23): 7-segments (Assembly code to PICSIMLAB using PORTD) display 23 by scanning on those two 7-segments

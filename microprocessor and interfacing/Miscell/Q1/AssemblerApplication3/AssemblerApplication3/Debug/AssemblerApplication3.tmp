@@ -1,0 +1,38 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\Debug\AssemblerApplication3.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>AssemblerApplication3.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>AssemblerApplication3.map</FILE>
+  <FILE>AssemblerApplication3.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <MAIN><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>23</LINE></MAIN>
+  <TABLE><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>16</LINE></TABLE>
+  <COPY_LOOP><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>45</LINE></COPY_LOOP>
+  <SUM_LOOP><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>63</LINE></SUM_LOOP>
+  <DIV_LOOP><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>77</LINE></DIV_LOOP>
+  <DIV_DONE><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>87</LINE></DIV_DONE>
+  <MOD_LOOP><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>102</LINE></MOD_LOOP>
+  <KEEP_VALUE><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>112</LINE></KEEP_VALUE>
+  <NEXT_ELEMENT><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>122</LINE></NEXT_ELEMENT>
+  <CHECK_COUNT><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>117</LINE></CHECK_COUNT>
+  <END><FILE>C:\Users\User\Desktop\Micropro\Q1\AssemblerApplication3\AssemblerApplication3\main.asm</FILE><LINE>134</LINE></END>
+ </LABELS>
+</ASSEMBLER_INFO>

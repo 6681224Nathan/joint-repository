@@ -1,0 +1,9 @@
+Implement a counter that takes input from two switches and outputs the result to two 7-segment displays.
+
+The counter should respond to the switches as follows:
+
+Switch 1: Each press increments the counter from 0 to 99, displaying the result on the two 7-segment displays.
+
+Switch 2: Each press resets the counter to 0.
+
+The two 7-segment displays are connected to a single port, with two pins from another port used to select which 7-segment display digit is active.

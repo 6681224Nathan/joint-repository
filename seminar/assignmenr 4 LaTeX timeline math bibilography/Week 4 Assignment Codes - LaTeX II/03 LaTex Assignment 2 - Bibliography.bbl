@@ -1,0 +1,67 @@
+\begin{thebibliography}{7}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Aldrich(2014)]{paper_6}
+Preston~R. Aldrich.
+\newblock The curriculum prerequisite network: a tool for visualizing and
+  analyzing academic curricula.
+\newblock \emph{CoRR}, abs/1408.5340, 2014.
+\newblock URL \url{http://arxiv.org/abs/1408.5340}.
+
+\bibitem[Hu and Brzozowski(2005)]{paper_7}
+Jiang Hu and Mike Brzozowski.
+\newblock Preference-based group scheduling.
+\newblock volume 3585, pages 990--993, 09 2005.
+\newblock ISBN 978-3-540-28943-2.
+\newblock \doi{10.1007/11555261\_87}.
+
+\bibitem[Kumar et~al.(2024)Kumar, M., Bader, Kaur, Ray, G., Virparia, Sagar,
+  Dutta, Masadeh, Dulhare, and Srinivasulu]{paper_3}
+A.V. Kumar, Ajay M., Ahmad Bader, Gaganpreet Kaur, Samrat Ray, Prasanna G.,
+  Paresh Virparia, Bharat Sagar, Amit Dutta, Shadi Masadeh, Uma Dulhare, and
+  Asadi Srinivasulu.
+\newblock \emph{Optical Character Recognition (OCR) Using Opencv and Python:
+  Implementation and Performance Analysis}, pages 147--163.
+\newblock 06 2024.
+\newblock ISBN 9798369333549.
+\newblock \doi{10.4018/979-8-3693-3354-9.ch008}.
+
+\bibitem[Medina et~al.(2019)Medina, Smith, Kolluru, Sheaffer, and
+  DiVall]{paper_4}
+Melissa~S. Medina, W.~Thomas Smith, Srikanth Kolluru, Elizabeth~A. Sheaffer,
+  and Margarita DiVall.
+\newblock A review of strategies for designing, administering, and using
+  student ratings of instruction.
+\newblock \emph{American Journal of Pharmaceutical Education}, 83\penalty0
+  (5):\penalty0 7177, jun 2019.
+\newblock \doi{10.5688/ajpe7177}.
+
+\bibitem[Resuello et~al.(2024)Resuello, Feliscuzo, and Pantaleon]{paper_5}
+Jenny~L. Resuello, Larmie~S. Feliscuzo, and Cheryl~B. Pantaleon.
+\newblock Text mining student comments for teaching performance evaluation
+  using vader and latent dirichlet allocation algorithm.
+\newblock In \emph{2024 International Conference Automatics and Informatics
+  (ICAI)}, pages 260--265, 2024.
+\newblock \doi{10.1109/ICAI63388.2024.10851580}.
+
+\bibitem[Sewak et~al.(2018)Sewak, Sahay, and Rathore]{paper_1}
+Mohit Sewak, Sanjay~K. Sahay, and Hemant Rathore.
+\newblock Comparison of deep learning and the classical machine learning
+  algorithm for the malware detection.
+\newblock \emph{2018 19th IEEE/ACIS International Conference on Software
+  Engineering, Artificial Intelligence, Networking and Parallel/Distributed
+  Computing (SNPD)}, pages 293--296, 2018.
+\newblock \doi{10.1109/SNPD.2018.8441123}.
+
+\bibitem[Zaabi and Mouheb(2020)]{paper_2}
+Ali~Al Zaabi and Djedjiga Mouheb.
+\newblock Android malware detection using static features and machine learning.
+\newblock \emph{2020 International Conference on Communications, Computing,
+  Cybersecurity, and Informatics (CCCI)}, page 1–5, 2020.
+\newblock \doi{10.1109/CCCI49893.2020.9256450}.
+
+\end{thebibliography}

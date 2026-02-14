@@ -1,0 +1,44 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\Debug\AssemblerApplication2024.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>AssemblerApplication2024.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>AssemblerApplication2024.map</FILE>
+  <FILE>AssemblerApplication2024.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <START><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>39</LINE></START>
+  <SEG_TABLE><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>32</LINE></SEG_TABLE>
+  <MAIN><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>61</LINE></MAIN>
+  <CHECK_INC><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>80</LINE></CHECK_INC>
+  <DELAY20MS><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>171</LINE></DELAY20MS>
+  <WAIT_RESET><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>70</LINE></WAIT_RESET>
+  <DISPLAY><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>98</LINE></DISPLAY>
+  <WAIT_INC><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>86</LINE></WAIT_INC>
+  <DIV10><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>104</LINE></DIV10>
+  <DONE_DIV><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>111</LINE></DONE_DIV>
+  <SHOW_TENS><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>125</LINE></SHOW_TENS>
+  <SHOW_ONES><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>141</LINE></SHOW_ONES>
+  <DELAY2MS><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>157</LINE></DELAY2MS>
+  <D2_1><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>159</LINE></D2_1>
+  <D2_2><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>161</LINE></D2_2>
+  <D20_1><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>173</LINE></D20_1>
+  <D20_2><FILE>C:\Users\User\Desktop\Micropro\Q2\AssemblerApplication2024\AssemblerApplication2024\main.asm</FILE><LINE>175</LINE></D20_2>
+ </LABELS>
+</ASSEMBLER_INFO>

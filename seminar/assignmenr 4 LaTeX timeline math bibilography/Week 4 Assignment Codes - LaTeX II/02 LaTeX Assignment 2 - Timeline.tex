@@ -1,0 +1,106 @@
+\documentclass[a4paper]{article} %Always requireed
+%========================================================================
+% preamble to declare kackges used in the document
+%========================================================================
+%Packages that will be used
+\usepackage{ragged2e}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage[table,xcdraw]{xcolor}
+
+%Define new command used for "tabularx" package
+\newcolumntype{Y}{>{\centering\arraybackslash}X} %Define new column type (Centering with textwidth)
+\renewcommand{\arraystretch}{1.4} %Increase the table height
+%Set up caption formatting/alignment
+\usepackage{caption}
+\captionsetup {	
+	%justification   = centering 
+	justification   = raggedright,
+	singlelinecheck = false
+}
+%\renewcommand{\arraystretch}{1.4}
+%To use a block comment in a document
+\usepackage{comment} 
+\begin{comment}
+	Test a block comment 
+\end{comment}
+%------------------------------------------------------------------------
+\usepackage{fontspec}
+%Either Xelatex or Lualatex is required as a default complier
+%To learn more about "fontspec" package: https://ctan.org/pkg/fontspec?lang=en 
+%========================================================================
+%To declare a document title and an author(s) 
+\title{EGCI491 Computer Engineering Seminar\\ \LaTeX \1em Assignment II}
+\author{Nathan Tanaboriboon}
+
+\begin{comment}
+	\author{
+		Nathan, Tanaboriboon\\
+		\texttt{nathan.tan@student.mahidol.edu}
+		\and
+		Kyaw Zin, Thant\\
+		\texttt{kyawzin.tha@student.mahidol.edu}
+		\and
+		Trinnaya, Damrongpatharawat\\
+		\texttt{trinnaya.dam@student.mahidol.edu}
+	}
+\end{comment}
+%document
+\begin{document}
+	%\maketitle
+	%Put your text in a body of your document here... 
+	
+	\section{Timeline}
+	\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+	\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+	\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}	
+	
+	\begin{table}[h]
+		\centering
+		\renewcommand{\arraystretch}{1.5} % Increases row height to look like the image
+		\setlength{\tabcolsep}{5pt}       % Adjusts column padding
+		
+		% Table setup: 1st column fixed width for text, next 11 columns centered for months
+		\begin{tabular}{|p{5cm}|c|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			
+			% Header Row 1
+			\multirow{2}{*}{\textbf{Plan}} & \multicolumn{11}{c|}{\textbf{Timeline 2026}} \\ \cline{2-12}
+			
+			% Header Row 2 (Months) - Note: Image starts at Feb
+			& Feb & Mar & Apr & May & Jun & Jul & Aug & Sep & Oct & Nov & Dec \\ \hline
+			
+			% Row 1: Literature Review (Feb)
+			Literature Review & \cellcolor{black} & & & & & & & & & & \\ \hline
+			
+			% Row 2: System Architecture (Feb, Mar)
+			System Architecture Design \& Requirements & \cellcolor{black} & \cellcolor{black} & & & & & & & & & \\ \hline
+			
+			% Row 3: UI/UX (Mar, Apr)
+			UI/UX design & & \cellcolor{black} & \cellcolor{black} & & & & & & & & \\ \hline
+			
+			% Row 4: Function Dev (Apr, May)
+			Function Dev: Rate my course & & & \cellcolor{black} & \cellcolor{black} & & & & & & & \\ \hline
+			
+			% Row 5: Schedule Matcher (Jun, Jul)
+			Schedule Matcher & & & & & \cellcolor{black} & \cellcolor{black} & & & & & \\ \hline
+			
+			% Row 6: Super Planner (Jul, Aug)
+			Super Planner & & & & & & \cellcolor{black} & \cellcolor{black} & & & & \\ \hline
+			
+			% Row 7: Testing (Aug, Sep, Oct)
+			Testing & & & & & & & \cellcolor{black} & \cellcolor{black} & \cellcolor{black} & & \\ \hline
+			
+			% Row 8: Documentation (Nov, Dec)
+			Documentation: CH3, 4, 5 \& Abstract & & & & & & & & & & \cellcolor{black} & \cellcolor{black} \\ \hline
+			
+			% Row 9: Final Presentation (Dec)
+			Final Presentation & & & & & & & & & & & \cellcolor{black} \\ \hline
+			
+			%
+			
+		\end{tabular}
+	\end{table}
+	
+\end{document}
+%========================================================================

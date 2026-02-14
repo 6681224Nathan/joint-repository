@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: 03 LaTex Assignment 2 - Bibliography.aux
+Reallocating 'name_of_file' (item size: 1) to 13 items.
+The style file: plainnat.bst.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: References.bib
+Warning--empty booktitle in paper_7
+Warning--empty publisher in paper_3
+You've used 7 entries,
+            2773 wiz_defined-function locations,
+            645 strings with 6719 characters,
+and the built_in function-call counts, 4319 in all, are:
+= -- 387
+> -- 271
+< -- 9
++ -- 91
+- -- 84
+* -- 347
+:= -- 643
+add.period$ -- 30
+call.type$ -- 7
+change.case$ -- 48
+chr.to.int$ -- 7
+cite$ -- 16
+duplicate$ -- 196
+empty$ -- 307
+format.name$ -- 95
+if$ -- 938
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 8
+newline$ -- 52
+num.names$ -- 28
+pop$ -- 100
+preamble$ -- 1
+purify$ -- 42
+quote$ -- 0
+skip$ -- 177
+stack$ -- 0
+substring$ -- 148
+swap$ -- 59
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 72
+warning$ -- 2
+while$ -- 31
+width$ -- 0
+write$ -- 115
+(There were 2 warnings)

@@ -1,0 +1,173 @@
+old 2024 q2
+
+.include "m328pdef.inc"
+
+;===============================
+; Register Definitions
+;===============================
+.def temp   = r16
+.def count  = r17
+.def tens   = r18
+.def ones   = r19
+.def dly1   = r20
+.def dly2   = r21
+
+;===============================
+; Code Segment
+;===============================
+.cseg
+.org 0x0000
+    rjmp START
+
+;===============================
+; 7-Segment Table (Common Cathode)
+;===============================
+SEG_TABLE:
+    .db 0x3F,0x06,0x5B,0x4F,0x66
+    .db 0x6D,0x7D,0x07,0x7F,0x6F
+
+;===============================
+; START
+;===============================
+START:
+
+    clr r1                 ; r1 must always be 0
+
+; ---- I/O Setup ----
+    ldi temp, 0xFF
+    out DDRD, temp
+
+    ldi temp, (1<<PB0)|(1<<PB1)
+    out DDRB, temp
+
+    ldi temp, 0x00
+    out DDRC, temp
+
+    ldi temp, (1<<PC0)|(1<<PC1)
+    out PORTC, temp
+
+    clr count
+
+;===============================
+; MAIN LOOP
+;===============================
+MAIN:
+
+;-----------------------
+; RESET BUTTON (PC0)
+;-----------------------
+    sbic PINC, PC0
+    rjmp CHECK_INC
+
+    rcall DELAY20MS
+WAIT_RESET:
+    sbis PINC, PC0
+    rjmp WAIT_RESET
+
+    clr count
+    rjmp CHECK_INC
+
+;-----------------------
+; INCREMENT BUTTON (PC1)
+;-----------------------
+CHECK_INC:
+
+    sbic PINC, PC1
+    rjmp DISPLAY
+
+    rcall DELAY20MS
+WAIT_INC:
+    sbis PINC, PC1
+    rjmp WAIT_INC
+
+    inc count
+    cpi count, 100
+    brlo DISPLAY
+    clr count
+
+;===============================
+; DISPLAY SECTION
+;===============================
+DISPLAY:
+
+; ----- Convert count to tens/ones -----
+    mov temp, count
+    clr tens
+
+DIV10:
+    cpi temp, 10
+    brlo DONE_DIV
+    subi temp, 10
+    inc tens
+    rjmp DIV10
+
+DONE_DIV:
+    mov ones, temp
+
+; ----- Show Tens -----
+    rcall SHOW_TENS
+
+; ----- Show Ones -----
+    rcall SHOW_ONES
+
+    rjmp MAIN
+
+;===============================
+; SHOW TENS
+;===============================
+SHOW_TENS:
+    ldi ZH, high(SEG_TABLE<<1)
+    ldi ZL, low(SEG_TABLE<<1)
+    add ZL, tens
+    adc ZH, r1
+    lpm temp, Z
+
+    out PORTD, temp
+    sbi PORTB, PB1
+    cbi PORTB, PB0
+    rcall DELAY2MS
+    ret
+
+;===============================
+; SHOW ONES
+;===============================
+SHOW_ONES:
+    ldi ZH, high(SEG_TABLE<<1)
+    ldi ZL, low(SEG_TABLE<<1)
+    add ZL, ones
+    adc ZH, r1
+    lpm temp, Z
+
+    out PORTD, temp
+    sbi PORTB, PB0
+    cbi PORTB, PB1
+    rcall DELAY2MS
+    ret
+
+;===============================
+; DELAY 2ms
+;===============================
+DELAY2MS:
+    ldi dly1, 20
+D2_1:
+    ldi dly2, 200
+D2_2:
+    dec dly2
+    brne D2_2
+    dec dly1
+    brne D2_1
+    ret
+
+;===============================
+; DELAY 20ms
+;===============================
+DELAY20MS:
+    ldi dly1, 100
+D20_1:
+    ldi dly2, 200
+D20_2:
+    dec dly2
+    brne D20_2
+    dec dly1
+    brne D20_1
+    ret

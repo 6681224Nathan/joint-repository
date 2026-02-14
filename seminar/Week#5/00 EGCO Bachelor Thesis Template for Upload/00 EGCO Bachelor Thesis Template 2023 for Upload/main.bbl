@@ -1,0 +1,79 @@
+\begin{thebibliography}{10}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[rat()]{ratemyprofessors}
+Rate my professors.
+\newblock https://www.ratemyprofessors.com/.
+\newblock Accessed: 2024-05-20.
+
+\bibitem[Aldrich(2014)]{paper_6}
+P.~R. Aldrich.
+\newblock The curriculum prerequisite network: a tool for visualizing and
+  analyzing academic curricula.
+\newblock \emph{CoRR}, abs/1408.5340, 2014.
+\newblock URL \url{http://arxiv.org/abs/1408.5340}.
+
+\bibitem[Hu and Brzozowski(2005)]{paper_7}
+J.~Hu and M.~Brzozowski.
+\newblock Preference-based group scheduling.
+\newblock volume 3585, pages 990--993, 09 2005.
+\newblock ISBN 978-3-540-28943-2.
+\newblock \doi{10.1007/11555261\_87}.
+
+\bibitem[Inc.(n.d.)]{stellic}
+S.~Inc.
+\newblock Stellic: Degree management and student success platform.
+\newblock https://www.stellic.com/, n.d.
+\newblock Accessed: 2025-02-11.
+
+\bibitem[Kumar et~al.(2024)Kumar, M., Bader, Kaur, Ray, G., Virparia, Sagar,
+  Dutta, Masadeh, Dulhare, and Srinivasulu]{paper_3}
+A.~Kumar, A.~M., A.~Bader, G.~Kaur, S.~Ray, P.~G., P.~Virparia, B.~Sagar,
+  A.~Dutta, S.~Masadeh, U.~Dulhare, and A.~Srinivasulu.
+\newblock \emph{Optical Character Recognition (OCR) Using Opencv and Python:
+  Implementation and Performance Analysis}, pages 147--163.
+\newblock 06 2024.
+\newblock ISBN 9798369333549.
+\newblock \doi{10.4018/979-8-3693-3354-9.ch008}.
+
+\bibitem[L.P.(n.d.)]{degreeworks}
+E.~C. L.P.
+\newblock Ellucian degree works.
+\newblock https://www.ellucian.com/solutions/degree-works, n.d.
+\newblock Accessed: 2025-02-11.
+
+\bibitem[Medina et~al.(2019)Medina, Smith, Kolluru, Sheaffer, and
+  DiVall]{paper_4}
+M.~S. Medina, W.~T. Smith, S.~Kolluru, E.~A. Sheaffer, and M.~DiVall.
+\newblock A review of strategies for designing, administering, and using
+  student ratings of instruction.
+\newblock \emph{American Journal of Pharmaceutical Education}, 83\penalty0
+  (5):\penalty0 7177, jun 2019.
+\newblock \doi{10.5688/ajpe7177}.
+
+\bibitem[Ngubane and Tapamo(2024)]{ngubane2024tableextractnet}
+T.~Ngubane and J.-R. Tapamo.
+\newblock Tableextractnet: A model of automatic detection and recognition of
+  table structures from unstructured documents.
+\newblock \emph{Informatics}, 11\penalty0 (4):\penalty0 77, 2024.
+\newblock \doi{10.3390/informatics11040077}.
+
+\bibitem[Resuello et~al.(2024)Resuello, Feliscuzo, and Pantaleon]{paper_5}
+J.~L. Resuello, L.~S. Feliscuzo, and C.~B. Pantaleon.
+\newblock Text mining student comments for teaching performance evaluation
+  using vader and latent dirichlet allocation algorithm.
+\newblock In \emph{2024 International Conference Automatics and Informatics
+  (ICAI)}, pages 260--265, 2024.
+\newblock \doi{10.1109/ICAI63388.2024.10851580}.
+
+\bibitem[Trippel and Röpke(2025)]{trippel2025developing}
+M.~Trippel and R.~Röpke.
+\newblock Developing a graph-based visualization of elective courses to support
+  course selection in higher education, 2025.
+\newblock URL \url{https://dl.gi.de/handle/20.500.12116/47141}.
+
+\end{thebibliography}

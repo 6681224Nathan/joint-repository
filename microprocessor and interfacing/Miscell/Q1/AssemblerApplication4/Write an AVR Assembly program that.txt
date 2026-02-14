@@ -1,0 +1,1 @@
+Write an AVR Assembly program that sort an array of 8 unsigned bytes stored in SRAM (starting at address 0x0100) into descending order using the Bubble Sort Algorithm and then stored the sorted arrat starting from 0x0110. The initial data stored in address 0x0100 is {23, 5, 17, 12, 45, 8, 30, 2}. The bubble sort algorithm is when A[i] < A[i+1] swape the data.

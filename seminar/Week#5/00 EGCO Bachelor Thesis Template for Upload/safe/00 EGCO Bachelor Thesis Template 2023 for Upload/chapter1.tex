@@ -1,0 +1,126 @@
+\chapter{INTRODUCTION}
+
+\section{Background}
+Academic planning is important especially for engineering students who must follow a structured curriculum with multiple prerequisites and limited courses offered each semester. Evaluating course difficulty, reviewing the course curriculum and coordinating schedules with peers for group study are also the struggles that most students are facing in the faculty. These tasks are usually performed manually using communication channels like LINE and it can cause inefficiency and time consuming.
+At the EGCI program, students currently lack a centralized platform that allows them to rate the course, find available time through class-schedule screenshot and plan their academic paths in a visual and structured way. Course feedback is only shared when students ask questions in group chats and there is no platform where information can be accessed any time. Additionally, comparing schedules with friends to find common free time requires manual checking which is time consuming and error prone when there are multiple students. Students also face difficulties when planning their academic paths. Most students rely on the student handbook to check course requirements, prerequisites, and credit conditions. However, the handbook only serves as a reference document and does not provide interactive guidance. As a result, many students become confused about which general education courses they still need to take, which electives are required, and how their course selections affect their graduation timeline. It is common for students to enroll in available courses without a clear long-term plan, which may lead to delayed graduation or inefficient course sequencing.
+Several systems such as online course platforms and academic planning tools have been developed to address individual aspects of this problem. However, most of these systems focus on single functions and there is still a need for EGCI students with specific curriculum structures.
+The objective of this project is to develop EGCEye, an integrated academic planning and course rating web platform specifically for EGCI students. The system will include three main functions: a class schedule matcher using image processing techniques, a rate-my-course feature for student reviews and  feedback, and a super visualized planner that guides students through their academic progress toward graduation.
+
+Rate My Course function
+
+Currently, from within MUIC and nearby universities, one of the ways students use to share their thoughts and opinions of each courses and professors is through university LineOpenchat and , since for LineOpenchat, it is a social space that the majority of students can use to communicate with each other, to share or inquire anything that aligns with their interests, although there are moderators from Student Affairs division of university and the student elected Student Association, the community is mostly self-regulated on daily basis. Similar things apply for other social media platforms as well, ranging from X, facebook, instagram, and Reddit.
+
+But since these social media platforms are not originally made for sharing opinions and rating of courses and professors specifically, new platforms are then created to achieve such goal. For instance, RateMyProfessor website \cite{ratemyprofessors}, created to let students rate and leaves comments of their professors in the website, categorized by faculties and universities, with wide range of universities available all around the world (although the majority of them are still located in the USA). 
+
+Even with such platform with specific purpose, there are many points that we want to develop, for example, RateMyProfessors website does the rating professor-oriented, basically, the site allows you to see the rating of each professors first before showing you the rating of each course that they teach, but from our opinions, we think that showing the course rating first before the rating of professors of each section seems to be more beneficial to the students’ academic planning. In addition, since from what we found, the information of the EGCI faculty are still very limited on the mentioned social media platform, including the RateMyProfessor website (Mahidol University is not available on the website), to solve with this problem, the Rate My Course function of our website will be created for the EGCI student specifically, to ensure that there are sufficient academic information on the website, available to all the EGCI students, preparing the infrastructure for the students to share and voice their opinions and comments of each available courses.
+
+Super Planner function
+
+Existing academic planning tools such as DegreeWorks and Stellic provide essential administrative functions, including GPA tracking, progress bars, and degree audits. These tools effectively list requirements and "what-if" scenarios for minors and majors. However, they are text-based and lack graphical interfaces to visualize the complex academic structure of courses. 
+
+Research suggests that text-based syllabi and catalogs are less effective for long-term planning than visual models. A study on curriculum visualization \cite{trippel2025developing} demonstrates that graph-based visualizations of courses and their respective prerequisites significantly improve a student's ability to understand their academic path compared to traditional text-based lists. By visualizing prerequisites and course sequences as a network and graph, students can better plan their academic career to avoid delayed graduation. With the Super Planner function, such tools for academic structure visualization will be available.
+
+Schedule Matcher function
+
+Another problem that affects the university student’s quality of life that we found are schedule coordination, specifically within a friend group, specifically with the MUIC students. Every time a new semester starts, with the option for each students to independently enroll in any courses that they want as long as there are seats available, each student often end up with different class schedules, meaning that the common available time of each students would differ, so, to find it, students need to do the manual common available time mapping on their own, which is time consuming. With the existing technology like the TableExtractNet. Ngubane and Tapamo \cite{ngubane2024tableextractnet} propose a deep learning approach utilizing CornerNet and Faster R-CNN to detect and recognize table structures from document images, which can be implemented and trained to turn the photos/screenshots of class schedules into a digital form, utilizing the “Master Busy Map” logic \cite{paper_7} to further develop an algorithm to discover the common available of many class schedules.
+
+
+\section{Objective}
+To develop a website for EGCI students to rate courses and leave comments on the courses offered by MUIC and the EGCI faculty, share their class schedules with friends to find common available times, and create an academic plan to track both courses they intend to enroll in and those they have already completed throughout their studies with the EGCI faculty.
+
+\section{Scope}
+The web will be available only for the EGCI students, and three main functions will be considered throughout our web platform development:
+\begin{enumerate}
+    \item Class schedule matcher function
+    \begin{enumerate}[label=\alph*]
+    	\item The Optical Character Recognition will be used to read any text labels of date and time from the class schedule screen capture.
+    	\item The coloured blobs will be detected by OpenCV. We will perform color segmentation to extract the class block, which will then be put in Master Busy Map to perform OR logic operation to find common free times among students.
+    	\item If no common available time is found for the entire group, the system will suggest available time slots for smaller subgroups by excluding one student at a time and identifying overlapping free periods among the remaining members
+    \end{enumerate}
+    
+    \newpage
+    \item Rate-my-course function
+    \begin{enumerate}[label=\alph*]
+    	\item Allows EGCI students to rate the any available General Education courses, major required course, and engineering core course offered by MUIC and EGCI faculty, as a score from 0 to 5 and allows users to leave a comment, whether anonymously or not.
+    	\item List of courses available to rate will be initially created by us but users can also choose to add more choice of courses in case new courses are available.
+    	\item Any available courses will also be separated by professors in case the course has more than one section, which are taught by different professors.
+    \end{enumerate}
+    
+    \item Super planner function
+    \begin{enumerate}[label=\alph*]
+    	\item The function offers graphical interfaces for users to arrange the plan for their entire academic studies with the EGCI faculty, the computer engineering major required courses and engineering core courses will be in a form of a floating icons which users can drag and place them in a slot for each semester, with multiple semesters available. Each course that has prerequisite courses will have a line connecting to the prerequisite courses. There would also be an additional “suggestion” line, which connects between a course and other available courses which are suggested by the faculty to study first although the course is not connected by the prerequisite line. With the general education courses, I-design courses, and major electives courses, the website will allow users to specify what course they would take to complete the required credit of that category.
+    	\item The courses that are not yet placed in the plan will also display a marker to suggest the users of their choice of course enrollment, for example, a second year course that has never been enrolled by the third year student will show a marker and a suggestion to the student that they should consider taking it as soon as possible.
+    	
+    \end{enumerate}
+
+\end{enumerate}
+
+\section{Expected Results}
+\noindent\hspace{1.5em}(Indicate expected outcomes of the project)
+\begin{enumerate}
+	\item The proposed system is expected to achieve a user base of 50 or more.
+	\item The Rate-My-Course reaches the number of activities: 15 for adding star-rating, and 5 for leaving comments.
+	\item The Class Schedule Matcher targets a number of 15-20 screenshots uploaded to find common free times, with all being accurately matched.
+	\item The Super Planner aims to facilitate at least 5-10 unique student plans. 2-3 trimesters (slots) or more mapped out are required to be counted as one plan to preserve its long-term plan characteristic.
+	\item The project aims for an average User Experience (UX) rating of 4.0-4.5 out of 5 stars based on quality feedback collected from a random group of users.
+	
+\end{enumerate}
+
+\section{Timeline}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}	
+
+\begin{table}[!ht]
+	\footnotesize
+	\sloppy
+	\centering
+	\renewcommand{\arraystretch}{1.3} % Adds a little breathing room to rows
+	\caption{Project Timeline 2026}
+	\label{tab:project-timeline}
+	
+	% Setup: 1st column 4cm for text, next 11 columns for months (Feb-Dec)
+	\begin{tabular}{|p{4cm}|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		% Header Structure matching your requested format
+		\multicolumn{1}{|c|}{} & \multicolumn{11}{c|}{\textbf{Timeline}} \\ \cline{2-12} 
+		\multicolumn{1}{|c|}{} & \multicolumn{11}{c|}{\textbf{2026}} \\ \cline{2-12} 
+		\multicolumn{1}{|c|}{\multirow{-3}{*}{\textbf{Plan}}} & \textbf{Feb} & \textbf{Mar} & \textbf{Apr} & \textbf{May} & \textbf{Jun} & \textbf{Jul} & \textbf{Aug} & \textbf{Sep} & \textbf{Oct} & \textbf{Nov} & \textbf{Dec} \\ \hline
+		
+		% Task 1: Literature Review (Feb)
+		Literature Review & 
+		\cellcolor[HTML]{000000} & & & & & & & & & & \\ \hline
+		
+		% Task 2: System Architecture (Feb, Mar)
+		System Architecture Design \& Requirements & 
+		\cellcolor[HTML]{000000} & \cellcolor[HTML]{000000} & & & & & & & & & \\ \hline
+		
+		% Task 3: UI/UX (Mar, Apr)
+		UI/UX design & 
+		& \cellcolor[HTML]{000000} & \cellcolor[HTML]{000000} & & & & & & & & \\ \hline
+		
+		% Task 4: Function Dev (Apr, May)
+		Function Dev: Rate my course & 
+		& & \cellcolor[HTML]{000000} & \cellcolor[HTML]{000000} & & & & & & & \\ \hline
+		
+		% Task 5: Schedule Matcher (Jun, Jul)
+		Schedule Matcher & 
+		& & & & \cellcolor[HTML]{000000} & \cellcolor[HTML]{000000} & & & & & \\ \hline
+		
+		% Task 6: Super Planner (Jul, Aug)
+		Super Planner & 
+		& & & & & \cellcolor[HTML]{000000} & \cellcolor[HTML]{000000} & & & & \\ \hline
+		
+		% Task 7: Testing (Aug, Sep, Oct)
+		Testing & 
+		& & & & & & \cellcolor[HTML]{000000} & \cellcolor[HTML]{000000} & \cellcolor[HTML]{000000} & & \\ \hline
+		
+		% Task 8: Documentation (Nov, Dec)
+		Documentation: CH3, 4, 5 \& Abstract & 
+		& & & & & & & & & \cellcolor[HTML]{000000} & \cellcolor[HTML]{000000} \\ \hline
+		
+		% Task 9: Final Presentation (Dec)
+		Final Presentation & 
+		& & & & & & & & & & \cellcolor[HTML]{000000} \\ \hline
+	\end{tabular}
+\end{table}

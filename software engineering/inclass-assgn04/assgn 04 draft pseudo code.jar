@@ -1,0 +1,293 @@
+
+
+%% ========================================= PSEUDO CODE FOR FUNCTION EXPLANATION ==================================
+
+ %%we separate by function of movement, 
+ %%not part of machines
+
+robotController.openTheDoor(){
+    object object
+
+    while(True)
+    {
+        if(visionModule.identify(object) == "door")
+        {
+            return false
+        }
+        else{
+            navigationModule.turn(15 degrees)
+        }
+
+    }
+
+    while( visionModule.measure(object) > 5cm ){
+        navigationModule.moveForward(1cm)
+    }
+
+
+    while(True)
+    {
+        if(visionModule.identify(object) == "doorKnob")
+        {
+            return false
+        }
+        else{
+            navigationModule.turn(15 degrees)
+        }
+
+    }
+
+    while( visionModule.measure(object) > 5mm ){
+        navigationModule.extendHand(1 mm)
+    }
+
+    handModule.closeGrip()
+    handModule.turn(90)
+
+    if( visionModule.identifyNLP() == "pull" )
+    {
+        pushPullModule.pull()
+    }
+    else if( visionModule.identifyNLP() == "push")
+    {
+        pushPullModule.push()
+    }
+
+
+    handModule.releaseGrip()
+
+
+    navigationModule.moveForward(1m)
+
+}
+
+pushPullModule.push()
+{
+    handModule.yawHandRight(5cm)
+}
+pushPullModule.pull()
+{
+    handModule.yawHandRight( -5cm )
+}
+
+
+%%======================== CLASS DIAGRAM ================================
+
+
+classDiagram
+
+
+robotController "1" --> "1" navigationModule : control
+robotController "1" --> "1" pushPullModule : control
+robotController "1" --> "1" visionModule : control
+robotController "1" --> "1" handModule : control
+visionModule "1" --> "1" object : detect (interact visually)
+pushPullModule "1" --> "1" handModule : control
+
+
+
+
+class robotController{
+   +openTheDoor()
+}
+
+
+class pushPullModule{
+   +push()
+   +pull()
+}
+
+class navigationModule{
+
+
+   +moveForward(int length)
+   +moveBackward(int length)
+   +turn(int degrees)
+   +turnAround()
+
+
+}
+
+
+class visionModule{
+   +identify(Object) : String
+   +measure(Object) : int
+
+
+   +identifyNLP() : String
+}
+
+
+class handModule{
+
+
+   +extendHand(int distance)
+   +closeGrip()
+  
+   +rotateHand(int degrees)
+
+
+   +releaseGrip()
+   +yawHandRight(int distance)
+}
+
+
+class object{
+   +int distanceX
+   +int distanceY
+
+
+   +String type
+}
+
+%%===========SEQUENCE DIAGRAM==============
+
+
+sequenceDiagram
+
+participant robotCon as robotController
+participant pushPull as pushPullModule
+participant navMod as navigationModule
+participant vision as visionModule
+participant hand as handModule
+participant object
+
+loop until loop is exited
+    
+    robotCon ->> vision : identify()
+    activate robotCon
+    activate vision
+    activate object
+    activate navMod
+    vision ->> object : scan()
+    object -->> vision : type
+    deactivate object
+    vision -->> robotCon : type
+    deactivate vision
+
+    alt type == "door"
+        robotCon --> robotCon : exit loop
+    else
+        robotCon ->> navMod : turn(15 degrees)
+        navMod -->> robotCon : turned 15 degrees
+    end
+end
+deactivate robotCon
+deactivate navMod
+
+loop until loop is exited
+
+    robotCon ->> vision : measure(object)
+    activate robotCon
+    activate vision
+    activate navMod
+    vision -->> robotCon : distance
+    deactivate vision
+
+    alt distance < 5cm
+        robotCon ->> robotCon : exit loop
+    else
+        robotCon ->> navMod : moveForward(5cm)
+        navMod -->> robotCon : moved
+    end
+
+    deactivate robotCon
+    deactivate navMod
+end
+
+loop until loop is exited
+    
+    robotCon ->> vision : identify()
+    activate robotCon
+    activate vision
+    activate object
+    activate navMod
+    vision ->> object : scan()
+    object -->> vision : type
+    deactivate object
+    vision -->> robotCon : type
+    deactivate vision
+
+    alt type == "doorKnob"
+        robotCon --> robotCon : exit loop
+    else
+        robotCon --> navMod : turn(15 degrees)
+        navMod -->> robotCon : turned 15 degrees
+    end
+end
+deactivate robotCon
+deactivate navMod
+
+loop until loop is exited
+
+    robotCon ->> vision : measure(object)
+    activate robotCon
+    activate vision
+    activate navMod
+    vision -->> robotCon : distance
+    deactivate vision
+
+    alt vdistance < 5mm
+        robotCon ->> robotCon : exit loop
+    else
+        robotCon ->> navMod : extendHand(1mm)
+        navMod -->> robotCon : extended
+    end
+
+    deactivate robotCon
+    deactivate navMod
+end
+
+robotCon ->> hand : closeGrip()
+hand -->> robotCon : closed
+Note over hand,robotCon : a return value is required, each action is taken one at a time
+activate robotCon
+activate hand
+activate vision
+robotCon ->> hand : turn(90 degrees)
+hand -->> robotCon : turned
+robotCon ->> vision : identifyNLP
+vision -->> robotCon : detected_sign
+deactivate vision
+
+activate pushPull
+alt detected_sign == "pull"
+    robotCon ->> pushPull : pull()
+    pushPull ->> hand : yawHandRight(5cm)
+    hand -->> pushPull : yawed()
+    pushPull -->> robotCon : pulled
+    
+else detected_sign == "push"
+    robotCon ->> pushPull : push()
+    pushPull ->> hand : yawHandLeft(-5cm)
+    hand -->> pushPull : yawed()
+    pushPull -->> robotCon : pushed
+end
+
+deactivate robotCon
+deactivate pushPull
+deactivate hand
+
+robotCon ->> hand : releaseGrip()
+hand -->> robotCon : released
+activate robotCon
+activate hand
+activate navMod
+robotCon ->> navMod : moveForward(1m)
+navMod -->> robotCon : moved
+deactivate robotCon
+deactivate hand
+deactivate navMod 
+
+
+
+    
+
+
+
+
+
+
+
+
+

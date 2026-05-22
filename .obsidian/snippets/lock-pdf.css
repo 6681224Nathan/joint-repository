@@ -1,0 +1,5 @@
+/* Disable scrolling and clicking inside PDF embeds */
+.pdf-embed, .internal-embed.pdf-container {
+    pointer-events: none;
+    user-select: none;
+}

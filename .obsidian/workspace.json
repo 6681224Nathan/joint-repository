@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "e4001a2ee4649d1d",
+        "id": "21b4058826c886d9",
         "type": "tabs",
         "children": [
           {
-            "id": "d20a519792eda1e9",
+            "id": "b5d2f2d9af7942cb",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "7afb0c4b05a81d5a",
@@ -183,26 +184,36 @@
       "bases:Create new base": false
     }
   },
-  "active": "d20a519792eda1e9",
+  "active": "b5d2f2d9af7942cb",
   "lastOpenFiles": [
-    "computer network/Computer Network and Information Security.pdf",
-    "Untitled.base",
+    "computer network/midterm cheat sheet.pdf",
+    "computer network/Obsidian attachments/Pasted image 20260527111453.png",
+    "computer network/Obsidian attachments/Pasted image 20260527092754.png",
+    "computer network/Midterm cheatsheet.md",
+    "Midterm cheatsheet.md",
     "computer network/Computer Network and Information Security.md",
-    "computer network/Obsidian attachment/Pasted image 20260522103611.png",
-    "computer network/Obsidian attachment/Pasted image 20260522103504.png",
-    "computer network/Obsidian attachment/Pasted image 20260522103437.png",
-    "computer network/Obsidian attachment/Pasted image 20260522102214.png",
-    "computer network/Obsidian attachment/Pasted image 20260522101507.png",
-    "computer network/Obsidian attachment",
-    "computer network/untitled folder",
-    "computer network/Pasted image 20260522103611.png",
-    "computer network/Pasted image 20260522103504.png",
-    "computer network/Pasted image 20260522103437.png",
-    "computer network/Pasted image 20260522102214.png",
-    "computer network/Pasted image 20260522101507.png",
-    "Untitled",
+    "computer network/mockMidterm.md",
+    "computer network/homework 2.pdf",
     "computer network/Week01 Intro.pdf",
-    "Obsidian/Obsidian shotcut keys.md",
-    "Obsidian"
+    "computer network/mockMidterm",
+    "computer network/Obsidian attachments/Pasted image 20260526233856.png",
+    "Untitled.base",
+    "princ makt/Principle of Marketing.md",
+    "software engineering/assignment 01/practice1-c4model-food-delivery-solution.pdf",
+    "software engineering/assignment 01/~$actice3-c4model-smartHome-student.docx",
+    "software engineering/assignment 01/ndividual work/practice1-c4model-food-delivery-solution.pdf",
+    "software engineering/assignment 01/ndividual work",
+    "software engineering/assignment 01/untitled folder",
+    "software engineering/assignment 01/practice3-c4model-smartHome-student.docx",
+    "princ makt/Obsidian attachments/Pasted image 20260526091951.png",
+    "princ makt/Principle of marketing.md",
+    "computer network/ComNet assgn-01.md",
+    "computer network/Obsidian attachments/Pasted image 20260522103611.png",
+    "computer network/Obsidian attachments/Pasted image 20260522103504.png",
+    "computer network/Obsidian attachments/Pasted image 20260522103437.png",
+    "computer network/Obsidian attachments/Pasted image 20260522102214.png",
+    "computer network/Obsidian attachments/Pasted image 20260522101507.png",
+    "computer network/Obsidian attachment/Pasted image 20260522103611.png",
+    "Obsidian/Obsidian shotcut keys.md"
   ]
 }

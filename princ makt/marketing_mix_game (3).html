@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Marketing Mix · Game Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..900,0..100&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF6EE;
+  --surface: #FFFFFF;
+  --ink: #1E1A15;
+  --ink-soft: #2A2522;
+  --muted: #6B6259;
+  --border: #E8DFD0;
+  --product: #E8A33D;
+  --price: #4A7C59;
+  --place: #3E5C8C;
+  --promotion: #C9534B;
+  --person: #8B5A8E;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 600px 400px at top left, rgba(232,163,61,0.06), transparent 60%),
+    radial-gradient(ellipse 600px 400px at bottom right, rgba(139,90,142,0.05), transparent 60%);
+}
+
+.container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+  position: relative;
+}
+
+header { text-align: center; padding: 12px 0 28px; }
+
+.eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'SOFT' 100, 'opsz' 144, 'wght' 600;
+  font-size: 44px;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  margin-top: 10px;
+  color: var(--ink);
+}
+
+h1 em {
+  font-style: italic;
+  font-variation-settings: 'SOFT' 100, 'opsz' 144, 'wght' 500;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 14px;
+  font-style: italic;
+}
+
+/* Spin section */
+.spin-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 24px 20px 22px;
+  text-align: center;
+  margin-bottom: 28px;
+  box-shadow: 0 1px 0 var(--border), 0 12px 32px -18px rgba(30,26,21,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.spin-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--product) 0%, var(--product) 20%,
+    var(--price) 20%, var(--price) 40%,
+    var(--place) 40%, var(--place) 60%,
+    var(--promotion) 60%, var(--promotion) 80%,
+    var(--person) 80%, var(--person) 100%);
+}
+
+.spin-label {
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.spin-number {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'SOFT' 100, 'opsz' 144, 'wght' 700;
+  font-size: 104px;
+  line-height: 1;
+  margin: 4px 0 14px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.2s;
+}
+
+.spin-number.idle { color: var(--border); }
+
+.spin-number.spinning {
+  animation: flicker 0.06s linear infinite;
+  color: var(--ink);
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.96); }
+}
+
+.spin-button {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s;
+  font-variant-numeric: tabular-nums;
+}
+
+.spin-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: var(--ink-soft);
+}
+
+.spin-button:active { transform: translateY(0); }
+.spin-button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.spin-hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 14px;
+  font-style: italic;
+}
+
+.random-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 100px;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s;
+}
+
+.random-btn:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+  border-style: solid;
+}
+
+/* Timer */
+.timer {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  padding: 7px 8px 7px 12px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--muted);
+  transition: all 0.3s;
+}
+
+.timer.active { color: var(--ink); border-color: var(--ink); }
+.timer.warn { color: var(--product); border-color: var(--product); }
+.timer.urgent {
+  color: var(--promotion);
+  border-color: var(--promotion);
+  animation: pulse 1s ease infinite;
+}
+.timer.done {
+  background: var(--promotion);
+  color: white;
+  border-color: var(--promotion);
+  animation: pulse 0.6s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(0.98); }
+}
+
+.timer-icon { font-size: 11px; opacity: 0.7; }
+
+.timer-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: inherit;
+  padding: 0 4px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.timer-btn:hover { opacity: 1; }
+
+/* Categories */
+.section-label {
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cat-button {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px 12px 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.15s ease, box-shadow 0.2s;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.cat-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--accent);
+}
+
+.cat-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -18px rgba(30,26,21,0.18);
+}
+
+.cat-button:active { transform: translateY(0); }
+
+.cat-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cat-emoji { font-size: 32px; line-height: 1; margin-bottom: 2px; }
+
+.cat-name {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'SOFT' 50, 'opsz' 36, 'wght' 600;
+  font-size: 19px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.cat-count {
+  font-size: 10.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.cat-product { --accent: var(--product); }
+.cat-price { --accent: var(--price); }
+.cat-place { --accent: var(--place); }
+.cat-promotion { --accent: var(--promotion); }
+.cat-person { --accent: var(--person); grid-column: 1 / -1; }
+
+.cat-person .cat-emoji { font-size: 28px; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30,26,21,0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.modal-overlay.active { display: flex; opacity: 1; }
+
+.card {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 28px 24px 24px;
+  max-width: 420px;
+  width: 100%;
+  position: relative;
+  transform: translateY(20px) scale(0.96);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1), opacity 0.25s;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-top: 6px solid var(--card-accent, var(--ink));
+}
+
+.modal-overlay.active .card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.card.t-product { --card-accent: var(--product); }
+.card.t-price { --card-accent: var(--price); }
+.card.t-place { --card-accent: var(--place); }
+.card.t-promotion { --card-accent: var(--promotion); }
+.card.t-person { --card-accent: var(--person); }
+
+.card-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.card-tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 100px;
+  color: white;
+  font-weight: 700;
+  background: var(--card-accent, var(--ink));
+}
+
+.card-num {
+  font-size: 10.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+.card-question {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'SOFT' 50, 'opsz' 32, 'wght' 500;
+  font-size: 21px;
+  line-height: 1.32;
+  margin-bottom: 20px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+
+.card-prompt {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: 12px;
+  line-height: 1.45;
+}
+
+.card-prompt strong { color: var(--ink); font-weight: 600; }
+
+.reveal-button {
+  width: 100%;
+  padding: 15px;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 14px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.reveal-button:hover { background: var(--ink-soft); }
+.reveal-button:active { transform: translateY(1px); }
+
+.answer {
+  display: none;
+  margin-top: 18px;
+  padding: 18px 18px 18px 16px;
+  border-radius: 14px;
+  background: var(--bg);
+  border-left: 4px solid var(--answer-color, var(--ink));
+}
+
+.answer.show {
+  display: block;
+  animation: fadeIn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.answer-label {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: 'wght' 700, 'opsz' 14;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--answer-color, var(--ink));
+}
+
+.answer-explanation {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.close-button {
+  width: 100%;
+  margin-top: 16px;
+  padding: 13px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  transition: all 0.2s;
+}
+
+.close-button:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: var(--bg);
+}
+
+footer {
+  text-align: center;
+  margin-top: 36px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+footer button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 0;
+}
+
+footer button:hover { color: var(--ink); }
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 28px auto;
+  max-width: 40px;
+}
+
+@media (max-width: 380px) {
+  h1 { font-size: 38px; }
+  .spin-number { font-size: 88px; }
+  .cat-name { font-size: 17px; }
+  .card-question { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="eyebrow">Marketing Mix · Game Companion</div>
+    <h1>The 4 <em>Ps</em><br>of Marketing</h1>
+    <p class="subtitle">ICMB259 · Principles of Marketing</p>
+  </header>
+
+  <section class="spin-section">
+    <div class="spin-label">Roll to Move</div>
+    <div class="spin-number idle" id="spinNumber">—</div>
+    <button class="spin-button" id="spinButton">Spin</button>
+    <p class="spin-hint">Move 1–4 squares on the board</p>
+    <button class="random-btn" id="randomBtn">🎲 Skip board · Random card</button>
+  </section>
+
+  <div class="section-label">Land on a square · Draw a card</div>
+
+  <div class="categories">
+    <button class="cat-button cat-product" data-cat="product">
+      <span class="cat-emoji">🐔</span>
+      <span class="cat-name">Product</span>
+      <span class="cat-count" id="count-product">—</span>
+    </button>
+    <button class="cat-button cat-price" data-cat="price">
+      <span class="cat-emoji">💰</span>
+      <span class="cat-name">Price</span>
+      <span class="cat-count" id="count-price">—</span>
+    </button>
+    <button class="cat-button cat-place" data-cat="place">
+      <span class="cat-emoji">🚚</span>
+      <span class="cat-name">Place</span>
+      <span class="cat-count" id="count-place">—</span>
+    </button>
+    <button class="cat-button cat-promotion" data-cat="promotion">
+      <span class="cat-emoji">🎩</span>
+      <span class="cat-name">Promotion</span>
+      <span class="cat-count" id="count-promotion">—</span>
+    </button>
+    <button class="cat-button cat-person" data-cat="person">
+      <span class="cat-emoji">👩</span>
+      <span class="cat-name">Problem Card</span>
+      <span class="cat-count" id="count-person">—</span>
+    </button>
+  </div>
+
+  <div class="divider"></div>
+
+  <footer>
+    Adapted from ILO <em>GET Ahead</em> &amp; <em>My.Coop</em> Marketing Mix Board Game<br>
+    <button id="resetBtn">Reset all decks</button>
+  </footer>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="card" id="cardModal">
+    <div class="timer" id="timer">
+      <span class="timer-icon">⏱</span>
+      <span id="timerValue">1:30</span>
+      <button class="timer-btn" id="pauseBtn" title="Pause / Resume">⏸</button>
+      <button class="timer-btn" id="resetTimerBtn" title="Reset to 1:30">↺</button>
+    </div>
+    <div class="card-tag-row">
+      <span class="card-tag" id="cardTag">PRODUCT</span>
+      <span class="card-num" id="cardNum"></span>
+    </div>
+    <div class="card-question" id="cardQuestion"></div>
+    <div class="card-prompt" id="cardPrompt"></div>
+    <button class="reveal-button" id="revealButton">Reveal Answer</button>
+    <div class="answer" id="answer">
+      <div class="answer-label" id="answerLabel"></div>
+      <div class="answer-explanation" id="answerExplanation"></div>
+    </div>
+    <button class="close-button" id="closeButton">Close · Next Player</button>
+  </div>
+</div>
+
+<script>
+const cards = {
+  product: [
+    { q: "Customer demand for a product always remains the same.", a: "FALSE", e: "Demand shifts with seasons, price changes, competition, and supply." },
+    { q: "You should make your product special or different from others.", a: "TRUE", e: "Try to create an 'identity' for your product in the market." },
+    { q: "Your product or service must meet your customers' needs.", a: "TRUE", e: "Selling excellent products that no one needs is difficult. Sometimes good promotion can create a new need." },
+    { q: "A new item may sell poorly at first but sales improve as its reputation grows.", a: "TRUE", e: "Usually true — if it's a good product and you build reputation over time." },
+    { q: "There are three good ways to find out what customers want: customer surveys, observing what they buy, and trial sales.", a: "TRUE", e: "Market research and testing improve the chances of success." },
+    { q: "If you meet your customers' needs better than your competitors, you will succeed.", a: "TRUE", e: "Satisfied customers return — and they tell others." },
+    { q: "Find a successful business and produce the same product. Then you will succeed too.", a: "FALSE", e: "Make your product 'special' — different from anyone else on the market." },
+    { q: "Only price determines whether customers will buy from you or your competitors.", a: "FALSE", e: "Quality, location, service, availability, and brand reputation all matter too." },
+    { q: "Sales do not remain the same over long periods of time, so you must keep improving.", a: "TRUE", e: "Competition changes. Customer needs evolve. Don't assume yesterday's sales continue." },
+    { q: "You decided to sell chickens. You need to re-examine that decision every five years.", a: "FALSE", e: "Evaluate every few months — markets move faster than that." },
+    { q: "Sales records help you evaluate which products sell and which do not.", a: "TRUE", e: "Track best-sellers, popular colours, sizes, and styles. Identify trends early." },
+    { q: "The surest path to success is to sell what you're already good at producing, rather than what your customers want.", a: "FALSE", e: "Produce what customers need or want. Skills can be built; demand cannot be forced." },
+    { q: "A new business should not expect to make a profit in the first few months — or sometimes the first year.", a: "TRUE", e: "Building reputation takes time, and first-year costs are typically high." },
+    { q: "A 'market test' — selling your product for a short time to see if people buy it — is a waste of time.", a: "FALSE", e: "Far better to test cheaply than to invest big money in something that fails." },
+    { q: "You should sell the same products that are popular in the capital city.", a: "FALSE", e: "Sell products that YOUR local customers want. Trends don't always travel." },
+    { q: "A business was selling brown eggs but customers preferred white. The only fix is to switch to white eggs.", a: "FALSE", e: "Run a campaign to persuade customers that brown eggs are better. Marketing can shift preferences." },
+    { q: "When you change a product, decide first: are you creating more sales with existing customers, or attracting new ones?", a: "TRUE", e: "Each goal needs a different strategy and different message." },
+    { q: "Customers choose repair services based mainly on price.", a: "FALSE", e: "They usually choose based on reputation, trust, and quality of work." },
+    { q: "Your friend's tailoring business was very profitable this year, so it will be profitable next year too.", a: "FALSE", e: "Many unexpected things can change sales year to year." },
+    { q: "You run a small bike repair shop. Since everyone in town is a potential customer, you should not specialise or target a specific audience.", a: "FALSE", e: "Always find ways to target — specialised positioning attracts loyal customers." }
+  ],
+  price: [
+    { q: "To set your price, you should add a margin onto your costs of production and selling (known as 'mark-up').", a: "TRUE", e: "This is called cost-plus pricing — a basic, reliable starting method." },
+    { q: "The price of your product must cover your 'fixed costs' like rent and equipment.", a: "TRUE", e: "Fixed costs don't change regardless of how many products you sell — but you still pay them." },
+    { q: "It is always a good idea to sell your product at a lower price than other sellers in your area.", a: "FALSE", e: "Sometimes you lose money by pricing too low — even if you sell more units." },
+    { q: "Higher prices mean higher profits.", a: "FALSE", e: "High prices can scare buyers away. Lower prices can sometimes attract enough volume to raise total profit." },
+    { q: "If you charge more than another seller, customers will not buy from you.", a: "FALSE", e: "Some buyers prioritise quality, service, location, or trust over price." },
+    { q: "Your profit depends on how much you charge, on customer demand, and on competition.", a: "TRUE", e: "Plus your costs, your inventory, and your reputation." },
+    { q: "Your profits should always be at least ten percent of your costs.", a: "FALSE", e: "There's no universal margin — it depends on your industry, market, and business model." },
+    { q: "You are the only chicken seller in your area, so you can raise prices as high as you want and stay in business.", a: "FALSE", e: "Customers have a sense of 'fair price'. If chicken gets too expensive, they buy fish instead." },
+    { q: "Lower prices can increase your profits — if they attract enough new customers.", a: "TRUE", e: "But you must sell enough additional volume to make up for the lower per-unit margin." },
+    { q: "It is important to review the price of your product or service on a regular basis.", a: "TRUE", e: "Costs change. Customer needs change. Competition shifts. Even a few months can make a difference." },
+    { q: "Setting prices below your costs is risky.", a: "TRUE", e: "You'll lose money over time. Acceptable only briefly — for a launch promotion or to clear stock." },
+    { q: "Things to consider when setting price: your costs, your production level, your competition, and your customers.", a: "TRUE", e: "All four are essential inputs to a smart pricing decision." },
+    { q: "Customers always buy at the lowest price available.", a: "FALSE", e: "Many buy based on quality, service, location, or trust in the seller." },
+    { q: "The price of your product does not need to include the costs of your rent and equipment.", a: "FALSE", e: "It must cover both fixed costs (rent, equipment) AND variable costs (supplies, packaging)." },
+    { q: "Variable costs change depending on how much business you do — for example, supplies and packaging.", a: "TRUE", e: "More sales = more variable costs. Fixed costs stay constant in the short run." },
+    { q: "Your sister sells high-quality cloth. A new seller offers lower-quality cloth at a lower price. Your sister should reduce her price too.", a: "FALSE", e: "Better to change her promotion to emphasise quality. See if loyal customers stay." },
+    { q: "It is easy to compete with a larger business on the basis of price.", a: "FALSE", e: "Large businesses have scale advantages. Small businesses compete on quality, service, location." },
+    { q: "Your price should remain the same all year long.", a: "FALSE", e: "Seasonal promotions, special sales, and demand shifts may justify changing prices." },
+    { q: "'Cost-plus' pricing (cost + planned profit margin) is one good way to set your prices.", a: "TRUE", e: "It's a reliable starting point — though competition and customer perception should adjust it." },
+    { q: "The price of your product should cover your production costs, be fair to your customers, AND provide some profit for you.", a: "TRUE", e: "All three at once — that's the balancing act of pricing." }
+  ],
+  place: [
+    { q: "There are two ways to sell your product: by yourself, or through agents/middlemen.", a: "TRUE", e: "Choose the model that fits your scale, time, and reach." },
+    { q: "You will always make more money by selling your product yourself.", a: "FALSE", e: "Self-selling has hidden costs — your time, transport, storage. Sometimes agents are cheaper." },
+    { q: "An agent can sell your product directly to customers, or sell it to retailers who sell to customers.", a: "TRUE", e: "Both models exist. Each has different margins and reach." },
+    { q: "Agents always charge unfair prices.", a: "FALSE", e: "Some agents save you money — if they charge less than your own selling costs would." },
+    { q: "Your choice of how to distribute your product is an important decision.", a: "TRUE", e: "It affects costs, reach, customer experience, and brand control." },
+    { q: "In most places, agents are the only way to distribute your product.", a: "FALSE", e: "You can sell it yourself, or form a cooperative with other sellers." },
+    { q: "Distribution means getting your product from the producer to the buyer.", a: "TRUE", e: "It includes transport, storage, packaging, and the final point of sale." },
+    { q: "You can usually save money on distribution by reducing the number of people between you and the buyer.", a: "TRUE", e: "Each middleman adds margin. Shorter chains often mean lower cost." },
+    { q: "People in your village sell fish to an agent who pays too little. Friends say there's no alternative — so there really isn't.", a: "FALSE", e: "Producers can set up cooperatives for joint transport, storage, and direct retail sales." },
+    { q: "Many businesses lose part of their products because of poor storage facilities.", a: "TRUE", e: "Spoilage, theft, and damage all cost money. Storage is part of cost of goods." },
+    { q: "Agents are never willing to change their prices or policies.", a: "FALSE", e: "Agents need your business too. You can often negotiate better terms." },
+    { q: "The greater the distance to the market, the greater the need for an agent.", a: "TRUE", e: "Transport and storage costs rise with distance — and agents specialise in moving goods." },
+    { q: "A 'gap' in distribution can be a good idea for a new business.", a: "TRUE", e: "Example: a group of women started a bus service to help vegetable growers reach the city." },
+    { q: "Good businesses produce as much as possible all year round.", a: "FALSE", e: "Plan inventory carefully — to avoid loss or spoilage, and to have products ready when demand peaks." },
+    { q: "The best way to sell eggs in a small village is always door-to-door.", a: "FALSE", e: "A small stand or local grocery store can be just as good — sometimes better." },
+    { q: "Your place of sales should be near your customers.", a: "TRUE", e: "Reduces friction. Closer = more likely to buy on impulse and to return." },
+    { q: "Selling your product yourself takes more time, but it is always worth it.", a: "FALSE", e: "Your time has value. Sometimes it's better spent on production or promotion." },
+    { q: "Good storage facilities are not very important in your business.", a: "FALSE", e: "Agricultural and perishable goods spoil. Poor storage = lost money." },
+    { q: "Hiring a vehicle for distribution can be more advantageous than owning one.", a: "TRUE", e: "Avoids high upfront investment, fixed maintenance costs, and the risk of under-utilization." },
+    { q: "Frequency — how often your products reach customers — is part of 'place'.", a: "TRUE", e: "Timing of availability matters as much as physical location." }
+  ],
+  promotion: [
+    { q: "'Promotion' means building awareness of your product's existence and quality among customers.", a: "TRUE", e: "It also means giving customers a reason to choose YOU." },
+    { q: "Promotion adds to the cost of your product or service.", a: "TRUE", e: "But effective promotion also increases sales — and the increase usually exceeds the cost." },
+    { q: "Good promotion tells customers everything about your product or service.", a: "FALSE", e: "Emphasise the strong points — especially how the product BENEFITS the customer." },
+    { q: "Posters, home visits, loudspeakers, radio ads, handbills, good signs, and an interesting shop appearance are all good promotion tools.", a: "TRUE", e: "Today add: social media, TikTok, LINE, Facebook, influencer partnerships, QR codes." },
+    { q: "Small businesses with mostly local customers don't really need to advertise.", a: "FALSE", e: "Everyone can gain customers and grow sales through effective promotion." },
+    { q: "Word of mouth doesn't significantly affect a business's sales.", a: "FALSE", e: "Reputation grows fast — both good and bad — with every satisfied (or angry) customer." },
+    { q: "An interesting-looking place of business may attract customers.", a: "TRUE", e: "Visual appeal is the first impression. It signals what's inside." },
+    { q: "Promotion means making people aware of your product AND influencing them to buy.", a: "TRUE", e: "Awareness alone isn't enough — you need to motivate action." },
+    { q: "Free samples, displays, and demonstrations are too costly for small business owners.", a: "FALSE", e: "Often they're remarkably effective — and cheaper than other ad channels." },
+    { q: "Successful businesses have many loyal, long-term customers.", a: "TRUE", e: "Retention is usually cheaper and more profitable than constant new acquisition." },
+    { q: "Promotion can help create a brand new 'need' in potential customers.", a: "TRUE", e: "Toothbrushes, ballpoint pens, smartphones — all needs that didn't exist until promotion created them." },
+    { q: "Promotion campaigns should only aim to attract new customers.", a: "FALSE", e: "Existing customers can also be encouraged to buy new products, buy more often, or upgrade." },
+    { q: "Promotion involves two key decisions: WHAT is your message, and HOW will you deliver it?", a: "TRUE", e: "Both must work together — a great message in the wrong channel falls flat." },
+    { q: "Your promotion message should tell customers the benefits they can expect from the product.", a: "TRUE", e: "People buy benefits, not features." },
+    { q: "Radio and newspaper ads are the only truly effective forms of advertising.", a: "FALSE", e: "Many channels work — choice depends on your audience and budget." },
+    { q: "'Our chickens are so big — one chicken can feed a family of ten' is a good marketing message.", a: "TRUE", e: "It shows the BENEFIT to the family in a vivid, personal way." },
+    { q: "'Our chickens eat good grain and vitamins' is a good marketing message.", a: "FALSE", e: "It's about the chickens — not about how the BUYER benefits. Translate features into benefits." },
+    { q: "There are three steps in selling: finding out customer needs, presenting your product, and closing the sale.", a: "TRUE", e: "Skip the first step and you'll often skip the third too." },
+    { q: "All customers are interested in the same benefits from a product.", a: "FALSE", e: "Some want savings, some health, some ease, some status. Segment your audience." },
+    { q: "Face-to-face selling is the single best method for small businesses.", a: "FALSE", e: "It works — but it takes time. Handbills, posters, or social media can be just as effective." },
+    { q: "Making use of new technologies (like mobile phones, social media, internet) in promotion is expensive.", a: "FALSE", e: "Usually very low cost — sometimes free. A TikTok video costs nothing but creativity." },
+    { q: "A good promotional message is true and realistic.", a: "TRUE", e: "Overpromising destroys credibility. Once lost, trust is very hard to rebuild." },
+    { q: "One good promotional message is better than several different messages.", a: "FALSE", e: "Different customer groups respond to different messages. Tailor your message to each audience." },
+    { q: "Concern for the environment and social impact can be a marketing advantage.", a: "TRUE", e: "Increasing numbers of customers care about sustainability and the story behind the product." }
+  ],
+  person: [
+    { q: "You have never advertised. What are some good ways to let people know about your product?", e: "Discuss: Start free (word of mouth, social media). Add signage and flyers. Try demos or free samples. Build a small loyal base first." },
+    { q: "The Health Inspector says you must close down. What do you do?", e: "Discuss: Take it seriously — never bribe. Find out exactly what needs to be fixed. Comply, document everything, reopen properly." },
+    { q: "A relative wants to be your partner — offering cash to double your business, in return for half your profits. What do you tell her?", e: "Discuss: Calculate carefully — is doubling realistic? Get terms in writing. Half profits may be too much just for capital. Mixing family and money is risky." },
+    { q: "Several customers want you to open earlier; others want you to stay open later. How do you decide?", e: "Discuss: Survey customers. Track when sales are highest. Calculate staff and energy costs. Test one option for a week, then the other." },
+    { q: "A competitor has lowered prices below yours. You can't match them and still make a profit. What do you do?", e: "Discuss: Don't match — you'll lose money. Compete on quality, service, location, or product variety. Strengthen the relationship with loyal customers." },
+    { q: "A young man you don't know offers to watch your shop after hours to protect it from vandals, saying others pay him. What do you do?", e: "Discuss: Could be a protection racket. Don't pay under pressure. Check with police and other shop owners first. Consider proper security." },
+    { q: "Your old customers seem to be going to other sellers. What do you do?", e: "Discuss: Ask them directly why. Survey. Identify gaps in your product, price, or service. Consider loyalty rewards or a personal outreach." },
+    { q: "A local government official asks you for free products or services. What do you do?", e: "Discuss: Decline politely. Treat the official like any customer. Document any repeated pressure. Avoid setting a precedent." },
+    { q: "You run a bakery selling bread, but want to add 'sweets' too. How do you decide whether to add the new product?", e: "Discuss: Ask current customers if they'd buy. Calculate added cost (ingredients, equipment, time). Run a small test batch. Check local competition." },
+    { q: "A local merchant with a truck buys vegetables from you and your neighbours and sells them in town. You think he pays too little. What can you do?", e: "Discuss: Negotiate. Compare with other buyers. Form a co-op with neighbours to bargain collectively — or rent a truck and sell direct." },
+    { q: "You run a bicycle repair service. Some customers say you charge too much. How do you decide whether to change your prices?", e: "Discuss: Check competitors' prices. Review your costs and margins. Ask: are you actually overpriced, or just perceived that way? Maybe improve perceived value." },
+    { q: "You offer gardening services to homes in a nearby city. What are good ways to let others know about your business?", e: "Discuss: Flyers in target neighbourhoods. Referrals from current clients. Social media with before/after photos. Partner with home stores or property managers." },
+    { q: "Someone else opens a business selling products just like yours. What would you do?", e: "Discuss: Differentiate — quality, service, niche, story. Don't just cut prices. Deepen relationships with existing customers. Compete on what makes you unique." },
+    { q: "You ran out of products after customers waited a long time. They are angry and threaten to buy elsewhere. What would you do?", e: "Discuss: Apologise sincerely and immediately. Offer something (discount, freebie, pre-order). Fix your inventory planning. Update customers when restocked." },
+    { q: "You want to set up a stall at the local market. What things are important when choosing where to locate your stall?", e: "Discuss: Foot traffic. Visibility. Proximity to similar or complementary stalls. Cost. Easy access for restocking. Weather protection." },
+    { q: "You're a member of a honey-producing cooperative. You'd like a local store to sell your honey. What do you say to the store owner to convince them?", e: "Discuss: Bring samples. Explain the margin they'd earn. Tell the local story. Offer a small trial on consignment. Provide marketing materials." },
+    { q: "Some friends and relatives want to buy from you on credit. What will you do?", e: "Discuss: Set a clear written policy. Limit credit amounts and time. Keep records. 'Family discounts' can quietly destroy your cash flow." },
+    { q: "You have an idea for a new product that may not be easily accepted in your community. How would you promote it?", e: "Discuss: Free trials and demonstrations. Find early adopters who'll champion it. Build social proof. Address objections directly and respectfully." },
+    { q: "Your product has a better market in the capital city — but it is perishable. What would you do?", e: "Discuss: Improve packaging and cold chain. Partner with reliable fast transport. Consider processing (jam, dried, preserved) to extend shelf life." },
+    { q: "You produce milk but there are no collection centres for everyone to bring milk to sell. How would you sell your milk?", e: "Discuss: Form a small cooperative collection point with neighbours. Door-to-door delivery. Sell to a local processor. Or partner with a café/restaurant." },
+    { q: "Your cooperative wants to better promote its 'brand' — the story behind the product. How could you do this?", e: "Discuss: Storytelling on packaging. Customer testimonials. Behind-the-scenes social content. Local media features. Consider certifications (organic, fair trade)." },
+    { q: "Your business faces strong competition from cheaper foreign products. What do you do?", e: "Discuss: Compete on quality, freshness, identity. 'Buy local' messaging. Highlight environmental and community impact. Build community loyalty." }
+  ]
+};
+
+const drawn = { product: [], price: [], place: [], promotion: [], person: [] };
+let currentCard = null;
+let currentCat = null;
+
+// Timer state
+let timerInterval = null;
+let timeLeft = 90;
+let timerPaused = false;
+
+function startTimer() {
+  timeLeft = 90;
+  timerPaused = false;
+  updateTimerDisplay();
+  document.getElementById('pauseBtn').textContent = '⏸';
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(tickTimer, 1000);
+}
+
+function tickTimer() {
+  if (timerPaused) return;
+  timeLeft--;
+  updateTimerDisplay();
+  if (timeLeft <= -1) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
+
+function updateTimerDisplay() {
+  const t = Math.max(0, timeLeft);
+  const m = Math.floor(t / 60);
+  const s = t % 60;
+  document.getElementById('timerValue').textContent = m + ':' + String(s).padStart(2, '0');
+  const el = document.getElementById('timer');
+  el.classList.remove('active', 'warn', 'urgent', 'done');
+  if (timeLeft <= 0) el.classList.add('done');
+  else if (timeLeft < 30) el.classList.add('urgent');
+  else if (timeLeft < 60) el.classList.add('warn');
+  else el.classList.add('active');
+}
+
+function togglePauseTimer() {
+  timerPaused = !timerPaused;
+  document.getElementById('pauseBtn').textContent = timerPaused ? '▶' : '⏸';
+}
+
+function resetTimer() {
+  startTimer();
+}
+
+function stopTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+}
+
+function updateCounts() {
+  for (const cat in cards) {
+    const remaining = cards[cat].length - drawn[cat].length;
+    const total = cards[cat].length;
+    const el = document.getElementById('count-' + cat);
+    if (el) {
+      const label = cat === 'person' ? 'left' : 'left';
+      el.textContent = remaining + ' / ' + total + ' ' + label;
+    }
+    const btn = document.querySelector('[data-cat="' + cat + '"]');
+    if (btn) btn.disabled = false;
+  }
+}
+
+function drawCard(cat) {
+  const deck = cards[cat];
+  let available = deck.map((c, i) => i).filter(i => !drawn[cat].includes(i));
+
+  if (available.length === 0) {
+    drawn[cat] = [];
+    available = deck.map((c, i) => i);
+  }
+
+  const idx = available[Math.floor(Math.random() * available.length)];
+  drawn[cat].push(idx);
+
+  const card = deck[idx];
+  currentCard = card;
+  currentCat = cat;
+
+  // Set modal accent
+  const cardEl = document.getElementById('cardModal');
+  cardEl.className = 'card t-' + cat;
+
+  // Tag
+  const tagEl = document.getElementById('cardTag');
+  tagEl.textContent = cat === 'person' ? 'PROBLEM CARD' : cat.toUpperCase();
+
+  document.getElementById('cardNum').textContent = 'Card #' + (idx + 1);
+  document.getElementById('cardQuestion').textContent = card.q;
+
+  // Prompt
+  const prompt = document.getElementById('cardPrompt');
+  if (cat === 'person') {
+    prompt.innerHTML = '<strong>Discuss with your group.</strong> Propose the best solution you can think of, then hear what others suggest.';
+  } else {
+    prompt.innerHTML = '<strong>True or False?</strong> The player answers first, then the group discusses before revealing.';
+  }
+
+  // Reveal button label
+  const revealBtn = document.getElementById('revealButton');
+  revealBtn.textContent = cat === 'person' ? 'Show Discussion Points' : 'Reveal Answer';
+  revealBtn.style.display = 'block';
+
+  // Reset answer area
+  document.getElementById('answer').classList.remove('show');
+
+  document.getElementById('modal').classList.add('active');
+  startTimer();
+  updateCounts();
+}
+
+function revealAnswer() {
+  if (!currentCard) return;
+  const ans = document.getElementById('answer');
+  const label = document.getElementById('answerLabel');
+  const exp = document.getElementById('answerExplanation');
+
+  if (currentCard.a) {
+    label.textContent = 'Answer: ' + currentCard.a;
+    ans.style.setProperty('--answer-color',
+      currentCard.a === 'TRUE' ? 'var(--price)' : 'var(--promotion)');
+  } else {
+    label.textContent = 'Discussion Points';
+    ans.style.setProperty('--answer-color', 'var(--person)');
+  }
+  exp.textContent = currentCard.e;
+  ans.classList.add('show');
+  document.getElementById('revealButton').style.display = 'none';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+  currentCard = null;
+  currentCat = null;
+  stopTimer();
+}
+
+function randomCard() {
+  const cats = ['product', 'price', 'place', 'promotion', 'person'];
+  const cat = cats[Math.floor(Math.random() * cats.length)];
+  drawCard(cat);
+}
+
+// Spin
+function spin() {
+  const numEl = document.getElementById('spinNumber');
+  const btn = document.getElementById('spinButton');
+  btn.disabled = true;
+  numEl.classList.remove('idle');
+  numEl.classList.add('spinning');
+
+  let count = 0;
+  const total = 14;
+  const interval = setInterval(() => {
+    numEl.textContent = Math.floor(Math.random() * 4) + 1;
+    count++;
+    if (count >= total) {
+      clearInterval(interval);
+      numEl.classList.remove('spinning');
+      numEl.textContent = Math.floor(Math.random() * 4) + 1;
+      btn.disabled = false;
+    }
+  }, 55);
+}
+
+function resetAll() {
+  for (const cat in drawn) drawn[cat] = [];
+  updateCounts();
+  const btn = document.getElementById('resetBtn');
+  const original = btn.textContent;
+  btn.textContent = '✓ Decks reset';
+  setTimeout(() => { btn.textContent = original; }, 1500);
+}
+
+// Event wiring
+document.getElementById('spinButton').addEventListener('click', spin);
+document.getElementById('revealButton').addEventListener('click', revealAnswer);
+document.getElementById('closeButton').addEventListener('click', closeModal);
+document.getElementById('resetBtn').addEventListener('click', resetAll);
+document.getElementById('randomBtn').addEventListener('click', randomCard);
+document.getElementById('pauseBtn').addEventListener('click', togglePauseTimer);
+document.getElementById('resetTimerBtn').addEventListener('click', resetTimer);
+
+document.querySelectorAll('.cat-button').forEach(btn => {
+  btn.addEventListener('click', () => drawCard(btn.dataset.cat));
+});
+
+document.getElementById('modal').addEventListener('click', (e) => {
+  if (e.target.id === 'modal') closeModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+updateCounts();
+</script>
+
+</body>
+</html>

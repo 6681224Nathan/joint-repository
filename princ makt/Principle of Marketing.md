@@ -279,6 +279,116 @@ Apple, not the first in the market, but first in mind.
 
 > Note for assignment : Change to sec number and followed by group number. Only one submit.
 
+## Products
+Anything that ==can be offered to the market.==
+For attention, acquisition, use, or consumption to satisfy a Need or want.
+- Physical goods
+- Services
+- Experiences
+- Place/Organization
+- Idea/information
+- Persons
+
+## Product = solution
+A product should meet a need or provide a ==solution== for a consumer. 
+
+## Product classification
+
+**Durability & tangibility**
+1. Durable goods
+2. Non-durable goods, doesn't last lon
+3. Service
+	1. intangible (lack physical substance)
+	2. Inseparable, variable (hard to pass it to someone else)
+	3. Quality control is **hard** , supplier credibility
+
+**Use**
+1. Consumer goods/ product
+	- convenience goods
+		- Low price, many purchase locations
+	- shopping goods
+		- Sustainability & quality
+		- Price & style
+	- speciality goods
+		- Image, brand building
+	- unsought goods
+		- New innovaitions, require much advertising and personal selling
+
+## Core products
+
+## Function and quality
+- Quality
+	- High positioning, high quality
+- Consistency
+
+## Quality
+Hard to evaluate
+- measurement
+	- Intrinsic cues
+		- Physical quality, sensory quality, technical product specification
+	- extrinsic cues
+		- high price = hgih quality (not always)
+		- brand name
+![[product1-2022.pdf#page=14]]
+
+## Features
+Can be used to differentiate from other brands
+Advice : extend to customer, what is also a benefit of that feature, **people don't understand what the feature does, why is it even there** ==communicate with the brand, not technical jargons**
+- Example.: Apple, shows off their camera, not by explaning technical jargon
+- **Primary** feature : all the brands have
+- **Secondary feature** : features unique to brand
+- Example : a fucking stereo coffin, conffin with a fucking speaker..? the fuck
+
+## Form
+## Product style
+Appearance to get people attention
+
+## Product design
+Not just look goods
+- Perform well
+- Attractive
+- Safe/Easy to use
+
+## Sensory qualities
+- Example : a scaf with a scent, smell certain scent and will not be hungry
+
+## Packaging
+- Protect the product during delivery
+- Maintain quality during delivery
+- Package designed to be reused
+	- reusable & recyclable
+- **product presentation**
+	- Example : Banana color grading in one package, yellow to green
+	- Example : change packacging into a tool box for sunscreen for construction workers, change product feeling, feminine to mine
+- serve diffferent needs & occasions
+
+## Labeling (informational)
+Carries product information
+- Labeling errors
+	- false advertisement
+	- wrong translation
+- Promotional
+	- Make a catch-the-eye heading
 
 
+## Brand
+Not just a name and a logo, but it shows **symbol, story, product, people behind the brand** to distinguish the brand from other brands
+- Brand identity
+	- Build awareness, increase recognition ==distinguish==
+-  Brand meaning/story
+
+## Skip to service
+- How intangible product ==proves their quality== to user (when there is no actual product)
+- **How to prove** : use equipment that people can see/observe, the staff, ==tangible evidence of intangible product==, more than 4P
+
+>4P, segmentation, targeting, positioning, positioning development, refer to first slide
+>![[product1-2022.pdf#page=1]]
+
+## Service bus : demand fluctuation
+==More than 4P== : Physical, process people
+- Physical evidence, good tangible evidence
+- Good process
+- Polite and clean people (staff)
+
+==Refer to marketing game, .html board game thing IN YOUR DEVICE==
 

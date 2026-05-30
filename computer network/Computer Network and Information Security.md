@@ -725,8 +725,9 @@ source address = unicast address
 - Multicast for efficient 1 : many delivery
 
 **END OF ROUTING PROTOCOL, END OF MIDTERM**
-Thursday, 10 - 12, week one until **this**, one page cheat sheet.F
+Thursday, 10 - 12, week one until **this**, one page cheat sheet.
 
 ---
 
+## After midterm
 

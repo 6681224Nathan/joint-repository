@@ -1,5 +1,6 @@
 {
   "enabledCssSnippets": [
     "lock-pdf"
-  ]
+  ],
+  "theme": "obsidian"
 }

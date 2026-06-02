@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "1f37f893c7c63a47",
+        "id": "de6ac1924637ac1e",
         "type": "tabs",
         "children": [
           {
-            "id": "1e3340acd6e6cbae",
+            "id": "e0a2098c9f74ccf5",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "image",
               "state": {
-                "file": "software engineering/assignment 01 alone/assignment 01 instruction.pdf"
+                "file": "stats for com eng/Obsidian attachments/Pasted image 20260602094232.png"
               },
-              "icon": "lucide-file-text",
-              "title": "assignment 01 instruction"
+              "icon": "lucide-image",
+              "title": "Pasted image 20260602094232"
             }
           }
         ]
@@ -181,37 +181,39 @@
       "bases:Create new base": false
     }
   },
-  "active": "1e3340acd6e6cbae",
+  "active": "881da087179347a6",
   "lastOpenFiles": [
-    "software engineering/inclass-assgn05/~$hesion-coupling-practice-student.docx",
+    "stats for com eng/midterm.pdf",
+    "stats for com eng/Sample data a sample from a large population Population data all data Deming experiment Process should not be adjusted in response to random variation. Variance average physical distance from me.pdf",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602094248.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602095050.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602095036.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602095020.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602095011.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602094956.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602094931.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602094536.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602094356.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260602094303.png",
+    "stats for com eng/Stats for comEng, fast track to finals.md",
+    "stats for com eng/~$Ch4-03.xlsx",
+    "stats for com eng/~$Ch4-02.xlsx",
+    "stats for com eng/Obsidian attachments",
+    "stats for com eng/~$Ch4-01.xlsx",
+    "stats for com eng/~$Ch3-03.xlsx",
+    "stats for com eng/4ADA3000",
+    "stats for com eng/~$Ch3-02.xlsx",
+    "stats for com eng/05B03000",
     "software engineering/assignment 01 alone/a1_6681224.md",
-    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260529133052.png",
-    "software engineering/assignment 01 alone/Obsidian attachments",
     "software engineering/assignment 01 alone/assignment 01 instruction.pdf",
-    "software engineering/midterm topics.md",
-    "software engineering/assignment 01 alone/a1_6681224.pdf",
-    "Untitled.base",
-    "Com Eng catalog.pdf",
     "computer network/Computer Network and Information Security.md",
+    "software engineering/midterm topics.md",
     "computer network/Midterm cheatsheet.md",
     "computer network/mockMidterm.md",
-    "software engineering/assignment 3 group/group2.pdf",
-    "software engineering/assignment 3 group/softeng home meter assignment.pdf",
-    "software engineering/assignment 3 group/Unconfirmed 665698.crdownload",
-    "software engineering/assignment 04 group/group2.pdf",
     "princ makt/Principle of Marketing.md",
-    "computer network/Obsidian attachments/Pasted image 20260527111453.png",
-    "computer network/Obsidian attachments/Pasted image 20260527092754.png",
     "Midterm cheatsheet.md",
-    "computer network/Obsidian attachments/Pasted image 20260526233856.png",
-    "princ makt/Obsidian attachments/Pasted image 20260526091951.png",
     "princ makt/Principle of marketing.md",
     "computer network/ComNet assgn-01.md",
-    "computer network/Obsidian attachments/Pasted image 20260522103611.png",
-    "computer network/Obsidian attachments/Pasted image 20260522103504.png",
-    "computer network/Obsidian attachments/Pasted image 20260522103437.png",
-    "computer network/Obsidian attachments/Pasted image 20260522102214.png",
-    "computer network/Obsidian attachments/Pasted image 20260522101507.png",
     "Obsidian/Obsidian shotcut keys.md"
   ]
 }

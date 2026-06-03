@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "9b5c1ff3c425fd07",
+        "id": "1c2b407cc32b1689",
         "type": "tabs",
         "children": [
           {
-            "id": "ecca5b812a5b4b16",
+            "id": "107fd1e05b1bd7df",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "software engineering/assignment 01 alone/a1_6681224.md",
+                "file": "software engineering/software engineering.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "a1_6681224"
+              "title": "software engineering"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "7afb0c4b05a81d5a",
@@ -183,10 +184,14 @@
       "bases:Create new base": false
     }
   },
-  "active": "ecca5b812a5b4b16",
+  "active": "107fd1e05b1bd7df",
   "lastOpenFiles": [
-    "software engineering/assignment 01 alone/a1-6681224.pdf",
+    "software engineering/softeng midterm cheatsheet.pdf",
+    "software engineering/software engineering.md",
+    "software engineering/midterm topics.md",
     "software engineering/assignment 01 alone/a1_6681224.md",
+    "software engineering/lectures/egci341_midterm_practice_2025-26T3_solution.pdf",
+    "software engineering/assignment 01 alone/a1-6681224.pdf",
     "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602235536.png",
     "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602235612.png",
     "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602235454.png",
@@ -206,10 +211,8 @@
     "user.java",
     "neatbean/target/classes/Lab_Ch10/bin/Lab_Ch10",
     "software engineering/assignment 01 alone/Tommy's Software Assgn1.pdf",
-    "stats for com eng/midterm.pdf",
     "stats for com eng/Stats for comEng, fast track to finals.md",
     "computer network/Computer Network and Information Security.md",
-    "software engineering/midterm topics.md",
     "computer network/Midterm cheatsheet.md",
     "computer network/mockMidterm.md",
     "princ makt/Principle of Marketing.md",

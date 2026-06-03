@@ -1,0 +1,51 @@
+sequenceDiagram
+
+participant user
+%%front end
+participant AQIColorSegment as AQIColorSegment: displayComponent
+participant detailedInfoBox as detailedInfoBox : displayComponent
+participant locationService
+%%API
+participant APIWebservice as APIWebservice : APIInterface
+%%Database
+participant AirVisualDatabase as AirVisualDatabase : databaseInterface
+
+activate user
+activate AQIColorSegment
+user ->> AQIColorSegment : open app
+deactivate AQIColorSegment
+activate detailedInfoBox
+user ->>detailedInfoBox : open app
+deactivate detailedInfoBox
+activate locationService
+user ->> locationService : open app
+deactivate locationService
+deactivate user
+
+
+locationService ->> user : getUserLocation()
+activate user
+activate locationService
+user -->> locationService : location
+locationService ->> APIWebservice : getAirCondition(String location)
+activate APIWebservice
+APIWebservice ->> AirVisualDatabase : getAirCondition(String location)
+activate AirVisualDatabase
+AirVisualDatabase -->> APIWebservice : air conditon (AQi, temp, etc.)
+deactivate AirVisualDatabase
+APIWebservice -->> locationService : air condition query successful
+deactivate locationService
+APIWebservice ->> detailedInfoBox : air conditon (AQi, temp, etc.)
+activate detailedInfoBox
+APIWebservice ->> AQIColorSegment : air conditon (AQi, temp, etc.)
+deactivate APIWebservice
+activate AQIColorSegment
+AQIColorSegment ->> AQIColorSegment : calcilate colors
+AQIColorSegment ->> user : showColors()
+deactivate AQIColorSegment
+detailedInfoBox ->> user : showDetails()
+deactivate detailedInfoBox
+deactivate user
+
+
+

@@ -1,0 +1,44 @@
+%% - The ==color code== of AQI level will be 
+%% ==updated== according to AQI ==ranks== in figure 2.
+%% - The application will send the 
+%% ==current location== as ==city name== to retrieve 
+%% the latest information including 
+%% 	- AQI, 
+%% 	- temperature, 
+%% 	- wind speed, and 
+%% 	- humidity 
+%% 	- from the AirVisual webservice
+%% - ==AirVisual webservice== as a ==backend API== 
+%% and this webservice queries the latest data from 
+%% ==AirVisual database server==. Note. 
+%% The webservice API and database servers are located in 
+%% different servers.
+classDiagram
+    class user{
+    }
+    namespace Front-End{
+        class display{
+
+        }
+        class locationService{
+        }
+    }
+    namespace API{
+        class APIWebservice{
+        }
+    }
+    namespace database{
+        class AirVisualDatabase{
+        }
+    }
+
+locationService --> user : asks for permission to collect location data
+user --> locationService : location data
+locationService --> APIWebservice : location and request for air cond. info
+APIWebservice --> AirVisualDatabase : location and request for air cond. info
+AirVisualDatabase --> APIWebservice : air cond. data
+APIWebservice --> display : air cond. data
+display --> user : display
+    
+
+    

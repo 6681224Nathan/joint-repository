@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "de6ac1924637ac1e",
+        "id": "9b5c1ff3c425fd07",
         "type": "tabs",
         "children": [
           {
-            "id": "e0a2098c9f74ccf5",
+            "id": "ecca5b812a5b4b16",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "stats for com eng/Obsidian attachments/Pasted image 20260602094232.png"
+                "file": "software engineering/assignment 01 alone/a1_6681224.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "Pasted image 20260602094232"
+              "icon": "lucide-file",
+              "title": "a1_6681224"
             }
           }
         ]
@@ -181,31 +183,31 @@
       "bases:Create new base": false
     }
   },
-  "active": "881da087179347a6",
+  "active": "ecca5b812a5b4b16",
   "lastOpenFiles": [
-    "stats for com eng/midterm.pdf",
-    "stats for com eng/Sample data a sample from a large population Population data all data Deming experiment Process should not be adjusted in response to random variation. Variance average physical distance from me.pdf",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602094248.png",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602095050.png",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602095036.png",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602095020.png",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602095011.png",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602094956.png",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602094931.png",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602094536.png",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602094356.png",
-    "stats for com eng/Obsidian attachments/Pasted image 20260602094303.png",
-    "stats for com eng/Stats for comEng, fast track to finals.md",
-    "stats for com eng/~$Ch4-03.xlsx",
-    "stats for com eng/~$Ch4-02.xlsx",
-    "stats for com eng/Obsidian attachments",
-    "stats for com eng/~$Ch4-01.xlsx",
-    "stats for com eng/~$Ch3-03.xlsx",
-    "stats for com eng/4ADA3000",
-    "stats for com eng/~$Ch3-02.xlsx",
-    "stats for com eng/05B03000",
+    "software engineering/assignment 01 alone/a1-6681224.pdf",
     "software engineering/assignment 01 alone/a1_6681224.md",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602235536.png",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602235612.png",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602235454.png",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602234427.png",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602233826.png",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602232917.png",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602232433.png",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602231514.png",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260529133052.png",
+    "software engineering/assignment 01 alone/container diagram.mmd",
+    "software engineering/assignment 01 alone/Obsidian attachments/Pasted image 20260602223426.png",
+    "software engineering/assignment 01 alone/sequence diagram.mmd",
+    "software engineering/assignment 01 alone/class diagram.md",
+    "software engineering/assignment 01 alone/class diagram.mmd",
+    "software engineering/assignment 01 alone/Tommy's SoftEn_Code for Diagrams (Not submitting ts).pdf",
     "software engineering/assignment 01 alone/assignment 01 instruction.pdf",
+    "user.java",
+    "neatbean/target/classes/Lab_Ch10/bin/Lab_Ch10",
+    "software engineering/assignment 01 alone/Tommy's Software Assgn1.pdf",
+    "stats for com eng/midterm.pdf",
+    "stats for com eng/Stats for comEng, fast track to finals.md",
     "computer network/Computer Network and Information Security.md",
     "software engineering/midterm topics.md",
     "computer network/Midterm cheatsheet.md",

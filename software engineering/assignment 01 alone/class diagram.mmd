@@ -1,0 +1,90 @@
+%% - The ==color code== of AQI level will be 
+%% ==updated== according to AQI ==ranks== in figure 2.
+%% - The application will send the 
+%% ==current location== as ==city name== to retrieve 
+%% the latest information including 
+%% 	- AQI, 
+%% 	- temperature, 
+%% 	- wind speed, and 
+%% 	- humidity 
+%% 	- from the AirVisual webservice
+%% - ==AirVisual webservice== as a ==backend API== 
+%% and this webservice queries the latest data from 
+%% ==AirVisual database server==. Note. 
+%% The webservice API and database servers are located in 
+%% different servers.
+classDiagram
+    class user{
+        -location()
+        +getUserLocation()
+    }
+    namespace Front-End{
+        class displayComponent{
+            <<interface>>
+            +display()
+        }
+        class AQIColorSegment{
+            -String AQI
+            +String color
+            +calculateColors()
+            +showColors()
+            +display()
+        }
+        class detailedInfoBox{
+            -String AQI, 
+            -String temperature 
+            -String wind speed 
+            -String humidity 
+            +showDetails()
+            +display()
+        }
+        class locationService{
+            -String location
+        }
+    }
+    namespace API{
+        class APIInterface{
+            -String location
+            -String AQI
+            +getAirConditionData(String location)
+        }
+        class APIWebservice{
+            -String location
+            -String AQI
+            -String temperature 
+            -String wind speed 
+            -String humidity 
+            +getUserLocation()
+            +getAirConditionData(String location)
+        }
+    }
+    namespace database{
+        class databaseInterface{
+            <<interface>>
+            -String location
+            -String AQI
+            +getAirConditionData(String location)
+        }
+        class AirVisualDatabase{
+            -String location
+            -String AQI
+            -String temperature 
+            -String wind speed 
+            -String humidity
+            +getAirConditionData(String location)
+        }
+    }
+
+    AQIColorSegment --|> displayComponent : implements
+    detailedInfoBox --|> displayComponent : implements
+    user --> displayComponent : interacts
+    locationService <-- user : getUserLocation()
+    locationService --> APIInterface : getAirCondition(String location) 
+    APIWebservice --|> APIInterface : implements
+    APIInterface --> databaseInterface : getAirCondition(String location)
+    AirVisualDatabase --|> databaseInterface : implements
+    APIInterface --> displayComponent : passes data to be displayed
+
+    
+
+    

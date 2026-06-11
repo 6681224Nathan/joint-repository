@@ -731,3 +731,114 @@ Thursday, 10 - 12, week one until **this**, one page cheat sheet.
 
 ## After midterm
 
+## Network and information security
+![[Pasted image 20260610083016.png|521]]
+## Element of network security
+- These used to be a standard for network security, but nowadays, it doesn't work anymore, now we have IAAA.
+![[Pasted image 20260610083118.png]]
+- identification
+	- Identify senders/users/, like typing identity information into a login bar
+- authentication
+	- confirm the identity, like using OTP
+- authorization
+	- Different permission allowance
+- accountability / edit
+	- Records are kept of how, when, did you access the certain site/ internet entity
+
+## Confidentiality
+
+## Integrity
+No unauthorized user can modify/read the data you try to send.
+- Every data's sender has "fingerprint", in a form of mathematical data. The information A and information B have **different fingerprint,** then it means someone has **tampered** with the data.
+
+## Availability
+- When a system works normally, hacker attacks, and then the owner cannot access, it means the system has poor availability
+
+## Attack
+- Security, confidentiality, integrity, and availability
+
+## C.I.A attack categorization
+![[Week09 Security.pdf#page=8]]
+- Packet sniffer, snooping : means it captures the data along the way and read the data. **Cryptography protocol** is the needed to encrypt the data. From **starting point** to the end, prevents the readability of snooped data.
+
+- Modification : modify data
+- Masquerading : pretending to be someone else.
+	- Ex. Ajarn Suratose got his password stolen, the hacker **"Masquerade"** as ajarn and log in.
+- Replaying : Intercept the data and send the data twice. 
+	- Ex. Ajarn logs into Facebook, and someone intercepts key, Facebook never changes parameter. The hacker "replays" that session parameter, and then can get access. 
+		- This happens because of the lack of checking of identity of sender
+- Repudiation : 
+	- Ex. In order to check the integrity of identity of seller, we need some way to check. Hacker creates a shop, and create Smurf account to rate the shop a lot, **it creates the false star rating, ปั้มบอต**
+
+- Denial of service : tries to attack the system. If the system cannot handle a large number of request, client sent a huge number of requests, the server cannot handle that large amount of requests, so **server fell**.
+
+## Services and techniques
+- In order to achieve CIA and IAAA (goals of network security), some services are introduced
+- **Cryptography :** Mathematical algorithm turning normal data into digital data.
+- **Steganography :** we try to insert a plaintext into an image. With movies and photos, data can be hidden inside that.
+- **Symetic-key encipherment** : key is transported via secure channel
+	- Range : 128 bits
+- But if I don't want to deploy a key distribution channel?? **Asymmetric-key encipherment** : the famous ==private-public key encipherment==
+	- Keep the private key private, for decryption, but public key to encrypt
+	- No need for secure channel of keys distribution, this is a pain point from Symmetrical-key encryption
+	- Range : 3000 bits 😮 50 times bigger than symmetrical encryption
+
+## Asym and sym encryption
+Sym is for short message sending
+Asym is for long message transmission.
+
+## TLS
+Transport layer security, uses both sym and asym
+
+## Hash function
+"digital fingerprint, message fingerprint, message digest" is an output of hash function. It is like a human fingerprint, whihc can be used to detect data modification.
+
+> Steganography will not be focused much, try to skip slide 14
+> JARGONS EXPLAINED : art of hiding data in image file.
+> 	- Since image file is huge, and human cannot grasp it all anyway, so modification to image is done, no one will notice.
+
+## General idea of symmetric-key cipher
+![[Week09 Security.pdf#page=18]]
+
+## Caesar cipher
+- Key shifting technique, link to [cryptography]
+
+## Block cipher
+![[Week09 Security.pdf#page=20]]
+**Bit key length**
+ 128
+ 192
+ 256
+
+## Asymmetric-key cipher
+**No need for secure channel for keys exchange**
+- Share only public key for encryption
+- Private key for private use, decryption
+==why symmetric key== cipher? : asymmetric key requires a lot of computing power, but symmetric key requires less computing power.
+sym = 128
+asym = 3k
+**the world of hybrid** : ==we use both==.
+
+## Elliptic curve
+A new promising cryptography technique, 128 * 2 bits, not as complex as asymm. **A meet in the middle between sym and asym**. Many websites use the elliptic encryption already.
+
+**Honorable mention**
+- Elliptic curve : encryption can be cracked public key
+
+## Post-quantum cryptography
+==this is for final presentation, unrelated==
+
+## Asymmetric-key crypto system
+![[Week09 Security.pdf]]
+
+
+
+
+
+
+
+
+
+
+
+

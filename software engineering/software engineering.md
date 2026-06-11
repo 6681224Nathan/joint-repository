@@ -361,16 +361,156 @@ UDDI - Universal description discovery and integration
 
 ## IF HAVE SPACE INSERT DIAGRAMS FROM THE LAST PART AS WELL
 
+## ==POST MIDTERM==
 
+## Verification and validation
+- Verification : 
+	- "are we building the product right?"
+	- The software should conform to its specification
+- Validation :
+	- "Are we building the right product"
+	- The software should do what the user really requires
+		- Even outside of specified specification, more of making what users really want
 
+![[egci341-lecture06-08.pdf#page=4]]
+Figure 6.7 : The right one is better. It is better suited for all users.  The left one is hard to navigate, UI organization is kinda... bad.
 
+## Verification and validation process
+**two principals objectives**
+- ==Discover of defects== in a system
+- Assessment of whether the ==system is useful and usable== in an operational situation
 
+## Example of user interface design
+![[egci341-lecture06-08.pdf#page=7]]
+Left figure asks for more detailed for calculation, thee are strict drop-down choices to enforce a limit of choices to limit the error the calculation may generate. The right one has less navigation of the input data.
 
+## Verification and validation goal
+- Verification and validation should establish confidence that the software is fit for purpose
+- This does ==not mean completely free of defects==
+- it must be ==good enough== for its intended use
+- Backlog management
+	- If the **backlog** cannot pass verification and validation process, it cannot stay in DONE column
+## Static and dynamic verification
+**Software inspection**, static verification
+- read code line by line, inspect the code and program manually to discover defects
+- Just read the report and the diagram can be considered as inspection as well.
+**software testing** dynamic verification
+- Test and observe product behavior
 
+## Software inspection
+![[egci341-lecture06-08.pdf#page=10]]
+Find the defect : the automatic reaction of password box is to hide the password, but the **open eyes** icon indicates that the default behavior is the reveal the password, shouldn't be that way. This is **software inspection**.
 
+## Static and dynamic verification and validation
+![[egci341-lecture06-08.pdf#page=11]]
 
+## Program testing
+- Testing can reveal the presence of errors (NOT their absense)
+	- ==static verification CANNOT use with non-functional ==requirement, speed, response time, these requirements will be shown only when the software is tested, by observe static program cannot happen, that's why it needs **dynamic verification or software testing**
 
+## Type of testing
+Defect testing
+- to discover system defects
+- A successfuyk defect test is one which reveals the presence of defects in the system
+Validation testing
+- To show that the software meets its requirements
+- A successful test shows that a requirements has been properly implemented
 
+## Testing and debugging
+- debugging is concerned with locating and repairing errors
+- Involves formulating a hypothesis about program behavior then testing these hypotheses to find system errors
+
+## Verification and validation planing
+- careful planning is requireed to get the most out of the testing and inspection process
+- plannig should start early in the development process
+- The plan should identify the balance between static verification and testing
+- Test planning si about defining standards for the testing process erather than describing product tests
+
+![[egci341-lecture06-08.pdf#page=17]]
+
+## Inspection procedure
+- **System overview presented** to inspection team
+- **Code and associated documents** are distributed to inspection team in advance
+- When inspection takes place, **discovered errors are noted**
+- **Modifications** are made to **repair** the discovered errors
+- Reinspection may or may not be required.
+
+## Inspection
+- Although most are done by humans, but source code can also be inspected by humans
+	- Static analysor, the program which finds defects in program
+		- uninitialized data, duplicate variable names. It helps reduce time for inspection team to inspect all the codes by themselves
+## Stage of static analysis
+Control flow analysis
+- Check for loops within multiple exits or entry points, finds unreachable codes
+Data usage analysis
+- Detect unitialized variables, variables written twice without an intervening assignments, variables which are declared but never used
+Interface analysis
+- Checks the consistency of routine and procedure declarations and their use
+- "interface" means the input box of a class 
+	- sayHi(String "message", int times)
+Information flow analysis
+- Identify dependencies of output variable
+- Do not detect anomalies itself but hightlights information for code inspection or review
+- "10/10/10" -> "10 October 2010"
+Path analysis
+- Identity oaths through the program and sets out of the sttatment executed in that path
+
+## Use of static analysis
+C language
+- Weak typing and may errors are undetected by the compiler
+Java
+- less cost-effective
+- Strong type checking
+- Detect many errors during compilation
+
+## Testing process
+Component testing
+- testing individual program components
+- Responsibility of the component developers
+System testing
+- Testing of component's groups integrated to a system or subsystem
+- Responsibility of the independent testing team
+- tests are based on a system specification
+
+## Testing phase
+![[egci341-lecture06-08.pdf#page=29]]
+![[egci341-lecture06-08.pdf#page=31]]
+
+## Testing process goal
+Validation testing
+- Demonstrate to the developer and the customer that the software meets requirements
+- A successful test shows that the system operated as intended use
+Defect testing
+- Discover fauults or defects in the software where its behavior is incorrect or not in conformance with its specificatio
+- A successful test makes that the system perform incorrectly ad so exposes a defect in the system
+
+![[egci341-lecture06-08.pdf#page=32]]
+![[egci341-lecture06-08.pdf#page=33]]
+![[egci341-lecture06-08.pdf#page=34]]
+
+## Release testing
+- release testing of a system that will be distributed to customers
+- primary goals is to incerase the supplier's confidence that the system meets the requirements
+- Release testing is usually black-box or functional testing
+- Alpha testing : have specific testing group, and a defined scenario to test, and defined the time to tes
+- Beta testing : released into a wild, the test version though
+
+## Black-box testing
+![[egci341-lecture06-08.pdf#page=36]]
+We put the data in without seeing the content of the system, we know the **input and output**, and we match whether the input gives the desired output or not.
+- Test the valid input, and **invalid input**, to test how the system reponses, **system should reject**
+- Test with out-of-the-box input, all inputs users might input
+- Ex. "firstname.lastname@hotmail@gmail.com" is input into Google, but google allows it (example of neglegance of invalid input testing)
+
+## Black-box testing tables
+![[egci341-lecture06-08.pdf#page=38]]
+Test with valid/invalid input, specify data, and see whether the results meet the expected result. **This is of a range detector, we specify range and test the data, the program will say whether the data fits in the range or not**
+
+## White-box testing
+![[egci341-lecture06-08.pdf#page=41]]
+*Pss. there are another testing, the in-between of white box and black box testing, is a grey box, but we are not going go learn that here*
+
+Test only the valid data. Test by path, if program has 3 paths for 3 conditions, we try to feed in the data into 3 paths, like looking into a clear pipe, and if there are certain pipes that don't have anything flowing through, then that's the dev's job to make that happen, or delete the pipe entirely.
 
 
 

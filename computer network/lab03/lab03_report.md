@@ -1,0 +1,12 @@
+By Nathan Tanaboriboon 6681224
+
+Q1 : AfricaCTF2021
+Q2 : fe80::c80b: adff:feaa:1db7
+Q3: www.7-zip.org
+Q4 : 10
+Q5 : c8:09:a8:57:47:93
+Q6 : LM-Q725K
+Q7 : 04edcc123af7b13e90ce101a31c2f996f471a7c8f48a1b81d765085f548059a550f3f4f62ca1f0e8f74d727053074a37bceb2cbdc7ce2a8994dcd76dd6834eefc5438c3b6da929321f3a1366bd14c877cc83e5d0731b7f80a6b80916efd4a23a4d
+Q8 : 24e92513b97a0348f733d16996929a79be21b0b1400cd7e2862a732ce7775b70
+Q9 : 08:00:27, Germany
+Q10 :  http://dfir.science/

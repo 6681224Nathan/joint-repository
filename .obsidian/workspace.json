@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "princ makt/Principle of Marketing.md",
+                "file": "software engineering/software engineering.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Principle of Marketing"
+              "title": "software engineering"
             }
           }
         ]
@@ -34,19 +34,6 @@
         "id": "4223b49dde7afe66",
         "type": "tabs",
         "children": [
-          {
-            "id": "881da087179347a6",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "Files"
-            }
-          },
           {
             "id": "f3166151af9f7f30",
             "type": "leaf",
@@ -73,8 +60,22 @@
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
+          },
+          {
+            "id": "881da087179347a6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -186,37 +187,44 @@
   },
   "active": "107fd1e05b1bd7df",
   "lastOpenFiles": [
-    "princ makt/lectures and stuff/9.2channel mng_2020.pdf",
-    "princ makt/Principle of Marketing.md",
-    "computer network/Computer Network and Information Security.md",
-    "computer network/Obsidian attachments/Pasted image 20260610083118.png",
-    "computer network/Obsidian attachments/Pasted image 20260610083016.png",
-    "losalamos/feedback01.md",
-    "computer network/Week09 Security.pdf",
-    "losalamos/feedback01.pdf",
-    "losalamos/Obsidian attachments/Pasted image 20260609143933.png",
-    "losalamos/Obsidian attachments/Pasted image 20260609143650.png",
-    "losalamos/Obsidian attachments/Pasted image 20260609142809.png",
-    "losalamos/Obsidian attachments/Pasted image 20260609142358.png",
-    "losalamos/Obsidian attachments/Pasted image 20260609141808.png",
-    "losalamos/Obsidian attachments",
+    "software engineering/lectures and stuff/OneDrive_1_6-30-2026/egci341-lecture13-14.pdf",
+    "software engineering/lectures and stuff/OneDrive_1_6-30-2026/egci341-lecture11-12.pdf",
+    "software engineering/lectures and stuff/OneDrive_1_6-30-2026/egci341-lecture09-10.pdf",
+    "software engineering/lectures and stuff/OneDrive_1_6-30-2026",
+    "software engineering/lectures and stuff/OneDrive_1_6-30-2026.zip",
+    "software engineering/lectures and stuff/Unconfirmed 272702.crdownload",
+    "Untitled.md",
     "software engineering/software engineering.md",
-    "stats for com eng/~$Ch4-06.xlsx",
-    "stats for com eng/05-Statistical InferenceII.pdf",
-    "stats for com eng/Ch4-06.xlsx",
-    "stats for com eng/Unconfirmed 338705.crdownload",
-    "princ makt/lectures and stuff/8.pricing1-2020 (1).pdf",
-    "princ makt/lectures and stuff/9.1Mk channel__2023.pdf",
+    "software engineering/Obsidian attachments/Pasted image 20260630123456.png",
+    "software engineering/Obsidian attachments/Pasted image 20260630123455.png",
+    "princ makt/Principle of Marketing.md",
+    "stats for com eng/excel files/~$Ch07-01.xlsx",
+    "stats for com eng/excel files/Ch07-01.xlsx",
+    "stats for com eng/excel files/Unconfirmed 523761.crdownload",
+    "stats for com eng/lectures and stuff/07-DesignExperiments.pdf",
+    "stats for com eng/note_from_youtube.md",
+    "stats for com eng/youtube self study/example.xlsx",
+    "software engineering/inclass-assgn10/report.md",
+    "software engineering/inclass-assgn10/Obsidian attachments/Pasted image 20260625233016.png",
+    "software engineering/inclass-assgn10/Obsidian attachments/Pasted image 20260625231112.png",
+    "losalamos/projnote.md",
+    "stats for com eng/statistics for computer engineering.md",
+    "stats for com eng/Stats for comEng, fast track to finals.md",
+    "computer network/Computer Network and Information Security.md",
+    "computer network/Obsidian attachments/Pasted image 20260624091605.png",
+    "computer network/Obsidian attachments/Pasted image 20260624085951.png",
+    "software engineering/softEng PERT diagram.png",
+    "computer network/lab03/lab03_report.md",
+    "software engineering/midterm topics.md",
+    "software engineering/721841018_1302018894937536_4464210967977231559_n.jpg",
+    "software engineering/inclass-assgn09/group2.md",
+    "software engineering/inclass-assgn09/Obsidian attachments/white box testing diagram softeng.png",
+    "software engineering/inclass-assgn09/Obsidian attachments/number 0.png",
+    "losalamos/feedback01.md",
     "computer network/Midterm cheatsheet.md",
     "computer network/lab01.md",
-    "computer network/Obsidian attachments/Pasted image 20260608152625.png",
-    "computer network/Obsidian attachments/Pasted image 20260608152452.png",
-    "computer network/Obsidian attachments/Pasted image 20260608152239.png",
-    "stats for com eng/statistics for computer engineering.md",
-    "software engineering/midterm topics.md",
     "software engineering/assignment 01 alone/a1_6681224.md",
     "software engineering/assignment 01 alone/class diagram.md",
-    "stats for com eng/Stats for comEng, fast track to finals.md",
     "computer network/mockMidterm.md",
     "Midterm cheatsheet.md",
     "princ makt/Principle of marketing.md",

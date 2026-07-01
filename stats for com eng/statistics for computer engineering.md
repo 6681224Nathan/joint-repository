@@ -26,5 +26,15 @@ Shit there is a way to calculate that, look it up
 ![[04-StatisticalInference-I.pdf#page=64]]
 Should read
 ![[04-StatisticalInference-I.pdf#page=65]]
+New chapter I don't even know what I'm studying.
 
+![[Pasted image 20260616101216.png]]
+![[Pasted image 20260616101232.png]]
 
+## Empirical model
+E(y | x) = $\beta_{0}+\beta_{1}X$ , meaning a linear mode which uses x to predict y (from a chaotic data set, non-linear vague pattern)
+
+- regressor (the variable we are going to make use)
+- dependent variable (y)
+
+Suppose that we have n pairs of observation. 

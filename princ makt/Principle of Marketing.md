@@ -910,6 +910,469 @@ Reason why people shop onsite
 ## Multi-brand store
 One store with multiple brands
 
-## Retailers to en
+## Price skimming, set to MAX
+## Suitable conditions
+Product conditions
+- Product quality and image must support high prices
+- Products
+
+Market conditions
+- Product is sold to different segments
+- Expect competitors to enter the market not so soon
+
+## Penetrating pricing
+- Setting a low price for a new product to attract a large number of buyers and a large market share
+	- Ex. Sony's Blueray laucnhed a lower price than Toshiba, eventually destroyed Toshiba
+	- 25% of brands use penetrating pricing in their life cycle
+- ==dominate market quickly==
+
+## Introductory price
+Not the samea as penetrating pricing
+- When brands enter market, they offer a promotion period
+	- Ex. New shop promotion, promotion for the first 100 customers, and then they switch back to normal price
+
+## Penetration pricing, examples
+- Chinese IKEA
+	- When IKEA entered China, people didn't buy because the local shops still dominated, so IKEA used ==penetration pricing==, lowering cost by 70% to gain market share
+- Netflix
+	- To compete with Blockbuster (during video renting era), they allow more rental quotas and unlimited rental for subscription
+	- Even during streaming era, their price is still low BUT slowly it **goes up** ever since Blockbuster was busted
+- Evil marketing (imo)
+	- Penetration pricing is ดึงสายป่าน and they slowly raise price to match with a good quality as competitor as DEAD
+
+## Suitable conditions
+Product conditions
+- Mass market
+
+
+## Skimming vs penetration
+![[8.pricing2-2020.pdf#page=10]]
+
+## Prince change
+- Price cuts
+	- Failing sales or market share - demand issues
+	- Grab market share from competitors
+	- Respond to competitor's price drops
+	- Lower production/service cost
+	- Economic condition - low purchasing opwer
+- Price increase
+	- Over-demand, lack of supply
+	- Match competitor's price increase
+	- Cost inflation
+
+## Price elasticity of demand
+(a measure of sensitivity to price change)
+Essential products
+- demand is less affected by price
+	- Gasoline, veg oil, water
+Not necessity product
+- More likely to buy when price drops, demand is affected by the price
+	- Durable products, like mobile phone
+
+## Factors affecting elasticity of demand
+- Necessities (less elastic)
+	- 
+- Have substitutes (more elastic)
+- The more different
+
+## Test, elastic or not elastic
+- Perceive as necessitiy or a luxury
+- Portion of a person's budget
+- Availability of substitute
+	- Gas, necessary, for one gas station, inelastic demand
+		- Have substitute, elastic demand
+	- BTS, necessary, does not consumes too much price, monopolistic, inelastic demand, **customer may not be able to adapt to changed price**
+	- Taxi/Airline
+		- Airline for tourism, elastic demand
+		- Taxi in the rainy day, inelastic
+			- Grab and Uber changed their price in real time
+		- Airline in exotic locations, inelastic
+	- Concert ticket, sold out quickly, inelastic
+
+## Prestige product
+- If the price drops, instead of high demand, people ==question== whether if there is anything wrong. Whrther the discounted product has something wrong with it
+	- Tag Huer
+## How to respond to competitor's price change
+- Follow the cost price increase when 
+	- Price increase alligns with image of the brand
+	- Customers don't care about the price
+- Don't
+	- Customers are sensititve to price increase
+	- Price increase does not alligns wit the image of the brand
+
+## How to increase the price
+- Eliminate discount
+- Unbundle product
+- Decrease price
+- Launch a new line of product
+	- Maybach
+- Communicate too as to "why" increase
+
+![[8.pricing2-2020.pdf#page=17]]
+
+> skimming, goes to MAX, penetration pricing, LOW
+
+## Summary of price
+![[8.pricing2-2020.pdf#page=18]]
+
+## Product mix pricing, one firm, many products
+- More than one items being sold for a firm
+- Setting price for ==more than one product==
+	- iPad price affects iPhone
+	- For some items
+- ==Focus on the profits of the total portfolio==
+
+## Product line pricing
+- Setting the ==price steps== between various products in product line based on cost differences, customer value of different features, competitor's price
+- Ex. McDonald's French Fries
+	- Size S 29Baht
+	- SIze M 68Baht
+	- Size L 76Baht
+	- Size XL 84Baht
+	- Size M is a decoy for L
+![[8.pricing2-2020.pdf#page=22]]
+For TV, people would tend to choose 75'' (if 98 inches are not included), but IF it is included, then people would tend to choose 82''.
+- ==slightly lower price, with much lower quantity, a slight higher price, with a much higher quality==
+==Decoy==
+- Encourages people to buy an expensive product
+
+## Optional product pricing
+- Some excessories in a product is free of charge, some have to be paid
+- How people value different features
+	- If clients value less of some functions, they can be sold separately, as a customization
+## Captive/complementary product pricing, mechanical pencil analogy
+- Set low price for the main product, and set HIGH price for additional product, customers have to keep buying captive product at a very high price
+	- Playstation and game
+	- Amazon Kindle, with high price for e-book
+	- AIS cell phone (discounted) with long term contract
+- But if the price is too high, clients would feel being taken advantage
+
+## Two-part pricing
+- Fixed fee
+	- Entrance fee, and membership fee
+- Variable usage fee, customize your own plan
+	- Choose a package with optimal usage for each users
+	- How to set price? 
+		- If you expect that customers would buy high price for a service, standard price can be set high
+		- Ex. Aquarium, with low standard price, but has a special price for a special section of aquarium
+- Low the entry fee and raise the price of extras: high-value customers are interested in the extra
+- Raise the entry free and lower the price of extras : low-value customers are interested in the extra
+
+## Buffet pricing
+- With fixed pricing, customers can consume unlimited product
+- To gain profit
+	- Explore average spending
+	- Containers that have vary size
+		- Low cost product
+		- Tall buffet condo, feels that customers eat a lot
+		- Variety of menu
+		- Small plate, large glass
+
+## Bundle pricing
+- Component products/services are offered as a package with reduced price
+	- Slow moving goods, and fast moving goods
+	- Pure bundling, buy bundling or nothing
+
+## Discount and allowance pricing
+> - discount means to reward customers, encourage them to do some certain actions, like trade in for Apple
+
+## Segmented pricing
+>segmentation, means selling different products for different customers
+- Offer the same product, different pricing
+	- Price discrimination
+## Customer-segment pricing
+- Same product of service for different people
+	- People of age, foreigners, charge more charge less
+	- Young male in fun park is charged more for insurance
+	- Weight of luggage and your WEIGHT (fatass) have to pay extra
+
+## Product-form pricingm containers
+- Same products, in different forms, vary in prices as well
+	- Evian, small bottle has higher price per unit
+	- Same for Vaseline here
+
+## Service level pricing
+Economy business first class
+- Price different is larger than the cost different, it is not fair, but people still buy
+
+## Image pricing
+Same product but is promoted by different brand promoters
+- name packet display
+
+## Location-based pricing
+Same product, with slightly different locations, have different benefits and pricing
+- Backseats for threater cost more
+- Front row seat cost most for NBA games
+
+## Channel-based pricing
+Same product being sold in different locations, different channels
+
+## Time-based pricing
+High season, low season, same product, different prices on time
+- Lower price for restaurant in weekday
+- Wednesday movie discount
+	- TO balance price fluctuation
+
+## Suitable conditions
+- Market must be segmented
+- Have to make customers feel too, that the product is worth the price difference, not completely unfair
+- those who buy low price cannot resell it
+	- Turkey discord incident
+
+## Psychological pricing, the 99 baht ass thing
+- Charm pricing, 99 baht
+- Small price font, in a large price tag
+![[8.pricing2-2020.pdf#page=41]]
+![[8.pricing2-2020.pdf#page=43]]
+![[8.pricing2-2020.pdf#page=44]]
+![[8.pricing2-2020.pdf#page=46]]
+
+## Store raise prices before sales
+- Charge overprice price and use discount to bring price back to real price
+![[8.pricing2-2020.pdf#page=48]]
+
+## Exam to recommend pricing strategy
+==final exam, except discount or promotion. ==
+
+## Promotional pricing drawbacks
+- People don't buy until discount period is out
+	- Not a substitute for effective strategic planning
+	- Frequent use leads to industriy price wars, which benefits only a few firms
+
+## Dynamic pricing
+> for time-based pricing, threater offers discounted price on Wednesday. High season, low season. Weekday, it's the same. 
+> Time-based, we fix the time when we know customers shop less, so we offer discount during that period of time to equalize sales over all time
+
+Dynamic pricing : real-time pricing, price goes up and down depends on current demand and supply, not fixed, hard to predict.
+- Ex. Grab and Uber
+
+## DynaPrc Time of use
+- Tollway, if traffic is jammed, we have to pay higher for a toll way
+
+## DynaPrc Time of purchase
+- Price differs unconstantly depends on the different time of the day, depends on the real-time no. of users of website/stores
+	- Ex. Amazon changed prices 9 times a day
+
+## Time lapsed
+- Liquor, same product, same whiskey, different frequent buyers, different prices
+
+## Temperature
+- With different temperatures, prices of drinks can differ
+
+## Random factors
+- Different browsers yield different prices from the same website
+- Apple iPhone iPad hotel booking, prices differ based on devices
+
+## Benefits of dynamic pricing
+Advantages
+- Reap profit in high demand
+- Reap more profit by addressing unmet demands of those willing to oay more
+Disadvantage
+- Algorithm might not always work
+- Not suitable for all products
+- Works for high demand, low supply product
+
+## Oppotunistic pricing
+- Concert ticket being resold for a higher price, for opportunity, for greed not an actual dynamic reason
+- Does not last long
+
+## International pricing
+Different prices in different countries
+- Starbucks is vey cheap in India, but very expensive in Farang countries. 
+
+## Payment and subscription
+- Free or very low entry fee
+- Subscription milks until you die
+
+## Additional strategy
+- Unit pricing : charge price based on different unit of measurement. Quantity sold, rate per hour, weight, length
+
+![[8.pricing2-2020.pdf#page=66]]
+
+
+## Marketing communication objectives
+- informative : product introduction
+	- Seek to develop initial demand, stimulate interest
+- Persuasive : product growth
+	- Seek to increase demand, for existing product stimulate a purchase
+- Reminder : product maturity and decline
+	- Strives to maintain demand, keep brad in customer's minds
+- Ex. Santa Claus and Coke, reminder
+- Ex. Coke now serve in mini-size, informative
+
+From here, due to statistic quiz, you would have to read this part by yourself. Good luck.
+
+## Advertising
+A paid form of non-personal communication about an organization, service, brands by an identified sponsor through various media. Usually persuasive in nature.
+![[10.2imc-2022.pdf#page=3]]
+
+## Traditional media
+![[10.2imc-2022.pdf#page=5]]
+![[10.2imc-2022.pdf#page=10]]
+
+>These sections, including ==10.1 and 10.2 introduction are poorly documented due to the fucked up of time management, read some more by yourself.==
+## Display advertising
+Ads that show up in websites.
+
+**search engine optimization**
+- certain key words, phrase which indicates pain points and needs trigger certain poduct to show up.
+
+**social media advertising**
+- Advertise through social media channels, like Facebook, instagram, youtube.
+	- Promo account
+- Tiktok has different forms of ads as well, for different purposes of advertisement
+	- Exposure (traditional ads)
+	- Engagement (grimage shake)
+- LinkedIn
+	- Dynamic ads, include the name of the person we want to reach, with call-to-action
+
+## Best advertising, non-intrusive ads
+- Advertorial: starts with informative ads, and end with the brand. Contents that are useful to viewer
+- Native adveritsing : ads that look native to the platform. 
+	- '# magarita of the year (hashtag)
+	- Article from NY times and certain websites
+		- Netflix promotes narco through informative website that shows the cocaine traffic
+		- Adobe released article on NY times of new shopping trends, and at the same time, promote themselves
+
+## Advertainment
+Products appear in the ==background== of media, movies films, it becomes display media. 
+- product integration
+	- but the brand can be ==forced== to be used or appear as well
+- Brand entertainment
+	- Entire entertainment made to advertise the brand
+		- Cast away and fedex..?
+- Advergaming
+	- Game made by brand, and the points from game can be redeemed from physical store as well.
+- Metaverse
+	- Roblox, Fornite
+- Advertiser-funded programming, TV shows that are made to specifically advertise the brand, that are made to be fun but also to advertise.
+	- Celeb vlog walking in mall reviewing stuff, developed by magazine/mall
+
+## In-store advertising
+Advertising is placed in a retailed store
+
+- Window display
+	- Manequin in front of dressing store
+- Display advertisement in store
+![[10.2imc-2022.pdf#page=41]]
+
+## Out-of-home adverising
+- Ads when people are outside of home, or go to public places, in transit, waiting (in a medical office), in specific commercial locations (threater, escalator)
+	- Ex. Flavor Radio, certain sound is triggered with smell of Donuts in a bus station with nearby Dunkin's
+	- Ex. Hijacked highway, home deco distributed VR to people on the hgihway so they can see VR elements on the road as well
+- **interactive outdoor ads**
+	- Ex. AR poster, can be triggered.
+	- Ex. Street furniture
+	- Ex. Escalator, elevator door (เจ็บนิดเดียว)
+- Hyper-realistic advertising
+	- AR showing cyber-punk like interative objects in AR format
+- Transit
+	- Ex. The sopranos hands sticking out of a cab
+	- Ex. Metro ads, placed on a metro car
+- Sky
+	- Goodyear blimp
+
+## Guerilla marketing
+Focus on a small specific customers and make them feel memorable with your product
+- Ex. An orange juice which talks with customers
+- Dramatic scenes
+	- Ex. Candid camera, prank, those "funny promo" videos we often see. 
+- **Backfire**, when prank goes too far
+
+## Sales promotion
+Samples are distributed to customers to try, to make an impression of the product.
+- Ex. Franklin from Snowfall, distributed cocaine for free at first
+
+## Personal selling
+Store employees, salesperson recommend the product that is best for you.
+- Ex. Salesperson can even recommend a competitor brand if it suits more for customers, to show sincerity and creates impression.
+- **When?**
+	- When product is complex, needs demonstration to know how to use
+
+## Public relations (PR)
+Maintain good relationship with the mass
+- When?
+	- Something newsworthy that marketers would like to share with the public to promote the brand
+	- Facing public emergency or crisis
+- PENCIL
+	- Publication, events, news, community, identity media, lobbying
+- PR stunts
+	- Planned events that attract public attention, a large Amazon box for example
+	- Troop events
+		- A group of marketing team that walk through public areas to grab attention
+- Sponsorship
+	- Malboro on F1
+	- Ambush marketing
+		- The brand hands out their products for free to famous figures, like athletes to promote itself
+
+## pros and cons
+Pro
+- PR activity is earned rather than paid, it tends to carry more credibility and weight than a paud advertisement from a biased source
+- No pay or low cost
+Con
+- Unable to fully control the authorship, content, and placement of PR
+	- An unfavorable view
+	- An inaccurate and incomplete content
+	- Low visible location of news
+
+## Direct marketing
+Activities that bypass any intermediaties and communicate directly with the individual consumer
+- Direct mail
+	- Ex. Jeep, Kitkat sends specific samples for free to their customers
+- Telemarketing, direct marketing conducted entirely by telephone
+- TV marketing, direct marketing via broadcast channels
+- Kiosk marketing
+- Online & social marketing
+	- Also comes with staff interaction, like admin responding to some stuff
+	- Ex. JD central, a secret way to tell bf what their gf wants in their valentine
+	- Ex. personalized MV & Listerine
+	- Ex. Google home of the whopper (gets canned award as a campaign)
+		- Google home answers to uses when it is asked of what is Burger King's whopper, it answers very weirdly because it read info from Wikipedia
+- Mobile marketing
+
+## Direct marking, pros anc cons
+Pros
+- specific, customized, immediate response, build customer relationship, low-cost
+Cons
+- Invasive, image problems, lack of customer receptivity
+
+## SUM
+![[10.2imc-2022.pdf#page=106]]
+
+## When to use?
+Depends on the types of product, maturity.
+![[10.2imc-2022.pdf#page=107]]
+![[10.2imc-2022.pdf#page=109]]
+![[10.3 5a and imc (1).pdf#page=6]]
+
+## Final exams
+Mock exam
+- trend analysis
+Final exam
+ - marketing game 10
+ - group assignment 15%
+ - group project 35% (research plan and data collection, research insights, brand positioning and competitor benchmarking, product/service
+
+Final exam 40%
+- new product in kickstarter, develop a case of the detail of new product
+- try to analyse a case and recommend target customer, product price place, product and distribution channel for Thai market. Format is the same but product is changed
+
+Preparation guide, carefully read and analyze
+- practice by looking at the group assignment
+- analyze the case
+- manage the time properly
+
+Marketing strategy
+- segmentation : 
+Evaluate market segment
+
+- propose new segment
+- potential competitor
+
+
+
+
+
+
 
 

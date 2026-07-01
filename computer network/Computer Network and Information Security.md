@@ -831,14 +831,192 @@ A new promising cryptography technique, 128 * 2 bits, not as complex as asymm. *
 ## Asymmetric-key crypto system
 ![[Week09 Security.pdf]]
 
+## Message integrity
+- To detect malicious activity, and then change channel when data modification is detected, to ensure **data integrity**
 
+## Digital fingerprint
+Digital fingerprint or message fingerprint, or message digest.
+==hash function==, when we apply Hash function to a message, it will generate an output, it will behave very closely to a ==fingerprint==, i.e. unique identification of a file. 
+The fingerprint is attached/sent to the receiver, and then the receiver can calculate the hash to ensure integrity of the message.
 
+Sender -------> Receiver
+message -----> message
+Hash M1 ====> Hash M2
+Hash M1 and M2 must be the SAME!.
 
+Hash M1 is sent separately to receiver and compared with Hash M2. ==In a separate channel, secure immune-to-change channel==. 
+![[Week09 Security.pdf#page=27]]
+**it is very important to establish a very secure channel for HASH transportation**
 
+M1 || H(M1) means Hash of M1
+$E_{x}H(M_{1})$ means an encryption for H(M1)
 
+## HASH function
+![[Pasted image 20260612122654.png]]
+Out of hash function : message address, finger print, can be used for message authentication. 
+- Ex. Ajarn wants to send assignment to everyone, for students to make sure got the SAME IDENTICAL assignment with 2 methods (**methods to ensure files integrity**)
+	- Digital signature
+	- HASH function : Aj create HASH of the original assignment, use public key of each students to encrypt the HASH, and send to each students. Student decrypts using private key, and then compute HASH of the received assignment, and then compared with the received HASH, whether they match or not. 
+		- The key encryption : hacker cannot generate a new HASH value of a file, making the HASH secure.
 
+![[Week09 Security.pdf#page=30]]
+![[Week09 Security.pdf#page=34]]
 
+>Hash function is fixed-size
 
+Digital signature : directly message authentication, messag integrity, non-repudiaion. 
 
+## Entity vs Message Authentication
+- Message authentication : might not happen in real time. It simple authenticates one message.
+- Entity authentication : Always authenticate for the entire duration of a session.
 
+## E-mail security
+Email security protocol, there are many, this is one of them
+- **Pretty Good Privacy (PGP)**
+- As email is a one time activity, creating a session handshaking becomes excessive. The mail is attached with something else as well.
 
+## Certificate 
+## ![[Week09 Security.pdf#page=51]]
+## Key rings
+Key rings, refers to collection of keys, public keys of people. 
+
+## Network and security 
+- Network security devices
+	- Router access control list (ACL)
+	- Firewalls/ WAF
+	- Intrusion detection/ prevention systems
+	- EDR/XDR
+	- SIEM/SOAR
+	  ...
+
+![[Week10 Security Devices.pdf#page=3]]
+**Cisco packet tracer** uses the **mentioned icon** to represent different entities within the network.
+
+- Router : route packets from different network
+- End use device : computer, laptops
+	- Task : configure and set up routers and everything
+
+ONCE router starts investigate a packet, router can deny a packet according to a set of rules.
+
+## Router Access Control List (ACL)
+![[Week10 Security Devices.pdf#page=7]]
+
+One access control list for one interface, but one interface can have multiple rules
+- Two interfaces
+	- Ingoing interface
+		- Routers apply the rules to the packet, if the packet pass the rules, then it is allowed, if not, packet can be denied
+		- Rules cannot be dropped
+		- One interface can have multiple rules, but **only one access control list**
+	- Outgoing interface
+		- an examiner that examines the outgoing packet
+		- **be careful of interface application of the direction of data**
+IF you drop ingoing/outgoing packet, LOCKED, then the packet cannot be received...? 
+==Check the direction of the traffic==
+
+## Firewalls
+Can be either hardware of software installed in a network device
+- Hardware firewall can be more expensive than software
+- Hardware can handle larger throughput
+- More storage, more memory
+- ==hardware firewall, with larger spending, can return a better result than software==
+
+- All traffic goes through the firewall
+- ==Access control== list would work as the first filter at router, but i==t examines only the header of the packet.== So if the attacker tries to use a more advanced technique other than the application layer, attack packet can pass through that filter.
+- but firewall comes with certain limitation
+	- If attacker uses ==encryption== technique, and the firewall cannot decrypt packet, then the packet can pass through
+	- misconfigured firewall can cause a serious consequences for the network, because of inefficient technician, then firewall would not work (useless)
+
+### types of firewalls
+- packet filtering (stateless)
+	- Works only in layer 3
+- stateful
+	- Tries to memorize the state of connection
+- application gateway (proxy firewall)
+	- can inspect traffic
+	- For layer 5,4,3
+-> Multilayer firewall which can move through multiple layers
+- hybrid firewall
+	- Combination of various firewall types
+-> Devices that can inspect only one layer is cheaper than those multilayer devices (can inspect multiple layer, in this case, firewall too)
+- Next-generation firewalls
+	- bring benefits from many firewalls
+	- integrate intrusion prevention feature
+		- Not just inspect packet, but can prevent attacker's intrusion as well
+	- Use application awareness and control to see block and risky apps
+	- Upgrade paths to include future information feeds, to keep itself updated
+		- Every time new threat is found, the info has to be downloaded to the next-gen firewalls
+
+## Intrusion prevention and detection devices
+IDS and IPS
+![[Pasted image 20260624085951.png]]
+One more devices can be integrated.
+- IPS can be used to PREVENT the attack, it can block the attack, IPS should be pressed inline after the firewall
+- IDS use just for attack detection, just to be tapped inline, using switch
+
+![[Week10 Security Devices.pdf#page=16]]
+
+IDS
+- pros
+	- Provide no impact on the network, because every traffic don't pass trough it
+	- Just inspect and detect
+	- no impact on latency, center failure
+- cons
+	- 
+IPS
+- pros
+	- can use to stop attack
+- cons
+	- sensor overload, some impact on the network
+
+## types of IPS
+- Host-based (HIPS)
+	- software in endpoint users, can be installed
+	- to inspect packets, to prevent encrypted malware
+	- if malware tries to install itself to endpoint user, HIPS can stop that
+		- "microsoft defender" has antivirus, attack prevention, it can protect your computer
+- Network IPS
+	- consist of sensors that can be installed in the network
+	- IPS dashboard, to receive alert and logs, sensor will pass the logs to the dashboard
+
+- Cisco advanced malware protection
+- Cisco web security appliance (WSA) with cloud web security (CWS)
+- Cisco email security appliance
+
+## VPN virtual private network
+Think of private tunnel
+It can protect your data by establishing a private tunnel apart from external server, to keep your data safe.
+
+## ACLs : important features
+- inbound ACL, passed to outbound ACL, by the router
+
+## Subnetmask of class A or class C
+- wirecard mask
+
+class c = /24
+subnet mask = 11111111 11111111 11111111 00000000
+
+ACL wildcard mask = 00000000 00000000 00000000 11111111
+
+Inverse mask of subnet (wirecard mask)
+![[Week10 Security Devices.pdf#page=23]]
+![[Week10 Security Devices.pdf#page=24]]
+![[Week10 Security Devices.pdf#page=25]]
+
+## Wildcard masks in ACLs
+in terminal 
+- `permit any` allows any packet to go out
+- if any traffic does not match any rules in the ACL, it will be dropped, because the last line of ACL is to ==drop packet DENY==
+- Tips and tricks : IPv4 and IPv6 have to be allowed as well
+
+![[Week10 Security Devices.pdf#page=28]]
+Guideline for ACL creation
+- ==extended ACL== : configure ACL as close as possible to ==source== of information
+- but if it is ==standard ACL== : as close as possible to ==destination==
+
+## syntax for cisco packet tracer
+- `deny` not drop
+- `permit` not allow or pass
+- `remark`
+- `log`
+
+## Physical and logical topologies

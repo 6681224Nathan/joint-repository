@@ -512,5 +512,371 @@ Test with valid/invalid input, specify data, and see whether the results meet th
 
 Test only the valid data. Test by path, if program has 3 paths for 3 conditions, we try to feed in the data into 3 paths, like looking into a clear pipe, and if there are certain pipes that don't have anything flowing through, then that's the dev's job to make that happen, or delete the pipe entirely.
 
+## Test table
+
+![[721841018_1302018894937536_4464210967977231559_n.jpg|619]]
+
+## Test table
+Aims to test all available scenarios.
+
+## Licenses
+![[Pasted image 20260616130723.png]]
+- GNU (General public license) 
+- Open-source software license : to prevent patent and legal issues, including the derivative software malfunctions and the software dev sues the open-source dev.
+- FROM THE DIAGRAM : The lines indicate what the new license can be for the derived software which comes from software with the shown specific license.
+	- Prohibition of arrow reversal : for Apache, the derived software cannot use MIT license.
 
 
+## Back to white-box testing
+Source code redundancy elimination. When a code has a part which will not be used, any variables will not go to that path/part of the code, the test aims to help eliminate that part for maximum optimization. 
+
+```
+function isPrimeNumber(number) {
+  if(number > 0){
+    if (number == 1 || number == 2) {
+      return true;
+    }
+    for (var i=2;i<number;i++) {
+      if (number % i == 0) {
+        return false;
+      }
+    } 
+    return true;
+  } else {
+    return "error"
+  }
+}
+```
+
+| test case | test table | expected result | program result |
+| --------- | ---------- | --------------- | -------------- |
+|           |            |                 |                |
+Find the complete table in inclass-assgn09
+
+## Stress testing (a kind of performance testing)
+- exercise the system beyond its maximum design load
+	- Stressing the system often causes defects to come
+- Stressing the system test failure behavior
+	- System should not fail catastrophically
+	- Stress testing checks for unacceptable lost of services or data
+- stress testing is particularly relevant to distributed systems
+	- Exhibit severe degradation as a network becomes overload
+
+## Component testing
+component or unit testing is the process of testing individual components in isolation
+- It is a defect testing process
+- Types of components :
+	- Individual functions or methods within an object
+	- Object classes with several attributes and methods
+	- Composite components with defined interfaces used to access their functionality
+
+## Object class testing
+Testing all operations associated with an object
+- setting and interrogating all object attributes
+- exercising the object in all possible states
+
+## Interface testing
+- Objectives are to detect faults due to interface errors or invalid assumptions aboout interfaces
+- Importance for object-oriented development as objects are defined by their interfaces
+![[egci341-lecture06-08.pdf#page=50]]
+
+## Interface types
+- Parameter interfaces
+	- Data passed from one procedure to another
+- Shared memory interfaces
+	- Block of memory is shared between procedures or functions
+- Procedural interfaces
+	- Subsystem encapsulates a set of procedure to be called by other sub-system
+- Message passing interfaces
+	- Subsystems request services from other sub-system
+
+## Interface erorrs
+- Interface misuse
+	- A calling component calls another component and make an error in its use of its interface (wrong typing in interface header)
+	- e.g. parameters in the wrong order (wrong order typing in interface header)
+- Interface misunderstanding
+	- A calling component embeds assumptions about the behavior of the called component which are incorrect
+- Timing errors
+	- The called and the calling component operate at different speeds and out-of-date information is accessed.
+		- Ex. Imagine a concurrency information tranmission, it fucks up the entire agreed-upon order procession.
+
+## Software integration
+
+## The world before devOps
+Waterfall linear software development model
+- Waterfall model
+- V-model
+- Incremental model
+
+Customers often have a gap between developer and operational workers (communication gap).
+![[egci341-lecture09-10.pdf#page=9]]
+
+## DevOps
+A concept to help solve the conflict between development and operations side. Deployment and stabiity, a crash of two operation principle.
+
+## The world before devOps
+Frequent disagreement between developers and operational work operator. 
+![[egci341-lecture09-10.pdf#page=12]]
+
+## The birth of devOps
+- After the birth of Agile in 2001 Utah, concept of devOps has been proposed in Agile conference in 2008.
+	- Concept of devOps is automation, we minimize anything manual
+
+## DevOps
+A culture, movement, practice which ==emphasizes collaboration and communication== between software developers and other information-technology professionals, while ==automating== the process of software delivery and infrastructure changes.
+
+## DevOps framework overview
+People
+- Mindset
+- Roles and responsibilities
+Process
+- practice
+	- DevOps pipeline
+	- Configuration measurement
+	- 5Cs
+	- Automation
+	- IaC
+	- Containization
+	- Kpis
+Technology
+- DevOps toolchain
+- DevOps periodic table
+
+## Mindset
+Lean thinking, minimize the number of processes, minize any process/steps that have to be done manually. ==automatic== 
+
+**What happen if they use devOps?**
+- Developers has less conflict wiht operations
+- Value is everything that your customer is willing to pay money for
+- Waste is any action or step that customer does not want to pay for
+
+## DevOps pipeline
+- Development team
+	- plan -> code -> build -> test
+- Operations team
+	- Release -> deploy -> operate -> monitor
+![[egci341-lecture09-10.pdf#page=25]]
+
+## Software configuration management
+-  a process to systematically manage, organize, and control the chnages in the documents, codes, and oter entities during the software development life cycle, the primary goal is to increase productivity with minimal mistakes
+
+## 5C of devLops
+![[egci341-lecture09-10.pdf#page=27]]
+![[egci341-lecture09-10.pdf#page=28]]
+
+## Automation
+
+## Software project management
+concerned with activities involved in ensuring that : 
+- Software is delivered *on time* and *on schedule*
+Project management is needed because software development is always subject to:
+- Budget and schedule constraints that are set by the organization developing the software.
+![[egci341-lecture11-12.pdf#page=4]]
+![[egci341-lecture11-12.pdf#page=5]]
+
+## Project staff
+- may not be possible to appoint the ideal people to work on a project
+	- Project budget may not allow for the use of highly-paid staff
+	- Staff with the appropriate experience may not be available
+- Managers have to work within these constraints especially when there are shortages of trained staff
+
+## Project plan
+- resources available to the project
+- Work breakdown
+- schedule for the work
+
+## Activity organization
+- Activities in a project should be organized to produce tangible outputs for management to judge progress
+- Milestones are the end-point of a process activity
+- Deliverables are project results delivered to customers
+
+![[egci341-lecture11-12.pdf#page=10]]
+
+## Project scheduling
+- Split project into tasks and estimate time and resources required to complete each task
+- Organization tasks concurrently to make optimal use of workforce
+- Minimize task dependencies to avoid delays caused by one task waiting for another to complete
+- Dependent on project managers intuition and experience
+
+![[egci341-lecture11-12.pdf#page=12]]
+
+## Scheduling problems
+- estimating the difficulty of problems and hence the cost of developing a solution is hard
+- productivity is not proportional to the number of people working on a task
+- Adding people to a late project makes it later because of communication overheads
+- Unexpected always happen
+	- Always allow contingency in planning
+
+## Bar charts and activity networks
+- Graphical notations used to illustrate the project schedule
+- Show project breakdown into tasks
+	- Tasks should not be too small
+	- They should take about a week or two
+- Activity charts show task dependencies and the critical path
+- Bar charts show schedule against calendar time
+![[egci341-lecture11-12.pdf#page=15]]
+![[egci341-lecture11-12.pdf#page=17]]
+Gantt chart is basically just a time line :¯\_(ツ)_/¯ 
+![[egci341-lecture11-12.pdf#page=18]]
+![[egci341-lecture11-12.pdf#page=19]]
+![[egci341-lecture11-12.pdf#page=20]]
+
+## Estimate task durations
+- Estimate the ==minimum amount of time== it would take to perform the task - to optimistic duration (OD)
+- Estimate the ==maximum amount of time ==it would take to perform the task - the pessimistic duration (PD)
+- Estimate the ==expected duration== (ED) that will be needed to perform the task
+- Calculate a weighted average of the most likely duration as follow
+$$ D = \frac{(1 \times OD) + (4 \times ED) + (1 \times PD)}{6} = 3.33 $$
+
+## Schedule adjustments
+- Using intertask dependencies, determine every possible path through the project
+- Sum the durations of all tasks in each path
+- **path with the longest total duration is the critical path**
+	- ==critical path ==for a project is that sequence of dependent tasks that have the largest sum of most likely durations
+		- critical path determines the earliest completion date of the project
+		- **Slack time** available for any noncritical task is the amount of delay that can be tolerated between the starting time and completion time of a task without casuing a delay in the completion date of the entire project
+
+## Slack time
+Slack time for each path, slack time means the time each path is less than the critical path, it means how long each path can be delayed because the critical path is not finished anyway.
+
+## Exercise, which is expected to be in the finals
+1) Draw the PERT diagram
+2) Draw the Gantt chart
+3) Find the critical path and critical tasks and duration
+4) Calculate the slack time of each time
+
+
+## Software estimation cost
+
+## Fundamental estimation question
+- how much effort is required to complete an activity
+- How much calendar time is needed to complete an activity
+- What is the total cost of an activity
+
+| Effort | Project A | 12 P-months != 12 months |
+| ------ | --------- | ------------------------ |
+|        | Project B | 10 P-months              |
+## Software cost components
+- hardware and software costs
+- travel and training costs
+- Effort costs (the dominant factor in most projects)
+	- The salaries of engineers involved in the project
+	- Social and insurance cost
+- Effort costs must take overheads into account
+	- Cost of building, air condition, lighting
+	- Costs of networking and communications
+	- Costs of shared facilities (e.g library, staff restaurant, etc)
+
+## Software pricing factors
+- Market opportunity, **demand**
+	- Demand of the app for each company is very high, and between software dev. com. are very competitive, so the price to build app is very high
+- Cost estimate uncertainty
+	- When the client's requirements are not clear, the software house will overestimate 
+- Contractual term 
+	- With the restriction of software development (contract A says that software developed for this contract cannot be used in another project, with another contract)
+- Requirements votality
+	- In order to win a contract, some requirements are reduced to reduce pricing for customers
+- Financial health
+	- When software house does not have any project at the moment, in order to pay employees, price per contract can be lowered in order to find project to fill in the gap
+
+>software house means software development company
+
+> P month means per month
+## Software productivity
+- A measurement of the rate at which individual engineers involved in software devlopment produce software and associated documentation. ==productivity measurement per individual per month==
+	- Can be used to measure to team's productivity
+		- **size-related measurement**
+			- Like lines of codes written per month
+			- No. of lines of sources codes
+			- no. of objects in the program
+		- **function-related measurement**
+			- Based on the functionality of the program created
+### Measurement problems
+- Estimating the size of the measurement
+	- i.e. How many function points
+- Estimating the total number of programer's months that have elapsed
+- Estimating contractor productivity (e.g. documentation team)
+
+### Line of Code (LOC)
+- Problem that can arises is that for different languages, different number of  lines of codes reflect different productivity
+- **Physical line of code** : count every line except comment, physical code line
+- **Logical line of code** : line that can be executed
+
+`for (i=o..) printf;`
+Logical line of codes : 2
+Physical line of codes : 1
+Comment : 0
+
+> Elapsed means the time that passed or slipped by
+
+## Productivity comparison
+- The lower level the language, the more productive the programmer
+	- The same functionality takes more codes to implement in a lower-level language than in a high-level language
+- The more verbose the programmer, the higher the productivity
+
+> Verbose means more code than necessary, ยืดยาว
+## System development times
+![[egci341-lecture13-14.pdf#page=10]]
+- the higher the language, the lower the effort, so it is better (less time as well)
+
+## Functional points
+Based on a combination of program characteristics
+- External inputs and outputs (EI, EQ)
+- User interactions and external queries (EQ)
+- External interface files (EIF)
+- files used by the system or internal logical files (ILF)
+ A weight is associated with each of these characteristics and the function point count is computed by multiplying each raw count by the weight and summing all values
+- Internal interface files
+	- Files used locally within the system
+- External interface files
+	- Files that have to be called from other application/outside
+- External input
+	- data that goes in from other app, outside
+- External outputs
+	- data tht comes "out" of the system
+- External inquiries
+	- EQ is a transaction function with both input and output which results in an information retreival
+
+## Function points
+- Function points count is modified by the complexity of the project
+- FPs can be used to estimate LOC depending on the average number of LOC per Function Points (FP) for a given language
+	- LOC = AVC * number of function points
+	- AVS is a language-dependent factor varying from 200-300 for assemble language for 2-40 for a 4GL
+	- AVC : the average number of lines of code
+- FPs are very subjective
+	- They depend on the estimator
+	- Automatic function-point counting is impossible
+![[egci341-lecture13-14.pdf#page=14]]
+![[egci341-lecture13-14.pdf#page=16]]
+## Practice
+## ==WILL BE IN FINAL EXAM==
+
+| No. of functions | Description                       | Weight  | Type |
+| ---------------- | --------------------------------- | ------- | ---- |
+| 2                | Send data to web service          | Average | EIF  |
+| 3                | Call function to reset the sensor | Low     | EIF  |
+| 3                | Query data from API in app        | High    | ILF  |
+| 1                | Get name and address from user    | Low     | EI   |
+| 3                | print reports on the screen       | Average | EO   |
+| 2                | Print reports to the printer      | Average | Eo   |
+| 2                | read sensor's data from database  | Low     | EQ   |
+TDI : 48
+Language : Visual C++
+LOC/P-month : 360
+$/LOC: 24
+
+- VAF = ==0.65 + (0.01xTDI) === 0.48 + 0.65 = 1.13
+- UFC = sum of all weight factor = $\sum$ no. of functions * weight (refers from types of function as well, and weight factor)  = 2 * 7  + 3 * 5 + 3 * 15 + 1 * 3 + 3 * 5 + 2 * 5 + 2 * 3 = 108
+- Function points : FP = UFC x VAF = 1.13 * 108= 122.04  
+- Find estimated LOC : AVC * FP = 34 * 122.04 = 4149.36
+- Find cost estimation of software : Est LOC * Dollar/LOC : 4149.36 * 204 = $99584.64
+- Effort : Est. LOC / (LOC/pmonth) = 4149.36 / 360 = 11.526 p-month (effort for the total project)
+	- Add more people, more cost, but lower calendar month (no. of dev * calendar month = p-month) p-month mostly stays the same
+
+## project
+- random forest, need to specify threshold, try clustering first, categorize to be different groups
+	- Mental test is a stat model, 
+	- Triangle matrix to a 3D table model, one file on row, 80 rows matrix (the procesed matrix)
+	- WE HAVE TO USE DIFFERENT CLUSTERING MODEL
+	- if algo is changed, can there be other intepretation
+	- objectives need to correspond to expected result

@@ -56,6 +56,55 @@
 
 Your favorite candy company claims that their chocolate bars have a mean weight of 200 grams, and their population standard deviation is 5 grams. You've noticed that they've seemed lighter than usual, You take a simple randok sample of 35 candy bars and find they have a mean weight of 198 grams, at $\alpha$ 0.05 test the company's claim.
 
+### Confidence interval
+Confidence interval with (1-alpha)% confidence value means the true population mean (from the sample mean) cannot exceed this range
+
+### Confidence bound
+Confidence bound is like the lowest possible acceptable limti and the highest (upper bound) for the true population mean to possibly be, with (1-alpha)% confidence level of course. 
+
+> Confidence bound is like one side, most or least, confidence interval is two sides
+
+### Right tail Z (alpha/2) value and T (alpha/2) value for confidence interval calculation
+Because right side and left side of the Z and T distribution is identical, it's only the matter of symbol difference, but the ==formula is designed for positive Z and T value, so right tail==
+
+> n>=30 can use Z test, does not need t test anymore, the sample is large enough to be a population
+
+![[Pasted image 20260702222625.png]]
+
+### Confidence bound and confidence interval
+Confidence bound is upper/lower bound. Confidence interval will just be upper bound or lower bound.
+
+### T test
+In case the standard deviation of population is not known and n does not reach 30 yet, then t test is needed. It uses the same CI and CB as Z test, exactly the same, just different test and excel formula.
+
+### Chi square
+Chi square is non negative
+it is for ==variance and stdev.s hypothesis testing==
+The curve bends left, starts from 0 to infinity (that is its domain).
+- Stdev and variance cannot be negative, there are only 0, or no variation, or inf as machine degrades, the quality control is worse, and outcomes start to deviate from each other as a sign of failure.
+- ==center is degree of freedom==
+
+**Hypothesis testing for chi square**
+Is mostly the same, just that in order to find P value, because Chi square graph is not symmetrical, so basically we have to determine whether test statistics lands on the left side or right side of the graph, and calculate the area to the extreme, then multiply it by two.
+![[Pasted image 20260703103059.png]]
+
+### Hypothesis testing, P value
+- Right tail, P value means the chance of sample mean and more extreme value (higher) coming from null hypothesis world
+- Left tail, P value means the chance of sample mean and more extreme value (lower) coming from null hypothesis world
+- Two tail, P value means the chance of sample mean and more extreme value (==not equal to center mean==) coming from null hypothesis world
+
+### confidence bound
+In confidence bound, if there is a notation of single chi square, Z and T, it means that ==they are critical value, but positive, but no more mirroring technique, because of chi square, or either left tail or right tail, depends on formula==
+
+## Yes or no like Poisson, proportion, norm.s
+- When dealing with yes/no statistics, proportion is brought to play, from category data (mean) to proportion statistics
+- **proportion statistic or p-hat** = incident we are interested in (sample) / total incident of sample
+
+
+
+
+
+
 
  
 

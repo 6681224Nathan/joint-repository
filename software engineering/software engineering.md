@@ -873,10 +873,153 @@ $/LOC: 24
 - Effort : Est. LOC / (LOC/pmonth) = 4149.36 / 360 = 11.526 p-month (effort for the total project)
 	- Add more people, more cost, but lower calendar month (no. of dev * calendar month = p-month) p-month mostly stays the same
 
-## project
-- random forest, need to specify threshold, try clustering first, categorize to be different groups
-	- Mental test is a stat model, 
-	- Triangle matrix to a 3D table model, one file on row, 80 rows matrix (the procesed matrix)
-	- WE HAVE TO USE DIFFERENT CLUSTERING MODEL
-	- if algo is changed, can there be other intepretation
-	- objectives need to correspond to expected result
+## Object points
+- Object points (alternatively named application points) are an alternative function-related measurement to function points
+- Object points are NOT the dame as object classes
+- The number of object points in a program is a weighted estimation of: 
+	- Number of separate screens that are displayed
+	- Number of reports that are produced by the system
+	- Number of program modules that must be developed to supplement the database code
+
+## Factors affecting productivity
+- Application domain experience
+- Process quality
+- Project size
+- Technology support
+- Working environment
+
+## Estimation techniques
+For ==software cost estimation==
+
+- Algorithmic cost modelling : Estimation made on the history of cost of developed software that is similar to the developing software
+- Expert judgement : Experts on the project made their own judgement of software cost, discussion is made, and being repeated until agreed price is given
+- Estimation by analogy : 
+- Parkinson's law : Measured by person-month, measured from effort ($total\space time \times people$)
+- Pricing to win : Depends on the customer's funding, high low. Estimated to be whatever the customer has available to spend.
+
+## Pricing to win
+Project costs whatever the customer has to spend on it
+- Advantages
+	- Get a contract
+- Disadvantages
+	- The small probability that the customer gets the system they want as a small one
+	- Costs do not accurately reflect work required
+
+## Top-down and bottom-up estimation
+- **Top down**
+	- Estimate based on the system (high level ) and slowly separate the components one by one ,and estimate from that
+- **Bottom up**
+	- Usable when the architect of the system is known and components identified
+	- This can be an accurate method of the sys has been designed in detia
+
+## Example : Object counts
+- 2 simple screens x 1 = 2
+- 3 mediume screens x 2 = 6
+Total objects = 8
+
+## Object point productivity
+![[egci341-lecture13-14.pdf#page=34]]
+
+![[egci341-lecture13-14.pdf#page=31]]
+
+![[egci341-lecture13-14.pdf#page=47]]
+
+1. PM = A x size ^ B x M
+		= 2.5 x 128 ^ 1.17 x 1 = 730.089
+PM = 2.5 x 128 ^ 1.17 x (1.39 x 1.3 x)
+
+### COCOMO model
+### Early design model
+PM = A x Size^B x M
+B = 1.01 + 0.01 x $\sum$ SF(i) 
+A : organisation-dependent constant
+B : reflects the disproportionate effort for large projects
+M : multiplier reflecting product, process and people attribute
+Size : code size (measured in KLOC, or Kilo line of code)
+SF = scale factor
+
+A = 2.7
+LOC = 75,000 LOC
+Multiplier : 
+	RUSE = 1.3
+	PDIF = 2.1
+	PREX - 1.8
+
+Exp B for effort calculation
+$\sum$ SF(i) = 25
+
+Size = KLOC = 75
+M = 1.3 * 2.1 * 1.8 =4.914
+A = 2.7
+B = 1.01 + 0.01 * 25 = 1.26
+PM = 2.7 * 75^1.26 * 4.914 = ==3057.57==
+
+
+## Project
+- The raw data is in .rick format, there is an exact coordinate of a residue, turned into plaintext data (.txt) being translated into a diagonal matrix, literally diagonal **there is an origin of a data which can be traced back to the raw data, the distance is calculated from those coordinates already**, but there are also a full complete matrix as well.
+	- Mentel 
+- There are 500 types of kinase. Among residues, lines are made to measure distance
+
+### Ontology
+- each PDB file has its own PDB code, 
+	- initial_of_proteinname_code_unicode
+
+### Gene ontology
+- Unique cocab to classify each type of protein, GO:word
+
+If we have PDB, we will have the protein code, 
+every protein has sets of turn until the last node, ge
+
+Browser annotation, goes to molecular function, type gene ontology, it becomes the whole class or protein kinease, it ghoes up to protein kinase PDB code, there is a structured vocab, if we go to RCSB
+
+> PDB protein data bank there is a way to get API, "unifront", "gene ontology", if we browse by annotation, molecular function, search for "0004672", it will go to protein kinase and there will be a correct name for protein kinase, under each ontology, there will be an identifier of what kinase it is, there will be ==information of what it is, ranging from organism type to ...==
+
+CDK2_HUMAN
+in ==Uniprot== there should be API
+- there will be information, subcellular location tells the location of the cell
+- PDB code for each kinase for website
+- ID mapping
+	- 3D structure data base
+	- PDB
+	- map it back to uniprot
+> there seems to be two websites now, PDB and Uniprot. Use information we get from PDB, to map it to Uniprot. This is basic mapping
+> API request, there will be specific place to get API, get gene ontology from Uniprot. The protein is connected to human body using Ansembly ID (อองซอมเบิล), 
+
+Protein_organism
+==Ajarn has mapped already, the uniprot and everything==
+
+Every PDB code would exist in Mahori, if it exists in human (gene ontology includes the keyword human)
+
+For example, we have cancer in intestine, we can repurpose drug for breast cancer to be at small intestine. 
+
+For a table, there are distance between points, the last column has to be the outcome, that is how we do clustering, independent variable is the content, last column is dependent. To use neural network to guess the body part in the last column.
+- More than a half of kinase appearance in certain body parts indicate that that body parts have that kinase for the most
+
+Shape of the ATP pocket looks the same, indicates the body parts where it works the most effective. 
+
+Which nodes in the shape tell certain meaning, breast cancer characteristic. 
+
+manoraa.icbs.mahidol.ac.th
+platform.opentargets.org/target/ENSG000000113262
+
+baseline expression
+there is also API query
+
+We have limited data, 
+
+Steps
+- We have distance, then we get the name of the kinase, search in PDB, get the name (ensembly ID), go to uniprot, get CDK2, go to target protein, and then we would get body parts
+- With the emsemble ID, there are also program to translte from the emsemble ID to be the uniprot ID, go to opentargets site to get uniprot ID to get body parts which kinase appears the most
+	- uniprot behaves like a center of buses, it links everything, 
+
+1nvr kinase uniprot
+
+==change the tree, from the clustering of drugs, to body parts instead==
+
+==alternative tree methods, and body parts mapping==
+
+The lasr appendix will have all talbes that we can  extract, Ajarn's thesis. 
+
+Use non redundant data set
+Either one 
+

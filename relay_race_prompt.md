@@ -1,0 +1,2 @@
+relay race prompt
+I want a full explanation for the topic I've said above, a full detailed with good quality, but I understand that you have limited token per chat, so if you think to reach maximum detail within one chat's token, you can ask me to send you another chat so that your token allocation would be larger, there can be more than just couple of chats, depends on you, feel free to ask for it

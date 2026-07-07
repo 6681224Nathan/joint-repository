@@ -954,72 +954,118 @@ A = 2.7
 B = 1.01 + 0.01 * 25 = 1.26
 PM = 2.7 * 75^1.26 * 4.914 = ==3057.57==
 
+## Finals review
 
-## Project
-- The raw data is in .rick format, there is an exact coordinate of a residue, turned into plaintext data (.txt) being translated into a diagonal matrix, literally diagonal **there is an origin of a data which can be traced back to the raw data, the distance is calculated from those coordinates already**, but there are also a full complete matrix as well.
-	- Mentel 
-- There are 500 types of kinase. Among residues, lines are made to measure distance
+### Open source software license
+- GNU V2, V3
+- Apache
+- MIT
 
-### Ontology
-- each PDB file has its own PDB code, 
-	- initial_of_proteinname_code_unicode
+### Software testing
 
-### Gene ontology
-- Unique cocab to classify each type of protein, GO:word
+### Software integration
+- try to understand building, testing, deployment, and so on
+### DevOps tool chain
+- How to adapt devOps to the project
+- ==can explain steps by steps of dev ops tool chain==
 
-If we have PDB, we will have the protein code, 
-every protein has sets of turn until the last node, ge
+### Project management
+- ==pert diagram==
+- critical path
+- slack time, Gantt chart
 
-Browser annotation, goes to molecular function, type gene ontology, it becomes the whole class or protein kinease, it ghoes up to protein kinase PDB code, there is a structured vocab, if we go to RCSB
+### Software cost estimation
+- Bring the formula in as well
+- object point/application point, calculate the effort
+- ==weight table== will be given
+==don't forget calculator, and no formula. Single side cheat sheet, do your best.==
 
-> PDB protein data bank there is a way to get API, "unifront", "gene ontology", if we browse by annotation, molecular function, search for "0004672", it will go to protein kinase and there will be a correct name for protein kinase, under each ontology, there will be an identifier of what kinase it is, there will be ==information of what it is, ranging from organism type to ...==
+### Practice
+- If GNU opensource software is integrated with the software that the team is developing, when the software is done, can the team use apache license for their own software
+	- Because GNU is a copyleft, it forces the derived software to be GNU as well, not Apache, since Apache is not copyleft.
+	- ==search for diagram of opensource software copatibility==
+- Meaning of figure below
+	- Creative commons license, **give credit, and non commercial (cannot use the product for commercial use**
+- Do the source code's owners of opensource software license take responsibility on their code if another programmer integrates these code to a new project
+	- No. This is the purpose of opensource software license, you **don't have to take responsibility if something happens with derived software**
 
-CDK2_HUMAN
-in ==Uniprot== there should be API
-- there will be information, subcellular location tells the location of the cell
-- PDB code for each kinase for website
-- ID mapping
-	- 3D structure data base
-	- PDB
-	- map it back to uniprot
-> there seems to be two websites now, PDB and Uniprot. Use information we get from PDB, to map it to Uniprot. This is basic mapping
-> API request, there will be specific place to get API, get gene ontology from Uniprot. The protein is connected to human body using Ansembly ID (อองซอมเบิล), 
+![[Pasted image 20260616130723.png]]
 
-Protein_organism
-==Ajarn has mapped already, the uniprot and everything==
+### DevOps tool chain
+- DevOps process & tools
+- containerization
+- devOps solution for one scenario
 
-Every PDB code would exist in Mahori, if it exists in human (gene ontology includes the keyword human)
+![[Pasted image 20260707125130.png]]
 
-For example, we have cancer in intestine, we can repurpose drug for breast cancer to be at small intestine. 
+3 5 6 cannot be delayed, because these path are on top of critical path
+1 can delay, G is not on a critical path. G can delay for 5 days, which means the first path can be delayed for 5 days (for G task)
+4 can this path be delayed??
 
-For a table, there are distance between points, the last column has to be the outcome, that is how we do clustering, independent variable is the content, last column is dependent. To use neural network to guess the body part in the last column.
-- More than a half of kinase appearance in certain body parts indicate that that body parts have that kinase for the most
+### Design and experiment
+![[egci341_final_review_2025-26T3.pdf#page=15]]
+### Blackbox
+Test all possible case, and observe result
 
-Shape of the ATP pocket looks the same, indicates the body parts where it works the most effective. 
+| Validity | Test case                        | Test data     | Expected result |
+| -------- | -------------------------------- | ------------- | --------------- |
+| Valid    | Winning no.                      | 03, 84, 46    | win             |
+| Valid    | Losing no.                       | 00, 99, 50    | lose            |
+| Invalid  | Any characters that is not 00-99 | 100, 000, abc | reject          |
+| Invalid  | Any number                       | 0, -1, 2.3    | reject          |
+| Invalid  | empty                            | NULL          | reject          |
+### White box testing
+Need to have a code, but from the description, 
+```
+start
+input i
 
-Which nodes in the shape tell certain meaning, breast cancer characteristic. 
+if(i=03 OR i =180)
+	return win
+else
+	return lose
+	
+end
+```
 
-manoraa.icbs.mahidol.ac.th
-platform.opentargets.org/target/ENSG000000113262
+![[egci341_final_review_2025-26T3.pdf#page=16]]
 
-baseline expression
-there is also API query
 
-We have limited data, 
+| Validity | Test case   | Test data      | Expected result |
+| -------- | ----------- | -------------- | --------------- |
+| valid    | Y <=  x+2   | (4, -4), (6,1) | True            |
+| Valid    | y > X+2     | (1,4), ...     | False           |
+| Invalid  | not integer | (0.13, -2.15)  | reject          |
+| invalid  | empty       | (null, null)   | reject          |
+### COCOMO II
+![[egci341_final_review_2025-26T3.pdf#page=18]]
+![[egci341_final_review_2025-26T3.pdf#page=19]]
+PM = $2.94 \times 8^{1.0997} \times 1$ = Effort 
 
-Steps
-- We have distance, then we get the name of the kinase, search in PDB, get the name (ensembly ID), go to uniprot, get CDK2, go to target protein, and then we would get body parts
-- With the emsemble ID, there are also program to translte from the emsemble ID to be the uniprot ID, go to opentargets site to get uniprot ID to get body parts which kinase appears the most
-	- uniprot behaves like a center of buses, it links everything, 
+PM = $2.94 \times 8^{1.0997} \times (1.3 \times 1.07)$
 
-1nvr kinase uniprot
+![[practice-soft-cost-funct-point-student.pdf#page=3]]
 
-==change the tree, from the clustering of drugs, to body parts instead==
+ 
+EIF LOW 5 * 3
+EI AVG 4 * 2
+EO AVG 5 * 4
+EO HI 7 * 2
+EQ LO 3 * 3
+ILF HI 15 * 1
+EIF AVG 7 * 2
 
-==alternative tree methods, and body parts mapping==
+UFP = 95
+VAF = 0.65 + (0.01 x 48)
+FP = UFP x VAF = 95 x 1.13 = 107.35
+Est. LOC = FP x (LOC/FP for the language) = 107.35 x 34 = 3649.9
 
-The lasr appendix will have all talbes that we can  extract, Ajarn's thesis. 
+==desig==n
+use case
+testing plan
+software cost est
 
-Use non redundant data set
-Either one 
+
+
+
 

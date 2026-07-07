@@ -38,3 +38,5 @@ E(y | x) = $\beta_{0}+\beta_{1}X$ , meaning a linear mode which uses x to predic
 - dependent variable (y)
 
 Suppose that we have n pairs of observation. 
+
+## Statistical process control

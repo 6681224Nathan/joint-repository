@@ -1,0 +1,19 @@
+flowchart TB
+  APIForDropInDB[APIForDropInDB]
+  subgraph dropInDB_API[dropInDB_API]
+     requestHandler[Request Handler]
+     queryBuilder[Query Builder / ORM]
+     txManager[Transaction Manager]
+     connPool[DB Connection Pool]
+  end
+  dropInDB[(dropInDB)]
+
+
+  APIForDropInDB -->|query, write| requestHandler
+  requestHandler --> queryBuilder
+  queryBuilder --> txManager
+  txManager --> connPool
+  connPool -->|query, write| dropInDB
+  dropInDB --> connPool
+  connPool --> requestHandler
+  requestHandler -->|result| APIForDropInDB

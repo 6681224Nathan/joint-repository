@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "princ makt/group-project/Additional notes regarding the missing points in the presentation.md",
+                "file": "losalamos/someshit.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Additional notes regarding the missing points in the presentation"
+              "title": "someshit"
             }
           }
         ],
@@ -94,7 +94,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "7afb0c4b05a81d5a",
@@ -201,13 +202,14 @@
   },
   "active": "49e84ac6d5fa8e9c",
   "lastOpenFiles": [
+    "losalamos/projnote.md",
+    "princ makt/group-project/Additional notes regarding the missing points in the presentation.md",
     "princ makt/group-project/Additional notes regarding the missing points in the presentation.pdf",
     "losalamos/iphone_app_mock_v9_unified.html",
     "princ makt/group-project/MockupForPresentation/lastest one/iphone_app_mock_v9_unified.html",
     "princ makt/group-project/MockupForPresentation/lastest one/Unconfirmed 896146.crdownload",
     "princ makt/group-project/MockupForPresentation/lastest one/Archive.zip",
     "software engineering/software engineering.md",
-    "princ makt/group-project/Additional notes regarding the missing points in the presentation.md",
     "Untitled.md",
     "Untitled 1.md",
     "software engineering/lectures and stuff/practice-soft-cost-funct-point-student.pdf",
@@ -218,7 +220,6 @@
     "software engineering/softeng midterm cheatsheet.pdf",
     "software engineering/inclass-assgn10/egci341-software-testing-jest.pdf",
     "stats for com eng/statistics for computer engineering.md",
-    "stats for com eng/excel files/~$Ch08-01.xlsx",
     "stats for com eng/statistics for computer engineering, second part.md",
     "stats for com eng/formual sheet.md",
     "princ makt/Principle of Marketing.md",
@@ -237,7 +238,6 @@
     "relay_race_prompt.md",
     "relay_reace_prompt.md",
     "software engineering/lectures and stuff/output1.md",
-    "losalamos/projnote.md",
     "computer network/lab03/lab03_report.md",
     "software engineering/inclass-assgn09/group2.md",
     "losalamos/feedback01.md",

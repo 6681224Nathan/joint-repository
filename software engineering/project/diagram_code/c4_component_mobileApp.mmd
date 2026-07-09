@@ -1,0 +1,60 @@
+flowchart TB
+   user[user]
+  subgraph mobileApp[mobileApp]
+
+
+
+
+      subgraph UI[display]
+          gameRelatedComponent[gameRelatedComponent]
+
+
+
+
+          roomReserveComponent[roomReserveComponent]
+
+
+
+
+          noteDisplay[NOTE : display has two parts, <br> one is about game creation/ <br>joining, another one is about <br>where the game would take <br>place. What, when is <br> gameRelatedComponent, <br> where is for <br>roomReserveComponent, <br> different DB.]
+
+
+
+
+      end
+
+
+
+
+      renderer[renderer / refresher]
+
+
+
+
+      dataFetchComponent[dataFetchComponent]
+
+
+
+
+  end
+
+
+
+
+  APIForMUDB[APIForMUDB]
+  APIForDropInDB[APIForDropInDB]
+ dropInCache[(dropInCahce)]
+
+
+
+
+  renderer --> |send to be displayed| gameRelatedComponent
+  renderer --> |send to be displayed| roomReserveComponent
+  renderer --> |ask for data every X interval| dataFetchComponent
+  dataFetchComponent --> |check cache| dropInCache
+  dataFetchComponent --> |query, write| APIForDropInDB
+  dataFetchComponent --> |query, write| APIForMUDB
+  APIForMUDB --> |caching| dropInCache
+  APIForDropInDB --> |caching| dropInCache
+  user --> |interact| gameRelatedComponent
+  user --> |interact| roomReserveComponent

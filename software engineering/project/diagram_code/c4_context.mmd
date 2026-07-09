@@ -1,0 +1,25 @@
+classDiagram
+
+
+   class user{
+
+
+   }
+   class  dropIn{
+
+
+   }
+   class dropInBackEnd{
+
+
+   }
+   class MUBackEnd{
+
+
+   }
+  
+   user --> dropIn : uses
+   dropIn --> dropInBackEnd : read, write, query
+   dropInBackEnd --> dropIn : return query, sucess
+   dropIn --> MUBackEnd : query/ read, write reservation
+   MUBackEnd --> dropIn : return query

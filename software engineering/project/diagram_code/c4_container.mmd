@@ -1,0 +1,97 @@
+classDiagram
+
+
+
+
+  class user{
+
+
+
+
+  }
+  namespace dropIn{
+      class mobileApp{
+
+
+
+
+      }
+      class APIForDropInDB{
+
+
+
+
+      }
+      class APIForMUDB{
+
+
+
+
+    
+      }
+      class dropInCache{
+
+
+
+
+      }
+      note for APIForMUDB "use REST, because
+      usual entreprise level DB
+      use REST endpoint instead of GraphQL,
+      since it is more secure
+      and stable"
+      note for APIForDropInDB "use GraphQL endpoint
+      because it exchanges many
+      lightweight packets, reduce
+      large bundled traffic"
+   }
+
+
+
+
+  namespace dropInBackEnd{
+      class dropInDB_API{
+
+
+
+
+      }
+      class dropInDB{
+
+
+
+
+      }
+  }
+  namespace MUBackEnd{
+      class MUDB_API{
+
+
+
+
+      }
+      class MUDB{
+
+
+
+
+      }
+  }
+
+
+
+
+
+
+
+
+user --> mobileApp : uses
+mobileApp <--> APIForDropInDB : query, write, return data
+mobileApp <--> APIForMUDB : query, write, return data
+APIForDropInDB --> dropInDB_API: query, write
+dropInDB_API --> dropInDB : query, write
+APIForMUDB --> MUDB_API : quert, write
+MUDB_API --> MUDB : query, write
+APIForDropInDB --> dropInCache : caching
+APIForMUDB --> dropInCache : caching
+mobileApp --> dropInCache : check cache

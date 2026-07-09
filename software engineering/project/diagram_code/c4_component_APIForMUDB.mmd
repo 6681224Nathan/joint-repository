@@ -1,0 +1,25 @@
+flowchart TB
+  mobileApp[mobileApp]
+  subgraph APIForMUDB[APIForMUDB]
+     controller[REST Controller]
+     validator[Request Validator]
+     authMW[Auth Middleware]
+     businessLogic[Business Logic / Service Layer]
+     cacheClient[Cache Client]
+     dbClient[MUDB Client]
+  end
+  dropInCache[(dropInCache)]
+  MUDB_API[MUDB_API]
+
+
+  mobileApp -->|HTTP request| controller
+  controller --> validator
+  validator --> authMW
+  authMW --> businessLogic
+  businessLogic --> cacheClient
+  cacheClient --> dropInCache
+  businessLogic -->|on cache miss| dbClient
+  dbClient -->|query, write| MUDB_API
+  dbClient --> businessLogic
+  businessLogic --> controller
+  controller -->|HTTP response| mobileApp

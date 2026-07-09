@@ -1,0 +1,33 @@
+flowchart TB
+ mobileApp[mobileApp]
+ subgraph APIForDropInDB[APIForDropInDB]
+    resolver[GraphQL Resolver]
+    schema[GraphQL Schema]
+   note[NOTE : GraphQL Schema<br>is for validation of incoming <br>data]
+    authMW[Auth Middleware]
+    businessLogic[Business Logic / Service Layer]
+    cacheClient[Cache Client]
+    dbClient[DropInDB Client]
+ end
+ dropInCache[(dropInCache)]
+ dropInDB_API[dropInDB_API]
+
+
+
+
+ mobileApp -->|query/mutation| resolver
+ resolver -.-> schema
+
+
+
+
+ resolver --> authMW
+ authMW --> businessLogic
+ businessLogic --> cacheClient
+ cacheClient --> dropInCache
+ businessLogic -->|on cache miss| dbClient
+ dbClient -->|query, write| dropInDB_API
+ dbClient --> businessLogic
+ businessLogic --> resolver
+ resolver -->|response| mobileApp
+ schema --> note

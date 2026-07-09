@@ -1,0 +1,21 @@
+flowchart TB
+  APIForMUDB[APIForMUDB]
+  subgraph MUDB_API[MUDB_API]
+     requestHandler[Request Handler]
+     authValidation[Enterprise Auth Validation]
+     queryBuilder[Query Builder / ORM]
+     txManager[Transaction Manager]
+     connPool[DB Connection Pool]
+  end
+  MUDB[(MUDB)]
+
+
+  APIForMUDB -->|query, write| requestHandler
+  requestHandler --> authValidation
+  authValidation --> queryBuilder
+  queryBuilder --> txManager
+  txManager --> connPool
+  connPool -->|query, write| MUDB
+  MUDB --> connPool
+  connPool --> requestHandler
+  requestHandler -->|result| APIForMUDB

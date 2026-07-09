@@ -1,0 +1,105 @@
+
+
+sequenceDiagram
+  actor user
+  participant gameRelatedComponent
+  participant roomReserveComponent
+  participant cache
+  participant dataFetcher
+  participant APIForMUDB
+  participant APIForDropInDB
+  participant MUDB_API
+  participant dropInDB_API
+   participant MUDB
+   participant dropInDB
+
+
+   %%create game
+   %%join game
+   %% (WRITE)
+   activate user
+   user ->> gameRelatedComponent : createGame() / joinGame()
+   user ->> roomReserveComponent : bookRoom()
+
+
+   gameRelatedComponent ->> dataFetcher : sendData()
+   roomReserveComponent ->> dataFetcher : sendData()
+
+
+   dataFetcher ->> APIForDropInDB : sendData()
+   dataFetcher ->> APIForMUDB : sendData()
+
+
+   APIForDropInDB ->> dropInDB_API : passingData()
+   APIForMUDB ->> MUDB_API : passingData()
+
+
+   dropInDB_API ->> dropInDB : queryDB()
+   MUDB_API ->> MUDB : queryDB()
+
+
+   dropInDB -->> dropInDB_API : queryDB() result
+   MUDB -->> MUDB_API : queryDB() result
+
+
+   dropInDB_API -->> APIForDropInDB : processData() result
+   MUDB_API -->> APIForDropInDB : processData() result
+
+
+   APIForDropInDB -->> dataFetcher : calculateData()
+   APIForMUDB -->> dataFetcher : calculateData()
+
+
+   dataFetcher -->> cache : passingToCache()
+   dataFetcher -->> gameRelatedComponent : sendData()
+   dataFetcher -->> roomReserveComponent : sendData()
+   gameRelatedComponent -->> user : display()
+   roomReserveComponent -->> user : display()
+  
+   deactivate user
+
+
+   %%see information (READ)
+   activate user
+   user ->> gameRelatedComponent : seeStats()
+   user ->> roomReserveComponent : fetchData()
+
+
+   gameRelatedComponent ->> dataFetcher : sendQuery()
+   roomReserveComponent ->> dataFetcher : sendQuery()
+
+
+   dataFetcher ->> cache : searchingCache()
+   alt cache sufficient information
+       cache -->> dataFetcher : searchingCache() result
+       dataFetcher -->> gameRelatedComponent : sendData()
+       dataFetcher -->> roomReserveComponent : sendData()
+       gameRelatedComponent -->> user : display()
+       roomReserveComponent -->> user : display()
+   else cache doesn't have sufficient information
+       dataFetcher ->> APIForDropInDB : sendQuery()
+       dataFetcher ->> APIForMUDB : sendQuery()
+       APIForDropInDB ->> dropInDB_API : queryDB()
+       APIForMUDB ->> MUDB_API : queryDB()
+       dropInDB_API ->> dropInDB : queryDB()
+       MUDB_API ->> MUDB : queryDB()
+      
+       MUDB -->> MUDB_API : queryDB() result
+       dropInDB -->> dropInDB_API : queryDB() result
+       MUDB_API -->> APIForMUDB : processData() result
+       dropInDB_API -->> APIForDropInDB : processData() result
+       APIForMUDB -->> dataFetcher : calculateData()
+       APIForDropInDB -->> dataFetcher : calculateData()
+       dataFetcher -->> cache : passingToCache()
+
+
+       dataFetcher -->> gameRelatedComponent : sendData()
+       dataFetcher -->> roomReserveComponent : sendData()
+       gameRelatedComponent -->> user : display()
+       roomReserveComponent -->> user : display()
+
+
+
+
+   end
+   deactivate user

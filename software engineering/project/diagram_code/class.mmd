@@ -1,0 +1,190 @@
+classDiagram
+
+
+class user{
+}
+
+
+namespace dropIn{
+   class display{
+       +display()
+   }
+   class UIComponent{
+       +fetchData()
+       +render()
+       +refresh()
+
+
+   }
+   class gameRelatedComponent{
+       -matchData
+       -joinData
+       -userStats
+      
+       +createGame()
+       +joinGame()
+       +seeStats()
+
+
+   }
+   class roomReserveComponent{
+       -roomThatsAvailable
+       -roomThatWillBeReserved
+       -locationData
+
+
+       +bookRoom()
+   }
+   class cache{
+       -matchData
+       -joinData
+       -userStats
+       -roomThatsAvailable
+       -roomThatWillBeReserved
+       -locationData
+
+
+   }
+   class APIForDropInDB{
+       -matchData
+       -joinData
+       -userStats
+
+
+       -authenticateQuery()
+       -calculateData()
+       +sendQuery()
+       +sendData()
+   }
+   class APIForMUDB{
+       -roomThatsAvailable
+       -roomThatWillBeReserved
+       -locationData
+
+
+       -authenticateQuery()
+       -calculateData()
+       +sendQuery()
+       +sendData()
+   }
+   class frontEndAPI{
+       <<interface>>
+       -authenticateQuery()
+       -calculateData()
+       +sendQuery()
+       +sendData()
+
+
+   }
+   note for frontEndAPI "two APIs, although use the same method,
+   is structurally different,
+   refer to C4"
+
+
+   class dataFetcher{
+       -roomThatsAvailable
+       -roomThatWillBeReserved
+       -locationData
+       -matchData
+       -joinData
+       -userStats
+
+
+	+sendQuery()
+	+sendData()
+	-calculateData()
+	+passingToCache()
+	+searchingCache()
+
+
+   }
+}
+
+
+namespace MUBackEnd{
+   class MUDB_API{
+       -roomThatsAvailable
+       -roomThatWillBeReserved
+       -locationData
+
+
+       -authenticate()
+       +passingData()
+       +processData()
+       +queryDB()
+
+
+   }
+   class MUDB{
+       -roomThatsAvailable
+       -roomThatWillBeReserved
+       -locationData
+
+
+   }
+}
+
+
+namespace DropInBackEnd{
+   class dropInDB_API{
+       -matchData
+       -joinData
+       -userStats
+
+
+       -authenticate()
+       +passingData()
+       +processData()
+       +queryDB()
+
+
+   }
+   class dropInDB{
+       -matchData
+       -joinData
+       -userStats
+   }
+}
+
+
+class backEndAPI{
+   <<interface>>
+}
+
+
+dropInDB_API --> dropInDB : query
+MUDB_API --> MUDB : query
+
+
+MUDB_API --> APIForMUDB : HTTPS data
+dropInDB_API --> APIForDropInDB : HTTPS data
+
+
+
+
+
+
+dropInDB_API ..|> backEndAPI : implement
+MUDB_API ..|> backEndAPI : implement
+
+
+gameRelatedComponent --* display
+roomReserveComponent --* display
+
+
+gameRelatedComponent --|> UIComponent
+roomReserveComponent --|> UIComponent
+
+
+APIForDropInDB ..|> frontEndAPI : implements
+APIForMUDB ..|> frontEndAPI : imeplements
+
+
+user --> display : interact
+
+
+dataFetcher <-- APIForMUDB : data
+dataFetcher <-- APIForDropInDB : data
+gameRelatedComponent <--> dataFetcher : request data, send
+roomReserveComponent <--> dataFetcher : request data, send
+dataFetcher <--> cache : caching and finding

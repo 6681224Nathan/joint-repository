@@ -1,0 +1,61 @@
+erDiagram
+    USER ||--o{ GAME : creates
+    USER ||--o{ PARTICIPATION : joins
+    USER ||--|| USER_STATS : has
+    GAME ||--o{ PARTICIPATION : includes
+    GAME ||--o| RESERVATION : booked_via
+    LOCATION ||--o{ ROOM : contains
+    ROOM ||--o{ RESERVATION : reserved_in
+
+    USER {
+        string userId PK
+        string name
+        string email
+        string phone
+    }
+
+    USER_STATS {
+        string userId PK
+        int gamesCreated
+        int gamesJoined
+        float rating
+    }
+
+    GAME {
+        string gameId PK
+        string creatorId FK
+        string sport
+        datetime dateTime
+        int maxPlayers
+        string status
+    }
+
+    PARTICIPATION {
+        string userId PK
+        string gameId PK
+        datetime joinedAt
+        string status
+    }
+
+    RESERVATION {
+        string reservationId PK
+        string gameId FK
+        string roomId FK
+        datetime startTime
+        datetime endTime
+        string status
+    }
+
+    ROOM {
+        string roomId PK
+        string locationId FK
+        string facilityType
+        int capacity
+    }
+
+    LOCATION {
+        string locationId PK
+        string address
+        float latitude
+        float longitude
+    }

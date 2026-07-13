@@ -13,30 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "stats for com eng/read by myself.md",
+                "file": "princ makt/finals.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "read by myself"
-            }
-          },
-          {
-            "id": "49e84ac6d5fa8e9c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "losalamos/someshit.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "someshit"
+              "title": "finals"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -94,8 +79,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "7afb0c4b05a81d5a",
@@ -200,52 +184,53 @@
       "bases:Create new base": false
     }
   },
-  "active": "49e84ac6d5fa8e9c",
+  "active": "107fd1e05b1bd7df",
   "lastOpenFiles": [
+    "princ makt/claude/marketing_finals_cheatsheet.pdf",
+    "princ makt/claude/marketing_finals_cheatsheet.html",
+    "princ makt/claude",
+    "princ makt/untitled folder",
+    "princ makt/gemini/Marketing_Finals_Cheatsheet_V2.pdf",
+    "princ makt/gemini",
+    "princ makt/lectures and stuff/marketing_finals_cheatsheet.html",
+    "princ makt/lectures and stuff/Unconfirmed 832627.crdownload",
+    "princ makt/lectures and stuff/marketing_finals_cheatsheet.pdf",
+    "princ makt/Marketing_Finals_Cheatsheet_V2.pdf",
+    "princ makt/finals.pdf",
+    "princ makt/Principle of Marketing Final.md",
+    "princ makt/finals.md",
+    "princ makt/Obsidian attachments/Pasted image 20260713121556.png",
+    "Untitled.md",
+    "princ makt/lectures and stuff/Principle of Marketing Final.md",
+    "princ makt/Principle of Marketing.md",
+    "stats for com eng/read by myself.md",
+    "stats for com eng/Obsidian attachments/Pasted image 20260712104332.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260712104324.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260712104035.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260712104001.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260712103946.png",
+    "stats for com eng/formula sheet.md",
+    "stats for com eng/Obsidian attachments/Pasted image 20260712103502.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260712103448.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260711185427.png",
+    "stats for com eng/Obsidian attachments/Pasted image 20260711185414.png",
+    "computer network/Midterm cheatsheet.md",
+    "computer network/Computer Network and Information Security.md",
     "losalamos/projnote.md",
     "princ makt/group-project/Additional notes regarding the missing points in the presentation.md",
-    "princ makt/group-project/Additional notes regarding the missing points in the presentation.pdf",
-    "losalamos/iphone_app_mock_v9_unified.html",
-    "princ makt/group-project/MockupForPresentation/lastest one/iphone_app_mock_v9_unified.html",
-    "princ makt/group-project/MockupForPresentation/lastest one/Unconfirmed 896146.crdownload",
-    "princ makt/group-project/MockupForPresentation/lastest one/Archive.zip",
     "software engineering/software engineering.md",
-    "Untitled.md",
     "Untitled 1.md",
-    "software engineering/lectures and stuff/practice-soft-cost-funct-point-student.pdf",
-    "software engineering/Obsidian attachments/Pasted image 20260707125130.png",
-    "software engineering/lectures and stuff/egci341-inclass-practice.pdf",
-    "software engineering/lectures and stuff/egci341_final_review_2025-26T3.pdf",
     "software engineering/midterm topics.md",
-    "software engineering/softeng midterm cheatsheet.pdf",
-    "software engineering/inclass-assgn10/egci341-software-testing-jest.pdf",
     "stats for com eng/statistics for computer engineering.md",
     "stats for com eng/statistics for computer engineering, second part.md",
-    "stats for com eng/formual sheet.md",
-    "princ makt/Principle of Marketing.md",
-    "princ makt/group-project/MockupForPresentation/lastest one/src/img/vd.png",
-    "princ makt/group-project/MockupForPresentation/lastest one/src/img/taro.png",
-    "princ makt/group-project/MockupForPresentation/lastest one/src/img/rueti.png",
-    "princ makt/group-project/MockupForPresentation/lastest one/src/img/profile_pic.png",
-    "princ makt/group-project/MockupForPresentation/lastest one/src/img/pin.png",
-    "princ makt/group-project/MockupForPresentation/lastest one/src/img/mu_coin.png",
-    "princ makt/group-project/MockupForPresentation/lastest one/src/img/ming.png",
-    "princ makt/group-project/MockupForPresentation/lastest one/src/img/map_view.png",
-    "princ makt/group-project/MockupForPresentation/lastest one/src/img/mahidol_logo.png",
     "software engineering/inclass-assgn10/report.md",
-    "computer network/Computer Network and Information Security.md",
-    "stats for com eng/read by myself.md",
     "relay_race_prompt.md",
     "relay_reace_prompt.md",
     "software engineering/lectures and stuff/output1.md",
     "computer network/lab03/lab03_report.md",
     "software engineering/inclass-assgn09/group2.md",
     "losalamos/feedback01.md",
-    "computer network/Midterm cheatsheet.md",
     "computer network/lab01.md",
-    "software engineering/assignment 01 alone/a1_6681224.md",
-    "software engineering/assignment 01 alone/class diagram.md",
-    "computer network/mockMidterm.md",
-    "Midterm cheatsheet.md"
+    "software engineering/assignment 01 alone/a1_6681224.md"
   ]
 }

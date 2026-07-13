@@ -41,11 +41,30 @@ P is **sample** proportion, Z is also left tail as always. The error, well, depe
 For upper bound on n, change p(1-p) to be 0.25
 
 ### Test statistics for Z test
-X bar = sample mean, mu0 hypothesis, sigma = pop stdev, n = sample count
+$\bar{X}$ = sample mean
+$\mu_{0}$ = hypothesis
+$\sigma$ = ==pop stdev==
+n = sample count 
 ![[Pasted image 20260703160643.png]]
 
 ### Test statistics for T test
+$\bar{X}$ = sample mean
+$\mu_{0}$ = hypothesis
+$s$ = ==sample stdev==
+n = sample count 
 ![[Pasted image 20260703171900.png]]
+
+### Test statistics for Chi Square $X^2$
+n= sample count
+$s^2$ is sample variance
+$\sigma^2$ is hypothesized variance
+![[Pasted image 20260709211547.png]]
+
+### Test statistics for Z test (proportion)
+$\hat{P}$ = sample proportion
+$p_{0}$ = hypothesized proportion
+n = sample count
+![[Pasted image 20260709220625.png]]
 
 - **population** mean : Z 
 - sample mean : T
@@ -53,13 +72,38 @@ X bar = sample mean, mu0 hypothesis, sigma = pop stdev, n = sample count
 - **population** variance : Z
 - sample variance : X^2
 
-| Test       | population mean | sample mean | population variance | sample variance |
-| ---------- | --------------- | ----------- | ------------------- | --------------- |
-| Z          | /               | X           | /                   | X               |
-| T          | X               | /           | X                   | X               |
-| Chi square | X               | X           | X                   | /               |
-THIS TABLE IS MADE WHILE I AM IN A CAR, PLEASE FACT CHECK AS WELL
-
 ==in THESE INTERVALS AND BOUND, it has to be right tail critical value, to get the positive value==
+
+Two sample Z test : known pop stdev
+![[Pasted image 20260711182411.png]]
+![[Pasted image 20260711183425.png]]
+![[Pasted image 20260711183740.png|460]]
+
+### Two sample pooled t-test : pop stdev are unknown, equal pop stdev
+![[Pasted image 20260711182435.png]]
+![[Pasted image 20260711182448.png]]
+![[Pasted image 20260711183151.png]]
+
+### Two sample Welch's t-test : pop stdev are unknown, unequal pop stdev
+![[Pasted image 20260711182526.png]]
+![[Pasted image 20260711182534.png]]
+V is degree of freedom
+![[Pasted image 20260711183245.png]]
+
+
+
+Paired t test : two matched or paired measurement, same item, different testing under two different conditions or methods.
+- same subject twice, before and after **same number of samples**
+![[Pasted image 20260711184636.png]]
+==D bar is mean of differences of two data, Sd is likewise==
+![[Pasted image 20260711185106.png]]
+Two variance F-test : measure variance of two data, equal or not
+![[Pasted image 20260711185351.png]]
+![[Pasted image 20260711185329.png]]
+For two tail test, the center of the distribution is 1
+Two proportion Z-test : measure proportion of data
+![[Pasted image 20260711185414.png]]
+$\hat{P}$ is total P
+
 
 

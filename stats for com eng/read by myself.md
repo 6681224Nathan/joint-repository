@@ -83,11 +83,12 @@ it is for ==variance and stdev.s hypothesis testing==
 The curve bends left, starts from 0 to infinity (that is its domain).
 - Stdev and variance cannot be negative, there are only 0, or no variation, or inf as machine degrades, the quality control is worse, and outcomes start to deviate from each other as a sign of failure.
 - ==center is degree of freedom==
+- 
 
 **Hypothesis testing for chi square**
 Is mostly the same, just that in order to find P value, because Chi square graph is not symmetrical, so basically we have to determine whether test statistics lands on the left side or right side of the graph, and calculate the area to the extreme, then multiply it by two.
 ![[Pasted image 20260703103059.png]]
-
+==Use right tail!!==
 ### Hypothesis testing, P value
 - Right tail, P value means the chance of sample mean and more extreme value (higher) coming from null hypothesis world
 - Left tail, P value means the chance of sample mean and more extreme value (lower) coming from null hypothesis world
@@ -96,19 +97,51 @@ Is mostly the same, just that in order to find P value, because Chi square graph
 ### confidence bound
 In confidence bound, if there is a notation of single chi square, Z and T, it means that ==they are critical value, but positive, but no more mirroring technique, because of chi square, or either left tail or right tail, depends on formula==
 
-## Yes or no like Poisson, proportion, norm.s
+## Yes or no like Binom, proportion, norm.s
 - When dealing with yes/no statistics, proportion is brought to play, from category data (mean) to proportion statistics
 - **proportion statistic or p-hat** = incident we are interested in (sample) / total incident of sample
+- proportion is a categorial data, ==yes or no==
+
+## Two variables hypothesis testing
+
+![[Pasted image 20260711173413.png]]
+
+### Two sample Z test : known pop stdev
+![[Pasted image 20260711182411.png]]
+![[Pasted image 20260711183425.png]]
+![[Pasted image 20260711183740.png|460]]
+
+### Two sample pooled t-test : pop stdev are unknown, equal pop stdev
+![[Pasted image 20260711182435.png]]
+![[Pasted image 20260711182448.png]]
+![[Pasted image 20260711183151.png]]
+
+### Two sample Welch's t-test : pop stdev are unknown, unequal pop stdev
+![[Pasted image 20260711182526.png]]
+![[Pasted image 20260711182534.png]]
+V is degree of freedom
+![[Pasted image 20260711183245.png]]
 
 
 
+Paired t test : two matched or paired measurement, same item, different testing under two different conditions or methods.
+- same subject twice, before and after **same number of samples**
+![[Pasted image 20260711184636.png]]
+==D bar is mean of differences of two data, Sd is likewise==
+![[Pasted image 20260711185106.png]]
+Two variance F-test : measure variance of two data, equal or not
+![[Pasted image 20260711185351.png]]
+![[Pasted image 20260711185329.png]]
+For two tail test, the center of the distribution is 1
+Two proportion Z-test : measure proportion of data
+![[Pasted image 20260711185414.png]]
+$\hat{P}$ is total P
 
-
-
-
- 
-
-
-- 1 sample Z-test
-- 1 sample T-test
-- Chi-squar
+## Simple linear regression
+![[Pasted image 20260712103946.png]]
+![[Pasted image 20260712104001.png]]
+![[Pasted image 20260712104035.png]]
+$Y_{0} \space and \space X_{0}$ are the exact point
+![[Pasted image 20260712104324.png]]
+Y hat i is the predicted Y. Real Y - predicted Y	
+![[Pasted image 20260712104332.png]]

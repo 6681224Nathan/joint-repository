@@ -1021,3 +1021,13 @@ Guideline for ACL creation
 
 ## Physical and logical topologies
 
+## Finals preparation
+Cover the topics of layer 4, layer 5, layer 6 and 7 (application), integrity, availability, security. Understand the concept of security, cryptography, symmetric, asymetric, hash function,  
+
+- 1-5 Cover the example of layer 4 and layer 7, 
+- 6-8 cryptography
+- 9 network security device
+
+1) 20 bytes, reserve for content 8 bytes, source 2 bytes, destination 2 bytes
+
+2) 

@@ -1,15 +1,18 @@
-MAIN = Main
-#SHELL := /usr/bin/bash
-#NIGGA THIS SHIT DOESNT WORK :cry:
+MAIN = pins_pong_3.Main
 
-say_hi:
-	 echo hello
+.PHONY: all compile run clean
 
+all: compile
+
+# -d .. writes .class files into ../pins_pong_3/ (i.e. right here),
+# which is where the `pins_pong_3` package must live.
 compile:
-	 javac *.java
+	javac -d .. *.java
 
-run:
-	 java $(MAIN)
+# The classpath root is the PARENT dir, because every file declares
+# `package pins_pong_3;`. Plain `java Main` can never work.
+run: compile
+	java -cp .. $(MAIN)
 
-clear:
-	 rm *.class
+clean:
+	rm -f *.class

@@ -111,7 +111,7 @@ class GameMode extends JPanel implements MouseMotionListener, KeyListener
         setAcMissMode(false);
         setIntUserLoc(0);*/
         
-        //cryBabyMode();
+        //cryBaby();
         //casual();
         //intimidating();
         //meVsSkynet();

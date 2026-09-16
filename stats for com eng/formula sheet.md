@@ -105,5 +105,92 @@ Two proportion Z-test : measure proportion of data
 ![[Pasted image 20260711185414.png]]
 $\hat{P}$ is total P
 
+![[Pasted image 20260713152459.png]]
+==NOT IMPORTANT==
 
+## CORREL(data1, data2) = r
 
+## Simple linear regression
+![[Pasted image 20260712103946.png]]
+![[Pasted image 20260712104001.png]]
+![[Pasted image 20260712104035.png]]
+$Y_{0} \space and \space X_{0}$ are the exact point
+![[Pasted image 20260712104324.png]]
+Y hat i is the predicted Y. Real Y - predicted Y	
+![[Pasted image 20260712104332.png]]
+
+### Multivariable regression
+X1 *  X2, X1^2, X2^2 Extra column
+Input in data analysis, Y is y, x is all x, including extra column
+Look at P value, select those that is under 0.05 (95% CI), significant enough
+P value < alpha, reject H0
+
+Two regression always intersects at the same point
+$r = \sqrt{b_{yx} \times b_{xy}}$ 
+Corrolation of two regression, of x based y, and of y based x
+When r = 0 (no corrolation) the best predictor of one variable, by another, is its mean, because that is all we have
+
+## Design experiment
+Conjecture– the original hypothesis that motivates the experiment.
+![[Pasted image 20260713232300.png]]
+a, b , ab, (1) are total from here, this is for ==effect estimator for A B AB==
+![[Pasted image 20260713232133.png]]
+![[Pasted image 20260713232321.png]]
+k = number of variables (A, B). n is number of tests (4) from green table above
+![[Pasted image 20260713232606.png]]
+==sigma^2 is average of variances of each variable test ==(4 test for 2 variables, (1), a b ab) (average(variance of each row))
+( standard error (effect) )^ 2 = variance (effect)
+residual degrees of freedom = degree of freedom
+![[Pasted image 20260713232919.png]]
+effect estimator comes from effect estimator that was found earlier, t ratio has formula, P value is a two tail of T, an area, only those under alpha is accepted, significant enough
+![[Pasted image 20260713233213.png]]
+Average here is average of every test, represent Y intercept
+==y is thickness, that is why mean is like that, and we are trying to get a predictor equation==
+Qualitative : discrete
+Quantitative : continuous
+
+1. Find effect estimator (there is a formula)
+2. Find standard effect error (use variance, k number of trials, and n number of variables)
+3. find t ratio ef/se
+4. find P value (use T ratio and find two tail of it, degree of freedom can be found using formula)
+5. identify significance value
+6. find coefficient
+7. prediction model with significance only, with Y intercept as ==mean of all==
+
+### $2^k$ design experiment
+contrast -> effect estimator -> standard error -> t-ratio -> P value -> significant model
+![[Pasted image 20260714001551.png]]
+for effect, the k-1 formula is affected for fractional design, since the no. of real variable is reduced
+![[Pasted image 20260714013830.png]]
+contrast is to combine the entire column above it.
+Focus on the sum square, it is the determiner. 
+Coefficient is effect/2.
+
+### Statistical process control
+S.D. of sample mean = stdev/sqrt(n)
+3-sigma control limit
+- UCL = mean + 3* s.d. of sample mean
+- CL = mean
+- LCL = mean - 3* s.d. of sample mean
+- Actual value can exceed this limit
+![[Pasted image 20260714022041.png]]
+
+![[Pasted image 20260714022121.png]]
+For graph creation purpose
+![[Pasted image 20260714022527.png]]
+![[Pasted image 20260714022941.png]]
+
+![[Pasted image 20260714024258.png]]
+![[Pasted image 20260714024631.png]]
+customer's promise, specification
+$z = \frac{value - mean}{\sigma}$ 
+can it fit?
+does it skew near border?
+![[Pasted image 20260714083143.png]]
+Probability that it goes out the border, turning normal var into z and use norm.s.dist
+
+![[Pasted image 20260714025043.png]]
+proportion-related
+![[Pasted image 20260714025208.png]]
+n is no. of sample per batch, 5 boards are inspected every hour
+![[Pasted image 20260714025406.png]]

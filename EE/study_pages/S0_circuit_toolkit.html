@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S0 Circuit toolkit</title>
+<style>
+:root{--bg:#fff;--fg:#1f1f1c;--mut:#5f5e5a;--card:#f4f2ec;--bd:#d3d1c7;--t:#1f1f1c;--surface-1:#f4f2ec;--acc:#185FA5;--hi:#FAEEDA}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1b19;--fg:#ece9df;--mut:#b4b2a9;--card:#2a2a27;--bd:#444441;--t:#ece9df;--surface-1:#2a2a27;--acc:#85B7EB;--hi:#412402}}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,sans-serif;max-width:760px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:20px;margin:40px 0 8px;padding-top:16px;border-top:1px solid var(--bd)}h3{font-size:16px;margin:24px 0 6px}
+.sub{color:var(--mut);margin:0 0 16px}
+.box{background:var(--card);border-radius:10px;padding:12px 16px;margin:12px 0}
+.key{background:var(--hi);border-radius:10px;padding:12px 16px;margin:12px 0}
+table{border-collapse:collapse;width:100%;margin:10px 0}th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}th{background:var(--card)}
+svg{width:100%;height:auto;display:block;margin:8px 0}
+svg text.t{font-size:14px;fill:var(--fg)}svg text.ts{font-size:12px;fill:var(--mut)}svg text.th{font-size:14px;font-weight:500;fill:var(--fg)}
+svg .arr{stroke:var(--t);stroke-width:1.5;fill:none}
+details{border:1px solid var(--bd);border-radius:10px;padding:8px 14px;margin:12px 0}summary{cursor:pointer;font-weight:600;color:var(--acc)}
+code{background:var(--card);padding:1px 5px;border-radius:4px}
+.toc a{color:var(--acc)}
+</style></head><body>
+
+<h1>S0: Circuit toolkit</h1>
+<p class="sub">EGCI 232 · about 25 min · needed for BJT biasing and rectifiers</p>
+<div class="box toc"><b>Contents</b><br>
+<a href="#p1">1. Thévenin and Norton</a> · <a href="#p2">2. Mesh vs nodal</a> · <a href="#p3">3. Capacitors</a> · <a href="#p4">4. Sine-wave numbers</a> · <a href="#prac">Practice P1–P3</a></div>
+
+<h2 id="p1">1. Thévenin and Norton</h2>
+<p>From two terminals A and B, any network of sources and resistors acts like <b>one battery in series with one resistor</b> (Thévenin), or <b>one current source in parallel with the same resistor</b> (Norton). They are the same circuit in two outfits.</p>
+<table>
+<tr><th>Quantity</th><th>How to get it</th></tr>
+<tr><td><b>Vth</b></td><td>Remove the load. Measure the open-circuit voltage between A and B.</td></tr>
+<tr><td><b>In</b></td><td>Put a wire across A–B. Measure the short-circuit current.</td></tr>
+<tr><td><b>Rth</b></td><td>Switch all sources off, then look into A–B. (Or Rth = Vth / In.)</td></tr>
+</table>
+<div class="key"><b>Switching a source off:</b> a voltage source becomes a <b>wire</b>. A current source becomes a <b>gap</b>.</div>
+<p>Example from last time (12 V, 33 kΩ, 10 kΩ divider): Vth = 2.79 V, Rth = 33k ∥ 10k = 7.67 kΩ, In = 2.79 V / 7.67 kΩ = 0.364 mA.</p>
+
+<svg viewBox="0 0 680 310" role="img"><title>Thévenin and Norton equivalents</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g fill="none" stroke="var(--t)" stroke-width="1.5">
+<path d="M100 128V80H140M210 80H256M100 172V220H256"/><circle cx="100" cy="150" r="22" fill="var(--surface-1)"/>
+<circle cx="260" cy="80" r="4"/><circle cx="260" cy="220" r="4"/>
+<path d="M440 128V80H616M440 172V220H616M530 80V115M530 185V220"/><circle cx="440" cy="150" r="22" fill="var(--surface-1)"/>
+<circle cx="620" cy="80" r="4"/><circle cx="620" cy="220" r="4"/></g>
+<rect x="140" y="68" width="70" height="24" rx="3" fill="var(--surface-1)" stroke="var(--t)"/>
+<rect x="518" y="115" width="24" height="70" rx="3" fill="var(--surface-1)" stroke="var(--t)"/>
+<circle cx="530" cy="80" r="3" fill="var(--t)"/><circle cx="530" cy="220" r="3" fill="var(--t)"/>
+<line x1="440" y1="162" x2="440" y2="138" class="arr" marker-end="url(#arrow)"/>
+<text class="t" x="100" y="143" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="100" y="160" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="th" x="150" y="30" text-anchor="middle">Thévenin form</text><text class="th" x="530" y="30" text-anchor="middle">Norton form</text>
+<text class="ts" x="175" y="58" text-anchor="middle">Rth = 7.67 kΩ</text>
+<text class="ts" x="72" y="146" text-anchor="end">Vth</text><text class="ts" x="72" y="162" text-anchor="end">2.79 V</text>
+<text class="ts" x="412" y="146" text-anchor="end">In</text><text class="ts" x="412" y="162" text-anchor="end">0.364 mA</text>
+<text class="ts" x="548" y="146">Rth</text><text class="ts" x="548" y="162">7.67 kΩ</text>
+<text class="th" x="320" y="155" text-anchor="middle">⇄</text>
+<text class="ts" x="272" y="84">A</text><text class="ts" x="272" y="236">B</text><text class="ts" x="632" y="84">A</text><text class="ts" x="632" y="236">B</text>
+<text class="ts" x="40" y="268">Vth: remove load, measure open voltage A–B</text>
+<text class="ts" x="380" y="268">In: wire across A–B, measure its current</text>
+<text class="ts" x="340" y="296" text-anchor="middle">Same Rth in both. Rth = Vth / In</text></svg>
+
+<h2 id="p2">2. Mesh vs nodal (same circuit, both ways)</h2>
+<p>You know both methods. This shows how to choose between them.</p>
+<svg viewBox="0 0 680 330" role="img"><title>Two-mesh circuit</title>
+<defs><marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g fill="none" stroke="var(--t)" stroke-width="1.5">
+<path d="M80 148V60H130M200 60H340M410 60H520V148M520 192V280H80V192M300 60V130M300 200V280M300 280V292M286 292H314M292 298H308M298 304H302"/>
+<circle cx="80" cy="170" r="22" fill="var(--surface-1)"/><circle cx="520" cy="170" r="22" fill="var(--surface-1)"/>
+<path d="M164 170A26 26 0 0 1 216 170" marker-end="url(#arrow2)"/><path d="M384 170A26 26 0 0 1 436 170" marker-end="url(#arrow2)"/></g>
+<g fill="var(--surface-1)" stroke="var(--t)"><rect x="130" y="48" width="70" height="24" rx="3"/><rect x="340" y="48" width="70" height="24" rx="3"/><rect x="288" y="130" width="24" height="70" rx="3"/></g>
+<circle cx="300" cy="60" r="4" fill="var(--t)"/><circle cx="300" cy="280" r="4" fill="var(--t)"/>
+<text class="t" x="80" y="162" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="80" y="180" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="t" x="520" y="162" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="520" y="180" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="ts" x="56" y="174" text-anchor="end">10 V</text><text class="ts" x="548" y="174">4 V</text>
+<text class="ts" x="165" y="40" text-anchor="middle">R1 = 1 kΩ</text><text class="ts" x="375" y="40" text-anchor="middle">R3 = 3 kΩ</text><text class="ts" x="326" y="170">R2 = 2 kΩ</text>
+<text class="th" x="300" y="40" text-anchor="middle">A</text><text class="ts" x="190" y="196" text-anchor="middle">I1</text><text class="ts" x="410" y="196" text-anchor="middle">I2</text></svg>
+<table>
+<tr><th>Mesh (2 unknowns, I1 and I2 clockwise)</th><th>Nodal (1 unknown, V<sub>A</sub>)</th></tr>
+<tr><td>Left: 10 = 1·I1 + 2(I1 − I2) → 3I1 − 2I2 = 10<br>Right: 3·I2 + 4 + 2(I2 − I1) = 0 → −2I1 + 5I2 = −4<br>Solve: <b>I2 = 0.727 mA, I1 = 3.82 mA</b></td>
+<td>KCL at A (currents leaving):<br>(V<sub>A</sub> − 10)/1k + V<sub>A</sub>/2k + (V<sub>A</sub> − 4)/3k = 0<br><b>V<sub>A</sub> = 6.18 V</b></td></tr></table>
+<p>Check: current in R2 = 6.18 V / 2k = 3.09 mA, and I1 − I2 = 3.09 mA ✓ (units: V, kΩ, mA).</p>
+<div class="key"><b>Choosing:</b> count the unknowns. Here nodal needs 1 and mesh needs 2, so nodal is quicker. Mesh is better when there are many series loops. The professor solves the diode examples with mesh (you'll see it in S1).</div>
+
+<h2 id="p3">3. Capacitors</h2>
+<table><tr><th>Signal</th><th>The capacitor acts like</th></tr>
+<tr><td>DC (steady)</td><td>an <b>open circuit</b> (gap)</td></tr>
+<tr><td>Fast AC, big C</td><td>a <b>wire</b> (short circuit)</td></tr></table>
+<p>How big its "resistance" is for AC: <code>Xc = 1 / (2π f C)</code>. Example: 100 µF at 1 kHz gives Xc = 1.6 Ω, which is a wire next to resistors of several kΩ.</p>
+<div class="key">Why this matters for amplifiers: a <b>coupling capacitor</b> lets the AC signal in and blocks the DC bias. A <b>bypass capacitor</b> across R<sub>E</sub> removes R<sub>E</sub> for AC only. DC analysis: delete the capacitors. AC analysis: replace them with wires.</div>
+
+<h2 id="p4">4. Sine-wave numbers</h2>
+<svg viewBox="0 0 680 310" role="img"><title>Sine wave with peak, RMS and period</title>
+<g fill="none" stroke="var(--t)"><path d="M60 140H610M60 30V250"/><path d="M60 270H330M60 264V276M330 264V276"/></g>
+<g fill="none" stroke-dasharray="5 4"><path d="M60 40H600" stroke="#BA7517"/><path d="M60 69.3H600" stroke="#1D9E75"/><path d="M60 240H600" stroke="#BA7517"/></g>
+<path id="sp" fill="none" stroke="#378ADD" stroke-width="2.5"/>
+<text class="ts" x="606" y="44">Vp</text><text class="ts" x="606" y="73">Vrms</text><text class="ts" x="606" y="244">−Vp</text><text class="ts" x="618" y="134">t</text><text class="ts" x="46" y="26" text-anchor="middle">v(t)</text>
+<text class="ts" x="195" y="296" text-anchor="middle">T = 1 / f  (one cycle)</text></svg>
+<p><b>Why this part exists:</b> rectifier questions start from the wall socket or a transformer, which give a sine wave. The question usually tells you <i>one</i> number about it (like "120 V RMS"), and you need to turn it into the number the circuit actually uses (the peak). That's all this part is.</p>
+<p>A sine voltage goes up and down smoothly, forever. It's written as <code>v(t) = Vp·sin(ωt)</code>. Only <b>two things</b> describe it: how <b>high</b> it goes and how <b>fast</b> it wiggles. Every other number is one of these two in a different form.</p>
+<table>
+<tr><th>Number</th><th>Plain meaning</th><th>Example: 17·sin(314t)</th></tr>
+<tr><td colspan="3"><b>How high</b></td></tr>
+<tr><td>Vp (peak)</td><td>The top of the wave. The number in front of "sin".</td><td>17 V</td></tr>
+<tr><td>Vrms</td><td>The "equivalent DC" value: the battery voltage that would heat a resistor equally. Vrms = 0.707 × Vp. <b>Meters and wall sockets show RMS.</b></td><td>0.707 × 17 = 12 V</td></tr>
+<tr><td colspan="3"><b>How fast</b></td></tr>
+<tr><td>f (frequency)</td><td>Full up-and-down cycles per second (Hz). Thai mains is 50 Hz.</td><td>314 / 6.28 = 50 Hz</td></tr>
+<tr><td>T (period)</td><td>Time for one cycle. T = 1/f.</td><td>1/50 = 20 ms</td></tr>
+<tr><td>ω (omega)</td><td>The same speed in a different unit (rad/s). ω = 2πf. It's the number next to t.</td><td>314 rad/s</td></tr>
+</table>
+<div class="key"><b>The two conversions you'll actually use:</b><br>
+1) <b>RMS → peak:</b> Vp = 1.414 × Vrms. "220 V mains" → 311 V peak; "120 V RMS" → 170 V peak. Diodes and capacitors charge to the <b>peak</b>, so always convert first.<br>
+2) <b>ω → f:</b> f = ω / 2π. You need f for the ripple formula in S2.</div>
+
+<h2 id="prac">Practice (try first, then open the solution)</h2>
+
+<h3>P1 · Thévenin and Norton (about 8 min)</h3>
+<p>Look into terminals A–B. R<sub>L</sub> (dashed) is <b>not</b> connected for a–c.</p>
+<svg viewBox="0 0 680 320" role="img"><title>Practice P1 circuit</title>
+<g fill="none" stroke="var(--t)" stroke-width="1.5"><path d="M80 148V60H130M200 60H340M410 60H476M80 192V280H476M300 60V130M300 200V280"/>
+<circle cx="80" cy="170" r="22" fill="var(--surface-1)"/><circle cx="480" cy="60" r="4"/><circle cx="480" cy="280" r="4"/></g>
+<g fill="none" stroke="var(--t)" stroke-dasharray="4 4"><path d="M484 60H580V130M580 200V280H484"/><rect x="568" y="130" width="24" height="70" rx="3"/></g>
+<g fill="var(--surface-1)" stroke="var(--t)"><rect x="130" y="48" width="70" height="24" rx="3"/><rect x="340" y="48" width="70" height="24" rx="3"/><rect x="288" y="130" width="24" height="70" rx="3"/></g>
+<circle cx="300" cy="60" r="4" fill="var(--t)"/>
+<text class="t" x="80" y="162" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="80" y="180" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="ts" x="56" y="174" text-anchor="end">12 V</text>
+<text class="ts" x="165" y="40" text-anchor="middle">R1 = 3 kΩ</text><text class="ts" x="375" y="40" text-anchor="middle">R3 = 2 kΩ</text><text class="ts" x="326" y="170">R2 = 6 kΩ</text>
+<text class="th" x="310" y="100">X</text><text class="th" x="480" y="44" text-anchor="middle">A</text><text class="th" x="480" y="302" text-anchor="middle">B</text>
+<text class="ts" x="560" y="164" text-anchor="end">R_L = 4 kΩ</text><text class="ts" x="560" y="182" text-anchor="end">(part d only)</text></svg>
+<ol type="a"><li>Find Vth.</li><li>Find Rth (switch the 12 V source off).</li><li>Find the Norton current In, and check In = Vth/Rth.</li><li>Connect R<sub>L</sub> = 4 kΩ across A–B. Find its current and voltage.</li></ol>
+<details><summary>Solution P1</summary>
+<p>a) With A–B open, no current flows in R3, so X is a plain divider: <b>Vth = 12 × 6/(3+6) = 8 V</b>.</p>
+<p>b) The 12 V source becomes a wire: R1 ∥ R2 = 3·6/9 = 2 kΩ, in series with R3: <b>Rth = 2 + 2 = 4 kΩ</b>.</p>
+<p>c) <b>In = 8 V / 4 kΩ = 2 mA</b>. Check with A–B shorted: R2 ∥ R3 = 1.5 kΩ, V<sub>X</sub> = 12 × 1.5/(3+1.5) = 4 V, I = 4 V / 2 kΩ = 2 mA ✓.</p>
+<p>d) I<sub>L</sub> = 8 / (4k + 4k) = <b>1 mA</b>, V<sub>L</sub> = 1 mA × 4k = <b>4 V</b>.</p></details>
+
+<h3>P2 · Nodal and mesh (about 8 min)</h3>
+<svg viewBox="0 0 680 330" role="img"><title>Practice P2 circuit</title>
+<defs><marker id="arrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g fill="none" stroke="var(--t)" stroke-width="1.5">
+<path d="M80 148V60H130M200 60H340M410 60H520V148M520 192V280H80V192M300 60V130M300 200V280M300 280V292M286 292H314M292 298H308M298 304H302"/>
+<circle cx="80" cy="170" r="22" fill="var(--surface-1)"/><circle cx="520" cy="170" r="22" fill="var(--surface-1)"/>
+<path d="M164 170A26 26 0 0 1 216 170" marker-end="url(#arrow3)"/><path d="M384 170A26 26 0 0 1 436 170" marker-end="url(#arrow3)"/></g>
+<g fill="var(--surface-1)" stroke="var(--t)"><rect x="130" y="48" width="70" height="24" rx="3"/><rect x="340" y="48" width="70" height="24" rx="3"/><rect x="288" y="130" width="24" height="70" rx="3"/></g>
+<circle cx="300" cy="60" r="4" fill="var(--t)"/><circle cx="300" cy="280" r="4" fill="var(--t)"/>
+<text class="t" x="80" y="162" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="80" y="180" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="t" x="520" y="162" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="520" y="180" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="ts" x="56" y="174" text-anchor="end">12 V</text><text class="ts" x="548" y="174">3 V</text>
+<text class="ts" x="165" y="40" text-anchor="middle">R1 = 2 kΩ</text><text class="ts" x="375" y="40" text-anchor="middle">R3 = 6 kΩ</text><text class="ts" x="326" y="170">R2 = 3 kΩ</text>
+<text class="th" x="300" y="40" text-anchor="middle">A</text><text class="ts" x="190" y="196" text-anchor="middle">I1</text><text class="ts" x="410" y="196" text-anchor="middle">I2</text></svg>
+<ol type="a"><li>Use nodal analysis to find V<sub>A</sub>.</li><li>Find I1 (through R1) and I2 (through R3).</li><li>Confirm with the mesh equations.</li><li>Does the 3 V source deliver or absorb power? How much?</li></ol>
+<details><summary>Solution P2</summary>
+<p>a) KCL at A: (V<sub>A</sub> − 12)/2 + V<sub>A</sub>/3 + (V<sub>A</sub> − 3)/6 = 0. Multiply by 6: 3V<sub>A</sub> − 36 + 2V<sub>A</sub> + V<sub>A</sub> − 3 = 0, so 6V<sub>A</sub> = 39, <b>V<sub>A</sub> = 6.5 V</b>.</p>
+<p>b) <b>I1 = (12 − 6.5)/2k = 2.75 mA</b>, <b>I2 = (6.5 − 3)/6k = 0.583 mA</b>. Current in R2 = 6.5/3k = 2.17 mA, and 2.75 = 2.17 + 0.583 ✓.</p>
+<p>c) Mesh: 5·I1 − 3·I2 = 12 and −3·I1 + 9·I2 = −3. Check: 5(2.75) − 3(0.583) = 12 ✓; −3(2.75) + 9(0.583) = −3 ✓.</p>
+<p>d) I2 enters the + terminal of the 3 V source, so it <b>absorbs</b> 3 V × 0.583 mA = <b>1.75 mW</b>. (The 12 V source delivers 33 mW, resistors use 31.25 mW, and 33 − 1.75 = 31.25 ✓.)</p></details>
+
+<h3>P3 · Sine wave and capacitor (about 5 min, no figure)</h3>
+<p>A transformer secondary gives <code>v(t) = 17·sin(314t)</code> V.</p>
+<ol type="a"><li>Find f and T.</li><li>Find Vrms.</li><li>What is the peak voltage of a 220 V RMS wall socket?</li><li>Find Xc of a 100 µF capacitor at this frequency and at 1 kHz. Which acts more like a wire?</li></ol>
+<details><summary>Solution P3</summary>
+<p>a) ω = 314 rad/s, so f = 314/2π ≈ <b>50 Hz</b>, T = 1/f = <b>20 ms</b>.</p>
+<p>b) Vrms = 17/√2 = <b>12.0 V</b>.</p>
+<p>c) Vp = 220 × √2 ≈ <b>311 V</b>.</p>
+<p>d) 50 Hz: Xc = 1/(2π·50·100×10⁻⁶) = <b>31.8 Ω</b>. 1 kHz: Xc = <b>1.59 Ω</b>. The 1 kHz case acts more like a wire. Both are small next to kΩ resistors.</p></details>
+
+<div class="box"><b>Common mistakes:</b> forgetting to switch the source off for Rth · using Vp where a question wants Vrms · wrong source sign in mesh equations.<br><b>Next:</b> message "S1" (diodes).</div>
+
+<script>
+var d='';for(var x=60;x<=600;x+=3){var y=140-100*Math.sin(2*Math.PI*(x-60)/270);d+=(x==60?'M':'L')+x+' '+y.toFixed(1);}
+document.getElementById('sp').setAttribute('d',d);
+</script>
+</body></html>

@@ -91,6 +91,9 @@ difference between max and min of voltage of load after being added capacitor. V
 
 Prob : We are given a load of wattage 0.2W and voltage rating of 5V. The problem statement is, we need to design a half wave rectifier to power the device up from the main power AC i.e. 220v. ==refers to the paper notebook==
 
+## NPN transistor biasing technique
+
+
 
 
 

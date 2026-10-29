@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PIV in rectifiers</title>
+<style>
+  :root{--bg:#fff;--fg:#1f1f1c;--mut:#5f5e5a;--card:#f4f2ec;--bd:#d3d1c7;--th:#ebe8df;--g:#1f9e3a;--r:#d23b2f;--b:#1f63c6}
+  @media (prefers-color-scheme:dark){:root{--bg:#1b1b19;--fg:#ece9df;--mut:#b4b2a9;--card:#2a2a27;--bd:#444441;--th:#33332f;--g:#5DCAA5;--r:#F09595;--b:#85B7EB}
+    svg [stroke="#333"]{stroke:#ece9df} svg [fill="#333"]{fill:#ece9df}
+    svg [fill="#fff"]{fill:#2a2a27} svg .h{stroke:#2a2a27}
+    svg [stroke="#1f9e3a"]{stroke:#5DCAA5} svg [fill="#1f9e3a"]{fill:#5DCAA5}
+    svg [stroke="#d23b2f"]{stroke:#F09595} svg [fill="#d23b2f"]{fill:#F09595}
+    svg [stroke="#1f63c6"]{stroke:#85B7EB} svg [fill="#1f63c6"]{fill:#85B7EB}
+    svg [fill="#fdecea"]{fill:#501313}
+    svg [stroke="#777"],svg [stroke="#999"]{stroke:#b4b2a9} svg [fill="#777"],svg [fill="#666"]{fill:#b4b2a9}}
+  body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,sans-serif}
+  main{max-width:820px;margin:0 auto;padding:24px 16px 60px}
+  h1{font-size:26px;margin:0 0 4px}
+  h2{font-size:20px;margin:36px 0 6px;border-bottom:2px solid var(--bd);padding-bottom:4px}
+  .box,.fig{background:var(--card);border:1px solid var(--bd);border-radius:10px;margin:12px 0}
+  .box{padding:12px 16px}.fig{padding:8px}
+  svg{width:100%;height:auto;display:block}
+  svg text{font-family:system-ui,-apple-system,sans-serif}
+  .h{paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+  .g{color:var(--g);font-weight:600}.r{color:var(--r);font-weight:600}.b{color:var(--b);font-weight:600}
+  table{border-collapse:collapse;width:100%;background:var(--card)}
+  td,th{border:1px solid var(--bd);padding:6px 10px;text-align:left}
+  th{background:var(--th)}
+  ul{margin:6px 0;padding-left:22px}
+  .note{font-size:14px;color:var(--mut)}
+</style>
+</head>
+<body>
+<main>
+<h1>PIV in rectifiers (with capacitor, ideal diodes)</h1>
+<p>Each circuit is frozen at the moment the OFF diode gets squeezed hardest. The small sine wave in each figure shows when that moment is.</p>
+
+<div class="box">
+  <b>Symbols</b>
+  <ul>
+    <li><b>V<sub>m</sub></b> = peak voltage of the transformer secondary. Ideal diodes, so it is also the peak output voltage. For center-tapped, V<sub>m</sub> is the peak of each half.</li>
+    <li><b>PIV</b> = peak inverse voltage = the biggest backwards voltage an OFF diode must block = <b>cathode voltage − anode voltage</b>.</li>
+    <li><b>Anode</b> = flat side of the triangle, where current enters. <b>Cathode</b> = the bar side, where current leaves.</li>
+    <li>All voltages are measured from the output's ground (0 V).</li>
+  </ul>
+  <b>Colors:</b> <span class="g">green</span> = current flowing (diode ON) &nbsp;·&nbsp;
+  <span class="r">red</span> = OFF diode being squeezed &nbsp;·&nbsp;
+  <span class="b">blue</span> = held at +V<sub>m</sub> by the charged capacitor
+</div>
+
+<h2>1. Half-wave + C</h2>
+<div class="fig"><svg id="hw" font-size="14" viewBox="0 0 720 345"></svg></div>
+<ul>
+  <li><b>Moment:</b> negative peak. The top of the coil swings down to <span class="r">−V<sub>m</sub></span>, so the diode is OFF.</li>
+  <li><b>Cathode:</b> the capacitor charged to +V<sub>m</sub> in the previous half and can't empty back through the OFF diode, so it still holds <span class="b">+V<sub>m</sub></span>. It only leaks slowly into R<sub>L</sub>.</li>
+  <li><b>PIV</b> = (+V<sub>m</sub>) − (−V<sub>m</sub>) = <b>2V<sub>m</sub></b></li>
+  <li>Other half (positive peak): the diode is ON, recharges C, and there is nothing to block.</li>
+</ul>
+
+<h2>2. Full-wave, center-tapped + C</h2>
+<div class="fig"><svg id="ct" font-size="14" viewBox="0 0 720 370"></svg></div>
+<ul>
+  <li><b>Moment:</b> positive peak. The top half pushes current through <span class="g">D1</span>. At the same time, the bottom end of the coil sits at <span class="r">−V<sub>m</sub></span> (the center tap is 0 V).</li>
+  <li><b>D2's cathode</b> is joined to D1's cathode at node J, which is the output. The capacitor holds J at <span class="b">+V<sub>m</sub></span>.</li>
+  <li><b>PIV of D2</b> = (+V<sub>m</sub>) − (−V<sub>m</sub>) = <b>2V<sub>m</sub></b></li>
+  <li>Other half: D2 ON, D1 OFF, and D1 gets the same 2V<sub>m</sub>.</li>
+</ul>
+
+<h2>3. Full-wave, bridge + C (professor's layout)</h2>
+<div class="fig"><svg id="br" font-size="14" viewBox="0 0 720 395"></svg></div>
+<ul>
+  <li><b>Moment:</b> positive peak (V<sub>s</sub>+ on top). The current path is top corner → <span class="g">D1</span> → R<sub>L</sub> → left corner → <span class="g">D2</span> → bottom corner → back to the coil.</li>
+  <li><b>D3:</b> anode at the left corner = output − = 0 V. Cathode at the top corner = <span class="b">+V<sub>m</sub></span>. PIV = V<sub>m</sub> − 0 = <b>V<sub>m</sub></b>.</li>
+  <li><b>D4:</b> anode at the bottom corner = 0 V (D2 is ON, an ideal wire to the left corner). Cathode at the right corner = <span class="b">+V<sub>m</sub></span>. PIV = <b>V<sub>m</sub></b>.</li>
+  <li><b>Why only V<sub>m</sub>:</b> no anode is ever left on a bare coil end at −V<sub>m</sub>. An ON diode always ties it to 0 V.</li>
+  <li>Other half: D3 and D4 ON, D1 and D2 OFF, with the same V<sub>m</sub>.</li>
+</ul>
+
+<h2>Summary</h2>
+<table>
+  <tr><th>Circuit</th><th>Cathode of OFF diode</th><th>Anode of OFF diode</th><th>PIV</th></tr>
+  <tr><td>Half-wave + C</td><td>+V<sub>m</sub> (capacitor)</td><td>−V<sub>m</sub> (bare coil end)</td><td><b>2V<sub>m</sub></b></td></tr>
+  <tr><td>Center-tapped + C</td><td>+V<sub>m</sub> (output)</td><td>−V<sub>m</sub> (bare coil end)</td><td><b>2V<sub>m</sub></b></td></tr>
+  <tr><td>Bridge + C</td><td>+V<sub>m</sub> (output)</td><td>0 V (held by an ON diode)</td><td><b>V<sub>m</sub></b></td></tr>
+</table>
+<p class="note">Only if a question says 0.7 V diodes: these become 2V<sub>m</sub> − 0.7, 2V<sub>m</sub> − 0.7 and V<sub>m</sub> − 0.7.</p>
+</main>
+
+<script>
+const K='#333',G='#1f9e3a',R='#d23b2f',B='#1f63c6';
+const P=(pts,c=K,w=2,extra='')=>`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round" ${extra}/>`;
+const T=(x,y,s,c=K,o='')=>`<text class="h" x="${x}" y="${y}" fill="${c}" ${o}>${s}</text>`;
+const Vm='V<tspan dy="4" font-size="10">m</tspan><tspan dy="-4"></tspan>';
+function diode(ax,ay,kx,ky,c=K,w=2){
+  const dx=kx-ax,dy=ky-ay,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,nx=-uy,ny=ux,cx=(ax+kx)/2,cy=(ay+ky)/2,h=11;
+  const b=[cx-h*ux,cy-h*uy],t=[cx+h*ux,cy+h*uy];
+  return P([[ax,ay],b],c,w)+P([t,[kx,ky]],c,w)+
+    `<polygon points="${b[0]+h*nx},${b[1]+h*ny} ${b[0]-h*nx},${b[1]-h*ny} ${t[0]},${t[1]}" fill="${c}" fill-opacity=".18" stroke="${c}" stroke-width="${w}" stroke-linejoin="round"/>`+
+    P([[t[0]+h*nx,t[1]+h*ny],[t[0]-h*nx,t[1]-h*ny]],c,w+0.5);
+}
+function coil(x,y1,y2,side,n=4,c=K){
+  const r=(y2-y1)/(2*n);let d=`M${x} ${y1}`;
+  for(let i=0;i<n;i++)d+=` a${r} ${r} 0 0 ${side>0?1:0} 0 ${2*r}`;
+  return `<path d="${d}" fill="none" stroke="${c}" stroke-width="2"/>`;
+}
+function cap(x,y1,y2,c=K){const m=(y1+y2)/2;return P([[x,y1],[x,m-6]],c)+P([[x-16,m-6],[x+16,m-6]],c,3)+P([[x-16,m+6],[x+16,m+6]],c,3)+P([[x,m+6],[x,y2]],c);}
+function res(x,y1,y2,c=K){const a=y1+18,z=y2-18,s=(z-a)/6,pts=[[x,y1],[x,a]];for(let i=0;i<6;i++)pts.push([x+(i%2?-8:8),a+s*(i+.5)]);pts.push([x,z],[x,y2]);return P(pts,c);}
+function arr(x,y,d,c=G){const m={r:[[x-6,y-6],[x+6,y],[x-6,y+6]],l:[[x+6,y-6],[x-6,y],[x+6,y+6]],u:[[x-6,y+6],[x,y-6],[x+6,y+6]],d:[[x-6,y-6],[x,y+6],[x+6,y-6]]}[d];return `<polygon points="${m.map(p=>p.join(',')).join(' ')}" fill="${c}"/>`;}
+function primary(y1,y2){
+  const m=(y1+y2)/2;
+  return P([[60,m-22],[60,y1-20],[130,y1-20],[130,y1]])+P([[60,m+22],[60,y2+20],[130,y2+20],[130,y2]])+
+    `<circle cx="60" cy="${m}" r="22" fill="#fff" stroke="#333" stroke-width="2"/>`+
+    `<path d="M46 ${m} q7 -14 14 0 t14 0" fill="none" stroke="${K}" stroke-width="2"/>`+
+    coil(130,y1,y2,-1)+P([[147,y1-8],[147,y2+8]],K,2)+P([[153,y1-8],[153,y2+8]],K,2);
+}
+function wave(x0,cy,w,a,peak){
+  let d='';for(let i=0;i<=48;i++){const t=i/48;d+=(i?'L':'M')+(x0+w*t).toFixed(1)+' '+(cy-a*Math.sin(2*Math.PI*t)).toFixed(1);}
+  const t=peak==='pos'?.25:.75,dx=x0+w*t,dy=cy-a*Math.sin(2*Math.PI*t);
+  return P([[x0,cy],[x0+w,cy]],'#999',1)+`<path d="${d}" fill="none" stroke="#777" stroke-width="1.5"/>`+
+    `<circle cx="${dx}" cy="${dy}" r="5" fill="${R}"/>`+T(dx+9,dy+(peak==='pos'?4:4),'now',R,'font-weight="600"')+T(x0-4,cy+4,'v<tspan dy="4" font-size="10">s</tspan>','#777','text-anchor="end"');
+}
+function pivBox(x,y,w,s){return `<rect x="${x}" y="${y}" width="${w}" height="32" rx="6" fill="#fdecea" stroke="${R}"/>`+`<text x="${x+w/2}" y="${y+21}" text-anchor="middle" fill="${R}" font-weight="600">${s}</text>`;}
+
+/* 1. half-wave, negative peak */
+document.getElementById('hw').innerHTML=
+  primary(110,230)+coil(170,110,230,1)+
+  T(196,122,'−',R,'font-size="22" font-weight="700"')+T(196,232,'+',K,'font-size="20" font-weight="700"')+
+  P([[170,110],[170,80],[250,80]],R)+diode(250,80,320,80,R,3)+P([[320,80],[560,80]],B)+
+  cap(440,80,260,B)+res(560,80,260)+P([[170,230],[170,260],[560,260]])+
+  arr(505,80,'r',B)+
+  T(178,62,'anode: −'+Vm,R,'font-weight="600"')+T(325,62,'cathode: +'+Vm,B,'font-weight="600"')+
+  T(285,112,'D OFF',R,'text-anchor="middle" font-weight="600"')+
+  T(462,164,'C still',B)+T(462,180,'holds +'+Vm,B)+T(578,175,'R<tspan dy="4" font-size="10">L</tspan>')+
+  T(365,280,'0 V (ground)','#666','text-anchor="middle"')+
+  wave(610,40,95,22,'neg')+
+  pivBox(200,300,330,'PIV = (+V<tspan dy="4" font-size="10">m</tspan><tspan dy="-4">) − (−V</tspan><tspan dy="4" font-size="10">m</tspan><tspan dy="-4">) = 2V</tspan><tspan dy="4" font-size="10">m</tspan>');
+
+/* 2. center-tapped, slide layout: both diodes' cathodes join at node J, load from J back to the center tap */
+document.getElementById('ct').innerHTML=
+  P([[60,148],[60,80],[130,80],[130,100]])+P([[60,192],[60,260],[130,260],[130,240]])+
+  `<circle cx="60" cy="170" r="22" fill="#fff" stroke="#333" stroke-width="2"/><path d="M46 170 q7 -14 14 0 t14 0" fill="none" stroke="${K}" stroke-width="2"/>`+
+  coil(130,100,240,-1)+P([[147,52],[147,288]])+P([[153,52],[153,288]])+
+  coil(170,60,170,1,3,G)+coil(170,170,280,1,3)+
+  T(196,74,'+',G,'font-size="20" font-weight="700"')+T(196,276,'−',R,'font-size="22" font-weight="700"')+
+  P([[170,60],[250,60]],G)+diode(250,60,320,60,G,2.5)+P([[320,60],[380,60],[380,170]],G)+
+  P([[170,280],[250,280]],R)+diode(250,280,320,280,R,3)+P([[320,280],[380,280],[380,170]],B)+
+  `<circle cx="380" cy="170" r="5" fill="#333"/>`+
+  P([[380,170],[600,170]],G)+cap(490,170,240,B)+res(600,170,240,G)+
+  P([[600,240],[388,240]],G)+`<path d="M388 240 Q380 224 372 240" fill="none" stroke="${G}" stroke-width="2"/>`+P([[372,240],[230,240],[230,170],[170,170]],G)+
+  arr(212,60,'r')+arr(380,118,'d')+arr(440,170,'r')+arr(530,240,'l')+arr(230,205,'u')+
+  T(285,42,'D1 ON',G,'text-anchor="middle" font-weight="600"')+T(285,262,'D2 OFF',R,'text-anchor="middle" font-weight="600"')+
+  T(238,160,'center tap = 0 V','#666')+T(392,158,'J: +'+Vm+' (held by C)',B,'font-weight="600"')+
+  T(506,210,'C',B,'font-weight="600"')+T(618,210,'R<tspan dy="4" font-size="10">L</tspan>')+
+  T(178,306,'anode: −'+Vm,R,'font-weight="600"')+T(330,306,'cathode: +'+Vm+' (joined to J)',B,'font-weight="600"')+
+  wave(480,80,130,24,'pos')+
+  pivBox(220,326,330,'D2: PIV = (+V<tspan dy="4" font-size="10">m</tspan><tspan dy="-4">) − (−V</tspan><tspan dy="4" font-size="10">m</tspan><tspan dy="-4">) = 2V</tspan><tspan dy="4" font-size="10">m</tspan>');
+
+/* 3. bridge, professor's diamond, positive peak (D1, D2 on; D3, D4 off) */
+const Tp=[390,80],Rt=[480,170],Bt=[390,260],Lf=[300,170];
+document.getElementById('br').innerHTML=
+  primary(110,230)+coil(170,110,230,1,4,G)+
+  T(196,122,'+',G,'font-size="20" font-weight="700"')+T(196,232,'−',G,'font-size="22" font-weight="700"')+
+  P([[170,110],[170,80],Tp],G)+P([[170,230],[170,260],Bt],G)+
+  diode(...Tp,...Rt,G,2.5)+diode(...Lf,...Bt,G,2.5)+
+  diode(...Lf,...Tp,R,3)+diode(...Bt,...Rt,R,3)+
+  P([Rt,[650,170]],G)+cap(560,170,320,B)+res(650,170,320,G)+
+  P([Lf,[300,252]],G)+`<path d="M300 252 a8 8 0 0 0 0 16" fill="none" stroke="${G}" stroke-width="2"/>`+P([[300,268],[300,320],[650,320]],G)+
+  arr(230,80,'r')+arr(525,170,'r')+arr(480,320,'l')+arr(300,296,'u')+arr(230,260,'l')+
+  T(360,66,'top: +'+Vm,B,'font-weight="600"')+
+  T(452,118,'D1 ON',G,'font-weight="600"')+T(458,236,'D4 OFF',R,'font-weight="600"')+
+  T(330,118,'D3 OFF',R,'text-anchor="end" font-weight="600"')+T(330,240,'D2 ON',G,'text-anchor="end" font-weight="600"')+
+  T(290,166,'left: 0 V','#666','text-anchor="end"')+
+  T(405,284,'bottom: 0 V (via D2)','#666')+
+  T(492,158,'right: +'+Vm+' (held by C)',B,'font-weight="600"')+
+  T(576,250,'C',B,'font-weight="600"')+T(668,250,'R<tspan dy="4" font-size="10">L</tspan>')+
+  wave(545,70,120,24,'pos')+
+  pivBox(80,348,270,'D3: PIV = (+V<tspan dy="4" font-size="10">m</tspan><tspan dy="-4">) − 0 = V</tspan><tspan dy="4" font-size="10">m</tspan>')+
+  pivBox(370,348,270,'D4: PIV = (+V<tspan dy="4" font-size="10">m</tspan><tspan dy="-4">) − 0 = V</tspan><tspan dy="4" font-size="10">m</tspan>');
+</script>
+</body>
+</html>

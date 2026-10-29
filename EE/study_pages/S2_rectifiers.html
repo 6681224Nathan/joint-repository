@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S2 Rectifiers</title>
+<style>
+:root{--bg:#fff;--fg:#1f1f1c;--mut:#5f5e5a;--card:#f4f2ec;--bd:#d3d1c7;--t:#1f1f1c;--surface-1:#f4f2ec;--acc:#185FA5;--hi:#FAEEDA}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1b19;--fg:#ece9df;--mut:#b4b2a9;--card:#2a2a27;--bd:#444441;--t:#ece9df;--surface-1:#2a2a27;--acc:#85B7EB;--hi:#412402}}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,sans-serif;max-width:760px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:20px;margin:40px 0 8px;padding-top:16px;border-top:1px solid var(--bd)}h3{font-size:16px;margin:24px 0 6px}
+.sub{color:var(--mut);margin:0 0 16px}
+.box{background:var(--card);border-radius:10px;padding:12px 16px;margin:12px 0}
+.key{background:var(--hi);border-radius:10px;padding:12px 16px;margin:12px 0}
+table{border-collapse:collapse;width:100%;margin:10px 0}th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}th{background:var(--card)}
+svg{width:100%;height:auto;display:block;margin:8px 0}
+svg text.t{font-size:14px;fill:var(--fg)}svg text.ts{font-size:12px;fill:var(--mut)}svg text.th{font-size:14px;font-weight:500;fill:var(--fg)}
+details{border:1px solid var(--bd);border-radius:10px;padding:8px 14px;margin:12px 0}summary{cursor:pointer;font-weight:600;color:var(--acc)}
+code{background:var(--card);padding:1px 5px;border-radius:4px}
+.toc a,a{color:var(--acc)}
+button{font:inherit;font-size:14px;padding:6px 14px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--fg);cursor:pointer}
+button.on{border-color:var(--acc);color:var(--acc);font-weight:600}
+.ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0;color:var(--mut);font-size:14px}.ctl input[type=range]{flex:1;min-width:160px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:8px 0}.cards div{background:var(--card);border-radius:8px;padding:8px 10px;font-size:13px;color:var(--mut)}.cards b{display:block;font-size:19px;color:var(--fg)}
+.tag{font-size:12px;padding:1px 6px;border-radius:6px;background:var(--card);color:var(--mut);border:1px solid var(--bd)}
+svg:not(.neg) .n, svg.neg .p{display:none}
+svg:not(.neg) .offp, svg.neg .offn{opacity:.25}
+.cap{min-height:48px}
+svg.cd:not(.dis) .dpath, svg.cd.dis .cpath{display:none} svg.cd.dis g.d{opacity:.25}
+.nohl .p,.nohl .n{display:none!important}.nohl .offp,.nohl .offn{opacity:1!important}
+</style></head><body>
+
+<h1>S2: Rectifiers</h1>
+<p class="sub">EGCI 232 · about 60 min · lecture 3, slides 4–34 · this is one of the two quiz problems</p>
+<div class="box toc"><b>Contents</b><br>
+<a href="#s1">1. The big picture</a> · <a href="#s2">2. Transformer</a> · <a href="#s3">3. Half-wave</a> · <a href="#s4">4. Center-tapped</a> · <a href="#s5">5. Bridge</a> · <a href="#s6">6. Cheat sheet</a> · <a href="#s7">7. Capacitor filter</a> · <a href="#s8">8. Design example</a> · <a href="#s9">9. Theory</a> · <a href="#prac">Practice P1–P5</a></div>
+<p><span class="tag">slide</span> = written on the slides. <span class="tag">extra</span> = standard formula not written on the slides, but needed to solve the slide problems.</p>
+
+<h2 id="s1">1. The big picture: wall AC → steady DC</h2>
+<p>Phones, laptops and LEDs need steady DC, but the wall gives 220 V AC (a sine wave). A <b>DC power supply</b> does the conversion in four stages (slides 4, 29). The quiz focuses on stages 1 to 3.</p>
+<svg id="blk" viewBox="0 0 680 190" role="img"><title>Power supply chain</title></svg>
+<table>
+<tr><th>Stage</th><th>Job</th></tr>
+<tr><td>1. Transformer</td><td>Steps 220 V down to a smaller AC voltage (e.g. 12 V).</td></tr>
+<tr><td>2. Rectifier (diodes)</td><td>Flips or blocks the negative half, so the output is always positive. Still very bumpy.</td></tr>
+<tr><td>3. Filter (capacitor)</td><td>Fills the gaps between bumps, leaving a small wobble called <b>ripple</b>.</td></tr>
+<tr><td>4. Regulator (e.g. 7805)</td><td>Removes the last ripple and holds an exact voltage (7805 → 5 V).</td></tr></table>
+
+<h2 id="s2">2. Transformer (1 minute)</h2>
+<p>A transformer has two coils. The voltage ratio equals the turns ratio: <code>V<sub>primary</sub> / V<sub>secondary</sub> = N<sub>1</sub> / N<sub>2</sub></code>. Example: 220 V with a 10:1 transformer gives 22 V RMS on the secondary.</p>
+<div class="key"><b>Ideal diodes on this page.</b> Your professor's notes treat diodes as ideal (ON = plain wire, no 0.7 V drop), so every formula and problem here does too. Only subtract 0.7 V per ON diode if a question says "silicon diode" or "0.7 V".</div>
+<div class="key"><b>Always do this first:</b> transformer voltages are <b>RMS</b>. Diodes and capacitors care about the <b>peak</b>. So: <b>V<sub>m</sub> = 1.414 × V<sub>secondary, RMS</sub></b>. In this page, <b>V<sub>m</sub></b> means the peak of the secondary voltage.</div>
+
+<h2 id="s3">3. Half-wave rectifier (slides 5–10)</h2>
+<p>One diode in series with the load. It lets the positive half through and blocks the negative half. Press the button to switch half-cycles. The green band is where current flows.</p>
+<svg id="fhw" viewBox="0 0 680 230" role="img"><title>Half-wave rectifier</title></svg>
+<div class="ctl"><button onclick="flip('fhw')">Switch half-cycle</button><span id="fhwc" class="cap"></span></div>
+<table><tr><th>Quantity</th><th>Formula</th><th></th></tr>
+<tr><td>Peak output</td><td>V<sub>p(out)</sub> = V<sub>m</sub></td><td>ideal diode: no drop</td></tr>
+<tr><td>DC (average) output</td><td>V<sub>dc</sub> = V<sub>p(out)</sub> / π = <b>0.318 V<sub>p(out)</sub></b></td><td><span class="tag">slide 5</span> (the integral ÷ 2π)</td></tr>
+<tr><td>Output frequency</td><td>same as input: f<sub>out</sub> = f (one bump per cycle)</td><td></td></tr>
+<tr><td>PIV (max reverse voltage on the diode)</td><td>V<sub>m</sub> (no capacitor) · 2V<sub>m</sub> with a capacitor</td><td><span class="tag">extra</span></td></tr></table>
+<p>Why π: the average of one positive sine bump spread over a whole cycle is V<sub>p</sub>/π. You don't need to derive it, just use 0.318.</p>
+<p><b>PIV</b> (peak inverse voltage) is the largest reverse voltage the diode must survive while it's OFF. You pick a diode whose rating is above it.</p>
+
+<h2 id="s4">4. Full-wave: center-tapped (slides 11–16)</h2>
+<p>The transformer has a wire from the middle of the secondary (the <b>center tap</b>). Each end of the coil goes to its own diode, the two cathodes join at node <b>J</b>, and the load sits between J and the center tap. D1 works on the positive half, D2 on the negative half, and <b>both push current through R<sub>L</sub> in the same direction</b>. So you get a bump on every half-cycle.</p>
+<svg id="fct" viewBox="0 0 680 270" role="img"><title>Center-tapped rectifier</title></svg>
+<div class="ctl"><button onclick="flip('fct')">Switch half-cycle</button><span id="fctc" class="cap"></span></div>
+<table><tr><th>Quantity</th><th>Formula</th><th></th></tr>
+<tr><td>V<sub>m</sub> here means</td><td>peak of <b>each half</b> of the secondary (center tap to one end)</td><td></td></tr>
+<tr><td>Peak output</td><td>V<sub>p(out)</sub> = V<sub>m</sub> (ideal diode)</td><td></td></tr>
+<tr><td>DC output</td><td>V<sub>dc</sub> = 2V<sub>p(out)</sub>/π = <b>0.636 V<sub>p(out)</sub></b></td><td><span class="tag">slide 15</span></td></tr>
+<tr><td>RMS output</td><td>0.707 V<sub>p(out)</sub></td><td><span class="tag">slide 15</span></td></tr>
+<tr><td>Output frequency</td><td><b>2f</b> (two bumps per cycle: 100 Hz from 50 Hz)</td><td></td></tr>
+<tr><td>PIV per diode</td><td>2V<sub>m</sub> (anode at −V<sub>m</sub>, cathode at +V<sub>m</sub>)</td><td><span class="tag">extra</span></td></tr></table>
+
+<h2 id="s5">5. Full-wave: bridge (slides 17–22)</h2>
+<p>Four diodes in a diamond, no center tap needed (drawn like your professor's slide: V<sub>s</sub>+ at the top corner, V<sub>s</sub>− at the bottom corner, output + on the right, output − on the left). On each half-cycle <b>two diodes</b> conduct (one on the way in, one on the way back). Watch the current through R<sub>L</sub>: it goes the same way on both halves.</p>
+<svg id="fbr" viewBox="0 0 680 320" role="img"><title>Bridge rectifier</title></svg>
+<div class="ctl"><button onclick="flip('fbr')">Switch half-cycle</button><span id="fbrc" class="cap"></span></div>
+<table><tr><th>Quantity</th><th>Formula</th><th></th></tr>
+<tr><td>Peak output</td><td>V<sub>p(out)</sub> = V<sub>m</sub> (ideal diodes; with 0.7 V diodes it would be V<sub>m</sub> − 1.4)</td><td></td></tr>
+<tr><td>DC output</td><td>0.636 V<sub>p(out)</sub></td><td><span class="tag">slide 15</span></td></tr>
+<tr><td>Output frequency</td><td><b>2f</b></td><td></td></tr>
+<tr><td>PIV per diode</td><td>V<sub>m</sub></td><td><span class="tag">extra</span></td></tr></table>
+
+<h2 id="s6">6. Cheat sheet (memorize this table)</h2>
+<table>
+<tr><th></th><th>Half-wave</th><th>Center-tapped</th><th>Bridge</th></tr>
+<tr><td>Diodes</td><td>1</td><td>2</td><td>4</td></tr>
+<tr><td>Diodes ON at once</td><td>1</td><td>1</td><td>2</td></tr>
+<tr><td>V<sub>p(out)</sub></td><td>V<sub>m</sub></td><td>V<sub>m</sub> <small>(V<sub>m</sub> of half the coil)</small></td><td>V<sub>m</sub></td></tr>
+<tr><td>V<sub>dc</sub> (no C)</td><td>0.318 V<sub>p(out)</sub></td><td>0.636 V<sub>p(out)</sub></td><td>0.636 V<sub>p(out)</sub></td></tr>
+<tr><td>Ripple / output frequency f<sub>r</sub></td><td>f</td><td>2f</td><td>2f</td></tr>
+<tr><td>PIV per diode</td><td>V<sub>m</sub> (2V<sub>m</sub> with C)</td><td>2V<sub>m</sub></td><td>V<sub>m</sub></td></tr>
+</table>
+<div class="key"><b>Order of work in every rectifier question:</b> (1) RMS → peak: V<sub>m</sub> = 1.414 × V<sub>rms</sub>. (2) Ideal diodes: V<sub>p(out)</sub> = V<sub>m</sub>. (3) Then V<sub>dc</sub>, ripple, PIV, currents.</div>
+
+<h2 id="s7">7. Capacitor filter and ripple (slides 9–10, 16, 21–22)</h2>
+<p>A capacitor across R<sub>L</sub> works like a <b>water tank</b>. Near each peak, the diode fills it up to V<sub>p</sub> (the charge path). Between peaks the diode is OFF, and the tank slowly drains through R<sub>L</sub> (the discharge path). The output drops a little, then gets refilled at the next peak. That small saw-tooth wobble is the <b>ripple V<sub>r</sub></b>.</p>
+<h3>What the circuits look like with a capacitor</h3>
+<p>The capacitor <b>C</b> always goes <b>in parallel with the load R<sub>L</sub></b> (across the output). Nothing else changes. Press the button to switch between the two phases: <b style="color:#D85A30">charging</b> (near each peak, the diode is ON and fills C) and <b style="color:#1D9E75">discharging</b> (between peaks, every diode is OFF, so C alone feeds R<sub>L</sub>).</p>
+<h3>Half-wave + C (slides 9–10)</h3>
+<svg id="chw" class="cd" viewBox="0 0 680 230" role="img"><title>Half-wave with capacitor</title></svg>
+<div class="ctl"><button onclick="flipC('chw')">Switch phase</button><span id="chwc" class="cap"></span></div>
+<h3>Center-tapped + C (slide 16)</h3>
+<svg id="cct" class="cd" viewBox="0 0 680 270" role="img"><title>Center-tapped with capacitor</title></svg>
+<div class="ctl"><button onclick="flipC('cct')">Switch phase</button><span id="cctc" class="cap"></span></div>
+<h3>Bridge + C (slides 21–22)</h3>
+<svg id="cbr" class="cd" viewBox="0 0 680 320" role="img"><title>Bridge with capacitor</title></svg>
+<div class="ctl"><button onclick="flipC('cbr')">Switch phase</button><span id="cbrc" class="cap"></span></div>
+<div class="key">In every version: during <b>charging</b>, current comes from the transformer through the ON diode(s). During <b>discharging</b>, the transformer and diodes do nothing. The capacitor is a small battery feeding R<sub>L</sub>, and its voltage sags a little: that sag is the ripple V<sub>r</sub>. In the explorer below, the short steep rises are charging and the long gentle slopes are discharging.</div>
+<h3>See the ripple</h3>
+<p>Full-wave refills <b>twice as often</b>, so it drains half as much: half the ripple. Try it:</p>
+<div class="ctl"><button id="tHW" onclick="setT(0)">Half-wave</button><button id="tCT" onclick="setT(1)">Center-tapped</button><button id="tBR" onclick="setT(2)">Bridge</button><label><input type="checkbox" id="cOn" checked onchange="sim()"> capacitor</label></div>
+<div class="ctl"><span style="min-width:120px">C = <b id="cVal"></b></span><input type="range" id="cIdx" min="0" max="6" step="1" value="2" oninput="sim()"></div>
+<svg id="ex" viewBox="0 0 680 260" role="img"><title>Rectifier output waveform</title></svg>
+<div class="cards"><div>V<sub>p(out)</sub><b id="o1"></b></div><div>Ripple freq f<sub>r</sub><b id="o2"></b></div><div>V<sub>dc</sub> (average)<b id="o3"></b></div><div>Ripple V<sub>r</sub> (measured)<b id="o4"></b></div><div>V<sub>r</sub> by formula<b id="o5"></b></div></div>
+<p style="font-size:14px;color:var(--mut)">Fixed: V<sub>m</sub> = 17 V (12 V RMS), f = 50 Hz, R<sub>L</sub> = 1 kΩ, ideal diodes. Dashed grey = the transformer's sine.</p>
+<table><tr><th>Quantity</th><th>Formula</th><th></th></tr>
+<tr><td>Ripple (peak-to-peak)</td><td><b>V<sub>r</sub> / V<sub>m</sub> = 1 / (f<sub>r</sub> R<sub>L</sub> C)</b>, so V<sub>r</sub> = V<sub>m</sub> / (f<sub>r</sub> R<sub>L</sub> C)</td><td><span class="tag">class notes</span> V<sub>r</sub>/V<sub>m</sub> = 1/(f<sub>r</sub>R<sub>L</sub>C)</td></tr>
+<tr><td>DC output with C</td><td>V<sub>dc</sub> = V<sub>m</sub> − V<sub>r</sub>/2 (the middle of the wobble)</td><td><span class="tag">extra</span></td></tr>
+<tr><td>C needed for a ripple target</td><td>C = V<sub>m</sub> / (f<sub>r</sub> R<sub>L</sub> V<sub>r</sub>)</td><td>same formula rearranged</td></tr>
+<tr><td>Ripple factor</td><td>r = V<sub>r</sub> / V<sub>dc</sub> (smaller = smoother)</td><td><span class="tag">slide 23</span> mentions it</td></tr></table>
+<div class="key"><b>Remember f<sub>r</sub>:</b> half-wave f<sub>r</sub> = f (50 Hz). Full-wave f<sub>r</sub> = 2f (100 Hz). Using the wrong one is the most common ripple mistake. V<sub>r</sub> = V<sub>max</sub> − V<sub>min</sub> (peak-to-peak), as in your class notes.</div>
+
+<h2 id="s8">8. Design example (30 V, 300 mA, your professor's working)</h2>
+<div class="box"><b>Slide (30 V supply):</b> Design a rectifier/filter giving about <b>30 V</b> at up to <b>300 mA</b>, fed from <b>120 V AC RMS</b>, 60 Hz. Ripple less than <b>10%</b> of the output at full load. Bridge rectifier, ideal diodes.</div>
+<table>
+<tr><th>Step</th><th>Working</th></tr>
+<tr><td>1. The load</td><td>R<sub>L</sub> = V / I = 30 / 0.3 = <b>100 Ω</b>. Bridge = full-wave, so f<sub>r</sub> = 2 × 60 = <b>120 Hz</b>.</td></tr>
+<tr><td>2. Ripple</td><td>V<sub>r</sub> ≤ 10% of 30 V = <b>3 V</b>.</td></tr>
+<tr><td>3. Peak V<sub>m</sub></td><td>V<sub>dc</sub> = V<sub>m</sub> − V<sub>r</sub>/2 → 30 = V<sub>m</sub> − 1.5 → <b>V<sub>m</sub> = 31.5 V</b>.</td></tr>
+<tr><td>4. Capacitor</td><td>V<sub>r</sub>/V<sub>m</sub> = 1/(f<sub>r</sub>R<sub>L</sub>C) → 3/31.5 = 1/(120 × 100 × C) → <b>C = 875 µF</b> (a real part: 1000 µF, rounding up).</td></tr>
+<tr><td>5. Transformer</td><td>Primary peak = 120 × 1.414 ≈ 170 V. Turns ratio = <b>170 : 31.5</b> (≈ 5.4 : 1). Secondary RMS = 31.5/1.414 = 22.3 V.</td></tr>
+<tr><td>6. Diodes</td><td>Bridge PIV = V<sub>m</sub> = <b>31.5 V</b>, current 0.3 A → e.g. 1N4001 (1 A, 50 V).</td></tr></table>
+<p>Some versions use "10% of V<sub>m</sub>" instead of 10% of the output: then V<sub>r</sub> = 0.1V<sub>m</sub> and V<sub>dc</sub> = V<sub>m</sub> − 0.05V<sub>m</sub> = 0.95V<sub>m</sub>. Read which one the question means.</p>
+
+<h2 id="s9">9. Theory you may be asked (slides 23–25, 29–31)</h2>
+<table><tr><th></th><th>Half-wave</th><th>Full-wave</th></tr>
+<tr><td>Advantages</td><td>Simple, cheap, easy to use</td><td>Higher efficiency; no half of the signal is wasted; less ripple</td></tr>
+<tr><td>Disadvantages</td><td>Low output power and voltage; higher ripple; poor transformer utilization</td><td>More parts; bigger; more expensive</td></tr>
+<tr><td>Applications</td><td>Low power: signal demodulation, peak detection</td><td>Power supplies, chargers for phones and laptops, UPS, LEDs and motors, welding, radio signal amplitude detection</td></tr></table>
+<ul><li><b>Center-tapped vs bridge:</b> center-tapped needs a special transformer and its diodes face 2V<sub>m</sub>. The bridge needs 4 diodes (and with real diodes loses 1.4 V instead of 0.7 V), but works with any transformer and its diodes only face V<sub>m</sub>. <span class="tag">extra</span></li>
+<li><b>7805 regulator (slide 29):</b> transformer → bridge of 4 × 1N4001 → 470 µF capacitor → 7805 → steady +5 V. The 0.1 µF capacitors remove high-frequency noise.</li>
+<li><b>Dual supply (slide 31):</b> one bridge plus two regulators (LM340 for +, LM320 for −) gives both + and − voltages.</li></ul>
+
+<h2 id="prac">Practice (try first, then open the solution). All diodes are ideal.</h2>
+<div class="key"><b>In the quiz you draw the circuit yourself.</b> Only the type is named ("design a bridge rectifier"). A complete drawing has:
+<ol style="margin:6px 0">
+<li><b>AC source</b> with its value (e.g. 220 V RMS, 50 Hz) on the <b>primary</b> coil.</li>
+<li><b>Transformer</b> (two coils, two lines between them) with the turns ratio. Center-tapped: a third wire from the middle of the secondary.</li>
+<li><b>Diodes pointing toward the output +</b>. Half-wave: 1 in series. Center-tapped: one from each end, cathodes joined. Bridge: diamond, AC into the top and bottom corners, output + from the corner both arrows point into.</li>
+<li><b>C in parallel with R<sub>L</sub></b> (if there is a filter), with values, and + / − on the output.</li></ol>
+Check: can you trace a loop from the coil, through an ON diode, down through R<sub>L</sub> and back, on <b>both</b> half-cycles (full-wave) with current going the same way through R<sub>L</sub>?</div>
+
+<h3>P1 · Half-wave · about 6 min</h3>
+<p>Mains 220 V RMS, 50 Hz. Transformer 10:1. R<sub>L</sub> = 1 kΩ. No capacitor. <b>Draw the half-wave rectifier circuit</b>, then find: (a) secondary RMS and peak, (b) V<sub>p(out)</sub>, (c) V<sub>dc</sub> and I<sub>dc</sub>, (d) PIV, (e) output frequency.</p>
+<details><summary>Solution P1</summary>
+<p><b>Circuit</b> (a half-wave rectifier: transformer, one diode, R<sub>L</sub>):</p>
+<svg id="p1" class="nohl" viewBox="0 0 680 230" role="img"><title>P1 circuit</title></svg>
+<p>a) 220/10 = <b>22 V RMS</b>; V<sub>m</sub> = 22 × 1.414 = <b>31.1 V</b>.</p>
+<p>b) Ideal diode: V<sub>p(out)</sub> = V<sub>m</sub> = <b>31.1 V</b>.</p>
+<p>c) V<sub>dc</sub> = 0.318 × 31.1 = <b>9.89 V</b>; I<sub>dc</sub> = 9.89/1k = <b>9.89 mA</b>.</p>
+<p>d) PIV = V<sub>m</sub> = <b>31.1 V</b> (no capacitor).</p>
+<p>e) Half-wave keeps the input frequency: <b>50 Hz</b>.</p></details>
+
+<h3>P2 · Bridge with filter (quiz style) · about 12 min</h3>
+<p>Mains 220 V RMS, 50 Hz. Transformer 15:1. Bridge of ideal diodes. C = 1000 µF, R<sub>L</sub> = 500 Ω. <b>Draw the circuit</b>, then find: (a) V<sub>m</sub>, (b) V<sub>p(out)</sub>, (c) ripple frequency, (d) V<sub>r</sub>, (e) V<sub>dc</sub> and the load current, (f) ripple factor, (g) PIV, (h) V<sub>dc</sub> if C is removed.</p>
+<details><summary>Solution P2</summary>
+<p><b>Circuit</b> (a bridge rectifier with filter: transformer, 4 diodes, C in parallel with R<sub>L</sub>):</p>
+<svg id="p2" class="nohl" viewBox="0 0 680 320" role="img"><title>P2 circuit</title></svg>
+<p>a) Secondary RMS = 220/15 = 14.67 V → <b>V<sub>m</sub> = 20.74 V</b>.</p>
+<p>b) Ideal diodes: <b>V<sub>p(out)</sub> = V<sub>m</sub> = 20.74 V</b>.</p>
+<p>c) Full-wave: <b>f<sub>r</sub> = 2 × 50 = 100 Hz</b>.</p>
+<p>d) V<sub>r</sub> = V<sub>m</sub>/(f<sub>r</sub>R<sub>L</sub>C) = 20.74 / (100 × 500 × 1000×10⁻⁶) = 20.74/50 = <b>0.415 V</b>.</p>
+<p>e) V<sub>dc</sub> = 20.74 − 0.415/2 = <b>20.53 V</b>; I<sub>L</sub> = 20.53/500 = <b>41.1 mA</b>.</p>
+<p>f) r = 0.415/20.53 = <b>0.020 (2%)</b>.</p>
+<p>g) Bridge: PIV = V<sub>m</sub> = <b>20.74 V</b>.</p>
+<p>h) No C: V<sub>dc</sub> = 0.636 × 20.74 = <b>13.19 V</b>. The capacitor raised the DC output from 13.2 V to 20.5 V.</p></details>
+
+<h3>P3 · Center-tapped · about 6 min</h3>
+<p>Mains 220 V, 50 Hz. Center-tapped secondary rated <b>12-0-12 V</b> (12 V RMS on each half). R<sub>L</sub> = 100 Ω, no capacitor. <b>Draw the circuit</b>, then find: (a) V<sub>m</sub> of each half, (b) V<sub>p(out)</sub>, (c) V<sub>dc</sub> and I<sub>dc</sub>, (d) PIV, (e) output frequency.</p>
+<details><summary>Solution P3</summary>
+<p><b>Circuit</b> (a center-tapped rectifier: center-tapped transformer, 2 diodes, R<sub>L</sub>):</p>
+<svg id="p3" class="nohl" viewBox="0 0 680 270" role="img"><title>P3 circuit</title></svg>
+<p>a) V<sub>m</sub> = 12 × 1.414 = <b>16.97 V</b> (each half).</p>
+<p>b) Ideal diodes: V<sub>p(out)</sub> = V<sub>m</sub> = <b>16.97 V</b>.</p>
+<p>c) V<sub>dc</sub> = 0.636 × 16.97 = <b>10.79 V</b>; I<sub>dc</sub> = 10.79/100 = <b>107.9 mA</b>.</p>
+<p>d) PIV = 2V<sub>m</sub> = 2 × 16.97 = <b>33.9 V</b> (D2's anode at −16.97 V while D1 pulls J to +16.97 V).</p>
+<p>e) Full-wave: <b>100 Hz</b>.</p></details>
+
+<h3>P4 · Design (slide 27, your professor's working) · about 10 min</h3>
+<div class="box">Slide 27: a load rated <b>0.2 W at 5 V</b> must be powered by a <b>half-wave</b> rectifier from <b>220 V</b> mains (50 Hz). Take the ripple as <b>10% of V<sub>m</sub></b> (V<sub>r</sub> = 0.1V<sub>m</sub>) and 5 V as the DC output. <b>Draw your design</b> (with values on it), then find: (a) R<sub>L</sub>, (b) V<sub>m</sub>, (c) C, (d) the turns ratio, (e) PIV.</div>
+<details><summary>Solution P4</summary>
+<p><b>Circuit</b> (half-wave + filter, with the values found below):</p>
+<svg id="p4" class="nohl" viewBox="0 0 680 230" role="img"><title>P4 circuit</title></svg>
+<p><b>a)</b> P = V²/R → R<sub>L</sub> = 5²/0.2 = <b>125 Ω</b>.</p>
+<p><b>b)</b> V<sub>dc</sub> = V<sub>m</sub> − V<sub>r</sub>/2 = V<sub>m</sub> − 0.05V<sub>m</sub> → 5 = 0.95V<sub>m</sub> → <b>V<sub>m</sub> = 5.263 V</b>.</p>
+<p><b>c)</b> Half-wave: f<sub>r</sub> = 50 Hz. V<sub>r</sub>/V<sub>m</sub> = 1/(f<sub>r</sub>R<sub>L</sub>C) → 0.1 = 1/(50 × 125 × C) → <b>C = 1.6 mF</b> (1600 µF).</p>
+<p><b>d)</b> Primary peak = 220 × 1.414 ≈ 311 V. Turns ratio = <b>311 : 5.263</b> (≈ 59 : 1).</p>
+<p><b>e)</b> Half-wave with C: PIV = 2V<sub>m</sub> = <b>10.5 V</b>.</p>
+<p>Bridge version (the professor also showed this): f<sub>r</sub> = 100 Hz, so 0.1 = 1/(100 × 125 × C) → C = <b>800 µF</b>. V<sub>m</sub> is still 5.263 V, and PIV = V<sub>m</sub> = 5.26 V.</p></details>
+
+<h3>P5 · "What is the output waveform?" (slide 33) · about 8 min</h3>
+<svg id="p5" viewBox="0 0 680 310" role="img"><title>P5 circuit</title></svg>
+<p>v<sub>i</sub> is a sine with 10 V peak. Ideal diodes, all resistors 2 kΩ. Sketch v<sub>o</sub> and give its peak. (Hint: do the positive half and negative half separately, using S1's assume-and-check.)</p>
+<details><summary>Solution P5</summary>
+<p>Name the corners T (top, input +), B (bottom, input −), L (left) and R (right). D1 goes L→T and D2 goes T→R.</p>
+<p><b>Positive half (T higher):</b> D2 ON (anode T is high). D1 OFF (its cathode T is high). Current: T → D2 → R, then splits to B: directly through R–B (2k), or R → middle 2k → L → L–B 2k (4k). V<sub>R</sub> = v<sub>i</sub>, and L sits halfway down the 4k path: V<sub>L</sub> = v<sub>i</sub>/2. So <b>v<sub>o</sub> = V<sub>R</sub> − V<sub>L</sub> = +v<sub>i</sub>/2</b>.</p>
+<p><b>Negative half (B higher):</b> D2 OFF, D1 ON (L→T conducts). Take T = 0, so L = 0 (D1 is a wire) and B = |v<sub>i</sub>|. From B to L: direct 2k, or B → R → L (2k + 2k), so V<sub>R</sub> = |v<sub>i</sub>|/2. <b>v<sub>o</sub> = V<sub>R</sub> − V<sub>L</sub> = +|v<sub>i</sub>|/2</b>.</p>
+<p><b>Result:</b> v<sub>o</sub> is positive on both halves, a <b>full-wave rectified wave with a 5 V peak</b> (half of 10 V because of the resistor divider).</p></details>
+
+<div class="box"><b>Common mistakes:</b> forgetting RMS → peak · using f instead of 2f for full-wave ripple · subtracting 0.7 V when the question uses ideal diodes · using the whole secondary as V<sub>m</sub> in a center-tapped rectifier · mixing up "10% of V<sub>m</sub>" and "10% of the output" for the ripple.<br><b>Next:</b> message "S3" (BJT DC bias).</div>
+
+<script>
+var W='stroke="var(--t)" stroke-width="1.5" fill="none"';
+function coil(x,y0,y1,n,right){var h=(y1-y0)/n,r=h/2,d='M'+x+' '+y0;for(var i=0;i<n;i++)d+=' a'+r+' '+r+' 0 0 '+(right?1:0)+' 0 '+h;return '<path d="'+d+'" '+W+'/>';}
+function xf(x,y0,y1,n,l1,l2,ratio){var s=coil(x,y0,y1,n,true)+coil(x-44,y0,y1,n,false);
+s+='<path d="M'+(x-26)+' '+y0+'V'+y1+'M'+(x-18)+' '+y0+'V'+y1+'M'+(x-44)+' '+y0+'H'+(x-84)+'M'+(x-44)+' '+y1+'H'+(x-84)+'" '+W+'/>';
+s+='<circle cx="'+(x-88)+'" cy="'+y0+'" r="4" '+W+'/><circle cx="'+(x-88)+'" cy="'+y1+'" r="4" '+W+'/>';
+var m=(y0+y1)/2;s+='<text class="ts" x="'+(x-96)+'" y="'+(m-4)+'" text-anchor="end">'+l1+'</text><text class="ts" x="'+(x-96)+'" y="'+(m+12)+'" text-anchor="end">'+l2+'</text>';
+if(ratio)s+='<text class="ts" x="'+(x-22)+'" y="'+(y0-8)+'" text-anchor="middle">'+ratio+'</text>';return s;}
+function dio(cx,cy,a,cls){return '<g class="'+(cls||'')+'" transform="translate('+cx+' '+cy+') rotate('+a+')"><polygon points="-11,-12 -11,12 11,0" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M11 -12V12" stroke="var(--t)" stroke-width="2.5"/></g>';}
+function rect(x,y,w,h){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="3" fill="var(--surface-1)" stroke="var(--t)"/>';}
+function tx(x,y,s,c,a){return '<text class="'+(c||'ts')+'" x="'+x+'" y="'+y+'"'+(a?' text-anchor="'+a+'"':'')+'>'+s+'</text>';}
+function hl(d,c){return '<path class="'+c+'" d="'+d+'" fill="none" stroke="#1D9E75" stroke-width="10" stroke-opacity="0.35" stroke-linejoin="round" stroke-linecap="round"/>';}
+function dot(x,y){return '<circle cx="'+x+'" cy="'+y+'" r="3.5" fill="var(--t)"/>';}
+function rot(cx,cy,a){return '<g transform="translate('+cx+' '+cy+') rotate('+a+')"><rect x="-28" y="-10" width="56" height="20" rx="3" fill="var(--surface-1)" stroke="var(--t)"/></g>';}
+
+function HW(id,o){var s=hl('M170 60H480V95M480 165V200H170','p');
+s+=xf(170,60,200,4,o.a,o.b,o.r)+'<path d="M170 60H480V95M480 165V200H170'+(o.c?'M400 60V126M400 134V200':'')+'" '+W+'/>'+(o.c?capV(400,126)+dot(400,60)+dot(400,200)+tx(380,134,o.c,'ts','end'):'')+dio(312,60,0,'offn')+rect(468,95,24,70);
+s+=tx(312,40,'D','th','middle')+tx(504,104,'+')+tx(504,134,o.rl)+tx(504,150,'(v<tspan dy="3" font-size="9">out</tspan><tspan dy="-3">)</tspan>')+tx(504,170,'−');
+s+=tx(312,90,'ON','th','middle').replace('class="th"','class="th p" style="fill:#0F6E56"')+tx(312,90,'OFF','th','middle').replace('class="th"','class="th n" style="fill:#A32D2D"');
+document.getElementById(id).innerHTML=s;}
+function CT(id,o){var s=hl('M170 40H400V140H560V200H250V140H170','p')+hl('M170 240H400V140H560V200H250V140H170','n');
+s+=xf(170,40,240,8,o.a,o.b,o.r)+'<path d="M170 40H400V240H170M400 140H560V145M560 195V200H408M392 200H250V140H170" '+W+'/><path d="M408 200Q400 184 392 200" '+W+'/>';
+s+=dio(290,40,0,'offn')+dio(290,240,0,'offp')+rect(548,145,24,50)+dot(400,140)+dot(170,140);
+s+=tx(290,22,'D1','th','middle')+tx(290,222,'D2','th','middle')+tx(412,132,'J','th')+tx(580,150,'+')+tx(580,174,o.rl)+tx(580,198,'−')+tx(186,132,'center tap');
+document.getElementById(id).innerHTML=s;}
+function BR(id,o){var C=o.c,s;
+s=hl('M170 40H360L500 160H590V300H220V160L360 280H170','p')+hl('M170 280H360L500 160H590V300H220V160L360 40H170','n')+xf(170,40,280,8,o.a,o.b,o.r);
+s+='<path d="M170 40H360L500 160L360 280H170M220 160L360 40M220 160L360 280M500 160H590V200M590 260V300H220V288M220 160V272'+(C?'M520 160V226M520 234V300':'')+'" '+W+'/><path d="M220 272Q204 280 220 288" '+W+'/>';
+s+=rect(578,200,24,60)+tx(610,206,'+')+tx(610,234,o.rl)+tx(610,262,'−')+dot(220,160)+dot(500,160);
+if(C)s+=capV(520,226)+dot(520,160)+dot(520,300)+tx(520,316,C,'ts','middle');
+s+=dio(430,100,40.6,'offn')+dio(290,220,40.6,'offn')+dio(290,100,-40.6,'offp')+dio(430,220,-40.6,'offp');
+s+=tx(452,92,'D1','th')+tx(268,240,'D2','th','end')+tx(268,92,'D3','th','end')+tx(452,240,'D4','th');
+document.getElementById(id).innerHTML=s;}
+function flip(id){var e=document.getElementById(id);e.classList.toggle('neg');cap(id);}
+var CAPS={fhw:['Positive half: anode higher → D is ON. Current flows round the loop and through R<sub>L</sub>, top to bottom.','Negative half: cathode higher → D is OFF. No current, so v<sub>out</sub> = 0.'],
+fct:['Positive half: the top end of the coil is +. D1 ON, D2 OFF. Current: top end → D1 → J → R<sub>L</sub> (top to bottom) → back to the center tap.','Negative half: the bottom end is +. D2 ON, D1 OFF. Current: bottom end → D2 → J → R<sub>L</sub> (top to bottom again) → center tap, so the output is still positive.'],
+fbr:['Positive half (top +): D1 and D2 ON, D3 and D4 OFF. Current: top corner → D1 → right corner → R<sub>L</sub> (top to bottom) → left corner → D2 → bottom corner.','Negative half (bottom +): D4 and D3 ON, D1 and D2 OFF. Current: bottom corner → D4 → right corner → R<sub>L</sub> (top to bottom again) → left corner → D3 → top corner.']};
+function cap(id){var n=document.getElementById(id).classList.contains('neg')?1:0;document.getElementById(id+'c').innerHTML=CAPS[id][n];}
+HW('fhw',{a:'220 V AC',b:'(primary)',r:'',rl:'R<tspan dy="3" font-size="9">L</tspan>'});CT('fct',{a:'220 V AC',b:'(primary)',r:'',rl:'R_L'});BR('fbr',{a:'220 V AC',b:'(primary)',r:'',rl:'R_L'});
+['fhw','fct','fbr'].forEach(cap);
+HW('p1',{a:'220 V AC',b:'50 Hz',r:'10 : 1',rl:'R_L = 1 kΩ'});
+HW('p4',{a:'220 V AC',b:'50 Hz',r:'311 : 5.263 (peak)',rl:'R_L = 125 Ω',c:'C = 1.6 mF'});
+BR('p2',{a:'220 V AC',b:'50 Hz',r:'15 : 1',rl:'R_L = 500 Ω',c:'C = 1000 µF'});
+CT('p3',{a:'220 V AC',b:'50 Hz',r:'12-0-12 V',rl:'R_L = 100 Ω'});
+(function(){var s='<path d="M110 136V40H360M110 184V280H360M220 160L360 40L500 160L360 280Z M220 160H320M400 160H500" '+W+'/><circle cx="110" cy="160" r="24" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/>';
+s+=tx(110,154,'+','t','middle')+tx(110,176,'−','t','middle')+tx(80,164,'v<tspan dy="3" font-size="9">i</tspan>','th','end');
+s+=dio(290,100,-40.6)+dio(430,100,40.6)+rot(290,220,40.6)+rot(430,220,-40.6)+rect(320,148,80,24);
+s+=tx(268,92,'D1','th','end')+tx(452,92,'D2','th')+tx(250,250,'2 kΩ','ts','end')+tx(470,250,'2 kΩ')+tx(360,140,'2 kΩ','ts','middle')+tx(360,190,'−  v<tspan dy="3" font-size="9">o</tspan><tspan dy="-3">  +</tspan>','ts','middle');
+s+=tx(360,30,'T','th','middle')+tx(360,300,'B','th','middle')+dot(220,160)+dot(500,160);
+var d='';for(var x=540;x<=660;x+=2){var y=160-40*Math.sin(2*Math.PI*(x-540)/120);d+=(x==540?'M':'L')+x+' '+y.toFixed(1);}
+s+='<path d="M540 160H664M540 110V210" stroke="var(--t)" fill="none"/><path d="'+d+'" stroke="#378ADD" stroke-width="2" fill="none"/>'+tx(546,116,'10 V')+tx(600,232,'v<tspan dy="3" font-size="9">i</tspan>','ts','middle');
+document.getElementById('p5').innerHTML=s;})();
+(function(){var s='',names=['Transformer','Rectifier','Filter (C)','Regulator'],sub=['220 V → 12 V AC','diodes','capacitor','7805 → 5 V'];
+for(var i=0;i<4;i++){var x=20+i*170;s+='<rect x="'+x+'" y="20" width="130" height="50" rx="8" fill="var(--surface-1)" stroke="var(--t)" stroke-width="0.8"/>'+tx(x+65,42,names[i],'th','middle')+tx(x+65,60,sub[i],'ts','middle');
+if(i<3)s+='<path d="M'+(x+134)+' 45H'+(x+166)+'M'+(x+160)+' 40L'+(x+166)+' 45L'+(x+160)+' 50" '+W+'/>';
+var d='',bx=x+5,bw=120,by=140,A=30;for(var k=0;k<=120;k++){var t=k/120,v;var sn=Math.sin(2*Math.PI*2*t);
+if(i==0)v=A*0.6*sn;else if(i==1)v=A*Math.abs(sn);else if(i==2){var ph=(t*4)%1;v=A*(ph<0.15?0.82+0.18*Math.sin(Math.PI*ph/0.3):1-0.18*(ph-0.15)/0.85);}else v=A*0.8;
+d+=(k?'L':'M')+(bx+t*bw).toFixed(1)+' '+(by-v).toFixed(1);}
+s+='<path d="M'+bx+' '+by+'H'+(bx+bw)+'" stroke="var(--bd)" fill="none"/><path d="'+d+'" stroke="#378ADD" stroke-width="2" fill="none"/>';}
+s+=tx(85,180,'AC sine','ts','middle')+tx(255,180,'bumps (pulsating DC)','ts','middle')+tx(425,180,'small ripple','ts','middle')+tx(595,180,'flat DC','ts','middle');
+document.getElementById('blk').innerHTML=s;})();
+
+function hc(d,c,col){return '<path class="'+c+'" d="'+d+'" fill="none" stroke="'+col+'" stroke-width="10" stroke-opacity="0.35" stroke-linejoin="round" stroke-linecap="round"/>';}
+function capV(x,y){return '<path d="M'+(x-14)+' '+y+'H'+(x+14)+'M'+(x-14)+' '+(y+8)+'H'+(x+14)+'" stroke="var(--t)" stroke-width="2.5"/>';}
+function capH(x,y){return '<path d="M'+x+' '+(y-14)+'V'+(y+14)+'M'+(x+8)+' '+(y-14)+'V'+(y+14)+'" stroke="var(--t)" stroke-width="2.5"/>';}
+var RED='#D85A30',GRN='#1D9E75';
+(function(){var s=hc('M170 60H400V126M400 134V200H170','cpath',RED)+hc('M400 126V60H480V95M480 165V200H400V134','dpath',GRN);
+s+=xf(170,60,200,4,'220 V AC','(primary)','')+'<path d="M170 60H480V95M480 165V200H170M400 60V126M400 134V200" '+W+'/>'+capV(400,126)+dio(312,60,0,'d')+rect(468,95,24,70)+dot(400,60)+dot(400,200);
+s+=tx(312,40,'D','th','middle')+tx(420,134,'C')+tx(504,134,'R_L')+tx(504,104,'+')+tx(504,170,'−');
+document.getElementById('chw').innerHTML=s;
+s=hc('M170 40H400V140H480V166M480 174V200H250V140H170','cpath',RED)+hc('M480 166V140H560V200H480V174','dpath',GRN);
+s+=xf(170,40,240,8,'220 V AC','(primary)','')+'<path d="M170 40H400V240H170M400 140H560V145M560 195V200H408M392 200H250V140H170M480 140V166M480 174V200" '+W+'/><path d="M408 200Q400 184 392 200" '+W+'/>';
+s+=capV(480,166)+dio(290,40,0,'d')+dio(290,240,0,'d')+rect(548,145,24,50)+dot(400,140)+dot(170,140)+dot(480,140)+dot(480,200);
+s+=tx(290,22,'D1','th','middle')+tx(290,222,'D2','th','middle')+tx(412,132,'J','th')+tx(498,174,'C')+tx(580,174,'R_L')+tx(186,132,'center tap');
+document.getElementById('cct').innerHTML=s;
+s=hc('M170 40H360L500 160H520V226M520 234V300H220V160L360 280H170','cpath',RED)+hc('M520 226V160H590V300H520V234','dpath',GRN);
+s+=xf(170,40,280,8,'220 V AC','(primary)','')+'<path d="M170 40H360L500 160L360 280H170M220 160L360 40M220 160L360 280M500 160H590V200M590 260V300H220V288M220 160V272M520 160V226M520 234V300" '+W+'/><path d="M220 272Q204 280 220 288" '+W+'/>';
+s+=capV(520,226)+rect(578,200,24,60)+dot(220,160)+dot(500,160)+dot(520,160)+dot(520,300)+tx(506,234,'C','ts','end')+tx(610,234,'R_L')+tx(610,206,'+')+tx(610,262,'−');
+s+=dio(430,100,40.6,'d')+dio(290,220,40.6,'d')+dio(290,100,-40.6,'d')+dio(430,220,-40.6,'d')+tx(452,92,'D1','th')+tx(268,240,'D2','th','end')+tx(268,92,'D3','th','end')+tx(452,240,'D4','th');
+document.getElementById('cbr').innerHTML=s;})();
+var CC={chw:['Charging (near the positive peak): D is ON. Current from the transformer fills C up to V<sub>p(out)</sub> (and also feeds R<sub>L</sub>).','Discharging (rest of the cycle): D is OFF. C pushes current down through R<sub>L</sub> and its voltage slowly sags until the next positive peak, one full cycle later.'],
+cct:['Charging (near a peak): the ON diode (D1 shown, D2 on the next half) fills C through node J. C sits in parallel with R<sub>L</sub>, between J and the center tap.','Discharging (between peaks): both diodes OFF. C feeds R<sub>L</sub> alone. Only half a cycle until the next refill, so less sag than half-wave.'],
+cbr:['Charging (near a peak): two diodes ON (D1 and D2 shown, D4 and D3 on the next half) fill C through the bridge.','Discharging (between peaks): all four diodes OFF. C feeds R<sub>L</sub> alone, refilled every half-cycle like the center-tapped version.']};
+function flipC(id){var e=document.getElementById(id);e.classList.toggle('dis');capC(id);}
+function capC(id){document.getElementById(id+'c').innerHTML=CC[id][document.getElementById(id).classList.contains('dis')?1:0];}
+['chw','cct','cbr'].forEach(capC);
+var TY=2,CV=[22,47,100,220,470,1000,2200];
+function setT(t){TY=t;['tHW','tCT','tBR'].forEach(function(id,i){document.getElementById(id).classList.toggle('on',i==t);});sim();}
+function sim(){var Vm=17,f=50,R=1000,on=document.getElementById('cOn').checked,C=CV[+document.getElementById('cIdx').value]*1e-6;
+document.getElementById('cVal').textContent=CV[+document.getElementById('cIdx').value]+' µF'+(on?'':' (off)');
+var drop=0,dt=2e-5,vc=0,pts=[],inp=[],k=0;
+for(var t=-0.04;t<=0.06;t+=dt){var vin=Vm*Math.sin(2*Math.PI*f*t),src=TY==0?vin-drop:Math.abs(vin)-drop;if(src<0)src=0;
+var vo=on?(vc=Math.max(src,vc*Math.exp(-dt/(R*C)))):src;if(t>=0&&(k++%10==0)){pts.push([t,vo]);inp.push([t,vin]);}}
+var X=function(t){return 60+t/0.06*580;},Y=function(v){return 140-v*6;};
+var s='<path d="M60 140H645M60 30V250" stroke="var(--t)" fill="none"/>';
+for(var m=0;m<=60;m+=10)s+=tx(X(m/1000),268-4,m+' ms','ts','middle');
+s+=tx(54,Y(17)+4,'17 V','ts','end')+tx(54,Y(-17)+4,'−17 V','ts','end')+tx(54,144,'0','ts','end');
+var d1='',d2='';inp.forEach(function(p,i){d1+=(i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1);});pts.forEach(function(p,i){d2+=(i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1);});
+s+='<path d="'+d1+'" stroke="var(--mut)" stroke-dasharray="4 4" fill="none"/><path d="'+d2+'" stroke="#D85A30" stroke-width="2.5" fill="none"/>';
+document.getElementById('ex').setAttribute('viewBox','0 0 680 272');document.getElementById('ex').innerHTML=s;
+var mx=-1,mn=99,sum=0;pts.forEach(function(p){mx=Math.max(mx,p[1]);mn=Math.min(mn,p[1]);sum+=p[1];});
+var fr=TY==0?f:2*f,vp=Vm-drop;
+document.getElementById('o1').textContent=vp.toFixed(1)+' V';document.getElementById('o2').textContent=fr+' Hz';
+document.getElementById('o3').textContent=(sum/pts.length).toFixed(2)+' V';
+document.getElementById('o4').textContent=on?(mx-mn).toFixed(2)+' V':'(no C)';
+document.getElementById('o5').textContent=on?(vp/(fr*R*C)).toFixed(2)+' V':'—';}
+setT(2);
+</script>
+</body></html>

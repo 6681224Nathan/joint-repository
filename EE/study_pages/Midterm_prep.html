@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Midterm prep</title>
+<style>
+:root{--bg:#fff;--fg:#1f1f1c;--mut:#5f5e5a;--card:#f4f2ec;--bd:#d3d1c7;--t:#1f1f1c;--acc:#185FA5;--hi:#FAEEDA}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1b19;--fg:#ece9df;--mut:#b4b2a9;--card:#2a2a27;--bd:#444441;--t:#ece9df;--acc:#85B7EB;--hi:#412402}}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,sans-serif;max-width:780px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:20px;margin:40px 0 8px;padding-top:16px;border-top:1px solid var(--bd)}h3{font-size:16px;margin:24px 0 6px}
+.sub{color:var(--mut);margin:0 0 16px}
+.box{background:var(--card);border-radius:10px;padding:12px 16px;margin:12px 0}
+.key{background:var(--hi);border-radius:10px;padding:12px 16px;margin:12px 0}
+table{border-collapse:collapse;width:100%;margin:10px 0}th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}th{background:var(--card)}
+svg{width:100%;height:auto;display:block;margin:8px 0}
+svg text{font-family:system-ui,-apple-system,sans-serif}
+svg text.t{font-size:14px;fill:var(--fg)}svg text.ts{font-size:12px;fill:var(--mut)}svg text.th{font-size:14px;font-weight:600;fill:var(--fg)}svg text.acc{fill:var(--acc)}
+.w{fill:none;stroke:var(--t);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.pl{stroke-width:2.8}.hl{stroke:var(--acc)}.dotc{fill:var(--t)}.bgf{fill:var(--bg)}.ah{fill:var(--t)}.ah.hl{fill:var(--acc)}
+details{border:1px solid var(--bd);border-radius:10px;padding:8px 14px;margin:12px 0}summary{cursor:pointer;font-weight:600;color:var(--acc)}
+a{color:var(--acc)}
+.mcq li{margin:8px 0}
+</style></head><body>
+
+<h1>Midterm prep: what to expect, and practice in the quiz 1 style</h1>
+<p class="sub">EGCI 232 · midterm Fri 30 Oct 2026, 12:30–14:30, rooms 6274/6275 · calculator and stationery only, bring your student ID</p>
+
+<h2 id="a">1. What quiz 1 tested (from the solution posted on Teams)</h2>
+<table>
+<tr><th>Part</th><th>What it was</th><th>Method used in the solution</th><th>Study page</th></tr>
+<tr><td>Multiple choice (10)</td><td>Theory: silicon at 0 K, majority carriers, forward bias, the 0.7 V model, why a filter capacitor, BJT active-mode biasing, which region is most doped, the current relation, the BJT as a switch, the effect of R<sub>L</sub> on gain</td><td>One-line reasons written beside each answer</td><td><a href="S1_diode_circuits.html">S1</a>, <a href="S2_rectifiers.html">S2</a>, <a href="S3_BJT_amplifier.html">S3</a></td></tr>
+<tr><td>Rectifier design</td><td>Bridge from 100 V RMS 50 Hz mains, given V<sub>DC</sub>, V<sub>r</sub> and R<sub>L</sub>: find the circuit, V<sub>m</sub>, turns ratio, f<sub>r</sub>, PIV, C</td><td><b>Ideal diodes.</b> V<sub>m</sub> = V<sub>DC</sub> + V<sub>r</sub>/2, C = V<sub>m</sub>/(V<sub>r</sub> f<sub>r</sub> R<sub>L</sub>), PIV = V<sub>m</sub> (bridge)</td><td><a href="S2_rectifiers.html">S2</a></td></tr>
+<tr><td>CE amplifier</td><td>Fully bypassed CE with a <b>dual (± supply)</b>, R<sub>sig</sub> and R<sub>L</sub>: DC (I<sub>B</sub>, I<sub>C</sub>, V<sub>CE</sub>, mode), g<sub>m</sub> and r<sub>π</sub>, draw the hybrid-pi circuit, overall gain v<sub>o</sub>/v<sub>sig</sub></td><td>Divider from +V<sub>CC</sub> to −V<sub>EE</sub>, KVL base loop ending at −V<sub>EE</sub>; v<sub>π</sub> from the R<sub>sig</sub> divider; v<sub>o</sub> = −g<sub>m</sub>v<sub>π</sub>(R<sub>C</sub>∥R<sub>L</sub>). The hybrid-pi model and V<sub>T</sub> = 0.026 V were printed on the paper.</td><td><a href="S3_BJT_amplifier.html">S3</a> + section 3 below</td></tr></table>
+<div class="key"><b>What the midterm probably adds</b> (2 hours instead of 1, lectures 1–5): more theory MCQs (semiconductor physics from lecture 2 is fair game), diode circuit analysis (assume ON/OFF and check), maybe a clipper/limiter or zener circuit (lecture 3 slides 32–40, <b>not studied yet</b>), BJT bias / load line / switch, and the same two long problem types. This is a guess from the quiz pattern and the syllabus, not something the professor said.</div>
+
+<h2 id="mcq">2. Theory multiple choice (new questions, quiz 1 style)</h2>
+<ol class="mcq">
+<li>In an n-type semiconductor the majority carriers are (a) holes (b) electrons (c) positive ions (d) negative ions. <details><summary>Answer</summary>(b) electrons. A pentavalent (5-valence-electron) dopant such as phosphorus gives a spare electron.</details></li>
+<li>Pure (intrinsic) silicon at room temperature (a) is a perfect insulator (b) conducts a little because heat frees a few electron-hole pairs (c) conducts like copper. <details><summary>Answer</summary>(b). At 0 K it is an insulator, because no electron has the energy to reach the conduction band.</details></li>
+<li>A p-type material is made by adding an impurity with (a) 3 (b) 4 (c) 5 valence electrons. <details><summary>Answer</summary>(a) trivalent, e.g. boron. Each one leaves a hole.</details></li>
+<li>The depletion region contains (a) free electrons only (b) holes only (c) fixed ions and almost no free carriers. <details><summary>Answer</summary>(c).</details></li>
+<li>The barrier potential of a silicon PN junction is about (a) 0.3 V (b) 0.7 V (c) 1.5 V. <details><summary>Answer</summary>(b) 0.7 V (germanium about 0.3 V).</details></li>
+<li>Reverse biasing a PN junction makes the depletion region (a) wider (b) narrower (c) unchanged. <details><summary>Answer</summary>(a) wider, and almost no current flows.</details></li>
+<li>In the ideal diode model, a forward-biased diode is (a) an open circuit (b) a short circuit (c) a 0.7 V source. <details><summary>Answer</summary>(b) a plain wire. (c) is the constant-voltage-drop model.</details></li>
+<li>The ripple frequency of a full-wave rectifier on 50 Hz mains is (a) 25 Hz (b) 50 Hz (c) 100 Hz. <details><summary>Answer</summary>(c) 2f.</details></li>
+<li>With ideal diodes, the PIV of each diode in a center-tapped rectifier is (a) V<sub>m</sub> (b) 2V<sub>m</sub> (c) V<sub>m</sub>/2. <details><summary>Answer</summary>(b) 2V<sub>m</sub>.</details></li>
+<li>Making the filter capacitor bigger (a) increases the ripple (b) decreases the ripple (c) changes the ripple frequency. <details><summary>Answer</summary>(b): V<sub>r</sub> = V<sub>m</sub>/(f<sub>r</sub>R<sub>L</sub>C).</details></li>
+<li>The base of a BJT is (a) thick and heavily doped (b) thin and lightly doped (c) the widest region. <details><summary>Answer</summary>(b). That's why most electrons pass straight through to the collector.</details></li>
+<li>A BJT used as an open switch is in (a) cutoff (b) active (c) saturation. <details><summary>Answer</summary>(a) cutoff.</details></li>
+<li>For an NPN in saturation, (a) V<sub>C</sub> &gt; V<sub>B</sub> (b) V<sub>B</sub> &gt; V<sub>C</sub> (c) V<sub>BE</sub> &lt; 0.5 V. <details><summary>Answer</summary>(b): both junctions are forward biased.</details></li>
+<li>In a CE amplifier, increasing the collector resistor R<sub>C</sub> (with no load) makes |A<sub>v</sub>| (a) larger (b) smaller (c) unchanged. <details><summary>Answer</summary>(a): A<sub>v</sub> = −g<sub>m</sub>R<sub>C</sub>. (It also moves the Q-point, so not without limit.)</details></li>
+<li>The hybrid-pi resistance r<sub>π</sub> equals (a) g<sub>m</sub>/β (b) β/g<sub>m</sub> (c) β·g<sub>m</sub>. <details><summary>Answer</summary>(b) β/g<sub>m</sub> = βV<sub>T</sub>/I<sub>C</sub>.</details></li>
+<li>Adding a source resistance R<sub>sig</sub> in front of a CE amplifier makes the overall gain v<sub>o</sub>/v<sub>sig</sub> (a) larger (b) smaller (c) unchanged. <details><summary>Answer</summary>(b): only Z<sub>i</sub>/(Z<sub>i</sub> + R<sub>sig</sub>) of v<sub>sig</sub> reaches the base.</details></li>
+</ol>
+
+<h2 id="dual">3. New skill: dual-supply bias (± supply)</h2>
+<p>Quiz 1 used <b>two supplies</b>: +V<sub>CC</sub> on top and −V<sub>EE</sub> at the bottom (R<sub>2</sub> and R<sub>E</sub> go to −V<sub>EE</sub> instead of ground). Only the DC part changes. For AC, <b>both supplies are AC ground</b>, so the AC analysis is exactly the same as in S3.</p>
+<table>
+<tr><th>Step</th><th>Single supply (S3)</th><th>Dual supply</th></tr>
+<tr><td>Thévenin voltage</td><td>V<sub>TH</sub> = V<sub>CC</sub>·R<sub>2</sub>/(R<sub>1</sub>+R<sub>2</sub>)</td><td><b>V<sub>TH</sub> = −V<sub>EE</sub> + (V<sub>CC</sub> + V<sub>EE</sub>)·R<sub>2</sub>/(R<sub>1</sub>+R<sub>2</sub>)</b> (the divider spans the whole V<sub>CC</sub> + V<sub>EE</sub>, measured up from −V<sub>EE</sub>)</td></tr>
+<tr><td>R<sub>TH</sub></td><td colspan="2">R<sub>1</sub>∥R<sub>2</sub> in both cases</td></tr>
+<tr><td>Base loop</td><td>V<sub>TH</sub> = I<sub>B</sub>R<sub>TH</sub> + 0.7 + I<sub>E</sub>R<sub>E</sub></td><td><b>V<sub>TH</sub> − I<sub>B</sub>R<sub>TH</sub> − 0.7 − I<sub>E</sub>R<sub>E</sub> = −V<sub>EE</sub></b>, so I<sub>B</sub> = (V<sub>TH</sub> − 0.7 + V<sub>EE</sub>)/(R<sub>TH</sub> + (β+1)R<sub>E</sub>)</td></tr>
+<tr><td>Emitter voltage</td><td>V<sub>E</sub> = I<sub>E</sub>R<sub>E</sub></td><td><b>V<sub>E</sub> = −V<sub>EE</sub> + I<sub>E</sub>R<sub>E</sub></b> (usually negative)</td></tr>
+<tr><td>V<sub>C</sub>, V<sub>CE</sub></td><td colspan="2">V<sub>C</sub> = V<sub>CC</sub> − I<sub>C</sub>R<sub>C</sub>, V<sub>CE</sub> = V<sub>C</sub> − V<sub>E</sub> in both cases</td></tr></table>
+
+<h3>Practice D1 · Dual-supply CE amplifier (quiz 1 style, new numbers) · 20 min</h3>
+<svg id="d1" viewBox="0 0 680 420" role="img"><title>Dual supply CE amplifier</title></svg>
+<p>β = 120, V<sub>BE(on)</sub> = 0.7 V, V<sub>T</sub> = 0.026 V, r<sub>o</sub> = ∞, R<sub>E</sub> fully bypassed by C<sub>E</sub>. (a) DC analysis: find I<sub>B</sub>, I<sub>C</sub> and V<sub>CE</sub>, and show the transistor is active. (b) Find g<sub>m</sub> and r<sub>π</sub>. (c) Draw the small-signal (hybrid-pi) equivalent circuit. (d) Find the overall gain A<sub>v</sub> = v<sub>o</sub>/v<sub>sig</sub>.</p>
+<details><summary>Solution D1</summary>
+<p><b>(a) DC</b> (capacitors open, v<sub>sig</sub> off):</p>
+<p>V<sub>TH</sub> = −10 + 20 × 33/80 = −10 + 8.25 = <b>−1.75 V</b>; R<sub>TH</sub> = 47 k∥33 k = <b>19.4 kΩ</b>.</p>
+<p>Base loop from V<sub>TH</sub> down to −10 V: −1.75 − I<sub>B</sub>(19.4 k) − 0.7 − 121·I<sub>B</sub>(5.6 k) = −10 → I<sub>B</sub> = 7.55/(19.4 k + 677.6 k) = <b>10.8 µA</b>.</p>
+<p>I<sub>C</sub> = 120 × 10.8 µA = <b>1.30 mA</b>; I<sub>E</sub> = 1.31 mA. V<sub>E</sub> = −10 + 1.31 mA × 5.6 k = −2.66 V; V<sub>B</sub> = −1.96 V; V<sub>C</sub> = 10 − 1.30 mA × 4.7 k = 3.89 V.</p>
+<p><b>V<sub>CE</sub> = 3.89 − (−2.66) = 6.55 V</b> &gt; 0.2 V, and V<sub>C</sub> &gt; V<sub>B</sub> &gt; V<sub>E</sub> → <b>active</b> ✓</p>
+<p><b>(b)</b> g<sub>m</sub> = 1.30 mA/26 mV = <b>50 mS</b>; r<sub>π</sub> = βV<sub>T</sub>/I<sub>C</sub> = 120/0.05 = <b>2.4 kΩ</b>.</p>
+<p><b>(c)</b> Both supplies → ground, all capacitors → wires, the emitter is grounded by C<sub>E</sub>:</p>
+<svg id="d1ac" viewBox="0 0 680 360" role="img"><title>D1 small-signal circuit</title></svg>
+<p><b>(d)</b> Z<sub>i</sub> = R<sub>1</sub>∥R<sub>2</sub>∥r<sub>π</sub> = 19.4 k∥2.4 k = 2.14 kΩ.</p>
+<p>v<sub>π</sub> = v<sub>sig</sub> · Z<sub>i</sub>/(R<sub>sig</sub> + Z<sub>i</sub>) = v<sub>sig</sub> × 2.14/2.74 = 0.781 v<sub>sig</sub>.</p>
+<p>v<sub>o</sub> = −g<sub>m</sub>v<sub>π</sub>(R<sub>C</sub>∥R<sub>L</sub>) with R<sub>C</sub>∥R<sub>L</sub> = 4.7 k∥8.2 k = 2.99 kΩ.</p>
+<p><b>A<sub>v</sub> = v<sub>o</sub>/v<sub>sig</sub> = −0.05 × 2988 × 0.781 = −117</b> (from base to output alone: −149).</p></details>
+
+<h2 id="rect">4. Rectifier design practice (quiz 1 style, ideal diodes)</h2>
+<p>Draw the circuit yourself first (checklist in <a href="S2_rectifiers.html#prac">S2 practice</a>), then compute.</p>
+<h3>R1 · Center-tapped design · 12 min</h3>
+<p>Input 220 V RMS, 50 Hz. Design a <b>center-tapped</b> full-wave rectifier with a capacitor filter that gives V<sub>DC</sub> = 12 V with a ripple V<sub>r</sub> = 0.4 V into R<sub>L</sub> = 200 Ω. (a) Draw the circuit. (b) V<sub>m</sub> of each half of the secondary. (c) Ripple frequency. (d) C. (e) Turns ratio (primary peak : whole secondary peak). (f) PIV. (g) Ripple factor.</p>
+<details><summary>Solution R1</summary>
+<p>(a) Center-tapped transformer; each end goes to its own diode, the cathodes join at J; C and R<sub>L</sub> in parallel from J to the center tap (see <a href="S2_rectifiers.html#s4">S2 section 4</a>).</p>
+<p>(b) V<sub>DC</sub> = V<sub>m</sub> − V<sub>r</sub>/2 → V<sub>m</sub> = 12 + 0.2 = <b>12.2 V</b>.</p>
+<p>(c) Full-wave: f<sub>r</sub> = 2 × 50 = <b>100 Hz</b>.</p>
+<p>(d) C = V<sub>m</sub>/(V<sub>r</sub> f<sub>r</sub> R<sub>L</sub>) = 12.2/(0.4 × 100 × 200) = <b>1.53 mF</b>.</p>
+<p>(e) Primary peak = 220√2 = 311 V. The whole secondary peaks at 2 × 12.2 = 24.4 V, so 311 : 24.4 = <b>12.75 : 1</b> (a 12.2-0-12.2 V peak center-tapped secondary).</p>
+<p>(f) PIV = 2V<sub>m</sub> = <b>24.4 V</b>.</p>
+<p>(g) r = V<sub>r</sub>/V<sub>DC</sub> = 0.4/12 = <b>0.033 (3.3%)</b>.</p></details>
+
+<h3>R2 · Half-wave from a power rating · 10 min</h3>
+<p>A device rated <b>0.9 W at 9 V</b> is powered from <b>120 V RMS, 60 Hz</b> by a <b>half-wave</b> rectifier with a filter capacitor. Take V<sub>r</sub> = 10% of V<sub>m</sub>. (a) Draw it. (b) R<sub>L</sub>. (c) V<sub>m</sub>. (d) C. (e) Turns ratio. (f) PIV.</p>
+<details><summary>Solution R2</summary>
+<p>(a) Transformer, one diode in series, C in parallel with R<sub>L</sub>.</p>
+<p>(b) R<sub>L</sub> = V²/P = 81/0.9 = <b>90 Ω</b>.</p>
+<p>(c) 9 = V<sub>m</sub> − 0.05V<sub>m</sub> = 0.95V<sub>m</sub> → <b>V<sub>m</sub> = 9.47 V</b>.</p>
+<p>(d) Half-wave: f<sub>r</sub> = 60 Hz. 0.1 = 1/(60 × 90 × C) → <b>C = 1.85 mF</b>.</p>
+<p>(e) 120√2 = 169.7 V, so 169.7 : 9.47 = <b>17.9 : 1</b>.</p>
+<p>(f) Half-wave with a capacitor: PIV = 2V<sub>m</sub> = <b>18.9 V</b>.</p></details>
+
+<h2 id="gaps">5. Still to study before Friday</h2>
+<ul>
+<li><b>Clippers, limiters and the zener diode</b> (lecture 3, slides 32–40): not covered yet.</li>
+<li><b>Semiconductor physics</b> (lecture 2): only touched by the MCQs above. A short theory page would help.</li>
+<li><b>Other BJT amplifiers (CC, CB)</b>: the slides are missing from the EE folder. Add them if they're on Teams.</li></ul>
+
+<script>
+var sb=function(s){return '<tspan dy="4" font-size="10">'+s+'</tspan><tspan dy="-4">​</tspan>';};
+function pts(a){return a.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ');}
+function P(a,c){return '<polyline class="'+(c||'w')+'" points="'+pts(a)+'"/>';}
+function T(x,y,s,c,an){return '<text class="'+(c||'ts')+'" x="'+x+'" y="'+y+'" text-anchor="'+(an||'start')+'">'+s+'</text>';}
+function dot(x,y){return '<circle class="dotc" cx="'+x+'" cy="'+y+'" r="3.5"/>';}
+function resV(x,y1,y2,c){c=c||'w';var m=(y1+y2)/2,a=[[x,y1],[x,m-24]];for(var i=0;i<6;i++)a.push([x+(i%2?-7:7),m-20+8*i]);a.push([x,m+24],[x,y2]);return P(a,c);}
+function resH(x1,x2,y,c){c=c||'w';var m=(x1+x2)/2,a=[[x1,y],[m-24,y]];for(var i=0;i<6;i++)a.push([m-20+8*i,y+(i%2?-7:7)]);a.push([m+24,y],[x2,y]);return P(a,c);}
+function capV(x,y1,y2){var m=(y1+y2)/2;return P([[x,y1],[x,m-4]])+P([[x-14,m-4],[x+14,m-4]],'w pl')+P([[x-14,m+4],[x+14,m+4]],'w pl')+P([[x,m+4],[x,y2]]);}
+function capH(x1,x2,y){var m=(x1+x2)/2;return P([[x1,y],[m-4,y]])+P([[m-4,y-14],[m-4,y+14]],'w pl')+P([[m+4,y-14],[m+4,y+14]],'w pl')+P([[m+4,y],[x2,y]]);}
+function gnd(x,y){return P([[x,y],[x,y+8]])+P([[x-12,y+8],[x+12,y+8]])+P([[x-7,y+13],[x+7,y+13]])+P([[x-3,y+18],[x+3,y+18]]);}
+function src(x,y){return '<circle class="w bgf" cx="'+x+'" cy="'+y+'" r="18"/><path class="w" d="M'+(x-10)+' '+y+' q5 -11 10 0 t10 0"/>';}
+function ah(x1,y1,x2,y2,c){var dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,nx=-uy,ny=ux,bx=x2-9*ux,by=y2-9*uy;return '<polygon class="ah '+(c||'')+'" points="'+x2+','+y2+' '+(bx+5*nx)+','+(by+5*ny)+' '+(bx-5*nx)+','+(by-5*ny)+'"/>';}
+function npn(x,y){return '<circle class="w" cx="'+(x+3)+'" cy="'+y+'" r="27"/>'+P([[x-30,y],[x-8,y]])+P([[x-8,y-16],[x-8,y+16]],'w pl')+P([[x-8,y-7],[x+14,y-22],[x+14,y-40]])+P([[x-8,y+7],[x+14,y+22],[x+14,y+40]])+ah(x-8,y+7,x+12,y+20.6);}
+function csrc(x,y1,y2,c){var m=(y1+y2)/2;return P([[x,y1],[x,m-18]],c)+'<polygon class="'+(c||'w')+' bgf" points="'+x+','+(m-18)+' '+(x+18)+','+m+' '+x+','+(m+18)+' '+(x-18)+','+m+'"/>'+P([[x,m-10],[x,m+4]],c)+ah(x,m-10,x,m+11,'hl')+P([[x,m+18],[x,y2]],c);}
+
+(function(){var s=P([[270,40],[400,40]])+T(408,44,'+V'+sb('CC')+' = +10 V','th');
+s+=resV(270,40,200)+T(284,112,'R'+sb('1'),'th')+T(284,130,'47 kΩ')+dot(270,200)+resV(270,200,380)+T(284,276,'R'+sb('2'),'th')+T(284,294,'33 kΩ');
+s+=P([[270,200],[300,200]])+npn(330,200)+T(374,204,'β = 120','t')+resV(344,40,160)+T(358,94,'R'+sb('C'),'th')+T(358,112,'4.7 kΩ');
+s+=dot(344,145)+P([[344,145],[400,145]])+capH(400,450,145)+T(425,124,'C'+sb('C2'),'ts','middle')+P([[450,145],[540,145]])+dot(540,145)+T(500,136,'v'+sb('o'),'t','middle')+resV(540,145,330)+T(554,236,'R'+sb('L'),'th')+T(554,254,'8.2 kΩ')+gnd(540,330);
+s+=resV(344,240,380)+T(358,300,'R'+sb('E'),'th')+T(358,318,'5.6 kΩ')+dot(344,256)+P([[344,256],[430,256]])+capV(430,256,330)+T(448,300,'C'+sb('E'),'ts')+gnd(430,330);
+s+=P([[270,380],[344,380]])+T(360,394,'−V'+sb('EE')+' = −10 V','th');
+s+=src(70,280)+P([[70,262],[70,200],[90,200]])+resH(90,160,200)+T(125,182,'R'+sb('sig')+' = 600 Ω','ts','middle')+P([[160,200],[190,200]])+capH(190,240,200)+T(215,180,'C'+sb('C1'),'ts','middle')+P([[240,200],[270,200]])+P([[70,298],[70,330]])+gnd(70,330)+T(44,284,'v'+sb('sig'),'th','end');
+document.getElementById('d1').innerHTML=s;})();
+
+(function(){var s=src(70,260)+P([[70,242],[70,180],[90,180]])+resH(90,160,180)+T(125,162,'R'+sb('sig')+' = 0.6 k','ts','middle')+P([[160,180],[300,180]])+dot(210,180)+dot(300,180)+T(300,168,'B','th','middle');
+s+=resV(210,180,320)+T(196,256,'R'+sb('1')+'∥R'+sb('2'),'th','end')+T(196,272,'19.4 k','ts','end')+resV(300,180,320,'w hl')+T(286,256,'r'+sb('π'),'acc th','end')+T(286,272,'2.4 k','ts','end')+T(316,204,'+','t')+T(316,312,'−','t')+T(316,256,'v'+sb('π'),'t');
+s+=csrc(420,110,320,'w hl')+T(442,218,'g'+sb('m')+'v'+sb('π'),'acc th')+T(442,234,'(50 mS)','ts')+T(420,98,'C','th','middle');
+s+=resV(520,110,320)+T(534,218,'R'+sb('C'),'th')+T(534,234,'4.7 k','ts')+resV(610,110,320)+T(624,218,'R'+sb('L'),'th')+T(624,234,'8.2 k','ts')+P([[420,110],[610,110]])+dot(520,110)+dot(610,110)+T(610,98,'v'+sb('o'),'t','middle');
+s+=P([[70,278],[70,320]])+P([[70,320],[610,320]])+gnd(140,320)+T(360,344,'E = ground (C'+sb('E')+'), both supplies = AC ground','ts','middle')+T(44,264,'v'+sb('sig'),'th','end');
+document.getElementById('d1ac').innerHTML=s;})();
+</script>
+</body></html>

@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "fceeaacc2be947b7",
+        "id": "34f50d19aa97b407",
         "type": "tabs",
         "children": [
           {
-            "id": "fe57bfa0297262ed",
+            "id": "ea451080ce8ca90f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "web_programming/js-course/10-express.md",
+                "file": "EE/EE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "10-express"
+              "title": "EE"
             }
           }
         ]
@@ -187,8 +187,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "fe57bfa0297262ed",
+  "active": "ea451080ce8ca90f",
   "lastOpenFiles": [
+    "EE/5-Common Emitter Amplifier AY2026-2027.pdf",
+    "EE/4-Bipolar Junction Transistor AY2026-2027.pdf",
+    "EE/3-Diode Circuits & Applications.pdf",
+    "EE/EE.md",
+    "web_programming/js-course/10-express.md",
     "web_programming/web_programming_workspace/practice_08/app_claude.js",
     "web_programming/web_programming_workspace/practice_08/comments.json",
     "web_programming/web_programming_workspace/practice_08/posts.json",
@@ -197,16 +202,12 @@
     "web_programming/web_programming_workspace/practice_08",
     "web_programming/web_programming_workspace/practice_07/app_claude.js",
     "web_programming/web_programming_workspace/practice_07/app.js",
-    "web_programming/web_programming_workspace/app.js",
-    "web_programming/web_programming_workspace/practice_07",
-    "web_programming/egci427-nodejs-updated.pdf",
     "web_programming/js-course/09-web-server-by-hand.md",
     "web_programming/js-course/07-async.md",
     "web_programming/js-course/08-node-tools.md",
     "web_programming/js-course/01-values-and-variables.md",
     "web_programming/js-course/00-start-here.md",
     "web_programming/web_programming.md",
-    "EE/EE.md",
     "princ makt/Principle of Marketing.md",
     "Untitled.canvas",
     "graduation project/xgboostLearn.md",
@@ -234,7 +235,6 @@
     "princ makt/Principle of Marketing Final.md",
     "princ makt/lectures and stuff/Principle of Marketing Final.md",
     "computer network/Midterm cheatsheet.md",
-    "losalamos/projnote.md",
-    "princ makt/group-project/Additional notes regarding the missing points in the presentation.md"
+    "losalamos/projnote.md"
   ]
 }

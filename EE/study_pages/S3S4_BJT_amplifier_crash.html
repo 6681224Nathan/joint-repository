@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BJT amplifier crash course</title>
+<style>
+:root{--bg:#fff;--fg:#1f1f1c;--mut:#5f5e5a;--card:#f4f2ec;--bd:#d3d1c7;--t:#1f1f1c;--surface-1:#f4f2ec;--acc:#185FA5;--hi:#FAEEDA}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1b19;--fg:#ece9df;--mut:#b4b2a9;--card:#2a2a27;--bd:#444441;--t:#ece9df;--surface-1:#2a2a27;--acc:#85B7EB;--hi:#412402}}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,sans-serif;max-width:780px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:25px;margin:0 0 4px}h2{font-size:20px;margin:34px 0 8px;padding-top:14px;border-top:1px solid var(--bd)}h3{font-size:16px;margin:18px 0 6px}
+.sub{color:var(--mut);margin:0 0 12px}.box{background:var(--card);border-radius:10px;padding:10px 14px;margin:10px 0}.key{background:var(--hi);border-radius:10px;padding:10px 14px;margin:10px 0}
+table{border-collapse:collapse;width:100%;margin:8px 0}th,td{border:1px solid var(--bd);padding:5px 9px;text-align:left;vertical-align:top}th{background:var(--card)}
+svg{width:100%;height:auto;display:block;margin:6px 0}svg text.t{font-size:14px;fill:var(--fg)}svg text.ts{font-size:12px;fill:var(--mut)}svg text.th{font-size:14px;font-weight:500;fill:var(--fg)}
+a{color:var(--acc)}details{border:1px solid var(--bd);border-radius:10px;padding:8px 14px;margin:10px 0}summary{cursor:pointer;font-weight:600;color:var(--acc)}
+</style></head><body>
+<h1>BJT amplifier crash course (20 min)</h1>
+<p class="sub">The amplifier problem of Quiz 1 · lecture 4 (BJT, biasing) + lecture 5 (CE amplifier) · read top to bottom</p>
+<div class="box"><a href="#sym">Symbols</a> · <a href="#a">1. What a BJT is</a> · <a href="#b">2. Modes</a> · <a href="#c">3. The circuit</a> · <a href="#d">4. DC analysis</a> · <a href="#e">5. Load line</a> · <a href="#f">6. AC analysis</a> · <a href="#g">7. Worked: slide 16</a> · <a href="#p">8. Practice</a></div>
+
+<h2 id="sym">Symbols</h2>
+<table><tr><th>Symbol</th><th>Meaning</th><th>Symbol</th><th>Meaning</th></tr>
+<tr><td>B, C, E</td><td>base, collector, emitter (the 3 legs)</td><td>V<sub>CC</sub></td><td>DC supply voltage (top rail)</td></tr>
+<tr><td>I<sub>B</sub>, I<sub>C</sub>, I<sub>E</sub></td><td>base, collector, emitter current (DC)</td><td>V<sub>TH</sub>, R<sub>TH</sub></td><td>Thévenin voltage, resistance of the R1–R2 divider</td></tr>
+<tr><td>β</td><td>current gain (how many times I<sub>C</sub> is bigger than I<sub>B</sub>)</td><td>Q-point</td><td>DC operating point (V<sub>CE</sub>, I<sub>C</sub>)</td></tr>
+<tr><td>V<sub>BE</sub></td><td>base–emitter voltage, 0.7 V when ON</td><td>g<sub>m</sub></td><td>transconductance: AC collector current per volt of v<sub>π</sub></td></tr>
+<tr><td>V<sub>CE</sub></td><td>collector–emitter voltage</td><td>V<sub>T</sub></td><td>thermal voltage, 26 mV at room temperature</td></tr>
+<tr><td>V<sub>B</sub>, V<sub>C</sub>, V<sub>E</sub></td><td>voltage at each leg, measured from ground</td><td>r<sub>π</sub></td><td>AC resistance looking into the base</td></tr>
+<tr><td>R<sub>s</sub></td><td>source (generator) resistance</td><td>v<sub>π</sub></td><td>AC voltage across r<sub>π</sub> (base to emitter)</td></tr>
+<tr><td>Z<sub>i</sub> (R<sub>i</sub>), Z<sub>o</sub> (R<sub>o</sub>)</td><td>input, output impedance of the amplifier</td><td>A<sub>v</sub>, A<sub>vs</sub>, A<sub>i</sub></td><td>gain v<sub>o</sub>/v<sub>in</sub>, gain v<sub>o</sub>/v<sub>s</sub>, current gain</td></tr></table>
+
+<h2 id="a">1. What a BJT is (2 min)</h2>
+<p>An NPN transistor is a <b>current-controlled valve</b>: a small current into the base (I<sub>B</sub>) opens a big current from collector to emitter (I<sub>C</sub> = β·I<sub>B</sub>). Small in → big out: that's amplification.</p>
+<svg id="f1" viewBox="0 0 680 230" role="img"><title>NPN transistor with currents</title></svg>
+<div class="key"><b>Three rules you use everywhere:</b><br>
+1. <b>I<sub>C</sub> = β·I<sub>B</sub></b> · 2. <b>I<sub>E</sub> = I<sub>B</sub> + I<sub>C</sub> = (β+1)·I<sub>B</sub></b> (everything leaves through the emitter) · 3. ON means <b>V<sub>BE</sub> = 0.7 V</b>, so <b>V<sub>B</sub> = V<sub>E</sub> + 0.7</b></div>
+
+<h2 id="b">2. The three modes (1 min)</h2>
+<table><tr><th>Mode</th><th>Test</th><th>Used as</th></tr>
+<tr><td>Cutoff</td><td>V<sub>BE</sub> &lt; ~0.5 V, I<sub>C</sub> = 0</td><td>switch OFF</td></tr>
+<tr><td><b>Active</b></td><td>V<sub>BE</sub> = 0.7 V and <b>V<sub>CE</sub> &gt; 0.2 V</b> (V<sub>C</sub> &gt; V<sub>B</sub>)</td><td><b>amplifier</b> (this is what we want)</td></tr>
+<tr><td>Saturation</td><td>V<sub>BE</sub> = 0.7 V, V<sub>CE</sub> ≈ 0.2 V (V<sub>C</sub> &lt; V<sub>B</sub>)</td><td>switch ON</td></tr></table>
+<p>So every amplifier problem ends its DC part with: <b>"V<sub>CE</sub> = … V &gt; 0.2 V → active region ✓"</b>.</p>
+
+<h2 id="c">3. The circuit you'll get (slide 16 / Lab 4)</h2>
+<svg id="f2" viewBox="0 0 680 350" role="img"><title>Common emitter amplifier</title></svg>
+<table><tr><th>Part</th><th>Job</th></tr>
+<tr><td>R1, R2</td><td>voltage divider that sets the base voltage (the bias)</td></tr>
+<tr><td>R<sub>C</sub></td><td>turns the changing collector current into a changing voltage (the output)</td></tr>
+<tr><td>R<sub>E</sub></td><td>stabilizes the DC bias</td></tr>
+<tr><td>C1, C2 (coupling)</td><td>let AC in and out, block DC so the bias isn't disturbed</td></tr>
+<tr><td>C<sub>E</sub> (bypass)</td><td>shorts R<sub>E</sub> for AC only, so the gain stays high</td></tr></table>
+<div class="key"><b>Professor's rule: DC analysis first (to get I<sub>C</sub> and check active), then AC analysis (gain, Z<sub>i</sub>, Z<sub>o</sub>).</b> Two different pictures of the same circuit:<br>
+DC picture: every capacitor = <b>open</b>. AC picture: every capacitor = <b>wire</b>, V<sub>CC</sub> = <b>ground</b>.</div>
+
+<h2 id="d">4. DC analysis (5 min)</h2>
+<p><b>Step A: draw the DC picture.</b> Capacitors are open, so v<sub>s</sub>, R<sub>s</sub>, R<sub>L</sub> and C<sub>E</sub> all disappear. <b>Step B: replace R1–R2 by its Thévenin equivalent</b> (S0!): that's what makes the base easy.</p>
+<svg id="f3" viewBox="0 0 680 300" role="img"><title>DC picture and Thévenin version</title></svg>
+<table><tr><th>Step</th><th>Formula</th><th>Why</th></tr>
+<tr><td>1</td><td><b>V<sub>TH</sub> = V<sub>CC</sub>·R2/(R1+R2)</b></td><td>open-circuit voltage of the divider</td></tr>
+<tr><td>2</td><td><b>R<sub>TH</sub> = R1 ∥ R2</b></td><td>V<sub>CC</sub> → ground, look in from the base</td></tr>
+<tr><td>3</td><td><b>I<sub>B</sub> = (V<sub>TH</sub> − 0.7) / (R<sub>TH</sub> + (β+1)R<sub>E</sub>)</b></td><td>KVL round the base loop: V<sub>TH</sub> = I<sub>B</sub>R<sub>TH</sub> + 0.7 + I<sub>E</sub>R<sub>E</sub>, with I<sub>E</sub> = (β+1)I<sub>B</sub></td></tr>
+<tr><td>4</td><td>I<sub>C</sub> = β I<sub>B</sub>, I<sub>E</sub> = (β+1) I<sub>B</sub></td><td>rules 1 and 2</td></tr>
+<tr><td>5</td><td>V<sub>E</sub> = I<sub>E</sub>R<sub>E</sub>, V<sub>C</sub> = V<sub>CC</sub> − I<sub>C</sub>R<sub>C</sub>, <b>V<sub>CE</sub> = V<sub>C</sub> − V<sub>E</sub></b></td><td>Ohm's law on R<sub>E</sub>, R<sub>C</sub></td></tr>
+<tr><td>6</td><td>V<sub>CE</sub> &gt; 0.2 V → active ✓</td><td>mode check</td></tr></table>
+<div class="box"><b>Example (Lab 4 circuit):</b> V<sub>CC</sub> = 12 V, R1 = 47k, R2 = 10k, R<sub>C</sub> = 2.2k, R<sub>E</sub> = 560 Ω, β = 100.<br>
+1. V<sub>TH</sub> = 12 × 10/57 = <b>2.105 V</b> · 2. R<sub>TH</sub> = 47k∥10k = <b>8.25 kΩ</b><br>
+3. I<sub>B</sub> = (2.105 − 0.7)/(8.25k + 101 × 0.56k) = 1.405/64.8k = <b>21.7 µA</b><br>
+4. I<sub>C</sub> = <b>2.17 mA</b>, I<sub>E</sub> = 2.19 mA · 5. V<sub>E</sub> = 1.23 V, V<sub>C</sub> = 12 − 2.17×2.2 = 7.23 V, <b>V<sub>CE</sub> = 6.0 V</b> · 6. active ✓</div>
+<p><b>Shortcut</b> (only if β·R<sub>E</sub> ≥ 10·R2): ignore I<sub>B</sub>, so V<sub>B</sub> ≈ V<sub>TH</sub> and I<sub>E</sub> ≈ (V<sub>TH</sub> − 0.7)/R<sub>E</sub>. Here β·R<sub>E</sub> = 56k &lt; 100k, so use the full formula.</p>
+
+<h2 id="e">5. DC load line and Q-point (1 min, lecture 5 slides 6–9)</h2>
+<p>Same trick as the diode (S1): two "pretend" points. Transistor = wire (V<sub>CE</sub> = 0): <b>I<sub>C(sat)</sub> = V<sub>CC</sub>/(R<sub>C</sub> + R<sub>E</sub>)</b>. Transistor = gap (I<sub>C</sub> = 0): <b>V<sub>CE(cutoff)</sub> = V<sub>CC</sub></b>. The Q-point (V<sub>CE</sub>, I<sub>C</sub>) sits on that line. For the biggest undistorted output, it should be near the <b>middle</b>; too close to either end and the output clips (slide 9).</p>
+<svg id="f4" viewBox="0 0 680 280" role="img"><title>DC load line</title></svg>
+
+<h2 id="f">6. AC analysis (6 min)</h2>
+<p><b>Step A: AC picture.</b> Capacitors → wire, V<sub>CC</sub> → ground. So R1 and R2 both end at ground (they're in parallel), R<sub>C</sub> and R<sub>L</sub> both end at ground (parallel), and C<sub>E</sub> shorts R<sub>E</sub> (emitter = ground).<br>
+<b>Step B: replace the transistor by the hybrid-pi model</b> (it's given in the exam; know what each part means):</p>
+<table><tr><th>Part</th><th>Meaning</th><th>Formula</th></tr>
+<tr><td>r<sub>π</sub> (between B and E)</td><td>what the base looks like to a small AC signal</td><td><b>r<sub>π</sub> = β/g<sub>m</sub></b></td></tr>
+<tr><td>g<sub>m</sub>v<sub>π</sub> (current source C → E)</td><td>the collector current, controlled by the base voltage v<sub>π</sub></td><td><b>g<sub>m</sub> = I<sub>C</sub>/V<sub>T</sub></b> (I<sub>C</sub> from DC!)</td></tr>
+<tr><td>r<sub>o</sub></td><td>output resistance of the transistor (very large)</td><td>usually ignored</td></tr></table>
+<svg id="f5" viewBox="0 0 680 290" role="img"><title>Hybrid-pi AC equivalent</title></svg>
+<h3>Gain with variables (the class assignment)</h3>
+<div class="box">Input side: the emitter is ground, so <b>v<sub>π</sub> = v<sub>in</sub></b>.<br>
+Output side (no load): the current g<sub>m</sub>v<sub>π</sub> flows <b>down</b> through R<sub>C</sub> from the output node to ground, so v<sub>o</sub> = −(g<sub>m</sub>v<sub>π</sub>)·R<sub>C</sub>. The minus is because the current flows <i>into</i> the output node's resistor from above, pulling the node below ground.<br>
+So <b>A<sub>v</sub> = v<sub>o</sub>/v<sub>in</sub> = −g<sub>m</sub>R<sub>C</sub></b>. With a load: R<sub>C</sub> → R<sub>C</sub>∥R<sub>L</sub>. The minus sign = output is inverted (180°), which is exactly what Lab 4 showed.</div>
+<table><tr><th>Quantity</th><th>Formula (R<sub>E</sub> bypassed)</th><th>Lab example (I<sub>C</sub> = 2.17 mA, β = 100)</th></tr>
+<tr><td>g<sub>m</sub></td><td>I<sub>C</sub>/26 mV</td><td>83.4 mS</td></tr>
+<tr><td>r<sub>π</sub></td><td>β/g<sub>m</sub></td><td>1.2 kΩ</td></tr>
+<tr><td>Z<sub>i</sub></td><td><b>R1∥R2∥r<sub>π</sub></b> (everything the source sees)</td><td>8.25k∥1.2k = 1.05 kΩ</td></tr>
+<tr><td>Z<sub>o</sub></td><td><b>R<sub>C</sub></b> (looking back from the output)</td><td>2.2 kΩ</td></tr>
+<tr><td>A<sub>v</sub> (no load)</td><td><b>−g<sub>m</sub>R<sub>C</sub></b></td><td>−184</td></tr>
+<tr><td>A<sub>v</sub> (with R<sub>L</sub>)</td><td><b>−g<sub>m</sub>(R<sub>C</sub>∥R<sub>L</sub>)</b></td><td>R<sub>L</sub> = 820 Ω: −49.8</td></tr>
+<tr><td>A<sub>vs</sub> (from v<sub>s</sub>)</td><td><b>A<sub>v</sub> × Z<sub>i</sub>/(Z<sub>i</sub> + R<sub>s</sub>)</b> (R<sub>s</sub> and Z<sub>i</sub> form a divider at the input)</td><td></td></tr>
+<tr><td>A<sub>i</sub></td><td>A<sub>v</sub> × Z<sub>i</sub>/R<sub>L</sub></td><td></td></tr></table>
+<div class="key"><b>If R<sub>E</sub> is NOT bypassed</b> (no C<sub>E</sub>): the emitter isn't ground any more. Then A<sub>v</sub> ≈ −(R<sub>C</sub>∥R<sub>L</sub>)/(1/g<sub>m</sub> + R<sub>E</sub>) (much smaller), and the base looks like r<sub>π</sub> + (β+1)R<sub>E</sub>, so Z<sub>i</sub> = R1∥R2∥[r<sub>π</sub> + (β+1)R<sub>E</sub>].</div>
+
+<h2 id="g">7. Worked: slide 16 design (4 min), the likely quiz type</h2>
+<p><b>Given:</b> V<sub>CC</sub> = 12 V, β = 100, want I<sub>C</sub> = 1 mA, V<sub>CE</sub> = 6 V, I<sub>R1</sub> = 10 I<sub>B</sub>, I<sub>R2</sub> = 9 I<sub>B</sub>, R<sub>s</sub> = 2k, R<sub>L</sub> = 5.1k, capacitors 100 µF. <b>Find</b> R<sub>C</sub>, R<sub>E</sub>, R1, R2, then A<sub>vi</sub>, A<sub>vs</sub>, R<sub>i</sub>, R<sub>o</sub>.<br>
+The slide doesn't fix V<sub>E</sub>: use the rule of thumb <b>V<sub>E</sub> = 0.1·V<sub>CC</sub> = 1.2 V</b> (if your professor gave another rule in class, use that).</p>
+<table><tr><th>Find</th><th>Formula</th><th>Numbers</th></tr>
+<tr><td>I<sub>B</sub>, I<sub>E</sub></td><td>I<sub>C</sub>/β, (β+1)I<sub>B</sub></td><td>10 µA, 1.01 mA</td></tr>
+<tr><td>R<sub>E</sub></td><td>V<sub>E</sub>/I<sub>E</sub></td><td>1.2/1.01m = <b>1.19 kΩ</b></td></tr>
+<tr><td>R<sub>C</sub></td><td>(V<sub>CC</sub> − V<sub>CE</sub> − V<sub>E</sub>)/I<sub>C</sub> (KVL down the right side)</td><td>(12 − 6 − 1.2)/1m = <b>4.8 kΩ</b></td></tr>
+<tr><td>V<sub>B</sub></td><td>V<sub>E</sub> + 0.7</td><td>1.9 V</td></tr>
+<tr><td>R2</td><td>V<sub>B</sub>/I<sub>R2</sub> = V<sub>B</sub>/(9 I<sub>B</sub>)</td><td>1.9/90µ = <b>21.1 kΩ</b></td></tr>
+<tr><td>R1</td><td>(V<sub>CC</sub> − V<sub>B</sub>)/I<sub>R1</sub> = (V<sub>CC</sub> − V<sub>B</sub>)/(10 I<sub>B</sub>)</td><td>10.1/100µ = <b>101 kΩ</b></td></tr>
+<tr><td>g<sub>m</sub>, r<sub>π</sub></td><td>I<sub>C</sub>/26 mV, β/g<sub>m</sub></td><td>38.5 mS, <b>2.6 kΩ</b></td></tr>
+<tr><td>R<sub>i</sub></td><td>R1∥R2∥r<sub>π</sub></td><td>101k∥21.1k∥2.6k = <b>2.26 kΩ</b></td></tr>
+<tr><td>R<sub>o</sub></td><td>R<sub>C</sub></td><td><b>4.8 kΩ</b></td></tr>
+<tr><td>A<sub>vi</sub></td><td>−g<sub>m</sub>(R<sub>C</sub>∥R<sub>L</sub>)</td><td>4.8k∥5.1k = 2.47k → −0.0385 × 2470 = <b>−95</b></td></tr>
+<tr><td>A<sub>vs</sub></td><td>A<sub>vi</sub> × R<sub>i</sub>/(R<sub>i</sub> + R<sub>s</sub>)</td><td>−95 × 2.26/4.26 = <b>−50.5</b></td></tr></table>
+<p>Why 10 I<sub>B</sub> / 9 I<sub>B</sub>: 10 I<sub>B</sub> comes down R1; at the base node I<sub>B</sub> goes into the transistor and the other 9 I<sub>B</sub> continues down R2 (KCL).</p>
+
+<h2 id="p">8. Practice (8 min, quiz style)</h2>
+<div class="box">Same circuit as section 3, R<sub>E</sub> bypassed. <b>V<sub>CC</sub> = 15 V, R1 = 56 kΩ, R2 = 12 kΩ, R<sub>C</sub> = 3.3 kΩ, R<sub>E</sub> = 1 kΩ, β = 150, R<sub>L</sub> = 10 kΩ, R<sub>s</sub> = 1 kΩ.</b><br>
+Find: (a) V<sub>TH</sub>, R<sub>TH</sub>, I<sub>B</sub> (b) I<sub>C</sub>, V<sub>CE</sub>, mode (c) the load-line end points (d) g<sub>m</sub>, r<sub>π</sub> (e) Z<sub>i</sub>, Z<sub>o</sub> (f) A<sub>v</sub> no load and with R<sub>L</sub> (g) A<sub>vs</sub>.</div>
+<details><summary>Solution</summary>
+<p>(a) V<sub>TH</sub> = 15 × 12/68 = <b>2.65 V</b> · R<sub>TH</sub> = 56k∥12k = <b>9.88 kΩ</b> · I<sub>B</sub> = (2.65 − 0.7)/(9.88k + 151 × 1k) = 1.947/160.9k = <b>12.1 µA</b></p>
+<p>(b) I<sub>C</sub> = 150 × 12.1µ = <b>1.82 mA</b> · I<sub>E</sub> = 1.83 mA · V<sub>E</sub> = 1.83 V · V<sub>C</sub> = 15 − 1.82 × 3.3 = 9.01 V · <b>V<sub>CE</sub> = 7.18 V &gt; 0.2 → active ✓</b></p>
+<p>(c) I<sub>C(sat)</sub> = 15/(3.3k + 1k) = <b>3.49 mA</b> · V<sub>CE(cutoff)</sub> = <b>15 V</b> · Q-point (7.18 V, 1.82 mA), close to the middle ✓</p>
+<p>(d) g<sub>m</sub> = 1.82m/26m = <b>69.8 mS</b> · r<sub>π</sub> = 150/0.0698 = <b>2.15 kΩ</b></p>
+<p>(e) Z<sub>i</sub> = 9.88k∥2.15k = <b>1.77 kΩ</b> · Z<sub>o</sub> = R<sub>C</sub> = <b>3.3 kΩ</b></p>
+<p>(f) No load: −0.0698 × 3300 = <b>−230</b> · With R<sub>L</sub>: 3.3k∥10k = 2.48k → −0.0698 × 2480 = <b>−173</b></p>
+<p>(g) A<sub>vs</sub> = −173 × 1.77/(1.77 + 1) = <b>−111</b></p></details>
+<div class="key"><b>Checklist:</b> DC (C open) → Thévenin → I<sub>B</sub> with (β+1)R<sub>E</sub> → I<sub>C</sub>, V<sub>CE</sub> → "active ✓" → AC (C wire, V<sub>CC</sub> ground) → g<sub>m</sub> from DC I<sub>C</sub> → r<sub>π</sub> → Z<sub>i</sub>, Z<sub>o</sub> → A<sub>v</sub> with the <b>minus sign</b> → A<sub>vs</sub> if R<sub>s</sub> is given. Write each formula before the numbers.</div>
+
+<script>
+var W='stroke="var(--t)" stroke-width="1.5" fill="none"';
+function R(x,y,w,h){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="3" fill="var(--surface-1)" stroke="var(--t)"/>';}
+function T(x,y,s,c,a,st){return '<text class="'+(c||'ts')+'" x="'+x+'" y="'+y+'"'+(a?' text-anchor="'+a+'"':'')+(st?' style="'+st+'"':'')+'>'+s+'</text>';}
+function D(x,y){return '<circle cx="'+x+'" cy="'+y+'" r="3.5" fill="var(--t)"/>';}
+function CV(x,y){return '<path d="M'+(x-13)+' '+y+'H'+(x+13)+'M'+(x-13)+' '+(y+8)+'H'+(x+13)+'" stroke="var(--t)" stroke-width="2.5"/>';}
+function CH(x,y){return '<path d="M'+x+' '+(y-13)+'V'+(y+13)+'M'+(x+8)+' '+(y-13)+'V'+(y+13)+'" stroke="var(--t)" stroke-width="2.5"/>';}
+function sub(a,b){return a+'<tspan dy="3" font-size="9">'+b+'</tspan><tspan dy="-3"></tspan>';}
+function Q(bx,cy){return '<path d="M'+bx+' '+(cy-22)+'V'+(cy+22)+'" stroke="var(--t)" stroke-width="3"/><path d="M'+bx+' '+(cy-10)+'L'+(bx+30)+' '+(cy-32)+'M'+bx+' '+(cy+10)+'L'+(bx+30)+' '+(cy+32)+'" '+W+'/><path d="M'+(bx+19)+' '+(cy+16)+'L'+(bx+30)+' '+(cy+32)+'L'+(bx+12)+' '+(cy+26)+'" fill="var(--t)" stroke="var(--t)"/>';}
+var G='#1D9E75',O='#D85A30';
+/* f1 */
+var s='<path d="M200 115H290M320 83V30M320 147V200" '+W+'/>'+Q(290,115);
+s+='<path d="M215 100H265M257 94L267 100L257 106" stroke="'+G+'" stroke-width="2" fill="none"/>'+T(240,90,sub('I','B')+' (small)','ts','middle','fill:#0F6E56');
+s+='<path d="M340 40V70M334 62L340 72L346 62" stroke="'+O+'" stroke-width="2" fill="none"/>'+T(352,58,sub('I','C')+' = β·'+sub('I','B')+' (big)','ts','','fill:#993C1D');
+s+='<path d="M340 160V190M334 182L340 192L346 182" stroke="'+O+'" stroke-width="2" fill="none"/>'+T(352,180,sub('I','E')+' = '+sub('I','B')+' + '+sub('I','C'),'ts','','fill:#993C1D');
+s+=T(190,119,'B','th','end')+T(320,22,'C','th','middle')+T(320,218,'E','th','middle')+T(250,150,sub('V','BE')+' = 0.7 V','ts','middle');
+s+=T(500,100,'NPN symbol:','th')+T(500,120,'arrow on the emitter')+T(500,136,'points OUT (the way')+T(500,152,'conventional current leaves)');
+document.getElementById('f1').innerHTML=s;
+/* f2 full circuit */
+s='<path d="M200 40H320M200 40V60M200 130V200M200 270V320M60 220V170H80M130 170H150M158 170H290M60 260V320H460M320 40V60M320 120V138M320 120H380M388 120H460V180M460 250V320M320 202V230M320 290V320M320 220H380V256M380 264V320" '+W+'/>';
+s+='<circle cx="60" cy="240" r="20" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M50 240q5 -8 10 0t10 0" '+W+'/>';
+s+=R(80,158,50,24)+R(188,60,24,70)+R(188,200,24,70)+R(308,60,24,60)+R(308,230,24,60)+R(448,180,24,70)+CH(150,170)+CH(380,120)+CV(380,256)+Q(290,170);
+s+=D(200,170)+D(320,120)+D(320,220)+D(460,120)+D(200,40)+D(320,320)+D(200,320);
+s+=T(330,34,sub('V','CC'))+T(105,150,sub('R','s'),'ts','middle')+T(34,244,sub('v','s'),'th','end')+T(180,99,'R1','th','end')+T(180,239,'R2','th','end')+T(340,94,sub('R','C'),'th')+T(340,264,sub('R','E'),'th')+T(398,262,sub('C','E'),'th')+T(480,219,sub('R','L'),'th');
+s+=T(154,198,'C1','ts','middle')+T(384,102,'C2','ts','middle')+T(276,176,'B','th','end')+T(330,145,'C','th')+T(330,210,'E','th')+T(470,112,sub('v','o'),'th');
+s+=T(530,90,'Input at the base,','ts')+T(530,106,'output at the collector,','ts')+T(530,122,'emitter common','ts')+T(530,138,'(to ground via C'+'<tspan dy="3" font-size="9">E</tspan><tspan dy="-3">)</tspan>','ts');
+document.getElementById('f2').innerHTML=s;
+/* f3 DC picture + Thevenin */
+s='<path d="M60 30H180M60 30V50M60 120V150H150M60 150V170M60 240V270M180 30V50M180 100V118M180 182V200M180 250V270M60 270H180" '+W+'/>';
+s+=R(48,50,24,70)+R(48,170,24,70)+R(168,50,24,50)+R(168,200,24,50)+Q(150,150)+D(60,150)+D(60,30)+D(60,270);
+s+=T(70,22,sub('V','CC'))+T(40,89,'R1','th','end')+T(40,209,'R2','th','end')+T(200,79,sub('R','C'),'th')+T(200,229,sub('R','E'),'th');
+s+=T(120,292,'DC picture (capacitors open)','ts','middle');
+s+='<path d="M250 150H263" stroke="var(--t)" stroke-width="2" fill="none"/><path d="M257 144L265 150L257 156" stroke="var(--t)" stroke-width="2" fill="none"/>';
+s+='<path d="M300 190V150H340M410 150H490M300 230V270H520M520 30V50M520 100V118M520 182V200M520 250V270M500 30H560" '+W+'/>';
+s+='<circle cx="300" cy="210" r="20" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/>'+T(300,204,'+','t','middle')+T(300,222,'−','t','middle');
+s+=R(340,138,70,24)+R(508,50,24,50)+R(508,200,24,50)+Q(490,150);
+s+=T(272,214,sub('V','TH'),'th','end')+T(375,130,sub('R','TH'),'th','middle')+T(540,79,sub('R','C'),'th')+T(540,229,sub('R','E'),'th')+T(530,22,sub('V','CC'))+T(430,292,'Thévenin version: one source + one resistor at the base','ts','middle');
+s+='<path d="M330 186H372M366 182L374 186L366 190" stroke="'+G+'" stroke-width="2" fill="none"/>'+T(352,204,sub('I','B'),'ts','middle','fill:#0F6E56');
+s+=T(600,150,'base loop KVL:','ts')+T(600,166,sub('V','TH')+' = '+sub('I','B')+sub('R','TH'),'ts')+T(600,182,'+ 0.7 + '+sub('I','E')+sub('R','E'),'ts');
+document.getElementById('f3').innerHTML=s;
+/* f4 load line (practice numbers) */
+var x0=80,x1=600,y0=240,y1=30,vm=16,im=4;function X(v){return x0+v/vm*(x1-x0);}function Y(i){return y0-i/im*(y0-y1);}
+s='<path d="M'+x0+' '+y0+'H'+(x1+10)+'M'+x0+' '+y0+'V'+(y1-8)+'" '+W+'/>';
+for(var v=0;v<=16;v+=2)s+=T(X(v),y0+16,v,'ts','middle');for(var i=0;i<=4;i++)s+=T(x0-8,Y(i)+4,i,'ts','end');
+s+='<path d="M'+X(0)+' '+Y(3.49)+'L'+X(15)+' '+Y(0)+'" stroke="'+O+'" stroke-width="2.5" fill="none"/>';
+s+='<circle cx="'+X(7.18)+'" cy="'+Y(1.82)+'" r="6" fill="#BA7517"/><path d="M'+x0+' '+Y(1.82)+'H'+X(7.18)+'V'+y0+'" stroke="#BA7517" stroke-dasharray="4 4" fill="none"/>';
+s+=T(X(0)+8,Y(3.49)-8,sub('I','C(sat)')+' = '+sub('V','CC')+'/('+sub('R','C')+' + '+sub('R','E')+')','th','','fill:#993C1D')+T(X(15),Y(0)-12,sub('V','CC')+' (cutoff)','th','middle','fill:#993C1D');
+s+=T(X(7.18)+12,Y(1.82)-10,'Q-point (7.18 V, 1.82 mA)','th','','fill:#854F0B')+T((x0+x1)/2,y0+34,sub('V','CE')+' (V)','ts','middle')+T(x0,y1-14,sub('I','C')+' (mA)','ts','middle');
+s+=T(X(11.5),Y(2.6),'practice problem numbers','ts','middle');
+document.getElementById('f4').innerHTML=s;
+/* f5 hybrid pi */
+var h='<path d="M60 160V100H90M150 100H300M220 100V140M220 200V250M300 100V140M300 200V250M60 200V250H600M420 148V100H600M420 192V250M510 100V140M510 200V250M600 100V140M600 200V250" '+W+'/>';
+h+='<circle cx="60" cy="180" r="20" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M50 180q5 -8 10 0t10 0" '+W+'/>';
+h+='<circle cx="420" cy="170" r="22" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M420 158V182M413 175L420 184L427 175" '+W+'/>';
+h+=R(90,88,60,24)+R(208,140,24,60)+R(288,140,24,60)+R(498,140,24,60)+R(588,140,24,60)+D(220,100)+D(300,100)+D(510,100)+D(600,100);
+h+=T(120,80,sub('R','s'),'ts','middle')+T(32,184,sub('v','s'),'th','end')+T(204,174,'R1∥R2','ts','end')+T(318,150,'+')+T(318,174,sub('r','π'),'th')+T(318,198,'−')+T(338,174,sub('v','π'),'ts');
+h+=T(446,166,sub('g','m')+sub('v','π'),'ts')+T(530,174,sub('R','C'),'th')+T(620,174,sub('R','L'),'th');
+h+=T(300,90,'B','th','middle')+T(420,90,'C','th','middle')+T(610,90,sub('v','o'),'th')+T(330,272,'E = ground (C'+'<tspan dy="3" font-size="9">E</tspan><tspan dy="-3"> shorts R</tspan><tspan dy="3" font-size="9">E</tspan><tspan dy="-3">), V</tspan><tspan dy="3" font-size="9">CC</tspan><tspan dy="-3"> = ground too</tspan>','ts','middle');
+h+=T(160,125,'Z'+'<tspan dy="3" font-size="9">i</tspan><tspan dy="-3"> →</tspan>','ts')+T(552,125,'← Z'+'<tspan dy="3" font-size="9">o</tspan>','ts');
+document.getElementById('f5').innerHTML=h;
+</script></body></html>

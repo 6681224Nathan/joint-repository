@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S1 Diode circuits</title>
+<style>
+:root{--bg:#fff;--fg:#1f1f1c;--mut:#5f5e5a;--card:#f4f2ec;--bd:#d3d1c7;--t:#1f1f1c;--surface-1:#f4f2ec;--acc:#185FA5;--hi:#FAEEDA}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1b19;--fg:#ece9df;--mut:#b4b2a9;--card:#2a2a27;--bd:#444441;--t:#ece9df;--surface-1:#2a2a27;--acc:#85B7EB;--hi:#412402}}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,sans-serif;max-width:760px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:20px;margin:40px 0 8px;padding-top:16px;border-top:1px solid var(--bd)}h3{font-size:16px;margin:24px 0 6px}
+.sub{color:var(--mut);margin:0 0 16px}
+.box{background:var(--card);border-radius:10px;padding:12px 16px;margin:12px 0}
+.key{background:var(--hi);border-radius:10px;padding:12px 16px;margin:12px 0}
+table{border-collapse:collapse;width:100%;margin:10px 0}th,td{border:1px solid var(--bd);padding:6px 10px;text-align:left;vertical-align:top}th{background:var(--card)}
+svg{width:100%;height:auto;display:block;margin:8px 0}
+svg text.t{font-size:14px;fill:var(--fg)}svg text.ts{font-size:12px;fill:var(--mut)}svg text.th{font-size:14px;font-weight:500;fill:var(--fg)}
+details{border:1px solid var(--bd);border-radius:10px;padding:8px 14px;margin:12px 0}summary{cursor:pointer;font-weight:600;color:var(--acc)}
+code{background:var(--card);padding:1px 5px;border-radius:4px}
+.toc a{color:var(--acc)}
+.steps{counter-reset:s;list-style:none;padding:0}.steps li{counter-increment:s;background:var(--card);border-radius:10px;padding:10px 14px 10px 48px;margin:8px 0;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:10px;width:24px;height:24px;border-radius:50%;background:var(--acc);color:var(--bg);text-align:center;font-weight:600;line-height:24px}
+button{font:inherit;font-size:14px;padding:6px 14px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--fg);cursor:pointer}
+.ctl{display:flex;align-items:center;gap:12px;margin:6px 0;color:var(--mut);font-size:14px}.ctl input{flex:1}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0}.cards div{background:var(--card);border-radius:8px;padding:8px 10px;font-size:13px;color:var(--mut)}.cards b{display:block;font-size:20px;color:var(--fg)}
+</style></head><body>
+
+<h1>S1: Diode circuits</h1>
+<p class="sub">EGCI 232 · about 40 min · from lecture 2 slides 20–35 and the professor's worked notes ("with note" file)</p>
+<div class="box toc"><b>Contents</b><br>
+<a href="#a">1. What a diode does</a> · <a href="#b">2. The three diode models</a> · <a href="#c">3. Load line and Q-point</a> · <a href="#d">4. Method: assume, then check</a> · <a href="#e">5. Professor's example</a> · <a href="#prac">Practice P1–P3</a></div>
+
+<h2 id="a">1. What a diode does</h2>
+<p>A diode is a <b>one-way valve for current</b>. Current can flow from the <b>anode</b> (A) to the <b>cathode</b> (K), in the direction the triangle points. It blocks current going the other way.</p>
+<svg viewBox="0 0 680 150" role="img"><title>Diode symbol, ON and OFF</title>
+<g fill="none" stroke="var(--t)" stroke-width="1.5"><path d="M60 60H140M170 60H250"/><path d="M400 60H480M510 60H590"/></g>
+<polygon points="140,44 140,76 170,60" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M170 44V76" stroke="var(--t)" stroke-width="2"/>
+<polygon points="480,44 480,76 510,60" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M510 44V76" stroke="var(--t)" stroke-width="2"/>
+<path d="M90 96H220" stroke="#1D9E75" stroke-width="2.5" fill="none"/><path d="M212 90L222 96L212 102" stroke="#1D9E75" stroke-width="2.5" fill="none"/>
+<path d="M440 96H560M440 88L560 104M440 104L560 88" stroke="#E24B4A" stroke-width="2" fill="none"/>
+<text class="th" x="60" y="44">A (+)</text><text class="th" x="250" y="44" text-anchor="end">K (−)</text>
+<text class="th" x="400" y="44">A (−)</text><text class="th" x="590" y="44" text-anchor="end">K (+)</text>
+<text class="ts" x="155" y="128" text-anchor="middle">Forward bias: anode higher → ON, current flows</text>
+<text class="ts" x="495" y="128" text-anchor="middle">Reverse bias: cathode higher → OFF, no current</text></svg>
+<p>A real silicon diode needs about <b>0.7 V</b> across it before it really conducts (germanium: about 0.3 V). That 0.7 V is the barrier potential of the PN junction (theory in T2).</p>
+
+<h2 id="b">2. The three diode models</h2>
+<p>A diode isn't a resistor, so you can't put it straight into KVL or mesh equations. The trick is to <b>swap the diode for something simple</b> that KVL understands (a wire, a small battery or a gap), then solve as usual. Which swap you use is called the <b>model</b>. The question tells you which one ("ideal diode" or "V<sub>D</sub> = 0.7 V" / "non-ideal").</p>
+<svg viewBox="0 0 680 230" role="img"><title>I-V curves of the three models</title>
+<g fill="none" stroke="var(--t)" stroke-width="1"><path d="M50 160H190M100 40V190"/><path d="M280 160H420M330 40V190"/><path d="M510 160H650M560 40V190"/></g>
+<path d="M50 160H100V45" fill="none" stroke="#378ADD" stroke-width="3"/>
+<path d="M280 160H365V45" fill="none" stroke="#378ADD" stroke-width="3"/>
+<path d="M510 160H575C588 160 593 150 597 45" fill="none" stroke="#378ADD" stroke-width="3"/>
+<path d="M365 160V170M595 160V170" stroke="var(--t)"/>
+<text class="ts" x="365" y="182" text-anchor="middle">0.7 V</text><text class="ts" x="595" y="182" text-anchor="middle">≈0.7 V</text>
+<text class="th" x="120" y="24" text-anchor="middle">Ideal</text><text class="th" x="350" y="24" text-anchor="middle">Constant drop (0.7 V)</text><text class="th" x="580" y="24" text-anchor="middle">Real diode</text>
+<text class="ts" x="194" y="164">V</text><text class="ts" x="106" y="48">I</text>
+<text class="ts" x="424" y="164">V</text><text class="ts" x="336" y="48">I</text>
+<text class="ts" x="654" y="164" text-anchor="end">V</text><text class="ts" x="566" y="48">I</text>
+<text class="ts" x="120" y="215" text-anchor="middle">turns on at 0 V</text><text class="ts" x="350" y="215" text-anchor="middle">turns on at 0.7 V</text><text class="ts" x="580" y="215" text-anchor="middle">smooth curve (exponential)</text></svg>
+<div class="key"><b>What this table is for:</b> it's the toolkit for the method in <a href="#d">section 4</a>. When you guess a diode is ON or OFF, the <b>middle columns</b> tell you what to draw in its place (step 2). After solving, the <b>last two columns</b> tell you how to test whether your guess was right (step 4). Find your model's row and use only that row.</div>
+<table>
+<tr><th>Model</th><th>If ON, replace with</th><th>If OFF, replace with</th><th>Check ON is right</th><th>Check OFF is right</th></tr>
+<tr><td><b>Ideal</b></td><td>a wire (V<sub>D</sub> = 0)</td><td>a gap</td><td>I<sub>D</sub> &gt; 0 (flows A→K)</td><td>V<sub>D</sub> = V<sub>A</sub> − V<sub>K</sub> &lt; 0</td></tr>
+<tr><td><b>0.7 V</b> (non-ideal)</td><td>a 0.7 V battery, + at anode</td><td>a gap</td><td>I<sub>D</sub> &gt; 0</td><td>V<sub>D</sub> &lt; 0.7 V</td></tr>
+<tr><td><b>Real</b></td><td colspan="4"><code>I<sub>D</sub> = I<sub>S</sub>(e<sup>V<sub>D</sub>/nV<sub>T</sub></sup> − 1)</code>. Too hard to solve by hand, so you use a graph (next section).</td></tr>
+</table>
+
+<h2 id="c">3. Load line and Q-point (slide 29)</h2>
+<h3>Why this exists</h3>
+<p>The ideal and 0.7 V models are <b>shortcuts</b>. A real diode doesn't jump on at one voltage; it follows a curve. So "what are V<sub>D</sub> and I<sub>D</sub>?" has <b>two unknowns</b>, and two unknowns need <b>two equations</b>: one from the circuit and one from the diode. The diode's equation has an exponential in it, so you can't solve it by hand easily. The load line solves the pair <b>with a graph</b> instead of algebra.</p>
+<h3>The circuit (slide 29)</h3>
+<svg viewBox="0 0 680 200" role="img"><title>Source, resistor and diode in series</title>
+<g fill="none" stroke="var(--t)" stroke-width="1.5"><path d="M200 78V40H290M370 40H460V80M460 104V160H200V122"/><circle cx="200" cy="100" r="22" fill="var(--surface-1)"/></g>
+<rect x="290" y="28" width="80" height="24" rx="3" fill="var(--surface-1)" stroke="var(--t)"/>
+<polygon points="448,80 472,80 460,104" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M448 104H472" stroke="var(--t)" stroke-width="2"/>
+<text class="t" x="200" y="92" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="200" y="110" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="ts" x="174" y="104" text-anchor="end">V<tspan dy="3" font-size="9">PS</tspan><tspan dy="-3"> = 5 V</tspan></text>
+<text class="ts" x="330" y="22" text-anchor="middle">R = 2 kΩ</text>
+<text class="ts" x="486" y="80">+</text><text class="th" x="486" y="98">V<tspan dy="3" font-size="9">D</tspan></text><text class="ts" x="486" y="116">−</text>
+<path d="M300 66H360" stroke="#1D9E75" stroke-width="2" fill="none"/><path d="M352 60L362 66L352 72" stroke="#1D9E75" stroke-width="2" fill="none"/><text class="ts" x="330" y="86" text-anchor="middle">I<tspan dy="3" font-size="9">D</tspan></text></svg>
+<table>
+<tr><th></th><th>Equation</th><th>On the graph it is…</th></tr>
+<tr><td><b>1. From the circuit</b> (KVL around the loop)</td><td><code>V<sub>PS</sub> = I<sub>D</sub>·R + V<sub>D</sub></code><br>5 = I<sub>D</sub>·2k + V<sub>D</sub></td><td>a straight line: the <b>load line</b></td></tr>
+<tr><td><b>2. From the diode</b></td><td><code>I<sub>D</sub> = I<sub>S</sub>(e<sup>V<sub>D</sub>/nV<sub>T</sub></sup> − 1)</code></td><td>the diode's <b>curve</b> (given to you)</td></tr>
+</table>
+<p>Every point on the line obeys the circuit. Every point on the curve obeys the diode. <b>Only the crossing obeys both</b>, so that crossing is the real answer. It's called the <b>Q-point</b> (quiescent or operating point).</p>
+<h3>Step by step</h3>
+<svg id="ls" viewBox="0 0 680 340" role="img"><title>Building the load line step by step</title><g id="lsgrid"></g>
+<path id="lscurve" fill="none" stroke="#378ADD" stroke-width="2.5"/>
+<path id="lsline" fill="none" stroke="#D85A30" stroke-width="2.5"/>
+<circle id="lsp1" r="6" fill="#D85A30"/><circle id="lsp2" r="6" fill="#D85A30"/><circle id="lsq" r="7" fill="#BA7517"/>
+<path id="lsqd" fill="none" stroke="#BA7517" stroke-width="1" stroke-dasharray="4 4"/>
+<text id="lsp1t" class="th" style="fill:#993C1D">(0 V, 2.5 mA): diode = wire</text>
+<text id="lsp2t" class="th" text-anchor="end" style="fill:#993C1D">(5 V, 0): diode = gap</text>
+<text id="lsqt" class="th" style="fill:#854F0B">Q-point (0.62 V, 2.2 mA)</text>
+<text id="lsct" class="ts" style="fill:#185FA5">diode curve</text>
+<text class="ts" x="350" y="334" text-anchor="middle">V<tspan dy="3" font-size="9">D</tspan><tspan dy="-3"> (volts)</tspan></text><text class="ts" x="20" y="30">I<tspan dy="3" font-size="9">D</tspan><tspan dy="-3"> (mA)</tspan></text></svg>
+<div class="ctl"><button id="lsb">Back</button><button id="lsn">Next step</button><span id="lsi"></span></div>
+<div id="lscap" class="box"></div>
+<div class="key"><b>Shortcut for any load line, in two points:</b><br>
+Point 1: pretend the diode is a <b>wire</b> (V<sub>D</sub> = 0). The current is the biggest it can be: <b>I = V<sub>PS</sub>/R</b>. Mark it on the current axis.<br>
+Point 2: pretend the diode is a <b>gap</b> (I<sub>D</sub> = 0). No current, so no voltage on R; all of V<sub>PS</sub> sits on the diode. Mark <b>V<sub>PS</sub></b> on the voltage axis.<br>
+Join them with a ruler, and read where the line crosses the curve.</div>
+<h3>Now play with it</h3>
+<p>Move the sliders and watch three things:</p>
+<ul><li>Bigger <b>V<sub>PS</sub></b>: the line slides outward (same slope) and the Q-point climbs the curve. More current.</li>
+<li>Bigger <b>R</b>: the line gets flatter (it pivots around V<sub>PS</sub>) and the current drops.</li>
+<li>Whatever you do, <b>V<sub>D</sub> stays around 0.55–0.67 V</b>. That's why the 0.7 V model works so well.</li></ul>
+<svg id="ll" viewBox="0 0 680 340" role="img"><title>Diode load line</title>
+<g id="llgrid"></g>
+<path id="llcurve" fill="none" stroke="#378ADD" stroke-width="2.5"/>
+<path id="llline" fill="none" stroke="#D85A30" stroke-width="2"/>
+<circle id="llq" r="6" fill="#BA7517"/>
+<text class="ts" x="350" y="334" text-anchor="middle">V<tspan dy="3" font-size="9">D</tspan><tspan dy="-3"> (volts)</tspan></text>
+<text class="ts" x="20" y="30">I<tspan dy="3" font-size="9">D</tspan><tspan dy="-3"> (mA)</tspan></text>
+<text class="ts" x="150" y="60" style="fill:#185FA5">diode curve</text>
+<text id="lllab" class="ts" style="fill:#993C1D">load line</text></svg>
+<div class="ctl"><span style="min-width:110px">V<sub>PS</sub> = <b id="vv">5</b> V</span><input type="range" id="vps" min="1" max="6" step="0.5" value="5"></div>
+<div class="ctl"><span style="min-width:110px">R = <b id="rv">2</b> kΩ</span><input type="range" id="rr" min="0.5" max="5" step="0.5" value="2"></div>
+<div class="cards"><div>Real (graph crossing)<b id="qv"></b><b id="qi"></b></div><div>Ideal model<b>0 V <span style="font-size:12px;color:var(--mut)">(assumed)</span></b><b id="ii"></b></div><div>0.7 V model<b>0.7 V <span style="font-size:12px;color:var(--mut)">(assumed)</span></b><b id="i7"></b></div></div>
+<p style="font-size:14px;color:var(--mut)">Each card is a Q-point (V<sub>D</sub>, I<sub>D</sub>). The models fix V<sub>D</sub> by assumption and only calculate I<sub>D</sub>. Only the graph actually finds V<sub>D</sub>.</p>
+<div class="key">Compare the cards: the <b>0.7 V model</b> is always close to the real answer. The <b>ideal</b> model is only good when V<sub>PS</sub> is much bigger than 0.7 V.<br><b>Coming back in S3:</b> a transistor gets a load line too, drawn the same way: one end at V<sub>CC</sub>/R<sub>C</sub> (transistor = wire), the other at V<sub>CC</sub> (transistor = gap).</div>
+
+<h2 id="d">4. Method: assume, then check</h2>
+<p>You can't know in advance whether a diode is ON or OFF, so you guess and then check. This is exactly what the professor does in the notes.</p>
+<ol class="steps">
+<li><b>Guess</b> each diode: ON or OFF. (A good guess: anode connected toward the + of a source → probably ON.)</li>
+<li><b>Replace</b> each diode using <a href="#b">the table in section 2</a> (middle columns): ON → wire (ideal) or 0.7 V battery; OFF → gap.</li>
+<li><b>Solve</b> the normal circuit with KVL, mesh or nodal (S0).</li>
+<li><b>Check</b> every diode using the table's last two columns. ON diodes: is I<sub>D</sub> &gt; 0 (flowing anode → cathode)? OFF diodes: is V<sub>A</sub> − V<sub>K</sub> below 0 (ideal) or below 0.7 V?</li>
+<li>If a check fails, <b>flip only that diode</b> and solve again. Repeat until every check passes. Only then are the numbers the answer.</li>
+</ol>
+<div class="key"><b>Trap:</b> a negative I<sub>D</sub> doesn't mean "current flows backwards". A diode can't do that. It means your guess was wrong and that diode is OFF.</div>
+
+<h2 id="e">5. Professor's example (lecture 2, slides 32–33)</h2>
+<svg viewBox="0 0 680 330" role="img"><title>Two-diode example circuit</title>
+<g fill="none" stroke="var(--t)" stroke-width="1.5">
+<path d="M120 60H220M300 60H540V148M540 192V300H120V260M120 60V100M120 120V170M120 170V200M400 60V80M400 140V200M400 260V300M400 170H270M250 170H120M330 300V312M316 312H344M322 318H338M328 324H332"/>
+<circle cx="540" cy="170" r="22" fill="var(--surface-1)"/></g>
+<g fill="var(--surface-1)" stroke="var(--t)"><rect x="220" y="48" width="80" height="24" rx="3"/><rect x="108" y="200" width="24" height="60" rx="3"/><rect x="388" y="80" width="24" height="60" rx="3"/><rect x="388" y="200" width="24" height="60" rx="3"/></g>
+<polygon points="108,100 132,100 120,120" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M108 120H132" stroke="var(--t)" stroke-width="2"/>
+<polygon points="270,158 270,182 250,170" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M250 158V182" stroke="var(--t)" stroke-width="2"/>
+<circle cx="120" cy="170" r="4" fill="var(--t)"/><circle cx="400" cy="170" r="4" fill="var(--t)"/><circle cx="400" cy="60" r="4" fill="var(--t)"/><circle cx="400" cy="300" r="4" fill="var(--t)"/>
+<text class="t" x="540" y="162" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="540" y="180" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="ts" x="568" y="174">15 V</text><text class="ts" x="260" y="40" text-anchor="middle">5 kΩ</text>
+<text class="th" x="96" y="114" text-anchor="end">D1</text><text class="th" x="260" y="150" text-anchor="middle">D2</text>
+<text class="ts" x="96" y="234" text-anchor="end">10 kΩ</text><text class="ts" x="140" y="214">+</text><text class="th" x="140" y="236">V</text><text class="ts" x="140" y="258">−</text>
+<text class="ts" x="424" y="114">10 kΩ</text><text class="ts" x="424" y="234">5 kΩ</text>
+<text class="ts" x="96" y="176" text-anchor="end">L</text><text class="ts" x="410" y="164">R</text></svg>
+<p>Call the middle-left node <b>L</b> and the middle-right node <b>R</b>. D1 points down (L is its cathode). D2 points left: anode at R, cathode at L.</p>
+<table>
+<tr><th>Ideal model</th><th>Working</th></tr>
+<tr><td>Try 1: D1 ON, D2 ON</td><td>Both diodes are wires, so L = R. Top: 5k ∥ 10k; bottom: 10k ∥ 5k; equal halves, so V<sub>L</sub> = 7.5 V.<br>KCL at R: in from top 10k = 7.5/10k = 0.75 mA; out through 5k = 7.5/5k = 1.5 mA; so I<sub>D2</sub> = 0.75 − 1.5 = <b>−0.75 mA &lt; 0 ✗</b> → D2 is OFF.</td></tr>
+<tr><td>Try 2: D1 ON, D2 OFF</td><td>Left path: 15 V across 5k + 10k → I<sub>D1</sub> = 15/15k = <b>1 mA</b> ✓, V = 10 V.<br>Right path: divider → V<sub>R</sub> = 15 × 5/15 = 5 V.<br>Check D2: V<sub>A</sub> − V<sub>K</sub> = 5 − 10 = −5 V &lt; 0 ✓ OFF confirmed.</td></tr>
+<tr><th>0.7 V model</th><th>Professor's mesh working (notes p16–17)</th></tr>
+<tr><td>Try 1: both ON</td><td>Mesh gives I<sub>D2</sub> = −0.785 mA &lt; 0 ✗ → D2 OFF.</td></tr>
+<tr><td>Try 2: D2 OFF</td><td>15 = 5k·I + 0.7 + 10k·I → I<sub>D1</sub> = 14.3/15k = <b>0.953 mA</b> ✓, V = 9.53 V. D2: 5 − 9.53 &lt; 0.7 ✓.</td></tr>
+</table>
+<div class="box">Note: the "ideal" slide shows I<sub>D1</sub> = 1.5 mA, but that number comes from Try 1, which failed. Once D2 is OFF, the correct value is 1 mA. In the 0.7 V version the professor did do the recheck (0.953 mA).</div>
+
+<h2 id="prac">Practice (try first, then open the solution)</h2>
+
+<h3>P1 · Ideal diode (lecture 3, slide 2) · about 6 min</h3>
+<svg viewBox="0 0 680 330" role="img"><title>P1 circuit</title>
+<g fill="none" stroke="var(--t)" stroke-width="1.5">
+<path d="M80 158V60H150M230 60H380M400 60H520V100M520 160V208M520 252V300H80V202M300 60V150M300 210V300"/>
+<circle cx="80" cy="180" r="22" fill="var(--surface-1)"/><circle cx="520" cy="230" r="22" fill="var(--surface-1)"/></g>
+<g fill="var(--surface-1)" stroke="var(--t)"><rect x="150" y="48" width="80" height="24" rx="3"/><rect x="288" y="150" width="24" height="60" rx="3"/><rect x="508" y="100" width="24" height="60" rx="3"/></g>
+<polygon points="380,48 380,72 400,60" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M400 48V72" stroke="var(--t)" stroke-width="2"/>
+<circle cx="300" cy="60" r="4" fill="var(--t)"/><circle cx="300" cy="300" r="4" fill="var(--t)"/>
+<text class="t" x="80" y="172" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="80" y="190" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="t" x="520" y="222" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="520" y="240" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="ts" x="56" y="184" text-anchor="end">10 V</text><text class="ts" x="548" y="234">12 V</text>
+<text class="ts" x="190" y="40" text-anchor="middle">4 Ω</text><text class="ts" x="324" y="184">10 Ω</text><text class="ts" x="544" y="134">15 Ω</text>
+<text class="th" x="300" y="40" text-anchor="middle">N</text><text class="th" x="390" y="40" text-anchor="middle">D</text></svg>
+<ol type="a"><li>Is the diode ON or OFF? Prove it with assume-and-check.</li><li>Find the voltage at node N.</li><li>Find the current through the 10 Ω resistor.</li></ol>
+<details><summary>Solution P1</summary>
+<p><b>Try 1: assume D ON</b> (wire). KCL at N: (10 − V)/4 = V/10 + (V − 12)/15. Multiply by 60: 150 − 15V = 6V + 4V − 48, so V = 198/25 = 7.92 V. Diode current = (7.92 − 12)/15 = −0.272 A &lt; 0 ✗. So D is OFF.</p>
+<p><b>Try 2: D OFF</b> (gap). Simple divider: <b>V<sub>N</sub> = 10 × 10/(4 + 10) = 7.14 V</b>. Check: anode 7.14 V, cathode side sits at 12 V (no current in 15 Ω), so V<sub>A</sub> − V<sub>K</sub> = −4.86 V &lt; 0 ✓ OFF.</p>
+<p><b>Current in 10 Ω = 10/14 = 0.714 A.</b></p>
+<p>Lesson: the 12 V on the cathode side is higher than anything the 10 V side can push, so the valve stays shut.</p></details>
+
+<h3>P2 · Two diodes (lecture 2 assignment, slide 34) · about 10 min</h3>
+<svg viewBox="0 0 680 330" role="img"><title>P2 circuit</title>
+<g fill="none" stroke="var(--t)" stroke-width="1.5">
+<path d="M80 148V60H130M200 60H230M250 60H390M410 60H520V148M520 192V300H80V192M300 60V130M300 200V300"/>
+<circle cx="80" cy="170" r="22" fill="var(--surface-1)"/><circle cx="520" cy="170" r="22" fill="var(--surface-1)"/></g>
+<g fill="var(--surface-1)" stroke="var(--t)"><rect x="130" y="48" width="70" height="24" rx="3"/><rect x="288" y="130" width="24" height="70" rx="3"/></g>
+<polygon points="230,48 230,72 250,60" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M250 48V72" stroke="var(--t)" stroke-width="2"/>
+<polygon points="410,48 410,72 390,60" fill="var(--surface-1)" stroke="var(--t)" stroke-width="1.5"/><path d="M390 48V72" stroke="var(--t)" stroke-width="2"/>
+<circle cx="300" cy="60" r="4" fill="var(--t)"/><circle cx="300" cy="300" r="4" fill="var(--t)"/>
+<text class="t" x="80" y="162" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="80" y="180" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="t" x="520" y="162" text-anchor="middle" dominant-baseline="central">+</text><text class="t" x="520" y="180" text-anchor="middle" dominant-baseline="central">−</text>
+<text class="ts" x="56" y="174" text-anchor="end">10 V</text><text class="ts" x="548" y="174">3 V</text>
+<text class="ts" x="165" y="40" text-anchor="middle">4 kΩ</text><text class="ts" x="324" y="170">6 kΩ</text>
+<text class="th" x="240" y="40" text-anchor="middle">D1</text><text class="th" x="400" y="40" text-anchor="middle">D2</text><text class="th" x="312" y="96">N</text></svg>
+<ol type="a"><li>Ideal diodes: find the state of D1 and D2, I<sub>D1</sub>, I<sub>D2</sub> and V<sub>N</sub>.</li><li>Repeat with the 0.7 V model.</li></ol>
+<details><summary>Solution P2</summary>
+<p><b>(a) Try 1: both ON.</b> D2 is a wire, so V<sub>N</sub> = 3 V. I<sub>D1</sub> = (10 − 3)/4k = 1.75 mA ✓. Current down 6k = 3/6k = 0.5 mA. KCL at N: 1.75 + I<sub>D2</sub> = 0.5, so I<sub>D2</sub> = −1.25 mA ✗ → D2 OFF.</p>
+<p><b>Try 2: D1 ON, D2 OFF.</b> Divider: <b>V<sub>N</sub> = 10 × 6/(4 + 6) = 6 V</b>, <b>I<sub>D1</sub> = 10/10k = 1 mA</b> ✓, <b>I<sub>D2</sub> = 0</b>. Check D2: anode 3 V, cathode 6 V → 3 − 6 = −3 V &lt; 0 ✓.</p>
+<p><b>(b) 0.7 V model, D2 OFF:</b> 10 = 4k·I + 0.7 + 6k·I → <b>I<sub>D1</sub> = 0.93 mA</b>, <b>V<sub>N</sub> = 0.93 × 6 = 5.58 V</b>. D2: 3 − 5.58 &lt; 0.7 ✓ still OFF.</p></details>
+
+<h3>P3 · Load line by graph (like slide 29) · about 6 min</h3>
+<p>V<sub>PS</sub> = 3 V, R = 1 kΩ, one diode in series (same circuit as section 3). The diode's curve is drawn below.</p>
+<svg id="g3" viewBox="0 0 680 340" role="img"><title>P3 graph sheet</title><g id="g3grid"></g><path id="g3curve" fill="none" stroke="#378ADD" stroke-width="2.5"/>
+<text class="ts" x="350" y="334" text-anchor="middle">V<tspan dy="3" font-size="9">D</tspan><tspan dy="-3"> (volts)</tspan></text><text class="ts" x="20" y="30">I<tspan dy="3" font-size="9">D</tspan><tspan dy="-3"> (mA)</tspan></text></svg>
+<ol type="a"><li>Write the KVL equation and find both ends of the load line.</li><li>Draw it (on paper) and read the Q-point.</li><li>Compare with the ideal model and the 0.7 V model.</li></ol>
+<details><summary>Solution P3</summary>
+<p>a) 3 = I<sub>D</sub>·1k + V<sub>D</sub>. Ends: V<sub>D</sub> = 0 → I<sub>D</sub> = <b>3 mA</b>; I<sub>D</sub> = 0 → V<sub>D</sub> = <b>3 V</b>.</p>
+<p>b) The line from (0 V, 3 mA) to (3 V, 0) crosses the curve at about <b>V<sub>D</sub> ≈ 0.62 V, I<sub>D</sub> ≈ 2.38 mA</b>.</p>
+<p>c) Compare the three Q-points (V<sub>D</sub>, I<sub>D</sub>):</p>
+<table><tr><th>Method</th><th>V<sub>D</sub></th><th>I<sub>D</sub></th></tr>
+<tr><td>Real (graph)</td><td>0.62 V (found)</td><td>2.38 mA</td></tr>
+<tr><td>Ideal model</td><td>0 V (assumed)</td><td>3/1k = 3 mA (26% too high)</td></tr>
+<tr><td>0.7 V model</td><td>0.7 V (assumed)</td><td>(3 − 0.7)/1k = 2.3 mA (very close)</td></tr></table>
+<p>With a small source voltage, the ideal model is a poor guess.</p></details>
+
+<div class="box"><b>Common mistakes:</b> calling a negative I<sub>D</sub> the answer instead of flipping the diode · forgetting to recheck after flipping · putting the 0.7 V battery the wrong way round (+ goes on the anode).<br><b>Next:</b> message "S2" (rectifiers).</div>
+
+<script>
+var IS=9.06e-9,NV=0.05;function idd(v){return IS*(Math.exp(v/NV)-1)*1000;}
+function grid(id,x0,x1,y0,y1,vmax,imax,vstep,istep){var g='',sx=(x1-x0)/vmax,sy=(y0-y1)/imax;
+for(var v=0;v<=vmax+1e-9;v+=vstep){var x=x0+v*sx;g+='<path d="M'+x+' '+y0+'V'+y1+'" stroke="var(--bd)" stroke-width="0.6"/><text class="ts" x="'+x+'" y="'+(y0+16)+'" text-anchor="middle">'+(+v.toFixed(1))+'</text>';}
+for(var i=0;i<=imax+1e-9;i+=istep){var y=y0-i*sy;g+='<path d="M'+x0+' '+y+'H'+x1+'" stroke="var(--bd)" stroke-width="0.6"/><text class="ts" x="'+(x0-8)+'" y="'+(y+4)+'" text-anchor="end">'+(+i.toFixed(1))+'</text>';}
+document.getElementById(id).innerHTML=g;return{sx:sx,sy:sy};}
+function curve(id,x0,y0,s,imax){var d='',first=true;for(var v=0;v<=1.2;v+=0.002){var i=idd(v);if(i>imax)break;d+=(first?'M':'L')+(x0+v*s.sx).toFixed(1)+' '+(y0-i*s.sy).toFixed(1);first=false;}document.getElementById(id).setAttribute('d',d);}
+var X0=70,X1=640,Y0=300,Y1=40,VM=6,IM=6,s1=grid('llgrid',X0,X1,Y0,Y1,VM,IM,1,1);curve('llcurve',X0,Y0,s1,IM);
+function upd(){var vps=+document.getElementById('vps').value,r=+document.getElementById('rr').value;
+document.getElementById('vv').textContent=vps;document.getElementById('rv').textContent=r;
+var lo=0,hi=vps;for(var k=0;k<60;k++){var m=(lo+hi)/2;if(idd(m)-(vps-m)/r>0)hi=m;else lo=m;}var qv=lo,qi=(vps-qv)/r;
+var va=vps/r>IM?vps-IM*r:0,ia=(vps-va)/r;document.getElementById('llline').setAttribute('d','M'+(X0+va*s1.sx)+' '+(Y0-ia*s1.sy)+'L'+(X0+vps*s1.sx)+' '+Y0);
+var q=document.getElementById('llq');q.setAttribute('cx',X0+qv*s1.sx);q.setAttribute('cy',Y0-qi*s1.sy);
+var lb=document.getElementById('lllab');lb.setAttribute('x',X0+vps*0.6*s1.sx);lb.setAttribute('y',Y0-(vps*0.4/r)*s1.sy-8);
+document.getElementById('qv').textContent=qv.toFixed(2)+' V';document.getElementById('qi').textContent=qi.toFixed(2)+' mA';
+document.getElementById('ii').textContent=(vps/r).toFixed(2)+' mA';document.getElementById('i7').textContent=Math.max(0,(vps-0.7)/r).toFixed(2)+' mA';}
+document.getElementById('vps').oninput=upd;document.getElementById('rr').oninput=upd;upd();
+var s3=grid('g3grid',70,640,300,40,3,3.5,0.5,0.5);curve('g3curve',70,300,s3,3.5);
+var L=grid('lsgrid',70,640,300,40,6,3,1,0.5);curve('lscurve',70,300,L,3);
+function P(v,i){return[70+v*L.sx,300-i*L.sy];}
+var p1=P(0,2.5),p2=P(5,0),lo=0,hi=5;for(var k=0;k<60;k++){var m=(lo+hi)/2;if(idd(m)-(5-m)/2>0)hi=m;else lo=m;}var pq=P(lo,(5-lo)/2);
+function at(id,a){var e=document.getElementById(id);for(var n in a)e.setAttribute(n,a[n]);}
+at('lsp1',{cx:p1[0],cy:p1[1]});at('lsp2',{cx:p2[0],cy:p2[1]});at('lsq',{cx:pq[0],cy:pq[1]});
+at('lsline',{d:'M'+p1[0]+' '+p1[1]+'L'+p2[0]+' '+p2[1]});at('lsqd',{d:'M70 '+pq[1]+'H'+pq[0]+'V300'});
+at('lsp1t',{x:p1[0]+80,y:p1[1]-12});at('lsp2t',{x:p2[0]-4,y:p2[1]-14});at('lsqt',{x:pq[0]+14,y:pq[1]-12});at('lsct',{x:P(0.7,0)[0]+8,y:P(0,2.9)[1]});
+var LST=0,LSC=[
+'Step 1. Start with the diode\'s curve (blue). It is given in the question. Every point on it is a (V<sub>D</sub>, I<sub>D</sub>) pair the diode allows. Notice it stays flat near 0 until about 0.6 V, then shoots up.',
+'Step 2. Point 1: pretend the diode is a <b>wire</b>, so V<sub>D</sub> = 0. KVL: 5 = I·2k + 0, so I = 5/2k = <b>2.5 mA</b>. Mark (0 V, 2.5 mA) on the current axis.',
+'Step 3. Point 2: pretend the diode is a <b>gap</b>, so I<sub>D</sub> = 0. No current means no voltage on R, so all 5 V sits on the diode. Mark (5 V, 0) on the voltage axis.',
+'Step 4. Join the two points with a ruler. That\'s the <b>load line</b>: every point on it satisfies the circuit\'s KVL, 5 = I<sub>D</sub>·2k + V<sub>D</sub>.',
+'Step 5. Read the crossing: <b>V<sub>D</sub> ≈ 0.62 V, I<sub>D</sub> ≈ 2.2 mA</b>. That\'s the Q-point. Check with KVL: 2.2 mA × 2 kΩ + 0.62 V = 4.4 + 0.62 ≈ 5 V ✓'];
+function lsd(){var show={lsp1:1,lsp1t:1,lsp2:2,lsp2t:2,lsline:3,lsq:4,lsqt:4,lsqd:4};for(var id in show)document.getElementById(id).setAttribute('opacity',LST>=show[id]?1:0);
+document.getElementById('lscap').innerHTML=LSC[LST];document.getElementById('lsi').textContent='Step '+(LST+1)+' of 5';}
+document.getElementById('lsn').onclick=function(){if(LST<4)LST++;lsd();};document.getElementById('lsb').onclick=function(){if(LST>0)LST--;lsd();};lsd();
+</script>
+</body></html>
